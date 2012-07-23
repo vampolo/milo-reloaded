@@ -1,0 +1,279 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Milo manager</title>
+	<meta http-equiv="content-language" content="en" />
+	<meta http-equiv="cache-control" content="no-cache" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="shortcut icon" href="{{=URL('static','emanager')}}/images/favicon.ico" type="image/x-icon"/>
+    <link href="{{=URL('static','emanager')}}/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
+	<!--[if lte IE 7]>
+	<link href="css/styles_ie.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+	<!--[if lte IE 6]>
+	<link href="css/styles_ie6.css" rel="stylesheet" type="text/css" media="screen" />
+	<![endif]-->
+    <script type="text/javascript" src="{{=URL('static','emanager')}}/js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="{{=URL('static','emanager')}}/js/ui.js"></script>
+</head>
+
+<body>
+
+<div id="wrap">
+	<div id="header">
+		<h1><a class="bg" href="#" title="Home"></a>Milo Manager</h1>
+		<p id="status">Logged is as Username, <a href="#" title="Sign Out?">Sign Out?</a></p>
+		<h2><span>Hello, this is the Dashboard</span></h2>
+		<p id="description">The milo dashboard is the main panel to monitor user activity in milo webapp</p>
+	</div>
+    <div id="sidebar">
+		<ul class="items">
+            <li class="active">
+            	<a href="#" title="Dashboard">Dashboard</a>
+            </li>
+			<li class="subitems">
+				<a href="#" title="Algorithms">Algorithms</a>
+				<ul>
+					{{for alg in algorithms:}}
+					<li><a title="{{=alg}}" onclick="fill_content('{{=URL('info_algorithm', args=[alg])}}')">{{=alg}}</a></li>
+					{{pass}}
+				</ul>
+			</li>
+ 			<li class="subitems">
+				<a href="#" title="Matrices">Matrices</a>
+				<ul>
+                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
+				</ul>
+			</li>
+			<li class="subitems">
+				<a href="#" title="Survey">Matrices</a>
+				<ul>
+                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
+				</ul>
+			</li>
+<!--			<li><a href="#mp3" title="MP3 Player">MP3 Player</a></li>
+			<li class="subitems">
+				<a href="#" title="Users">Donation Info</a>
+				<ul>
+					<li><a href="#" title="Admin Users">Monthly Goals</a></li>
+					<li><a href="#" title="Add New User">Monthly Donations</a></li>
+
+				</ul>
+			</li>
+			<li class="subitems">
+				<a href="#" title="Users">Member Info</a>
+				<ul>
+					<li><a href="#" title="Admin Users">Member List</a></li>
+					<li><a href="#" title="Add New User">Mass Message</a></li>
+					<li><a href="#" title="Add New User">Edit Members</a></li>
+					<li><a href="#" title="Add New User">Edit Permissions</a></li>
+					<li><a href="#" title="Add New User">Edit Ranks</a></li>
+				</ul>
+			</li> -->
+		</ul>
+		<span class="clear"></span>
+		<div id="redbox">
+			<h4>Info</h4>
+			<p>
+				URM created on {{=matrices_info.get('urm', 'Unknown')}}<br />
+				ICM created on {{=matrices_info.get('icm','Unknown')}}<br />				
+			</p>
+		</div>
+	</div>
+	<div id="content">
+		<h2>Form fields</h2>
+		<ul class="tabs">
+			<li class="active"><a href="#" title="Item1"><span>This is a tab</span></a></li>
+			<li><a href="#" title="Item2"><span>This is other tab</span></a></li>
+		</ul>
+		<form method="post" action="">
+		<fieldset>
+			<label>Small Input:</label>
+			<span class="small_input"><input class="small" name="" type="text" value="" /></span><br class="hid" />
+			<span class="negative">Negative message!</span><br class="hid" />
+			<label>Medium Input:</label>
+			<span class="medium_input"><input class="medium" name="" type="text" value="" /></span><br class="hid" />
+			<span class="positive">Positive message!</span><br class="hid" />
+			<label>Large Input:</label>
+			<span class="large_input"><input class="large" name="" type="text" value="" /></span><br class="hid" />
+			<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+			<label>Your message?</label><br class="hid" />
+			<span class="textarea"><textarea cols="" rows=""></textarea></span><br class="hid" />
+			<a href="#" class="button" title="Submit"><span>Submit</span></a>
+			<span class="clear"></span>
+		</fieldset>
+		</form>
+		<p class="alert">
+			<span class="txt"><span class="icon"></span><strong>Alert:</strong> This template is going to explote in 10 seconds.</span>
+			<a href="#" class="close" title="Close"><span class="bg"></span>Close</a>
+		</p>
+		<p id="tip" class="alert">
+			<span class="txt"><span class="icon"></span><strong>Tip:</strong> I know, you REALLY love this CMS Skin.</span>
+			<a href="#" class="close" title="Close"><span class="bg"></span>Close</a>
+		</p>
+		<p id="congrats" class="alert">
+			<span class="txt"><span class="icon"></span><strong>Congrats:</strong> The action you just did was made with success.</span>
+			<a href="#" class="close" title="Close"><span class="bg"></span>Close</a>
+		</p>
+		<h2>CSS Table List</h2>
+		<ul class="tabs">
+			<li><a href="#" title="Item1"><span>Nice!</span></a></li>
+			<li class="active"><a href="#" title="Item2"><span>I love this table</span></a></li>
+		</ul>
+		<div class="box">
+			<table>
+				<tr>
+					<th class="col1">Column 1</th>
+					<th class="col2">Column 2</th>
+					<th class="col3">Column 3</th>
+					<th class="col4">Column 4</th>
+					<th class="col5">Column 5</th>
+				</tr>
+				<tr class="highlight">
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="highlight">
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="highlight">
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="highlight">
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+				<tr class="highlight">
+					<td><a href="#" title="Lorem ipsum dolor">Lorem ipsum dolor</a></td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td>Lorem ipsum dolor</td>
+					<td class="action">
+						<ul>
+							<li><a class="edit" href="#" title="edit"></a></li>
+							<li><a class="add" href="#" title="add"></a></li>
+							<li><a class="delete" href="#" title="delete"></a></li>
+							<li><a class="mark" href="#" title="mark"></a></li>
+						</ul>
+					</td>
+				</tr>
+			</table>
+			<p id="pagin">
+				&laquo; <a href="#" title="">previous</a> &ndash;
+				<a href="#" title="">1</a>
+				<a href="#" title="">2</a>
+				<a href="#" title="">3</a>
+				<a href="#" title="">4</a>
+				<a href="#" title="">5</a>
+				<a href="#" title="">6</a>
+				<a href="#" title="">7</a>
+				<a href="#" title="">8</a>
+				<a href="#" title="">9</a>
+				&ndash; <a href="#" title="">next</a> &raquo;
+			</p>
+		</div>
+	</div>
+	<div id="footer">
+	</div>
+</div>
+
+</body>
+</html>

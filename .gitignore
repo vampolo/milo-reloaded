@@ -1,0 +1,7 @@
+*.pyc
+/static/images/movies/*
+*.table
+*.log
+.pydevproject
+.project
+.settings

@@ -1,0 +1,169 @@
+# -*- coding: utf-8 -*-
+
+#########################################################################
+## This scaffolding model makes your app work on Google App Engine too
+## File is released under public domain and you can use without limitations
+#########################################################################
+
+## if SSL/HTTPS is properly configured and you want all HTTP requests to
+## be redirected to HTTPS, uncomment the line below:
+# request.requires_https()
+
+if not request.env.web2py_runtime_gae:
+    ## if NOT running on Google App Engine use SQLite or other DB
+    db = DAL('postgres://milo:milosecret@localhost/milo-reloaded')
+else:
+    ## connect to Google BigTable (optional 'google:datastore://namespace')
+    db = DAL('google:datastore')
+    ## store sessions and tickets there
+    session.connect(request, response, db = db)
+    ## or store session in Memcache, Redis, etc.
+    ## from gluon.contrib.memdb import MEMDB
+    ## from google.appengine.api.memcache import Client
+    ## session.connect(request, response, db = MEMDB(Client()))
+
+## by default give a view/generic.extension to all actions from localhost
+## none otherwise. a pattern can be 'controller/function.extension'
+response.generic_patterns = ['*'] if request.is_local else []
+## (optional) optimize handling of static files
+# response.optimize_css = 'concat,minify,inline'
+# response.optimize_js = 'concat,minify,inline'
+
+#########################################################################
+## Here is sample code if you need for
+## - email capabilities
+## - authentication (registration, login, logout, ... )
+## - authorization (role based authorization)
+## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)
+## - old style crud actions
+## (more options discussed in gluon/tools.py)
+#########################################################################
+
+from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
+auth = Auth(db, hmac_key=Auth.get_or_create_key())
+crud, service, plugins = Crud(db), Service(), PluginManager()
+
+## create all tables needed by auth if not custom tables
+auth.define_tables()
+
+## configure email
+mail=auth.settings.mailer
+mail.settings.server = 'logging' or 'smtp.gmail.com:587'
+mail.settings.sender = 'you@gmail.com'
+mail.settings.login = 'username:password'
+
+## configure auth policy
+auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_approval = False
+auth.settings.reset_password_requires_verification = True
+
+## if you need to use OpenID, Facebook, MySpace, Twitter, Linkedin, etc.
+## register with janrain.com, write your domain:api_key in private/janrain.key
+from gluon.contrib.login_methods.rpx_account import use_janrain
+use_janrain(auth,filename='private/janrain.key')
+
+#########################################################################
+## Define your tables below (or better in another model file) for example
+##
+## >>> db.define_table('mytable',Field('myfield','string'))
+##
+## Fields can be 'string','text','password','integer','double','boolean'
+##       'date','time','datetime','blob','upload', 'reference TABLENAME'
+## There is an implicit 'id integer autoincrement' field
+## Consult manual for more options, validators, etc.
+##
+## More API examples for controllers:
+##
+## >>> db.mytable.insert(myfield='value')
+## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
+## >>> for row in rows: print row.id, row.myfield
+#########################################################################
+
+import imdb
+
+imdb_connection_str = 'postgres://imdb:imdbsecret@localhost/imdb'
+
+imsql = imdb.IMDb('sql', uri=imdb_connection_str)
+
+im = imdb.IMDb()
+
+db.define_table('users',
+        Field('name'),
+        Field('email'),
+        Field('imdb_id', 'integer')
+        )
+
+db.define_table('genres',
+        Field('name')
+        )
+
+db.define_table('persons',
+        Field('first_name'),
+        Field('last_name'),
+        Field('birth', 'datetime')
+        )
+
+db.define_table('movies',
+        Field('imdb_id', 'integer'),
+        Field('title'),
+        Field('poster', 'text'),
+        Field('trailer', 'text'),
+        Field('plot', 'text'),
+        Field('date', 'datetime'),
+        Field('updated', 'datetime')
+        )
+
+db.define_table('movies_genres',
+        Field('movie', db.movies, requires=IS_IN_DB(db, 'movies.id', db.movies._format)),
+        Field('genre', db.genres, requires=IS_IN_DB(db, 'movies.id', db.movies._format))
+        )
+
+db.define_table('ratings',
+        Field('iuser', db.users, requires = IS_IN_DB(db,'users.id',db.users._format)),
+        Field('imovie', db.movies, requires = IS_IN_DB(db,'movies.id',db.movies._format)),
+        Field('rating', 'double')
+        )
+
+db.define_table('comments',
+        Field('movie', db.movies, requires = IS_IN_DB(db, 'movies.id', db.movies._format)),
+        Field('title'),
+        Field('text', 'text'),
+        Field('rating', db.ratings, requires = IS_IN_DB(db, 'ratings.id', db.ratings._format)),
+        Field('timestamp', 'datetime'),
+        )
+
+db.define_table('roles',
+        Field('name')
+        )
+
+db.define_table('persons_in_movies',
+        Field('movie', db.movies, requires = IS_IN_DB(db, 'movies.id', db.movies._format)),
+        Field('person', db.persons, requires = IS_IN_DB(db, 'persons.id', db.persons._format)),
+        Field('role', db.roles, requires = IS_IN_DB(db, 'roles.id', db.roles._format))
+        )
+
+
+movies_with_ratings = (db.movies.id.belongs(db(db.ratings)._select(db.ratings.imovie, distinct=db.ratings.imovie)))
+movies_with_titles = ~(db.movies.title==None)
+with_poster = (db.movies.poster.startswith('images/movies'))
+
+#for x in db(db.ratings).select(db.ratings.ALL):
+#    for y in db(db.ratings.id>x.id).select(db.ratings.ALL):
+#        if y.iuser == x.iuser and y.imovie == x.imovie:
+#            y.delete_record()
+#    db.commit()
+
+#run only once
+#db.executesql('CREATE UNIQUE INDEX iuser_imovie ON ratings (iuser,imovie);')
+
+
+db.define_table('features',
+        Field('name'),
+        Field('type')
+        )
+
+db.define_table('movies_features',
+        Field('movie', db.movies, requires = IS_IN_DB(db,'movies.id',db.movies._format)),
+        Field('feature', db.features, requires = IS_IN_DB(db,'features.id',db.features._format)),
+        Field('times', 'integer')
+        )
