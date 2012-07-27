@@ -1,0 +1,12 @@
+.centered{
+	margin:0 auto;
+}
+
+.masonry-item img{
+	max-width: 200px;
+}
+
+.movie-info {
+	width:200px;
+	margin:3px 5px 3px;
+}

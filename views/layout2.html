@@ -37,20 +37,12 @@
 
   <!-- All JavaScript at the bottom, except for Modernizr which enables 
 	   HTML5 elements & feature detects -->
-  <script src="{{=URL('static','js/modernizr.custom.js')}}"></script>
+  <script src="{{=URL('static','js/modernizr.custom.js')}}"></script>  
 
   <!-- include stylesheets -->
   {{
   response.files.append(URL('static','css/skeleton.css'))
   response.files.append(URL('static','css/web2py.css'))
-  response.files.append(URL('static', 'css/style.css'))
-  response.files.append(URL('static', 'css/style.css3.css'))
-  response.files.append(URL('static', 'css/smoothness/jquery-ui.css'))
-  response.files.append(URL('static', 'js/nivo-slider/themes/default/default.css'))
-  response.files.append(URL('static', 'js/nivo-slider/nivo-slider.css'))
-  
-  response.files.append(URL('static', 'js/nivo-slider/jquery.nivo.slider.js'))
-  
   if response.menu:
      response.files.append(URL('static','css/superfish.css'))
      response.files.append(URL('static','js/superfish.js'))
@@ -58,7 +50,7 @@
   }}
 
   {{include 'web2py_ajax.html'}}
-  
+
   {{if response.menu:}}
   <script type="text/javascript">
     jQuery(function(){ jQuery('ul.sf-menu').supersubs({minWidth:12,maxWidth:30,extraWidth:3}).superfish(); });
@@ -78,54 +70,8 @@
   <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
   uncomment to load jquery-ui //-->
   
-<!--   Added by old milo -->
-
-<!-- custom theme styles -->
- 
-  
-<!--   <link rel='stylesheet' id='fancybox-css' href="${request.static_url('milo_app:static/js/fancybox/style.css_ver=3.1')}" type=
-  'text/css' media='all' />
-
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jqueryui.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/ui.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/l10n.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.superfish.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.easing.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.coda.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.float.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.equal.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/fancybox/jquery.fancybox.js')}">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/jquery.validate.js')}">
-  </script>
-  <script tal:condition="new_rec" type='text/javascript' src="${request.static_url('milo_app:static/js/undo.js')}">
-  </script>	
-  <script src="http://connect.facebook.net/en_US/all.js#appId=113902308692268&amp;xfbml=1">
-  </script>
-  <script type='text/javascript' src="${request.static_url('milo_app:static/js/rating.js')}">
-  </script>
-  <metal:add_js metal:define-slot="add_js"></metal:add_js>	 -->
-  
-  <script type="text/javascript">
-			 //<![CDATA[
-          function doClear(theText) {
-                if (theText.value == theText.defaultValue) {
-                        theText.value = ""
-                }
-          }
-          //]]>
-  </script>
   {{block head}}
+  
   {{end}}
 </head>
 <body>
@@ -150,15 +96,10 @@
     <div class="header">
       <div class="container">         
         <div class="sixteen columns">
-          <img src="{{=URL('static','images/logo.png')}}"/>
+          <h1 class="remove-bottom" style="margin-top: .5em;">
+          {{=response.title or request.application}}
+          </h1>
           <h5>{{=response.subtitle or ''}}</h5>
-          <div id="search">
-            <form method="POST" autocomplete="off" id="search-form" action="${request.resource_url(request.root,'Popular')}" name="search-form">
-              <input type="text" name="search_query" id="s" value="Find movies by query" onfocus=
-              "doClear(this)" /> 
-              <input type="submit" id="search-submit" value="" />
-            </form>
-          </div><!-- search -->
         </div>
         <div class="sixteen columns">
           <div class="statusbar clearfix">
@@ -186,11 +127,9 @@
         </div>
         {{pass}}
         
-        <div class="{{=middle_columns}} columns center">
           {{block center}}
-          {{include}}
+          
           {{end}}
-        </div>
         
         {{if right_sidebar_enabled:}}
         <div class="four columns">
@@ -202,6 +141,7 @@
         {{pass}}
         
       </div><!-- container -->
+      {{include}}
     </div><!-- main -->
     
     <div class="push"></div>
@@ -212,6 +152,7 @@
       <div class="sixteen columns">
         {{block footer}} <!-- this is default footer -->
         <div class="footer-content clearfix">
+          <div class="copyright">{{=T('Copyright')}} &#169; 2011</div>
           <div style="float: right;">
             <a href="http://www.web2py.com/">
             <img style="padding-bottom: 0;" src="{{=URL('static','images/poweredby.png')}}"/>

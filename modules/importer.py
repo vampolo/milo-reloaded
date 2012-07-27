@@ -61,7 +61,7 @@ class MediaRetriever(object):
             try:
                 page_search_list = parse(urllib2.urlopen('http://www.youtube.com/results?'+urllib.urlencode({'search_query': movie_title.encode('utf-8')+' trailer'})))
                 break
-            except HTTPError:
+            except urllib2.HTTPError:
                 if counter >= 10:
                     return None
                 counter += 1
@@ -158,7 +158,16 @@ class Importer(object):
         for movie in movies:
             url = review_url(movie.imdb_id)
             tree = lxml.html.parse(url)
-            h1_title = tree.xpath('//h1[@itemprop="name"]')
+            tree_counter = 1
+            while True:
+                try:
+                    h1_title = tree.xpath('//h1[@itemprop="name"]')
+                    break
+                except AssertionError:
+                    tree_counter +=1
+                    if tree_counter > 10:
+                        continue
+                    time.sleep(tree_counter**2)
             if not h1_title:
                 #cannot retrieve movie title
                 continue
@@ -211,7 +220,7 @@ class Importer(object):
         db = self.db
         query=(db.movies.id.belongs(db(db.ratings)._select(db.ratings.imovie, distinct=db.ratings.imovie)))
         if noposter:
-            query &= (db.movies.poster==None)
+            query &= (db.movies.poster==None)|(db.movies.poster.startswith('http'))
         for movie in db(query).select():
             mr = MediaRetriever(movie.title, movie.imdb_id)
             if not mr.has_poster():
