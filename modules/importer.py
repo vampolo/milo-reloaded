@@ -74,9 +74,13 @@ class MediaRetriever(object):
             trailer_source = 'http://www.youtube.com'+movie_trailer
         return trailer_source
 
-    def get_poster(self, download=False):
+    def get_poster(self, download=True, force=False):
         imdb_id = self.movie_imdb_id
         genre = list()
+        
+        if self.has_poster() and not force:
+            return os.path.join(R_POSTERS_PATH, str(imdb_id)+'.jpg')
+        
         second_page = parse(self.__create_request(review_url(imdb_id)))
         if second_page:
             try:
@@ -86,7 +90,10 @@ class MediaRetriever(object):
                 poster_url = None
             if poster_page_url is not None:
                 poster_page = parse(self.__create_request('http://www.imdb.com'+poster_page_url))
-                poster_url = poster_page.xpath("//div[@id='photo-container']/div[@id='canvas']//img[@id='primary-img']")[0].attrib.get('src')
+                try:
+                    poster_url = poster_page.xpath("//div[@id='photo-container']/div[@id='canvas']//img[@id='primary-img']")[0].attrib.get('src')
+                except IndexError:
+                    poster_url = None
             if poster_url and download:
                 print poster_url
                 try:
@@ -156,65 +163,8 @@ class Importer(object):
         movies_with_ratings = db(db.ratings)._select(db.ratings.imovie, distinct=db.ratings.imovie)
         movies = db(db.movies.id.belongs(movies_with_ratings)&(db.movies.updated==None)).select()
         for movie in movies:
-            url = review_url(movie.imdb_id)
-            tree = lxml.html.parse(url)
-            tree_counter = 1
-            while True:
-                try:
-                    h1_title = tree.xpath('//h1[@itemprop="name"]')
-                    break
-                except AssertionError:
-                    tree_counter +=1
-                    if tree_counter > 10:
-                        continue
-                    time.sleep(tree_counter**2)
-            if not h1_title:
-                #cannot retrieve movie title
-                continue
-            title = h1_title[0].text.strip()
-            imdb_movie = im.get_movie(movie.imdb_id)
-            if title==imdb_movie.get('title'):
-                print 'processing ', title
-                mr = MediaRetriever(title, movie.imdb_id)
-#                try:
-                info = self.get_info(movie.imdb_id)
-                plot = info.get('plot')
-                if plot:
-                    plot = plot[0].encode('utf-8')
-                year = info.get('year')
-                print year, plot
-                movie.update_record(title = title,
-                                    plot = plot,
-                                    trailer = mr.get_trailer(),
-                                    year = year,
-                                    updated = datetime.datetime.now()
-                                    )
-                #do genre
-                for genre in info.get('genres', []):
-                    genre_id = db.genres.update_or_insert(name=genre)
-                    if not id:
-                        genre_id = db(db.genres.name==genre).select(db.genres.id).first()
-                db.movies_genres.update_or_insert(movie=movie, genre=genre_id)
-                    
-                #do cast
-                for person in info.get('cast'):
-                    first_name = person.get('first_name')
-                    last_name = person.get('last_name')
-                    role = person.get('role')
-                    person_id = db.persons.update_or_insert(first_name=first_name,
-                                                            last_name=last_name
-                                                            )
-                    if not person_id:
-                        person_id = db((db.persons.first_name==first_name)&(db.persons.last_name==last_name)).select(db.persons.id).first()
-                    
-                    role_id = db.roles.update_or_insert(name=role)
-                    if not role_id:
-                        role_id = db(db.roles.name==role).select(db.roles.id).first()
-                    db.persons_in_movies.update_or_insert(movie=movie, person=person_id, role=role_id)
-                
-#                except:
-#                    continue
-                db.commit()
+            print 'importing ', movie.title
+            self._update_movie(movie)
 
     def import_posters(self, download=True, noposter=True):
         db = self.db
@@ -254,9 +204,85 @@ class Importer(object):
             cast.append(d_name)
         return dict(title=title, plot=plot, year=year, genres=genres, cast=cast)
     
-    def get_top250_movies(self):
+    def _get_top250_movies(self):
         im = self.im
         imdb_ids = list()
         for movie in im.get_top250_movies():
             imdb_ids.append(movie.getID())
         return imdb_ids
+    
+    def import_or_update_movie(self, id=None, imdb_id=None):
+        '''Given a milo id or imdb id import that movie into the database
+        '''
+        db = self.db
+        if id:
+            movie = db.movies[int(id)]
+        elif imdb_id:
+            movie = db(db.movies.imdb_id==imdb_id).select().first() or db.movies.insert(imdb_id=imdb_id)
+        else:
+            raise Exception()
+        self._update_movie(movie)
+        return True
+    
+    def _update_movie(self, movie):
+        '''Given a movie database instance, update it with data from imdb
+        '''
+        db = self.db
+        im = self.im
+        url = review_url(movie.imdb_id)
+        tree = lxml.html.parse(url)
+        tree_counter = 1
+        while True:
+            try:
+                h1_title = tree.xpath('//h1[@itemprop="name"]')
+                break
+            except AssertionError:
+                tree_counter +=1
+                if tree_counter > 10:
+                    continue
+                time.sleep(tree_counter**2)
+        if not h1_title:
+            #cannot retrieve movie title
+            return
+        title = h1_title[0].text.strip()
+        imdb_movie = im.get_movie(movie.imdb_id)
+        if title==imdb_movie.get('title'):
+            mr = MediaRetriever(title, movie.imdb_id)
+            info = self.get_info(movie.imdb_id)
+            plot = info.get('plot')
+            if plot:
+                plot = plot[0].encode('utf-8')
+            year = info.get('year')
+         
+            poster_url = mr.get_poster()
+            
+            movie.update_record(title = title,
+                                plot = plot,
+                                poster = poster_url,
+                                trailer = mr.get_trailer(),
+                                year = year,
+                                updated = datetime.datetime.now()
+                                )
+            #do genre
+            for genre in info.get('genres', []):
+                genre_id = db.genres.update_or_insert(name=genre) or db(db.genres.name==genre).select(db.genres.id).first()
+                db.movies_genres.update_or_insert(movie=movie, genre=genre_id)
+                
+            #do cast
+            for person in info.get('cast'):
+                first_name = person.get('first_name')
+                last_name = person.get('last_name')
+                role = person.get('role')
+                person_id = db.persons.update_or_insert(first_name=first_name,
+                                                        last_name=last_name
+                                                        )
+                if not person_id:
+                    person_id = db((db.persons.first_name==first_name)&(db.persons.last_name==last_name)).select(db.persons.id).first()
+                
+                role_id = db.roles.update_or_insert(name=role)
+                if not role_id:
+                    role_id = db(db.roles.name==role).select(db.roles.id).first()
+                db.persons_in_movies.update_or_insert(movie=movie, person=person_id, role=role_id)
+            
+            db.commit()
+        

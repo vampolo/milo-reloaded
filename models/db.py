@@ -81,11 +81,13 @@ use_janrain(auth,filename='private/janrain.key')
 
 import imdb
 
-imdb_connection_str = 'postgres://imdb:imdbsecret@localhost/imdb'
-
-imsql = imdb.IMDb('sql', uri=imdb_connection_str)
+#imdb_connection_str = 'postgres://imdb:imdbsecret@localhost/imdb'
+#
+#imsql = imdb.IMDb('sql', uri=imdb_connection_str)
 
 im = imdb.IMDb()
+#let's use TOR
+im.set_proxy('http://localhost:8118/')
 
 db.define_table('users',
         Field('name'),
@@ -109,7 +111,7 @@ db.define_table('movies',
         Field('poster', 'text'),
         Field('trailer', 'text'),
         Field('plot', 'text'),
-        Field('date', 'datetime'),
+        Field('year'),
         Field('updated', 'datetime')
         )
 

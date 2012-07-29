@@ -2,6 +2,14 @@
 	margin:0 auto;
 }
 
+.clearboth{
+	clear: both;
+}
+
+.trailer {
+	margin-top: 50px;
+}
+
 .masonry-item img{
 	max-width: 200px;
 }
@@ -9,4 +17,10 @@
 .movie-info {
 	width:200px;
 	margin:3px 5px 3px;
+}
+
+#movie .poster{
+	float: left;
+	width: 390px;
+	margin: 0 20px 10px 0;
 }

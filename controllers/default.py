@@ -9,14 +9,14 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
-ITEMS_PER_PAGE = 12
+ITEMS_PER_PAGE = 50
 
 def index():
     page = 0 if not request.args(0) else int(request.args(0))
     query = db(movies_with_ratings&movies_with_titles&with_poster)
-    list_movies = query.select(limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE)).as_list()
+    list_movies = query.select(orderby=~(db.movies.year), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE)).as_list()
     max_items = query.count() 
-    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
+    return dict(list_movies = list_movies, slider_movies = list_movies[-20:-10], page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
 
 def user():
     """

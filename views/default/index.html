@@ -1,18 +1,21 @@
 {{left_sidebar_enabled,right_sidebar_enabled=False,True}}
 {{
 response.files.append(URL('static','3Dgallery/css/style.css'))
-response.files.append(URL('static','css/milo.css'))
 response.files.append(URL('static', '3Dgallery/js/jquery.gallery.js'))
 response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 }}
 
 {{extend 'layout2.html'}}
 
+{{block statusbar}}
+    <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a></div>
+{{end}}
+
 {{block center}}
 <section id="dg-container">
 				<div class="dg-wrapper">
 					{{for movie in slider_movies:}}
-					<a href="#"><img src="{{=URL('static', movie.get('poster'))}}" alt="image01"></a>
+					<a href="{{=URL('movie', 'show', args=[movie.get('id')])}}"><img src="{{=URL('static', movie.get('poster'))}}" alt="image01"></a>
 					{{pass}}
 				</div>		
 </section>
@@ -21,10 +24,18 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 <section id="masonry-content" class="centered">
 	{{for movie in list_movies:}}
 	<div class="masonry-item">
-		<img src="{{=URL('static', movie.get('poster'))}}" />
+		<a href="{{=URL('movie', 'show', args=[movie.get('id')])}}"><img src="{{=URL('static', movie.get('poster'))}}" /></a>
 		<div class="movie-info">
-			<div class="movie-title">{{=movie.get('title')}}</div>
-			<div class="movie-plot">{{=movie.get('genre')}}</div>
+			<a href="{{=URL('movie', 'show', args=[movie.get('id')])}}"><div class="movie-title">{{=movie.get('title')}}</div></a>
+			<div class="movie-year">
+			{{if not movie.get('year'):
+				schedule_movie(movie.get('id'))
+			}}
+				Unavailable
+			{{else:}}
+				{{=movie.get('year')}}
+			{{pass}}
+			</div>
 		</div>
 		<div class="comments">
 			
@@ -39,10 +50,6 @@ $(function() {
 		autoplay	:	true
 	});
 	
-	var bodywidth = $('body').innerWidth();
-	
-	//$('#masonry-container').css('width', bodywidth);
-	
 	var $container = $('#masonry-content');
 	$container.imagesLoaded(function(){
 	  $container.masonry({
@@ -54,6 +61,14 @@ $(function() {
 	
 });
 </script>
+<div id="paging">
+	{{if page != 0:}}
+	{{=A('Previous', _href=URL(args=[page-1]))}}
+	{{pass}}
+	{{if items_per_page*page < max_items:}}
+	{{=A('Next', _href=URL(args=[page+1]))}}
+	{{pass}}
+</div>
 
 {{block right_sidebar}}
 
