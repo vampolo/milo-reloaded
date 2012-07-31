@@ -6,12 +6,24 @@
 	clear: both;
 }
 
+.outer-center {
+  float: right;
+  right: 50%;
+  position: relative;
+}
+
+.inner-center {
+  float: right;
+  right: -50%;
+  position: relative;
+}
+
 .trailer {
 	margin-top: 50px;
 }
 
 .masonry-item img{
-	max-width: 200px;
+	max-width: 210px;
 }
 
 .movie-info {
@@ -24,3 +36,16 @@
 	width: 390px;
 	margin: 0 20px 10px 0;
 }
+
+#masonry-content{
+	margin-bottom: 100px;
+}
+
+#masonry-item{
+	text-align:center;
+}
+
+#paging-container {
+  overflow: auto;
+}
+

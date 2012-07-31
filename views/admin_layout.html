@@ -15,6 +15,8 @@
 	<![endif]-->
     <script type="text/javascript" src="{{=URL('static','emanager')}}/js/jquery-1.2.6.min.js"></script>
     <script type="text/javascript" src="{{=URL('static','emanager')}}/js/ui.js"></script>
+    
+    {{include 'web2py_ajax.html'}}
 </head>
 
 <body>
@@ -40,17 +42,17 @@
 				</ul>
 			</li>
  			<li class="subitems">
-				<a href="#" title="Matrices">Matrices</a>
-				<ul>
+ 				{{=A('Matrices', _title="Matrices", target='content', callback=URL('matrices'))}}
+			<!-- 	<ul>
                     <li><a href="#" title="Edit Matches">Edit Matches</a></li>
-				</ul>
+				</ul> -->
 			</li>
-			<li class="subitems">
+		<!-- 	<li class="subitems">
 				<a href="#" title="Survey">Matrices</a>
 				<ul>
                     <li><a href="#" title="Edit Matches">Edit Matches</a></li>
 				</ul>
-			</li>
+			</li> -->
 <!--			<li><a href="#mp3" title="MP3 Player">MP3 Player</a></li>
 			<li class="subitems">
 				<a href="#" title="Users">Donation Info</a>
@@ -74,10 +76,8 @@
 		<span class="clear"></span>
 		<div id="redbox">
 			<h4>Info</h4>
-			<p>
-				URM created on {{=matrices_info.get('urm', 'Unknown')}}<br />
-				ICM created on {{=matrices_info.get('icm','Unknown')}}<br />				
-			</p>
+			<p>URM created on {{=matrices_info.get('urm', 'Unknown')}}</p><br />
+			<p>ICM created on {{=matrices_info.get('icm','Unknown')}}<br /></p>
 		</div>
 	</div>
 	<div id="content">

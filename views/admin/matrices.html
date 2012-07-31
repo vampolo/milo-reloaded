@@ -1,0 +1,31 @@
+<h2>Matrices</h2>
+<div class="box">
+	<table>
+		<tbody>
+			<tr>
+				<th class="col1">Name</th>
+				<th class="col2">Creation date</th>
+				<th class="col3">Actions</th>
+			</tr>
+			{{highlight=True}}
+			{{for matrice,date in matrices.iteritems():}}
+			<tr class="{{='highlight' if highlight else ''}}">
+				<td>{{=matrice}}</td>
+				<td>{{=date}}</td>
+				<td class="action">
+					<ul>
+						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[matrice]))}}</li>
+						<li>{{=A('', _class="add", _title="make new matrice", callback=URL('make_matrice', args=[matrice]), target="message")}}</li>
+						<li>{{=A('', _class="delete", _title="delete", callback=URL('delete_matrice', args=[matrice]), target="message")}}</li>
+					</ul>
+				</td>
+			</tr>
+			{{highlight = not highlight}}
+			{{pass}}
+		</tbody>
+	</table>
+</div>
+<br>
+<div id="message">
+	
+</div>

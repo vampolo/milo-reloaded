@@ -7,8 +7,8 @@ matlab_wrapper = local_import('matlab_wrapper')
 db_scheduler = DAL('postgres://milo:milosecret@localhost/milo-scheduler')
  
 def create_model(*args, **vars):
-    w = matlab_wrapper.Whisperer(db)
-    w.create_model()
+    w = matlab_wrapper.Whisperer(db,im)
+    w.create_model(*args, **vars)
 
 def create_metadata(*args, **vars):
     metadata = local_import('metadata')
@@ -28,10 +28,10 @@ def import_or_update_movie(*args, **kwargs):
     i = Importer(db, im)
     i.import_or_update_movie(*args, **kwargs)
 
-def import_posters():
+def import_popular_movies(*args, **kwargs):
     i = Importer(db, im)
-    i.import_posters()
-    
+    i.get_popular_movies(schedule_movie, *args, **kwargs)
+
 milo_scheduler = Scheduler(db_scheduler, dict(
     create_model=create_model,
     create_metadata=create_metadata,
@@ -53,12 +53,22 @@ def schedule_movie(*args, **kwargs):
         repeats = 1,
         timeout = 3600,
     )
+    db_scheduler.commit()
 
-#import datetime    
-#db_scheduler.scheduler_task.insert(
-#        application_name='milo',
-#        function_name='create_urm',
-#        enabled=True,
-#        start_time=request.now,
-#        stop_time = request.now+datetime.timedelta(days=1)
-#        )
+def schedule_model(*args, **kwargs):
+    db_scheduler.scheduler_task.insert(
+        status='QUEUED',
+        application_name='milo',
+        task_name='schedule_model',
+        function_name='create_model',
+        args=json.dumps(args),
+        vars=json.dumps(kwargs),
+        enabled=True,
+        start_time = request.now,
+        stop_time = request.now+datetime.timedelta(days=10),
+        repeats = 1,
+        timeout = 3600*24*7,
+    )
+    db_scheduler.commit()
+
+    

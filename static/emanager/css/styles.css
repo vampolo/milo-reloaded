@@ -182,6 +182,11 @@ strong	{
 	padding-right: 20px;
 	background: url(../images/bg_redbox.png) no-repeat right top;
 }
+
+#redbox p {
+	margin-left:50px;
+}
+
 #sidebar h4	{
 	color: #fff;
 	font-size: 1.1em;
@@ -332,6 +337,17 @@ strong	{
 	padding: 5px 0;
 	font-size: 1.1em;
 }
+
+#content .box p	{
+	height: 1%;
+	clear: both;
+	color: #6c6c6c;
+	display: block;
+	font-size: 1.2em;
+	font-weight: bold;
+	line-height: 1.25em;
+	padding: 15px 0 5px 0;
+}
 #content .textarea	{
 	width: 693px;
 	height: 150px;
@@ -398,10 +414,10 @@ strong	{
 	margin: -2px 17px 0 -33px;
 	background: url(../images/icon_alert.png) no-repeat left top;
 }
-#tip span.icon	{
+.tip span.icon	{
 	background: url(../images/icon_tip.png) no-repeat left top;
 }
-#congrats span.icon	{
+.congrats span.icon	{
 	background: url(../images/icon_congrats.png) no-repeat left top;
 }
 .alert a, .alert a:visited	{
@@ -425,6 +441,12 @@ strong	{
 #content .box	{
 	background: url(../images/bg_content_form.png) repeat-y left top;
 }
+
+#content .box-end{
+	height:18px;
+	background: url(../images/bg_content_fieldset.png) no-repeat left bottom;
+}
+
 #content table	{
 	width: 726px;
 	margin: 0 auto;

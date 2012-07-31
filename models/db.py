@@ -169,3 +169,4 @@ db.define_table('movies_features',
         Field('feature', db.features, requires = IS_IN_DB(db,'features.id',db.features._format)),
         Field('times', 'integer')
         )
+

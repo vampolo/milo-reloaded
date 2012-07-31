@@ -174,7 +174,7 @@ class Whisperer(object):
         db = self.db
         alg = self._get_model_name(algname)
         self._create_matlab_matrices()
-#        self._create_model(alg)
+        self._create_model(alg)
 
 
     @matlab
@@ -230,7 +230,7 @@ class Whisperer(object):
         for root, dirs, files in os.walk(self.savepath):
             for f in files:
                 for algname in algnames:
-                    if f[:-10] in self._get_model_name(algname):
+                    if f[:-10] in self._get_model_name(algname) and f[:-10]!='':
                         algo =f[:-10]
                         path = os.path.join(root, f)
                         algs[algname] = datetime.datetime.fromtimestamp(os.path.getmtime(path))
@@ -247,56 +247,16 @@ class Whisperer(object):
         except:
             pass
         return matrices
+    
+    @classmethod
+    def get_matrices_path(cls):
+        matrices = dict()
+        try:
+            matrices['urm'] = os.path.join(cls.savepath, 'urm.mat')
+            matrices['icm'] = os.path.join(cls.savepath, 'icm.mat')
+            matrices['titles'] = os.path.join(cls.savepath, 'titles.mat')
+            matrices['features'] = os.path.join(cls.savepath, 'features.mat')
+        except:
+            pass
+        return matrices
 
-
-    @matlab
-    def load_urm(self):
-        self._run("load('urmFull.mat')")
-        self._run("A=full(urm)")
-        urm = self._get("A")
-        #force matlab to close and free memory
-        self._close_matlab()
-        print 'Out of matlab!'
-        for (row,col),value in numpy.ndenumerate(urm):
-            print 'processing rating %i for user %i and item %i' % (value, row, col)
-            if value is not 0:
-                self.db.add(Rating(user_id=row+1, item_id=col+1, rating=value))
-                self.db.flush()
-                self.db.commit()
-        #for i,row in enumerate(urm):
-        #    print 'processing row: %s' % (i)
-        #    self.db.add(User(name="netflix%s" % (i)))
-        #    self.db.flush()
-        #urm[r.user_id-1][r.item_id-1]
-
-#    @matlab
-#    def load_titles(self, filename='/tmp/movie_titles.txt'):
-#        self._run("load('titles.mat')")
-#        titles = self._get('titles')
-#        l = list()
-#        for row in titles:
-#            l.append(''.join(row).rstrip())
-#        f = open(filename, 'w')
-#        for item in l:
-#            f.write("%s\n" % item)
-#        f.close()
-#        return l
-#
-#    def do_something(self):
-#        print 'URM'
-#        print self.create_urm()
-#        print 'ICM'
-#        print self.create_icm()
-#        print 'run AsySVD'
-#        #print self.create_model('random')
-#        #print self.create_model('cosineIIknn')
-#        #print 'get rec'
-#        print self.get_rec('random', self.db.query(User).filter(User.id==9).first())
-#        #print Whisperer.get_algnames()
-#        #print self.get_models_info()
-#        #do something
-
-#if __name__=='__main__':
-#    w = Whisperer()
-#    #w.load_urm()
-#    w.do_something()

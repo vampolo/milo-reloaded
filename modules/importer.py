@@ -6,7 +6,7 @@ import urllib2
 import urllib
 import datetime
 import time
-from pprint import pprint
+import re
 from lxml.html import parse
 
 HERE = os.path.abspath(os.path.dirname(__file__))
@@ -21,12 +21,97 @@ MOVIES_IN_THEATERS_URL="http://www.imdb.com/movies-in-theaters/"
 COMING_SOON_URL="http://www.imdb.com/movies-coming-soon/"
 
 
-IMDB_MOVIE_URL = 'http://www.imdb.com/title/tt{}/'
+IMDB_REVIEW_URL = 'http://www.imdb.com/title/tt{}/reviews'
+
+userid_regxp = re.compile('.*/ur(\d+)/.*')
+user_regxp = re.compile('^([\w\s-]+)(\((.*)\))?')
+rate_regxp = re.compile('(\d*)\/(\d*)')
+reviews_regxp = re.compile('^\n(\d*) reviews.*')
 
 def review_url(id):
     if id is not None:
+        return IMDB_REVIEW_URL.format(id)
+    return None
+
+
+IMDB_MOVIE_URL = 'http://www.imdb.com/title/tt{}/'
+
+def movie_url(id):
+    if id is not None:
         return IMDB_MOVIE_URL.format(id)
     return None
+
+def _get_movies_ids_in_page(url):
+       imdb_ids = list()
+       page = urllib2.urlopen(url)
+       data = lxml.html.parse(page)
+       for a_tag in data.xpath("//h4[@itemprop='name']/a"):
+           imdb_ids.append(a_tag.attrib.get('href')[9:-1])
+       return imdb_ids
+   
+def get_movies_in_theaters():
+    return _get_movies_ids_in_page(MOVIES_IN_THEATERS_URL)
+   
+def get_movies_coming_soon(period=None):
+    url = COMING_SOON_URL
+    if period:
+        url+=period.strftime("%Y-%m")
+    return _get_movies_ids_in_page(url)
+
+def parse_review_url(url):
+    i = 0
+    users = {}
+    return_rates = list()
+    while True:
+        if i > 0 and i > reviews_num/10:
+            return (users, return_rates)
+        ret_url = url+'?'+urllib.urlencode({'start':i*10})
+        counter = 1
+        while True:
+            try:
+                counter += 1
+                tree = lxml.html.parse(ret_url)
+                break
+            except IOError:
+                if counter >=10:
+                    break
+                time.sleep(100)
+        if i == 0:
+            try:
+                td_review = tree.xpath('//div[@id="pagecontent"]//table/tr/td[@align="right"]')[0]
+            except:
+                return (users, return_rates)
+            reviews_match = reviews_regxp.match(td_review.text)
+            if reviews_match:
+                reviews_num = int(reviews_match.group(1))
+            else:
+                reviews_num = 1
+        try:
+            contents = tree.xpath('//div[@id="tn15content"]//hr')
+        except:
+            continue
+        for rev in contents[:-1]:
+            p_rev = rev.getnext()
+            rates = p_rev.xpath('img[@alt]')
+            for r in rates:
+                rate_match = rate_regxp.match(r.get('alt'))
+                rate = float(rate_match.group(1))/float(rate_match.group(2))
+                user = p_rev.xpath('a')[0]
+                userid_rgxp = userid_regxp.match(user.get('href'))
+                userid = int(userid_rgxp.group(1))
+                try:
+                    username_and_mail_rgxp = user_regxp.match(user.text)
+                    username = username_and_mail_rgxp.group(1).rstrip()
+                    email = username_and_mail_rgxp.group(3)
+                except:
+                    username = userid
+                    email = None
+                if userid not in users:
+                    users[userid]=dict(username=username, email=email, imdb_id=userid)
+                if rate:
+                    return_rates.append((userid,rate))
+        i += 1
+
 
 
 class MediaRetriever(object):
@@ -46,7 +131,6 @@ class MediaRetriever(object):
     def __create_request(self, url, params=None):
         req = urllib2.Request(url, params)
         return self.opener.open(req)
-
 
     def _guess_imdb_id(self):
         movie = self.movie_title
@@ -81,7 +165,7 @@ class MediaRetriever(object):
         if self.has_poster() and not force:
             return os.path.join(R_POSTERS_PATH, str(imdb_id)+'.jpg')
         
-        second_page = parse(self.__create_request(review_url(imdb_id)))
+        second_page = parse(self.__create_request(movie_url(imdb_id)))
         if second_page:
             try:
                 poster_page_url = second_page.xpath("//td[@id='img_primary']/a")[0].attrib.get('href')
@@ -113,25 +197,7 @@ class MediaRetriever(object):
     def has_poster(self):
         imdb_id = self.movie_imdb_id
         return os.path.exists(os.path.join(POSTERS_PATH, str(imdb_id)+'.jpg'))
-    
-    
-    def _get_movies_ids_in_page(self, url):
-        print url
-        imdb_ids = list()
-        page = urllib2.urlopen(url)
-        data = lxml.html.parse(page)
-        for a_tag in data.xpath("//h4[@itemprop='name']/a"):
-            imdb_ids.append(a_tag.attrib.get('href')[9:-1])
-        return imdb_ids
-    
-    def get_movies_in_theaters(self):
-        return _get_movies_ids_in_page(MOVIES_IN_THEATERS_URL)
-    
-    def get_movies_coming_soon(self, period=None):
-        url = COMING_SOON_URL
-        if period:
-            url+=period.strftime("%Y-%m")
-        return _get_movies_ids_in_page(url)
+
     
     
     
@@ -153,6 +219,18 @@ class Importer(object):
     def __init__(self, db, im):
         self.db = db
         self.im = im
+        
+    def _add_user(self, user):
+        self.db.users.update_or_insert(name=user.get('username'), imdb_id=user.get('imdb_id'), email=user.get('email'))
+
+    def _add_movie(self, imdb_id):
+        self.db.movies.update_or_insert(imdb_id=imdb_id)
+    
+    def _add_rating(self, user_imdb_id, movie_imdb_id, rating):
+        db = self.db
+        user = db(db.users.imdb_id==user_imdb_id).select().first()
+        movie = db(db.movies.imdb_id==movie_imdb_id).select().first()
+        db.ratings.update_or_insert(iuser=user, imovie=movie, rating=rating)
 
     def import_movies_from_imdb(self):
         '''
@@ -204,14 +282,22 @@ class Importer(object):
             cast.append(d_name)
         return dict(title=title, plot=plot, year=year, genres=genres, cast=cast)
     
-    def _get_top250_movies(self):
+    def get_popular_movies(self, schedule_movie, *args, **kwargs):
         im = self.im
-        imdb_ids = list()
         for movie in im.get_top250_movies():
-            imdb_ids.append(movie.getID())
-        return imdb_ids
+            schedule_movie(imdb_id=movie.getID(), reviews=True)
+        for imdb_id in get_movies_in_theaters():
+            schedule_movie(imdb_id=imdb_id, reviews=True)
+        
+        for year in range(2000, 2013):
+            for month in range(01, 13):
+                period = datetime.date(year=year, month=month, day=1)    
+                for imdb_id in get_movies_coming_soon(period):
+                    schedule_movie(imdb_id=imdb_id, reviews=True)
+            
+        return 
     
-    def import_or_update_movie(self, id=None, imdb_id=None):
+    def import_or_update_movie(self, id=None, imdb_id=None, reviews=False, *args, **kwargs):
         '''Given a milo id or imdb id import that movie into the database
         '''
         db = self.db
@@ -220,8 +306,10 @@ class Importer(object):
         elif imdb_id:
             movie = db(db.movies.imdb_id==imdb_id).select().first() or db.movies.insert(imdb_id=imdb_id)
         else:
-            raise Exception()
+            raise ValueError('you may specify id or imdb_id')
         self._update_movie(movie)
+        if reviews:
+            self._parse_reviews(movie)
         return True
     
     def _update_movie(self, movie):
@@ -229,7 +317,7 @@ class Importer(object):
         '''
         db = self.db
         im = self.im
-        url = review_url(movie.imdb_id)
+        url = movie_url(movie.imdb_id)
         tree = lxml.html.parse(url)
         tree_counter = 1
         while True:
@@ -285,4 +373,19 @@ class Importer(object):
                 db.persons_in_movies.update_or_insert(movie=movie, person=person_id, role=role_id)
             
             db.commit()
+            
+    
+    def _parse_reviews(self, movie):
+        '''Given a movie instance add reviews to database if the don't exist
+        '''
+        db = self.db
+        im = self.im
+        url = review_url(movie.imdb_id)
+        (users, ratings) = parse_review_url(url)
+        for user_imdb_id, user in users.iteritems():
+            self._add_user(user)
+        for (user_imdb_id, rating) in ratings:
+            self._add_rating(user_imdb_id, movie.imdb_id, rating)
+        db.commit()
+        return True
         
