@@ -147,7 +147,9 @@ db.define_table('persons_in_movies',
 
 movies_with_ratings = (db.movies.id.belongs(db(db.ratings)._select(db.ratings.imovie, distinct=db.ratings.imovie)))
 movies_with_titles = ~(db.movies.title==None)
-with_poster = (db.movies.poster.startswith('images/movies'))
+with_poster = ~(db.movies.poster=='images/unknown_poster.jpg')
+with_year = ~(db.movies.year==None)
+useful_movies = movies_with_ratings&movies_with_titles&with_poster&with_year
 
 #for x in db(db.ratings).select(db.ratings.ALL):
 #    for y in db(db.ratings.id>x.id).select(db.ratings.ALL):
@@ -170,3 +172,29 @@ db.define_table('movies_features',
         Field('times', 'integer')
         )
 
+
+db.define_table('surveys',
+                Field('name'),
+                Field('algorithm'),
+                Field('ratings_number'),
+                Field('scale', 'integer'),
+                )
+
+db.define_table('surveys_users',
+                Field('survey', db.surveys),
+                Field('iuser', db.users),
+                )
+
+db.define_table('questions',
+                Field('text', 'text')
+                )
+
+db.define_table('answers',
+                Field('text', 'text')
+                )
+
+db.define_table('answers_to_surveys',
+                Field('survey_user', db.surveys_users),
+                Field('question', db.questions),
+                Field('answer', db.answers)
+                )

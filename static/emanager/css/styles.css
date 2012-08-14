@@ -456,11 +456,9 @@ strong	{
 	background: #f2f2f2 url(../images/bg_td_highlight.png) repeat-x left top;
 }
 #content th	{
-	height: 42px;
+	height: 30px;
 	color: #6c6c6c;
 	font-size: 1.2em;
-	text-align: left;
-	text-indent: 20px;
 	font-weight: bold;
 	vertical-align: middle;
 }

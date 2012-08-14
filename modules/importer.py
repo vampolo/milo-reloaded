@@ -8,6 +8,7 @@ import datetime
 import time
 import re
 from lxml.html import parse
+from metadata import MetadataGenerator
 
 HERE = os.path.abspath(os.path.dirname(__file__))
 
@@ -297,7 +298,7 @@ class Importer(object):
             
         return 
     
-    def import_or_update_movie(self, id=None, imdb_id=None, reviews=False, *args, **kwargs):
+    def import_or_update_movie(self, id=None, imdb_id=None, reviews=False, metadata=True, *args, **kwargs):
         '''Given a milo id or imdb id import that movie into the database
         '''
         db = self.db
@@ -310,7 +311,13 @@ class Importer(object):
         self._update_movie(movie)
         if reviews:
             self._parse_reviews(movie)
+        if metadata:
+            self._add_metadata(movie)
         return True
+    
+    def _add_metadata(self, movie):
+        generator = MetadataGenerator(self.db, self.im)
+        generator.create_metadata(movie)
     
     def _update_movie(self, movie):
         '''Given a movie database instance, update it with data from imdb

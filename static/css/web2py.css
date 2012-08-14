@@ -64,7 +64,7 @@ html, body {
 /* Sticky footer end */
 
 body {
-    background-color: #FFFFFF;
+    background: #f7f5f5 url(../images/paper.jpg) repeat;
 }
 
 .header {

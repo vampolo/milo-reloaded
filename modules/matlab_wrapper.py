@@ -9,6 +9,8 @@ here = os.path.abspath(os.path.dirname(__file__))
 ALGOPATH=os.path.join(here,'algorithms')
 SAVEPATH=os.path.join(here,'elaborated_models')
 
+ALL_MATRICES = ['urm', 'icm', 'titles', 'features']
+
 def matlab(f):
     @functools.wraps(f)
     def wrapper(self, *args, **kwds):
@@ -47,40 +49,40 @@ class Whisperer(object):
         self.m = None
 
     @matlab
-    def create_titles_and_features_vector(self):
+    def create_titles_vector(self):
         db = self.db
-        db_ratings = db(db.ratings).select(db.ratings.ALL, distinct=db.ratings.imovie)
+        db_ratings = db(db.ratings).select(db.ratings.ALL, distinct=db.ratings.imovie).sort(lambda x: x.imovie)
         titles = None
         if self.im:
             titles = list()
-            for x in db_ratings.sort(lambda x: x.imovie):
-                movie = self.im.get_movie(x.imovie.imdb_id)
-                titles.append(movie.get('title', 'Unknown'))
+            for x in db_ratings:
+                movie = x.imovie
+                titles.append(movie.title)
         if titles:
             self._run("titles = cell({},1)".format(len(titles)))
             for i, title in enumerate(titles):
+                if title is None:
+                    title = 'None'
                 title = title.replace("'", "''")
-                self._run("titles{{{0}}}='{1}'".format(i+1, title.encode('utf-8')))
+                self._run("titles{{{0}}}='{1}'".format(i+1, title))
             self._run("save('"+os.path.join(self.savepath, 'titles')+"', 'titles')")
-            self._run("clear")
-
-        db_features = db(db.movies_features).select(db.movies_features.ALL, distinct=db.movies_features.feature)
+    
+    @matlab
+    def create_features_vector(self):
+        db = self.db
+        db_features = db(db.movies_features).select(db.movies_features.ALL, distinct=db.movies_features.feature).sort(lambda x: x.feature)
         features_vector = list()
-        for x in db_features.sort(lambda x: x.feature):
+        for x in db_features:
             features_vector.append(x.feature.name)
         self._run("features = cell({},1)".format(len(features_vector)))
         for i, feature in enumerate(features_vector):
             feature_escaped = feature.replace("'", "''")
             self._run("features{{{0}}}='{1}'".format(i+1, feature_escaped))
         self._run("save('"+os.path.join(self.savepath, 'features')+"', 'features')")
-        self._run("clear")
-
 
 
     @matlab
-    def _create_matlab_matrices(self, type=None, delta=None, *args, **vars):
-        if delta is None:
-            delta = datetime.datetime.now()+datetime.timedelta(4)
+    def create_matlab_matrices(self, type=None, force=False, *args, **vars):
         c_icm = True
         c_urm = True
         urm_filepath = os.path.join(self.savepath, 'urm.mat')
@@ -99,7 +101,7 @@ class Whisperer(object):
             c_urm = False
         if c_urm:
             filepath = os.path.join(self.savepath, 'urm.mat')
-            if not urm_date or urm_date > delta:
+            if not urm_date or force:
                 print 'Creating URM'
                 users, movies, ratings, urm_dimensions = self._create_urm()
                 self._put('urm_users', users)
@@ -111,7 +113,7 @@ class Whisperer(object):
                 self._run("clear")
         if c_icm:
             filepath = os.path.join(self.savepath, 'icm.mat')
-            if not icm_date or icm_date > delta:
+            if not icm_date or force:
                 print 'Creating ICM'
                 icm_items, icm_features, icm_occurrencies, icm_dimensions = self._create_icm()
                 self._put('icm_items', icm_items)
@@ -162,10 +164,14 @@ class Whisperer(object):
         return up
 
     @matlab
-    def _create_model(self, alg, *args, **kwargs):
+    def _create_model(self, alg, param=None, *args, **kwargs):
         self._run("load('"+os.path.join(self.savepath, 'urm.mat')+"')")
         self._run("load('"+os.path.join(self.savepath, 'icm.mat')+"')")
-        self._run("["+alg+"_model] = createModel_"+alg+"(urm, icm)")
+        self._run("param = struct()")
+        if param:
+            for k,v in param.iteritems():
+                self._run("param."+str(k)+" = "+str(v))
+        self._run("["+alg+"_model] = createModel_"+alg+"(urm, icm, param)")
         self._run("save('"+os.path.join(self.savepath, alg+'_model')+"', '"+alg+"_model')")
 
     def create_model(self, algname='AsySVD'):
@@ -173,7 +179,7 @@ class Whisperer(object):
         #function [model] = createModel_ALGORITHM_NAME(URM,ICM,param)
         db = self.db
         alg = self._get_model_name(algname)
-        self._create_matlab_matrices()
+        self.create_matlab_matrices()
         self._create_model(alg)
 
 
@@ -239,24 +245,25 @@ class Whisperer(object):
     @classmethod
     def get_matrices_info(cls):
         matrices = dict()
-        try:
-            matrices['urm'] = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(cls.savepath, 'urm.mat')))
-            matrices['icm'] = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(cls.savepath, 'icm.mat')))
-            matrices['titles'] = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(cls.savepath, 'titles.mat')))
-            matrices['features'] = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(cls.savepath, 'features.mat')))
-        except:
-            pass
+        for matrice in ALL_MATRICES:
+            try:
+                matrices[matrice] = datetime.datetime.fromtimestamp(os.path.getmtime(os.path.join(cls.savepath, matrice+'.mat')))
+            except:
+                matrices[matrice] = None
         return matrices
     
     @classmethod
     def get_matrices_path(cls):
         matrices = dict()
-        try:
-            matrices['urm'] = os.path.join(cls.savepath, 'urm.mat')
-            matrices['icm'] = os.path.join(cls.savepath, 'icm.mat')
-            matrices['titles'] = os.path.join(cls.savepath, 'titles.mat')
-            matrices['features'] = os.path.join(cls.savepath, 'features.mat')
-        except:
-            pass
+        for matrice in ALL_MATRICES:
+            try:
+                matrices[matrice] = os.path.join(cls.savepath, matrice+'.mat')
+            except:
+                matrices[matrice] = None
         return matrices
+    
+    @classmethod
+    def delete_matrice(cls, matrice):
+        matrices_path = cls.get_matrices_path()
+        os.remove(matrices_path[matrice])
 

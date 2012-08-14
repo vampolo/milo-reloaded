@@ -13,10 +13,14 @@
 				<td>{{=matrice}}</td>
 				<td>{{=date}}</td>
 				<td class="action">
-					<ul>
+					<ul style="width:75px;">
+						{{if date is not None:}}
 						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[matrice]))}}</li>
+						{{pass}}
 						<li>{{=A('', _class="add", _title="make new matrice", callback=URL('make_matrice', args=[matrice]), target="message")}}</li>
+						{{if date is not None:}}
 						<li>{{=A('', _class="delete", _title="delete", callback=URL('delete_matrice', args=[matrice]), target="message")}}</li>
+						{{pass}}
 					</ul>
 				</td>
 			</tr>

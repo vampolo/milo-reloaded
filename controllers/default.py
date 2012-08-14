@@ -11,12 +11,28 @@
 
 ITEMS_PER_PAGE = 50
 
-def index():
+def _render_to_index(query):
+    response.view = 'default/index.html'
     page = 0 if not request.args(0) else int(request.args(0))
-    query = db(movies_with_ratings&movies_with_titles&with_poster&(db.movies.updated<datetime.datetime.now()+datetime.timedelta(4)))
-    list_movies = query.select(orderby=~(db.movies.year), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE)).as_list()
-    max_items = query.count() 
-    return dict(list_movies = list_movies, slider_movies = list_movies[-20:-10], page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
+    print db(query)._select(db.movies.ALL, distinct=True)
+    print ''
+    list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year), distinct=True, limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE))
+    max_items = db(query).count() 
+    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
+
+def index():
+    query = useful_movies
+    return _render_to_index(query)
+    
+def search():
+    term = request.vars.get('s')
+    genres = request.vars.getlist('genres')
+    query = db.movies.id>0
+    if term:
+        query &= db.movies.title.contains(term)
+    if genres:
+        query &= db.movies.id.belongs(db(db.movies_genres.genre.belongs(genres))._select(db.movies_genres.movie))
+    return _render_to_index(query)
 
 def user():
     """
