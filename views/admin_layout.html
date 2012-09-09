@@ -15,7 +15,6 @@
 	<![endif]-->
     <script type="text/javascript" src="{{=URL('static','emanager')}}/js/jquery-1.2.6.min.js"></script>
     <script type="text/javascript" src="{{=URL('static','emanager')}}/js/ui.js"></script>
-    
     {{include 'web2py_ajax.html'}}
 </head>
 
@@ -24,30 +23,31 @@
 <div id="wrap">
 	<div id="header">
 		<h1><a class="bg" href="#" title="Home"></a>Milo Manager</h1>
-		<p id="status">Logged is as Username, <a href="#" title="Sign Out?">Sign Out?</a></p>
+		<p id="status">Logged is as {{=auth.user.email}}, <a href="{{=URL('user', 'logout')}}" title="Sign Out?">Sign Out?</a></p>
 		<h2><span>Hello, this is the Dashboard</span></h2>
 		<p id="description">The milo dashboard is the main panel to monitor user activity in milo webapp</p>
 	</div>
 	<div class="flash">{{=response.flash or ''}}</div>
     <div id="sidebar">
 		<ul class="items">
+	    <li>{{=A('Back to milo', _href=URL('default','index'))}}</li>
             <li class="active">
             	<a href="{{=URL('index')}}" title="Dashboard">Dashboard</a>
             </li>
             <li class="subitems">
             	<a href="#"> Actions</a>
             	<ul>
-            		<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), target='#content')}}</li>
-            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'update_all_movies'), target='#content')}}</li>
-            		<li>{{=A('Get coming soon movies', callback=URL('admin', 'update_all_movies'), target='#content')}}</li>
-            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 'update_all_movies'), target='#content')}}</li>
+            		<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), target='content')}}</li>
+            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'update_all_movies'), target='content')}}</li>
+            		<li>{{=A('Get coming soon movies', callback=URL('admin', 'update_all_movies'), target='content')}}</li>
+            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 'update_all_movies'), target='content')}}</li>
             	</ul>
             </li>
 			<li class="subitems">
 				<a href="#" title="Algorithms">Algorithms</a>
 				<ul>
 					{{for alg in algorithms:}}
-					<li><a title="{{=alg}}" onclick="fill_content('{{=URL('info_algorithm', args=[alg])}}')">{{=alg}}</a></li>
+					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
 			</li>
@@ -58,7 +58,10 @@
 				</ul> -->
 			</li>
 			<li>
-				<a href="#">Surveys</a>
+				{{=A('Surveys', callback=URL('admin', 'surveys'), target='content')}}
+				<ul>
+					<li>{{=A('Create new survey', callback=URL('admin', 'create_survey'), target='content')}}</li>
+				</ul>
 			</li>
 		<!-- 	<li class="subitems">
 				<a href="#" title="Survey">Matrices</a>

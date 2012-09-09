@@ -1,0 +1,27 @@
+{{
+legend = {
+          1:'Worst',
+          2:'Bad',
+          3:'Ok',
+          4:'Good',
+          5:'Best'
+         }
+
+}}
+<form class="rating-form">
+{{if rating_mode==5:}}
+    {{for star in range(5):}}
+    <input name="{{=movie.id}}" type="radio" class="star" value="{{=star+1}}" title="{{=legend[star+1]}}"/>
+    {{pass}}
+{{elif rating_mode==2:}}
+    <input name="{{=movie.id}}" type="radio" class="star" value="1" title="Worst"/>
+    <input name="{{=movie.id}}" type="radio" class="star" value="2" title="Best"/>
+{{pass}}
+</form>
+<br/>
+<script>
+jQuery('.rating-form').submit(function() {
+  ajax('{{=URL('new_post')}}');
+  return false;
+});
+</script>

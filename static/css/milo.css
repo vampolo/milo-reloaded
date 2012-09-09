@@ -13,7 +13,7 @@
 	font-weight:bold;
 }
 
-.outer-center {
+/*.outer-center {
 	float: right;
 	right: 50%;
 	position: relative;
@@ -23,8 +23,7 @@
 	float: right;
 	right: -50%;
 	position: relative;
-}
-
+}*/
 .trailer {
 	margin-top: 50px;
 }
@@ -72,7 +71,8 @@
 
 #search {
 	height: 140px;
-	margin-left: 4%;
+	margin-left: 5%;
+	text-align:center;
 }
 #search input[type="text"] {
 	width: 450px;

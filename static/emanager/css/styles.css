@@ -249,10 +249,15 @@ strong	{
 	color: #6c6c6c;
 }
 #content form	{
-	margin-bottom: 20px;
+	padding: 0 0 18px 18px;
 	background: url(../images/bg_content_form.png) repeat-y left top;
 }
 #content fieldset	{
+	padding: 0 0 18px 18px;
+	background: url(../images/bg_content_fieldset.png) no-repeat left bottom;
+}
+
+#content form table	{
 	padding: 0 0 18px 18px;
 	background: url(../images/bg_content_fieldset.png) no-repeat left bottom;
 }
@@ -266,7 +271,8 @@ strong	{
 	line-height: 1.25em;
 	padding: 15px 0 5px 0;
 }
-#content .large_input, #content .medium_input, #content .small_input	{
+
+#content .large_input, #content .medium_input, #content .small_input{
 	float: left;
 	height: 30px;
 }
@@ -306,6 +312,29 @@ strong	{
 }
 #content input.small:focus	{
 	background: #eee url(../images/bg_input_small.png) no-repeat left bottom;
+}
+#content input	{
+	width: 350px;
+	background: #aaa url(../images/bg_input_medium.png) no-repeat left top;
+}
+
+#content select{
+	margin:0px 10px 25px 0px;
+	height:16px;
+	width:20%;
+	border-radius: 5px;
+}
+
+#content input[type='submit'] {
+	float: left;
+	height: 25px;
+	display: block;
+	background: #aaa url(../images/bg_button_a.png) no-repeat left top;
+	width:150px;
+}
+
+#content input:focus	{
+	background: #eee url(../images/bg_input_medium.png) no-repeat left bottom;
 }
 #content span.positive	{
 	float: left;
@@ -368,16 +397,16 @@ strong	{
 #content textarea:focus	{
 	background: #eee url(../images/bg_textarea.png) no-repeat left bottom;
 }
-#content a.button, #content a.button:visited	{
+#content a.button, #content a.button:visited{
 	float: left;
 	height: 25px;
 	display: block;
 	background: #aaa url(../images/bg_button_a.png) no-repeat left top;
 }
-#content a.button:active	{
+#content a.button:active]{
 	background: #eee url(../images/bg_button_a.png) no-repeat left bottom;
 }
-#content a.button span, #content a.button:visited span	{
+#content a.button span, #content a.button:visited span{
 	float: left;
 	height: 19px;
 	color: #343434;
@@ -388,7 +417,7 @@ strong	{
 	padding: 6px 18px 0 18px;
 	background: url(../images/bg_button_span.png) no-repeat right top;
 }
-#content a.button:active span	{
+#content a.button:active span{
 	color: #aaa;
 	background: url(../images/bg_button_span.png) no-repeat right bottom;
 }

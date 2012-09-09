@@ -3,6 +3,7 @@
 
 import matlab_wrapper
 
+@auth.requires_membership('admin')
 def index():
     algorithms = matlab_wrapper.Whisperer.get_algnames()
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
@@ -19,19 +20,19 @@ def info_algorithm():
     algname = request.args(0)
     infos = matlab_wrapper.Whisperer.get_models_info()
     return dict(algname=algname, date=infos.get(algname, 'Not available'))
-    
+
 def update_algorithm():
     algname=request.args(0)
     schedule_model(algname=algname)
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Model creation correctly submitted</span></p>'
-    
+
 def matrices():
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(matrices=matrices)
-    
+
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
-    matrice = request.args(0)    
+    matrice = request.args(0)
     response.headers['Content-Disposition'] = 'attachment; filename={}.mat'.format(matrice)
     return response.stream(matrices[matrice])
 
@@ -53,4 +54,17 @@ def delete_matrice():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>The matrice has been deleted</span>' +str(A("Refresh page", _title="Matrices", target="content", callback=URL("matrices")))+'</p>'
 
 def surveys():
-    return dict()
+    surveys = db(db.surveys).select()
+    return dict(surveys=surveys)
+
+def create_survey():
+    form = SQLFORM(db.surveys, formstyle='divs', _action=URL('admin', 'create_survey'))
+    if form.process().accepted:
+        response.flash="ok"
+        redirect(URL('index'))
+    elif form.errors:
+        response.flash="errors"
+    else:
+        response.flash='fill out the form'
+    return dict(form=form)
+

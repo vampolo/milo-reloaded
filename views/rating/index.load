@@ -1,0 +1,9 @@
+{{n_rat_leg = len(legend)}}
+<form action={{=URL('rating', 'rate')}} method=POST>
+    {{for star in range(n_rat_leg):}}
+    <input name="rate" type="radio" class="auto-submit-star" value="{{=star+1}}" title="{{=legend[star+1]}}" {{if rating == star+1:}}checked="checked"{{pass}}/>
+    {{pass}}
+    <input type="hidden" name="movie" value={{=id}}>
+    <input type="hidden" name="mode" value={{=n_rat_leg}}>
+</form>
+<br/>

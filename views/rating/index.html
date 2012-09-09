@@ -1,0 +1,6 @@
+<form>
+    {{for star in range(len(legend)):}}
+    <input name="{{=id}}" type="radio" class="star auto-submit-star" value="{{=star+1}}" title="{{=legend[star+1]}}"/>
+    {{pass}}
+</form>
+<br/>

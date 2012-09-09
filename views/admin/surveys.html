@@ -1,0 +1,31 @@
+<h2>Surveys</h2>
+<div class="box">
+	<table>
+		<tbody>
+			<tr>
+				<th class="col1">Name</th>
+				<th class="col2">Algorithm</th>
+				<th class="col3">Number of Ratings</th>
+				<th class="col4">Scale</th>
+				<th class="col5">Actions</th>
+			</tr>
+			{{highlight=True}}
+			{{for survey in surveys:}}
+			<tr class="{{='highlight' if highlight else ''}}">
+				<td>{{=survey.name}}</td>
+				<td>{{=survey.algorithm}}</td>
+				<td>{{=survey.number_of_ratings}}</td>
+				<td>{{=survey.scale}}</td>
+				<td class="action">
+					<ul style="width:75px;">
+						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[]))}}</li>
+						<li>{{=A('', _class="add", _title="make new matrice", callback=URL('make_matrice', args=[]), target="message")}}</li>
+						<li>{{=A('', _class="delete", _title="delete", callback=URL('delete_matrice', args=[]), target="message")}}</li>
+					</ul>
+				</td>
+			</tr>
+			{{highlight = not highlight}}
+			{{pass}}
+		</tbody>
+	</table>
+</div>

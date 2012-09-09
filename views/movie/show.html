@@ -3,7 +3,7 @@
 {{extend 'layout2.html'}}
 
 {{block statusbar}}
-    <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show')}}">Movie</a></div>
+    <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
 {{end}}
 
 {{block center}}
@@ -27,6 +27,12 @@
 			{{pass}}
 		</div>
 		{{pass}}
+		{{if auth.is_logged_in():}}
+		<div>
+		  <h3>Rate</h3>
+		{{=LOAD('rating', 'index.load', args=[movie.id], ajax_trap=True)}}
+		{{pass}}
+		</div>
 		{{if movie.plot:}}
 		<div>
 			<h3>Plot</h3>
