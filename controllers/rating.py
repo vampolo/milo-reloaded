@@ -51,4 +51,3 @@ def rate():
     else:
         raise EnvironmentError('Multiple entries in db')
     return dict()
-

@@ -12,6 +12,16 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 {{end}}
 
 {{block center}}
+    {{if session.survey:}}
+    <div class="sixteen columns center alpha omega" style="margin-bottom:20px">
+      <right>
+	<form method="POST">
+	  <input type="hidden" name="free_rating" value="end"/>
+	  <input type="submit" value="Next"/>
+	</form>
+      </right>
+    </div>
+    {{pass}}
 	<div id="myImageFlow" class="imageflow">
 		{{for movie in slider_movies:}}
 			<img src="{{=URL('static', movie.poster)}}" alt="{{=movie.title}}" longdesc="{{=URL('movie', 'show', args=[movie.id])}}" />
@@ -36,7 +46,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 			}}
 			<div class="genre">
 				<span class="bold">Genre:</span>
-				{{for rel in movie.get('movies_genres').select():}}
+				{{for rel in movie.get('movies_genres').select(cache=(cache.disk, 3600)):}}
 				{{=A(rel.genre.name, _href=URL('search', vars={'genres':(rel.genre.id,)}))}}
 				{{pass}}
 			</div>
@@ -70,19 +80,17 @@ $(function() {
 	
 });
 </script>
-<div id="paging-container">
-	<div class="outer-center">
-		<div class="inner-center">
-			<div>
-				{{if page != 0:}}
-				{{=A('Previous', _href=URL(args=[page-1], vars=request.vars))}}
-				{{pass}}
-				{{if items_per_page*page < max_items:}}
-				{{=A('Next', _href=URL(args=[page+1], vars=request.vars))}}
-				{{pass}}	
-			</div>
-		</div>	
-	</div>
+<div class="container"> 
+<div class="sixteen columns center">
+<center>
+  {{if page != 0:}}
+  {{=A('Previous', _href=URL(args=[page-1], vars=request.vars))}}
+  {{pass}}
+  {{if items_per_page*page < max_items:}}
+  {{=A('Next', _href=URL(args=[page+1], vars=request.vars))}}
+  {{pass}}
+</center>			     
+</div>
 </div>
 
 {{block right_sidebar}}

@@ -12,7 +12,7 @@
 	<article>
 		<h2 class="title">{{=movie.get('title')}} ({{=movie.year}})</h2>
 		{{
-			if not movie.year or not movie.poster:
+			if not movie.year or not movie.poster or movie.poster.startswith('images/unknown'):
 				schedule_movie(movie.id, reviews=True)
 			pass
 		}}
@@ -31,8 +31,8 @@
 		<div>
 		  <h3>Rate</h3>
 		{{=LOAD('rating', 'index.load', args=[movie.id], ajax_trap=True)}}
-		{{pass}}
 		</div>
+		{{pass}}
 		{{if movie.plot:}}
 		<div>
 			<h3>Plot</h3>

@@ -3,6 +3,7 @@ import numpy
 import os
 import functools
 import datetime
+import bottleneck
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -66,7 +67,7 @@ class Whisperer(object):
                 title = title.replace("'", "''")
                 self._run("titles{{{0}}}='{1}'".format(i+1, title))
             self._run("save('"+os.path.join(self.savepath, 'titles')+"', 'titles')")
-    
+
     @matlab
     def create_features_vector(self):
         db = self.db
@@ -102,7 +103,6 @@ class Whisperer(object):
         if c_urm:
             filepath = os.path.join(self.savepath, 'urm.mat')
             if not urm_date or force:
-                print 'Creating URM'
                 users, movies, ratings, urm_dimensions = self._create_urm()
                 self._put('urm_users', users)
                 self._put('urm_movies', movies)
@@ -114,7 +114,6 @@ class Whisperer(object):
         if c_icm:
             filepath = os.path.join(self.savepath, 'icm.mat')
             if not icm_date or force:
-                print 'Creating ICM'
                 icm_items, icm_features, icm_occurrencies, icm_dimensions = self._create_icm()
                 self._put('icm_items', icm_items)
                 self._put('icm_features', icm_features)
@@ -135,7 +134,9 @@ class Whisperer(object):
         users = numpy.array(users)
         movies = numpy.array(movies)
         ratings = numpy.array(ratings)
-        dimensions = [float(db(db.users).count()), float(db(db.movies).count())]
+        max_user = db.ratings.iuser.max()
+        max_movies = db.ratings.imovie.max()
+        dimensions = [float(db().select(max_user).first()[max_user]), float(db().select(max_movies).first()[max_movies])]
         dimensions = numpy.array(dimensions)
 
         return users, movies, ratings, dimensions
@@ -150,18 +151,23 @@ class Whisperer(object):
         items = [float(x.movie.id) for x in entries]
         features = [float(x.feature.id) for x in entries]
         occurrencies = [float(x.times) for x in entries]
-        dimensions = numpy.array([float(db(db.movies).count()), float(db(db.features).count())])
+        max_movies = db.movies_features.movie.max()
+        max_features = db.movies_features.feature.max()
+        dimensions = numpy.array([float(db().select(max_movies).first()[max_movies]), float(db().select(max_features).first()[max_features])])
         return numpy.array(items), numpy.array(features), numpy.array(occurrencies), dimensions
 
-    def create_userprofile(self, user, items=None):
-        if not items:
-            items = self.db.query(Item).all()
+    def create_userprofile(self, user):
+        db = self.db
+        entries = db(db.ratings.iuser==user).select(db.ratings.ALL, cacheable=True)
+        ratings = [float(x.rating) for x in entries]
+        movies = [float(x.imovie) for x in entries]
+        max_movies = db.ratings.imovie.max()
+        dimension = [float(db().select(max_movies).first()[max_movies])]
 
-        ratings = self.db.query(Rating).all()
-        up = numpy.zeros((1,self.db.query(func.max(Item.id)).one()[0]))
-        for r in ratings:
-            up[0][r.item.id-1] = r.rating
-        return up
+        # up = numpy.zeros((1,self.db.query(func.max(Item.id)).one()[0]))
+        # for r in ratings:
+        #     up[0][r.item.id-1] = r.rating
+        return numpy.array(ratings), numpy.array(movies), numpy.array(dimension)
 
     @matlab
     def _create_model(self, alg, param=None, *args, **kwargs):
@@ -179,7 +185,7 @@ class Whisperer(object):
         #function [model] = createModel_ALGORITHM_NAME(URM,ICM,param)
         db = self.db
         alg = self._get_model_name(algname)
-        self.create_matlab_matrices()
+        self.create_matlab_matrices(force=True)
         self._create_model(alg)
 
 
@@ -187,9 +193,12 @@ class Whisperer(object):
     def _get_rec(self, algname, user, **param):
         """Return a recommendation using the matlab engine"""
         #function [recomList] = onLineRecom_ALGORITHM_NAME (userProfile, model,param)
-        up = self.create_userprofile(user)
+        ratings, movies, dimension = self.create_userprofile(user)
         alg = self._get_model_name(algname)
-        self._put('up', up)
+        self._put('ratings', ratings)
+        self._put('movies', movies)
+        self._put('dimension', dimension)
+        self._run("up = sparse(1, movies, ratings, 1, dimension(1))")
         self._run("param = struct()")
         for k,v in param.iteritems():
             self._run("param."+str(k)+" = "+str(v))
@@ -197,12 +206,17 @@ class Whisperer(object):
         self._run("[rec] = onLineRecom_"+algname+"(up, "+alg+"_model, param)")
         return self._get("rec")
 
-    def get_rec(self, algname, user, **param):
+    def get_rec(self, algname, user, max=10, **param):
         """Wrapper aroung the real recommendation getter to set parameters"""
         if algname == 'AsySVD':
-            param = dict(param, userToTest=user.id)
+            param = dict(param, userToTest=user)
 
-        return self._get_rec(algname, user, **param)
+        rec = self._get_rec(algname, user, **param)
+        rec = numpy.squeeze(rec)
+        indexes = bottleneck.argpartsort(rec, rec.size-max, axis=0)[-max:]
+        rec = [(rec[index], index) for index in indexes]
+        rec.sort(reverse=True)
+        return rec
 
     @classmethod
     def get_algnames(self):
@@ -251,7 +265,7 @@ class Whisperer(object):
             except:
                 matrices[matrice] = None
         return matrices
-    
+
     @classmethod
     def get_matrices_path(cls):
         matrices = dict()
@@ -261,9 +275,8 @@ class Whisperer(object):
             except:
                 matrices[matrice] = None
         return matrices
-    
+
     @classmethod
     def delete_matrice(cls, matrice):
         matrices_path = cls.get_matrices_path()
         os.remove(matrices_path[matrice])
-

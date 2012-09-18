@@ -231,7 +231,21 @@ class Importer(object):
         db = self.db
         user = db(db.users.imdb_id==user_imdb_id).select().first()
         movie = db(db.movies.imdb_id==movie_imdb_id).select().first()
-        db.ratings.update_or_insert(iuser=user, imovie=movie, rating=rating)
+        # commented because not reliable
+        # db.ratings.update_or_insert(iuser=user, imovie=movie, rating=rating)
+        rating_db = db((db.ratings.iuser==user)&
+        (db.ratings.imovie==rating)).select()
+        if len(rating_db) == 0:
+            db.ratings.insert(iuser=user,
+                              imovie=movie,
+                              rating=float(rating)
+                              )
+        elif len(rating_db) == 1:
+            rating_db = rating_db.first()
+            rating_db.rating=float(rating)
+            rating_db.update_record()
+        else:
+            raise EnvironmentError('Multiple entries in db')
 
     def import_movies_from_imdb(self):
         '''

@@ -234,7 +234,9 @@ countries = [
 
 countrynames = [x[1] for x in countries]
 
+@auth.requires_login()
 def demographic():
+    surveyid = request.args[0]
     form=FORM(
               TABLE(
                   TR('Age',SELECT(value='23',_name='age', *range(15,100))),
@@ -242,16 +244,19 @@ def demographic():
                   TR('Education',SELECT('Primary school', 'Middle secondary school', 'High school', 'Bachelor degree', 'Master degree', 'Phd', 'Professor', _name='education', value='Bachelor degree',)),
                   TR('Nationality', SELECT(*countrynames, _name='nationality')),
                   TR('Average number of movies watched per month', SELECT(_name='number_of_movies_per_month', value='10', *(range(1,20)+['more than 20']))),
-                  TR(INPUT(_type='submit'))
+                  TR('','',INPUT(_type='submit'))
               ))
     if form.process().accepted:
         session.flash = 'form accepted'
-        redirect(URL('base_ratings'))
+        session.survey=surveyid
+        redirect(URL('milo','default','index'))
     elif form.errors:
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill the form'
+    response.view = 'survey/form.html'
     return dict(form=form)
+
 
 @auth.requires_login()
 def catalogue_questions():
@@ -259,27 +264,27 @@ def catalogue_questions():
         TR("Where you looking for specific items?", SELECT('No',
                                                            'Partially',
                                                            'Yes', _name="spec_item")),
-        TR("Did you looked for movies that couldn't be found", SELECT('No', 'Yes', _name="not_found")),
+        TR("Did you looked for movies that couldn't be found?", SELECT('No', 'Yes', _name="not_found")),
         TR("If yes, which ones?"),
-        TR(INPUT(_name="title1")),
-        TR(INPUT(_name="title2")),
-        TR(INPUT(_name="title3")),
+        TR('',INPUT(_name="title1")),
+        TR('',INPUT(_name="title2")),
+        TR('',INPUT(_name="title3")),
         TR("Do you think that the catalogue appers to be complete?", SELECT("Highly complete",
                                                                             "Complete enough",
                                                                             "Partially complete",
                                                                             "Incomplete")),
         TR("Check the boxes you LIKED about the graphical interface"),
-        TR(INPUT(_type="checkbox"),"Color Palette"),
-        TR(INPUT(_type="checkbox"),"Text readability"),
-        TR(INPUT(_type="checkbox"),"Organizzation"),
-        TR(INPUT(_type="checkbox"),"Orientation guidelines"),
+        TR(TD(INPUT(_type="checkbox"), "Color Palette")),
+        TR(TD(INPUT(_type="checkbox"),"Text readability")),
+        TR(TD(INPUT(_type="checkbox"),"Organizzation")),
+        TR(TD(INPUT(_type="checkbox"),"Orientation guidelines")),
         TR("Check the boxes you DISLIKED about the graphical interface"),
-        TR(INPUT(_type="checkbox"), "Color Palette"),
-        TR(INPUT(_type="checkbox"),"Text readability"),
-        TR(INPUT(_type="checkbox"),"Organizzation"),
-        TR(INPUT(_type="checkbox"),"Orientation guidelines"),
+        TR(TD(INPUT(_type="checkbox"),"Color Palette")),
+        TR(TD(INPUT(_type="checkbox"),"Text readability")),
+        TR(TD(INPUT(_type="checkbox"),"Organizzation")),
+        TR(TD(INPUT(_type="checkbox"),"Orientation guidelines")),
         TR("Did you find confusing the browsing experience through the catalogue?", SELECT('No', 'Partially', 'Yes')),
-        TR(INPUT(_type="submit"))
+        TR('','',INPUT(_type="submit"))
         ))
     if form.process().accepted:
         session.flash = 'form accepted'
@@ -288,8 +293,64 @@ def catalogue_questions():
         response.flash = 'form has errors'
     else:
         response.flash = 'please fill the form'
+    response.view = 'survey/form.html'
     return dict(form=form)
+
+
+def next_movie():
+    survey = db.surveys[session.survey]
+    n_rec = survey.number_of_ratings
+    while True:
+        rec = whisperer.get_rec(survey.algorithm, auth.user.milo_user, max=n_rec)
+        print rec
+        if session.rec_seen == None:
+            session.rec_seen = list()
+        for value,index in rec:
+            if index not in session.rec_seen and db((db.ratings.imovie==index)&(db.ratings.iuser==auth.user.milo_user)).count() == 0:
+                return index
+        n_rec += 10
 
 @auth.requires_login()
 def rec_movies():
-    return dict()
+    if session.movie:
+        movie_id = session.movie
+    else:
+        session.movie = next_movie()
+        movie_id = session.movie
+        session.rec_to_do = db.surveys[session.survey].number_of_ratings
+    if len(request.post_vars) != 0:
+        #we are in the post
+        #process form
+        session.rec_to_do -= 1
+        if db((db.ratings.imovie==session.movie)&(db.ratings.iuser==auth.user.milo_user)).count():
+            session.rec_seen.append(session.movie)
+        if session.rec_to_do == 0:
+            session.rec_seen = None
+            redirect(URL('local_info'))
+        else:
+            movie_id = next_movie()
+            session.movie = movie_id
+            
+    movie = db.movies[movie_id]
+    comments = db(db.comments.movie==movie).select()
+    cast = movie.persons_in_movies(db.persons_in_movies.role.belongs(db.roles.name=='actor')).select()
+    directors = movie.persons_in_movies(db.persons_in_movies.role.belongs(db.roles.name=='director')).select()
+    return dict(movie=movie, comments=comments, cast=cast, directors=directors)
+
+@auth.requires_login()
+def local_info():
+    form = FORM(TABLE(
+        TR('Where did this survey take place?', SELECT('University', 'Home', 'Work place', 'Public place', 'Other')),
+        TR('Why did you accepted to take part to the survey?', SELECT('Friend request', 'Interest in movies', 'Other')),
+        TR('','',INPUT(_type="submit", value="Finish"))
+        ))
+    if form.process().accepted:
+        session.flash = 'Thank you for participating to this survey!'
+        session.survey = None
+        redirect(URL('default', 'index'))
+    elif form.errors:
+        response.flash = 'form has errors'
+    else:
+        response.flash = 'please fill the form'
+    response.view = 'survey/form.html'
+    return dict(form=form)

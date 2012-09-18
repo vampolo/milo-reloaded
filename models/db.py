@@ -43,14 +43,25 @@ from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 auth = Auth(db, hmac_key=Auth.get_or_create_key())
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
+db.define_table('users',
+        Field('name'),
+        Field('email'),
+        Field('imdb_id', 'integer'),
+        Field('webuser', 'boolean')
+        )
+
+auth.settings.extra_fields[auth.settings.table_user_name] = [
+        Field('milo_user', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),
+            unique=True, notnull=False, writable=False, readable=False, default=lambda: db.users.insert(webuser=True))]
 ## create all tables needed by auth if not custom tables
 auth.define_tables()
 
 ## configure email
 mail=auth.settings.mailer
-mail.settings.server = 'logging' or 'smtp.gmail.com:587'
-mail.settings.sender = 'you@gmail.com'
-mail.settings.login = 'username:password'
+mail.settings.server = 'localhost:25'
+mail.settings.sender = 'milo@vincenzo-ampolo.net'
+#mail.settings.login = 'username:password'
+mail.settings.login = None
 
 ## configure auth policy
 auth.settings.registration_requires_verification = False
@@ -88,12 +99,6 @@ import imdb
 im = imdb.IMDb()
 #let's use TOR
 im.set_proxy('http://localhost:8118/')
-
-db.define_table('users',
-        Field('name'),
-        Field('email'),
-        Field('imdb_id', 'integer')
-        )
 
 db.define_table('genres',
         Field('name')
@@ -172,17 +177,18 @@ db.define_table('movies_features',
         Field('times', 'integer')
         )
 
+from matlab_wrapper import Whisperer
 
 db.define_table('surveys',
                 Field('name'),
-                Field('algorithm'),
-                Field('ratings_number'),
-                Field('scale', 'integer'),
+                Field('algorithm', requires=IS_IN_SET(Whisperer.get_algnames())),
+                Field('number_of_ratings', 'integer'),
+                Field('scale', 'integer', requires=IS_IN_SET([1, 5]), default=5),
                 )
 
 db.define_table('surveys_users',
-                Field('survey', db.surveys),
-                Field('iuser', db.users),
+                Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
+                Field('iuser', db.users, requires=IS_IN_DB(db, 'users.id', db.users._format)),
                 )
 
 db.define_table('questions',

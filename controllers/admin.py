@@ -13,6 +13,7 @@ def index():
     l.append(db(db.movies).count())
     l.append(db(db.ratings).count())
     l.append(db_scheduler(db_scheduler.scheduler_worker).count())
+    l.append(db_scheduler((db_scheduler.scheduler_task.status=="QUEUED")|(db_scheduler.scheduler_task.status=="ASSIGNED")).count())
     workers = db_scheduler(db_scheduler.scheduler_run.status=='RUNNING').select()
     return dict(algorithms=algorithms, matrices_info=matrices, info=l, workers=workers)
 
@@ -58,8 +59,20 @@ def surveys():
     return dict(surveys=surveys)
 
 def create_survey():
-    form = SQLFORM(db.surveys, formstyle='divs', _action=URL('admin', 'create_survey'))
+    form = SQLFORM.factory(db.surveys, Field('users_or_emails', 'text'), formstyle='divs', _action=URL('admin', 'create_survey'))
     if form.process().accepted:
+        survey_id = db.surveys.insert(**db.surveys._filter_fields(form.vars))
+        for email in form.vars.users_or_emails.split(','):
+            email = email.strip()
+            if len(email) == 0:
+                continue
+            db_email = db(db.users.email==email).select().first()
+            if not db_email:
+                db_email = db(db[auth.settings.table_user_name].email==email).select().first()
+            if not db_email:
+                user_id = db[auth.settings.table_user_name].insert(email)
+            db.surverys_users.insert(survey=survey_id, iuser=db[auth.settings.table_user_name][user_id].milo_user)
+            schedule_start_survey(survey_id)
         response.flash="ok"
         redirect(URL('index'))
     elif form.errors:
@@ -67,4 +80,12 @@ def create_survey():
     else:
         response.flash='fill out the form'
     return dict(form=form)
+
+def get_popular_movies():
+    schedule_popular_movies()
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Movies retrieval scheduled in the system</span></p>'
+
+def update_all_movies():
+    schedule_all_movies()
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Movies retrieval scheduled in the system</span></p>'
 

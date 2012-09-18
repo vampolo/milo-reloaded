@@ -1,0 +1,106 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,False}}
+
+{{extend 'layout2.html'}}
+
+{{block statusbar}}
+    <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
+{{end}}
+
+{{block center}}
+<section id="movie">
+	<img class="poster" src="{{=URL('static', movie.get('poster'))}}"/>
+	<article>
+		<h2 class="title">{{=movie.get('title')}} ({{=movie.year}})</h2>
+		{{
+			if not movie.year or not movie.poster or movie.poster.startswith('images/unknown'):
+				schedule_movie(movie.id, reviews=True)
+			pass
+		}}
+		{{if movie.movies_genres.count():}}
+		<div>
+			<h3>Genres</h3>
+			{{for rel in movie.movies_genres.select():}}
+				<span>{{=rel.genre.name}}</span>
+			{{pass}}
+		</div>
+		{{pass}}
+		{{if movie.plot:}}
+		<div>
+			<h3>Plot</h3>
+			<p>{{=movie.plot}}</p>
+		</div>
+		{{pass}}
+		{{if cast:}}
+		<div>
+			<h3>Cast</h3>
+			{{for rel in cast:}}
+			<span>{{=rel.person.first_name}} {{=rel.person.last_name}}</span>
+			{{pass}}
+		</div>
+		{{pass}}
+		{{if directors:}}
+		<div>
+			<h3>Directors</h3>
+			{{for rel in directors:}}
+			<span>{{=rel.person.first_name}} {{=rel.person.last_name}}</span>
+			{{pass}}
+		</div>
+		{{pass}}
+		<div class="clearboth"></div>
+		<div class="sixteen columns center">
+		  <h3>Survey</h3>
+		  <form id="survey-form" class="" method="POST">
+		    <h5>Have you ever seen this movie?</h5>
+		    <input type="radio" name="seen" value="yes">yes
+		    <input type="radio" name="seen" value="no">no
+		    <div id="heard" style="display:none">
+		      <h5>Have you ever heard about this movie?</h5>
+		      <input type="radio" name="heard" value="yes">yes
+		      <input type="radio" name="heard" value="no">no
+		    </div>
+		{{if movie.trailer:}}
+		<div class="trailer" id="trailer" style="display:none">
+			<h5>Watch trailer:</h5>
+			<div style="text-align: center;">
+				<iframe width="650" height="390" src="{{='http://www.youtube.com/embed/{}'.format(movie.trailer[movie.trailer.find('v=')+2:])}}" frameborder="0" allowfullscreen></iframe>
+			</div>
+		</div>
+		{{pass}}
+		<input id="survey-submit" type="submit" value="Next" style="float:right; margin-top:25px; display:none">
+		</form>
+                <div id="rating" class="three columns center" style="display:none">
+		  <h5>Rate movie:</h5>
+		  {{if auth.is_logged_in():}}
+			{{=LOAD('rating', 'index.load', args=[movie.id], ajax_trap=True)}}
+		  {{pass}}
+		</div>
+		<script type="text/javascript">
+		  $(window).ready(function(){
+		      $("input[name=seen]").change(function(){
+		          if(this.value == 'yes'){
+		              $('#rating').show('slow');
+		              $('#heard').hide('slow');
+		              $('#survey-submit').show('slow');
+		          }
+		          else{
+		              $('#rating').hide('slow');
+		              $('#heard').show('slow');
+		          }
+		          $('#trailer').hide('slow');
+		      });
+                      $("input[name=heard]").change(function(){
+                          if(this.value == 'yes'){
+		              $('#trailer').hide('slow');
+                              $('#rating').show('slow');
+                          }else{
+		              $('#rating').show('slow');
+		              $('#trailer').show('slow');
+		          }
+		          $('#survey-submit').show('slow');
+		      });
+		  });
+		</script>
+		</div>
+	</article>
+</section>
+{{end}}
