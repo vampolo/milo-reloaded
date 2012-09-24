@@ -7,9 +7,11 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 
 {{extend 'layout2.html'}}
 
+{{if not session.survey:}}
 {{block statusbar}}
     <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a></div>
 {{end}}
+{{pass}}
 
 {{block center}}
     {{if session.survey:}}

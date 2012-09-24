@@ -1,0 +1,29 @@
+<div class="breadcrumbs">
+{{if not session.survey_stage:}}
+    {{if not breadcrumbs:}}
+        {{=request.function.replace('_', ' ').title()}}
+    {{else:}}
+	aaaaaaa
+    {{pass}}
+{{else:}}
+    {{if session.survey_stage >= 1:}}
+        <a href="{{=URL('survey', 'demographic', args=request.args)}}">Demographic</a>
+    {{pass}}
+    {{if session.survey_stage >= 2:}}
+	>
+	<a href="{{=URL('default', 'index', args=request.args)}}">Free rating</a>
+    {{pass}}
+    {{if session.survey_stage >= 3:}}
+	>
+	<a href="{{=URL('survey', 'catalogue_questions', args=request.args)}}">Catalog</a>
+    {{pass}}
+    {{if session.survey_stage >= 4:}}
+	>
+	<a href="{{=URL('survey', 'rec_movies', args=request.args)}}">Recommendation</a>
+    {{pass}}
+    {{if session.survey_stage >= 5:}}
+	>
+	<a href="{{=URL('survey', 'local_info', args=request.args)}}">Last question</a>
+    {{pass}}
+{{pass}}
+</div>

@@ -2,9 +2,11 @@
 
 {{extend 'layout2.html'}}
 
+{{if not session.survey:}}
 {{block statusbar}}
     <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
 {{end}}
+{{pass}}
 
 {{block center}}
 <section id="movie">

@@ -234,9 +234,14 @@ countries = [
 
 countrynames = [x[1] for x in countries]
 
+response.menu = None
+
 @auth.requires_login()
 def demographic():
     surveyid = request.args[0]
+    #check that the user is in that survey
+    if not session.survey_stage:
+        session.survey_stage = 1
     form=FORM(
               TABLE(
                   TR('Age',SELECT(value='23',_name='age', *range(15,100))),
@@ -249,6 +254,8 @@ def demographic():
     if form.process().accepted:
         session.flash = 'form accepted'
         session.survey=surveyid
+        if session.survey_stage < 2:
+            session.survey_stage = 2
         redirect(URL('milo','default','index'))
     elif form.errors:
         response.flash = 'form has errors'
@@ -260,6 +267,8 @@ def demographic():
 
 @auth.requires_login()
 def catalogue_questions():
+    if session.survey_stage < 3:
+        session.survey_stage = 3
     form = FORM(TABLE(
         TR("Where you looking for specific items?", SELECT('No',
                                                            'Partially',
@@ -312,6 +321,8 @@ def next_movie():
 
 @auth.requires_login()
 def rec_movies():
+    if session.survey_stage < 4:
+        session.survey_stage = 4
     if session.movie:
         movie_id = session.movie
     else:
@@ -339,6 +350,8 @@ def rec_movies():
 
 @auth.requires_login()
 def local_info():
+    if session.survey_stage < 5:
+        session.survey_stage = 5
     form = FORM(TABLE(
         TR('Where did this survey take place?', SELECT('University', 'Home', 'Work place', 'Public place', 'Other')),
         TR('Why did you accepted to take part to the survey?', SELECT('Friend request', 'Interest in movies', 'Other')),
