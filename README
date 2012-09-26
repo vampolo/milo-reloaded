@@ -1,0 +1,21 @@
+Install
+
+sudo apt-get install libxtst6 libxi6 libxt6 libxpm4 libxmu6
+Install matlab (use ssh -X to install remotely)
+if you get error like:
+   usr/local/MATLAB/R2011a/bin$ ./matlab 
+./matlab: 1: /usr/local/MATLAB/R2011a/bin/util/oscheck.sh: /lib64/libc.so.6: not
+/usr/local/MATLAB/R2011a/bin/glnxa64/MATLAB: error while loading shared librarie
+
+do
+ sudo ln -s /lib/x86_64-linux-gnu/libc.so.6 /lib64/libc.so.6
+
+install web2py
+
+install numpy apt
+install imdbpy pip
+http://goshawknest.wordpress.com/2012/06/24/how-to-install-pymatlab/
+
+pip install bottleneck
+
+. matlab_variables
