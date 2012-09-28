@@ -50,4 +50,4 @@ def rate():
         rating_db.update_record()
     else:
         raise EnvironmentError('Multiple entries in db')
-    return dict()
+    return ''
