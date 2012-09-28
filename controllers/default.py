@@ -9,7 +9,7 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
-ITEMS_PER_PAGE = 50
+ITEMS_PER_PAGE = 15
 
 def _render_to_index(query):
     print session.survey
@@ -17,8 +17,6 @@ def _render_to_index(query):
         redirect(URL('survey', 'catalogue_questions'))
     response.view = 'default/index.html'
     page = 0 if not request.args(0) else int(request.args(0))
-    print db(query)._select(db.movies.ALL, distinct=True)
-    print ''
     list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year), distinct=True, limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     max_items = db(query).count() 
     return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
