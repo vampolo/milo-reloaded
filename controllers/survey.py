@@ -361,6 +361,7 @@ def local_info():
     if form.process().accepted:
         session.flash = 'Thank you for participating to this survey!'
         session.survey = None
+        session.survey_stage = None
         redirect(URL('default', 'index'))
     elif form.errors:
         response.flash = 'form has errors'
