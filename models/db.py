@@ -11,7 +11,7 @@
 
 if not request.env.web2py_runtime_gae:
     ## if NOT running on Google App Engine use SQLite or other DB
-    db = DAL('postgres://milo:milosecret@localhost/milo-reloaded')
+    pass
 else:
     ## connect to Google BigTable (optional 'google:datastore://namespace')
     db = DAL('google:datastore')

@@ -1,8 +1,6 @@
 from importer import Importer
 import json
 import matlab_wrapper
-
-db_scheduler = DAL('postgres://milo:milosecret@localhost/milo-scheduler')
  
 def create_model(*args, **vars):
     w = matlab_wrapper.Whisperer(db,im)
