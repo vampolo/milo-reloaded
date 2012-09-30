@@ -27,7 +27,7 @@ class Whisperer(object):
     algopath = ALGOPATH
 
     def _start_matlab(self):
-        self.m = MatlabSession('matlab -nosplash -nodisplay')
+        self.m = MatlabSession('/usr/local/MATLAB/R2011a/bin/matlab -nosplash -nodisplay')
         self.m.run("addpath(genpath('"+os.path.abspath(self.algopath)+"'))")
 
     def __init__(self,db,im=None):

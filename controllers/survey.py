@@ -1,4 +1,3 @@
-
 countries = [
     ('IT', 'Italy'),
     ('AF', 'Afghanistan'),
@@ -302,6 +301,8 @@ def catalogue_questions():
     elif form.errors:
         response.flash = 'form has errors'
     else:
+        survey = db.surveys[session.survey]
+        schedule_recommendation(survey.algorithm, auth.user.milo_user, survey.number_of_ratings*2)
         response.flash = 'please fill the form'
     response.view = 'survey/form.html'
     return dict(form=form)
@@ -310,16 +311,23 @@ def catalogue_questions():
 def next_movie():
     survey = db.surveys[session.survey]
     n_rec = survey.number_of_ratings
+    if not session.recommendation:
+        recommendation = db(db.recommendations.iuser==auth.user.milo_user).select().last()
+        rec = recommendation.rec
+        session.recommendation = rec
+    else:
+        rec = session.recommendation
+    print rec
+    if session.rec_seen == None:
+        session.rec_seen = list()
     while True:
-        rec = whisperer.get_rec(survey.algorithm, auth.user.milo_user, max=n_rec)
-        print rec
-        if session.rec_seen == None:
-            session.rec_seen = list()
-        for value,index in rec:
+        for index in rec:
             if index not in session.rec_seen and db((db.ratings.imovie==index)&(db.ratings.iuser==auth.user.milo_user)).count() == 0:
                 return index
-        n_rec += 10
-
+        session.recommendation = None
+        schedule_recommendation(survey.algorithm, auth.user.milo_user, survey.number_of_ratings*10)
+        rec = [x.id for x in db(useful_movies).select(db.movies.id, limitby=(0,1000))]
+    
 @auth.requires_login()
 def rec_movies():
     if session.survey_stage < 4:

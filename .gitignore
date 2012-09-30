@@ -8,3 +8,6 @@
 sessions/
 errors/
 modules/elaborated_models/
+cache/
+private/
+/TAGS

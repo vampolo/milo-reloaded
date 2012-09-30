@@ -3,8 +3,6 @@ import json
 import matlab_wrapper
 
 db_scheduler = DAL('postgres://milo:milosecret@localhost/milo-scheduler')
-
-whisperer = matlab_wrapper.Whisperer(db, im)
  
 def create_model(*args, **vars):
     w = matlab_wrapper.Whisperer(db,im)
@@ -47,5 +45,14 @@ def start_survey(surveyid):
     create_model(survey.algorithm)
     send_email()
 
+def do_recommendation(algorithm, userid, num_rec):
+    w = matlab_wrapper.Whisperer(db, im)
+    rec = w.get_rec(algorithm, userid, num_rec)
+    db.recommendations.update_or_insert(db.recommendations.iuser==userid,
+                                        iuser=userid,
+                                        rec=[index for value,index in rec])
+    db.commit()
+
 from gluon.scheduler import Scheduler
-myscheduler = Scheduler(db_scheduler)
+myscheduler = Scheduler(db_scheduler,
+                        group_names=['main', 'recommendation', 'model'])

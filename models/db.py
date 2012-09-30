@@ -204,3 +204,8 @@ db.define_table('answers_to_surveys',
                 Field('question', db.questions),
                 Field('answer', db.answers)
                 )
+
+db.define_table('recommendations',
+                Field('iuser', 'reference users'),
+                Field('rec', 'list:reference movies')
+                )
