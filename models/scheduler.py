@@ -1,6 +1,8 @@
 from importer import Importer
 import json
 import matlab_wrapper
+
+db_scheduler = DAL(db_scheduler_string)
  
 def create_model(*args, **vars):
     w = matlab_wrapper.Whisperer(db,im)
