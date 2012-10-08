@@ -39,7 +39,7 @@ def start_survey(surveyid):
         mail.send(to=l,
           subject='hello',
           # If reply_to is omitted, then mail.settings.sender is used
-          reply_to='noreply@noreply',
+          reply_to='survey@movish.com',
           message='hi there')
     survey = db.survey[surveyid]
     create_model(survey.algorithm)

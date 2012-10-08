@@ -16,6 +16,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 {{block center}}
     {{if session.survey:}}
     <div class="sixteen columns center alpha omega" style="margin-bottom:20px">
+      <center>You can now rate how many movies you want. You can use the search box to look for movies or you can surf by genres just clicking in a genre of a movie. We suggest you to do at least more than 5 ratings. When you are ready click the next button to go to the next step of the survey</center>
       <right>
 	<form method="POST">
 	  <input type="hidden" name="free_rating" value="end"/>
@@ -98,4 +99,5 @@ $(function() {
 {{block right_sidebar}}
 
 {{end}}
+
 

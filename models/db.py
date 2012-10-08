@@ -58,10 +58,10 @@ auth.define_tables()
 
 ## configure email
 mail=auth.settings.mailer
-mail.settings.server = 'localhost:25'
-mail.settings.sender = 'milo@vincenzo-ampolo.net'
-#mail.settings.login = 'username:password'
-mail.settings.login = None
+mail.settings.server = 'smtp.gmail.com:587'
+mail.settings.sender = 'movish@movish.com'
+mail.settings.login = mail_string
+#mail.settings.login = None
 
 ## configure auth policy
 auth.settings.registration_requires_verification = False

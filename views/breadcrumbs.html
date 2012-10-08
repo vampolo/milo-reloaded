@@ -7,23 +7,25 @@
     {{pass}}
 {{else:}}
     {{if session.survey_stage >= 1:}}
-        <a href="{{=URL('survey', 'demographic', args=request.args)}}">Demographic</a>
+        <span>Demographic</span>
     {{pass}}
     {{if session.survey_stage >= 2:}}
 	>
-	<a href="{{=URL('default', 'index', args=request.args)}}">Free rating</a>
+	<span>Free rating</span>
     {{pass}}
     {{if session.survey_stage >= 3:}}
 	>
-	<a href="{{=URL('survey', 'catalogue_questions', args=request.args)}}">Catalog</a>
+	<span>Catalog</span>
     {{pass}}
     {{if session.survey_stage >= 4:}}
 	>
-	<a href="{{=URL('survey', 'rec_movies', args=request.args)}}">Recommendation</a>
+	<span>Recommendation</span>
     {{pass}}
     {{if session.survey_stage >= 5:}}
 	>
-	<a href="{{=URL('survey', 'local_info', args=request.args)}}">Last question</a>
+	<span>Last question</span>
     {{pass}}
 {{pass}}
 </div>
+
+

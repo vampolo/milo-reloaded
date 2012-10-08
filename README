@@ -1,6 +1,6 @@
 Install
 
-sudo apt-get install libxtst6 libxi6 libxt6 libxpm4 libxmu6
+sudo apt-get install libxtst6 libxi6 libxt6 libxpm4 libxmu6 libxp6
 Install matlab (use ssh -X to install remotely)
 if you get error like:
    usr/local/MATLAB/R2011a/bin$ ./matlab 

@@ -89,3 +89,8 @@ def update_all_movies():
     schedule_all_movies()
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Movies retrieval scheduled in the system</span></p>'
 
+def bisect():
+    completed_n = db_scheduler(db_scheduler.scheduler_task.status=="COMPLETED").count()
+    failed_n = db_scheduler(db_scheduler.scheduler_task.status=="FAILED").count()
+    faileds = db_scheduler(db_scheduler.scheduler_run.status=="FAILED").select(orderby=~db_scheduler.scheduler_run.id, limitby=(0,10), cacheable=True)
+    return dict(completed_n=completed_n, failed_n=failed_n, faileds=faileds)

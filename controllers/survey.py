@@ -256,7 +256,7 @@ def demographic():
         session.survey=surveyid
         if session.survey_stage < 2:
             session.survey_stage = 2
-        redirect(URL('movish','default', 'index'))
+        redirect(URL('milo','default', 'index'))
     elif form.errors:
         response.flash = 'form has errors'
     else:
