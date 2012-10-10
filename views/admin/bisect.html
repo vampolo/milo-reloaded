@@ -21,6 +21,7 @@
       {{for fail in faileds:}}
       <tr>
       <td style="text-align:left;">
+        <b>Date:{{=str(fail.stop_time)}}</b>
           <pre>
           {{=fail.traceback}}   
           </pre>
