@@ -144,7 +144,7 @@ class MediaRetriever(object):
         counter = 1
         while True:
             try:
-                page_search_list = parse(urllib2.urlopen('http://www.youtube.com/results?'+urllib.urlencode({'search_query': movie_title.encode('utf-8')+' trailer'})))
+                page_search_list = parse(urllib2.urlopen('http://www.youtube.com/results?'+urllib.urlencode({'search_query': movie_title.encode('utf-8')+' trailer',  'hl':'en','gl':'US'})))
                 break
             except urllib2.HTTPError:
                 if counter >= 10:
