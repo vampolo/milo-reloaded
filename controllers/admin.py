@@ -1,6 +1,3 @@
-# coding: utf8
-# try something like
-
 import matlab_wrapper
 
 @auth.requires_membership('admin')

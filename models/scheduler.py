@@ -34,16 +34,34 @@ def update_all_movies(*args, **kwargs):
         schedule_movie(movie.id, reviews=True)
 
 def start_survey(surveyid):
-    def send_mail():
-        l= ['vincenzo.ampolo@gmail.com']
-        mail.send(to=l,
-          subject='hello',
-          # If reply_to is omitted, then mail.settings.sender is used
-          reply_to='survey@movish.com',
-          message='hi there')
+    def send_mail(users):
+        for user in users:
+            l= [user.email]
+            mail.send(to=l,
+                      subject='Survey invitation',
+                      # If reply_to is omitted, then mail.settings.sender is used
+                      reply_to='survey@movish.com',
+                      message='''Hello.
+                      You have been selected to participate to a quick survey about movies.
+                      Just click on the link below and you can participate.
+                      
+                      {0}
+
+                      Your username is: {1}
+                      Your password is: {2}
+                      
+                      Ready to discover new cool movies?
+
+                      '''.format(URL(
+                          'milo', 'survey', 'demographic', args=[survey.id],
+                          host='movish.co'), user.email, user.email[:user.email.find('@')]))
     survey = db.survey[surveyid]
     create_model(survey.algorithm)
-    send_email()
+    user_ids = db(db.survey_users.survey == survey)._select(db.survey_users.iuser)
+    survey_users = db(db[auth.settings.table_user_name].id.belongs(user_ids)).select(
+        db[auth.settings.table_user_name].id,
+        db[auth.settings.table_user_name].email)
+    send_email(survey_users, survey.id)
 
 def do_recommendation(algorithm, userid, num_rec):
     w = matlab_wrapper.Whisperer(db, im)
