@@ -55,7 +55,7 @@ def start_survey(surveyid):
                       '''.format(URL(
                           'milo', 'survey', 'demographic', args=[survey.id],
                           host='movish.co'), user.email, user.email[:user.email.find('@')]))
-    survey = db.survey[surveyid]
+    survey = db.surveys[surveyid]
     create_model(survey.algorithm)
     user_ids = db(db.survey_users.survey == survey)._select(db.survey_users.iuser)
     survey_users = db(db[auth.settings.table_user_name].id.belongs(user_ids)).select(
