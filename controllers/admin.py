@@ -71,7 +71,7 @@ def create_survey():
             else:
                 user_id = db_email.id
             db.surveys_users.insert(survey=survey_id, iuser=db[auth.settings.table_user_name][user_id].milo_user)
-            schedule_start_survey(survey_id)
+        schedule_start_survey(survey_id)
         response.flash="ok"
         redirect(URL('index'))
     elif form.errors:
