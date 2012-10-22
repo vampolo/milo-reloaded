@@ -67,7 +67,7 @@ def create_survey():
             if not db_email:
                 db_email = db(db[auth.settings.table_user_name].email==email).select().first()
             if not db_email:
-                user_id = db[auth.settings.table_user_name].insert(email)
+                user_id = db[auth.settings.table_user_name].insert(email=email)
             else:
                 user_id = db_email.id
             db.surveys_users.insert(survey=survey_id, iuser=db[auth.settings.table_user_name][user_id].milo_user)
