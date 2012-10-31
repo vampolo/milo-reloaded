@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<title>Milo manager</title>
+	<title>Movish manager</title>
 	<meta http-equiv="content-language" content="en" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,15 +22,15 @@
 
 <div id="wrap">
 	<div id="header">
-		<h1><a class="bg" href="#" title="Home"></a>Milo Manager</h1>
+		<h1><a class="bg" href="#" title="Home"></a>Movish Manager</h1>
 		<p id="status">Logged is as {{=auth.user.email}}, <a href="{{=URL('user', 'logout')}}" title="Sign Out?">Sign Out?</a></p>
 		<h2><span>Hello, this is the Dashboard</span></h2>
-		<p id="description">The milo dashboard is the main panel to monitor user activity in milo webapp</p>
+		<p id="description">The movish dashboard is the main panel to monitor user activity in movish webapp</p>
 	</div>
 	<div class="flash">{{=response.flash or ''}}</div>
     <div id="sidebar">
 		<ul class="items">
-	    <li>{{=A('Back to milo', _href=URL('default','index'))}}</li>
+	    <li>{{=A('Back to movish', _href=URL('default','index'))}}</li>
             <li class="active">
             	<a href="{{=URL('index')}}" title="Dashboard">Dashboard</a>
             </li>
