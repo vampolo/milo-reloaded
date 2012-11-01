@@ -61,7 +61,7 @@ def start_survey(surveyid):
     survey_users = db(db[auth.settings.table_user_name].id.belongs(user_ids)).select(
         db[auth.settings.table_user_name].id,
         db[auth.settings.table_user_name].email)
-    send_email(survey_users, survey.id)
+    send_mail(survey_users, survey.id)
 
 def do_recommendation(algorithm, userid, num_rec):
     w = matlab_wrapper.Whisperer(db, im)
