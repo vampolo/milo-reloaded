@@ -154,7 +154,8 @@ movies_with_ratings = (db.movies.id.belongs(db(db.ratings)._select(db.ratings.im
 movies_with_titles = ~(db.movies.title==None)
 with_poster = ~(db.movies.poster=='images/unknown_poster.jpg')
 with_year = ~(db.movies.year==None)
-useful_movies = movies_with_ratings&movies_with_titles&with_poster&with_year
+exclude_adult = ~(db.movies.id.belongs(db(db.movies_genres.genre.belongs(db(db.genres.name=='Adult')._select(db.genres.id)))._select(db.movies_genres.movie)))
+useful_movies = movies_with_ratings&movies_with_titles&with_poster&with_year&exclude_adult
 
 #for x in db(db.ratings).select(db.ratings.ALL):
 #    for y in db(db.ratings.id>x.id).select(db.ratings.ALL):
