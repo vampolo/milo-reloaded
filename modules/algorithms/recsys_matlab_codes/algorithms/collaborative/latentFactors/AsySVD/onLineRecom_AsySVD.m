@@ -44,14 +44,13 @@ function [recomList] = onLineRecom_ASYSVD (userProfile, model,param)
     for i=1:numRatedItems
         item=ratedItems(i);
 %XXX        pu = pu +  (userProfile(item) - (mu+bu(user)+bi(item)))*x(:,item);
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXX ->>>>
         pu = pu +  (userProfile(item) - (mu+bu+bi(item)))*x(:,item);
-%XXXXXXXXXXXXXXXXXXXXXXXXXXXXX <<<<-
         pu = pu +  y(:,item);
     end
     pu = pu / sqrt(numRatedItems);   
     
-    recomList = mu + bu(user) + bi + q'*pu; %r_hat_ui = mu + bu(u) + bi(item) + q(:,item)'*pu; 
+%XXX    recomList = mu + bu(user) + bi + q'*pu; %r_hat_ui = mu + bu(u) + bi(item) + q(:,item)'*pu; 
+    recomList = mu + bu + bi + q'*pu; %r_hat_ui = mu + bu(u) + bi(item) + q(:,item)'*pu; 
         
 
     
