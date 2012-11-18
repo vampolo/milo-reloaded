@@ -12,19 +12,18 @@
 ITEMS_PER_PAGE = 15
 
 def _render_to_index(query):
-    print session.survey
     if request.post_vars.free_rating == 'end':
         redirect(URL('survey', 'catalogue_questions'))
     response.view = 'default/index.html'
     page = 0 if not request.args(0) else int(request.args(0))
-    list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year), distinct=True, limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
-    max_items = db(query).count() 
+    list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
+    max_items = db(query).count()
     return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
 
 def index():
     query = useful_movies
     return _render_to_index(query)
-    
+
 def search():
     term = request.vars.get('s')
     genres = request.vars.getlist('genres')
@@ -86,4 +85,3 @@ def data():
       LOAD('default','data.load',args='tables',ajax=True,user_signature=True)
     """
     return dict(form=crud())
-
