@@ -29,7 +29,7 @@ def search():
     genres = request.vars.getlist('genres')
     query = db.movies.id>0
     if term:
-        query &= db.movies.title.contains(term)
+        query &= db.movies.title.contains(term+' ' if term[-1] is not ' ' else term)
     if genres:
         query &= db.movies.id.belongs(db(db.movies_genres.genre.belongs(genres))._select(db.movies_genres.movie))
     return _render_to_index(query)
