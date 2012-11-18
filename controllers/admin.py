@@ -93,3 +93,6 @@ def bisect():
     failed_n = db_scheduler(db_scheduler.scheduler_task.status=="FAILED").count()
     faileds = db_scheduler(db_scheduler.scheduler_run.status=="FAILED").select(orderby=~db_scheduler.scheduler_run.id, limitby=(0,10), cacheable=True)
     return dict(completed_n=completed_n, failed_n=failed_n, faileds=faileds)
+
+def remove_adult_movies():
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>All movies with Adult genre will be deleted from the dataset shortly</span></p>'
