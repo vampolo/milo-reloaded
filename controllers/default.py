@@ -12,13 +12,19 @@
 ITEMS_PER_PAGE = 15
 
 def _render_to_index(query):
-    if request.post_vars.free_rating == 'end':
-        redirect(URL('survey', 'catalogue_questions'))
+    sur = dict()
+    if session.survey and auth.user is not None:
+        sur['survey'] = db.surveys[session.survey]
+        sur['n_ratings'] = db(db.ratings.iuser==auth.user.milo_user).count()
+        if sur['survey'].number_of_free_ratings-sur['n_ratings']<=0:
+            redirect(URL('survey', 'catalogue_questions'))
+    elif 'survey' in session:
+        del session.survey
     response.view = 'default/index.html'
     page = 0 if not request.args(0) else int(request.args(0))
     list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     max_items = db(query).count()
-    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE)
+    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE, **sur)
 
 def index():
     query = useful_movies

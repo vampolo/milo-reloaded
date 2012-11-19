@@ -185,6 +185,8 @@ db.define_table('surveys',
                 Field('algorithm', requires=IS_IN_SET(Whisperer.get_algnames())),
                 Field('number_of_ratings', 'integer'),
                 Field('scale', 'integer', requires=IS_IN_SET([1, 5]), default=5),
+                Field('number_of_free_ratings', 'integer', default=5),
+                Field('type', 'string', requires = IS_IN_SET(['algorithm_performance', 'algorithm_strenght']), default='algorithm_performance')
                 )
 
 db.define_table('surveys_users',
@@ -208,5 +210,7 @@ db.define_table('answers_to_surveys',
 
 db.define_table('recommendations',
                 Field('iuser', 'reference users'),
-                Field('rec', 'list:reference movies')
+                Field('movies', 'list:reference movies'),
+                Field('algorithm'),
+                Field('timestamp', 'datetime', default=request.now)
                 )

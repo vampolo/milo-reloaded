@@ -16,13 +16,14 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 {{block center}}
     {{if session.survey:}}
     <div class="sixteen columns center alpha omega" style="margin-bottom:20px">
-      <center>You can now rate how many movies you want. You can use the search box to look for movies or you can surf by genres just clicking in a genre of a movie. We suggest you to do at least more than 5 ratings. When you are ready click the next button to go to the next step of the survey</center>
-      <right>
+      <center>You have to rate <strong>{{=survey.number_of_free_ratings}}</strong> movies now. You can use the search box to look for movies or you can surf by genres just clicking in a genre of a movie.<br/>
+	When you complete all the ratings the system will ask the next questions.<br/>
+	<strong>Still {{=survey.number_of_free_ratings-n_ratings}} to go</strong>
 	<form method="POST">
 	  <input type="hidden" name="free_rating" value="end"/>
-	  <input type="submit" value="Next"/>
+	  <input type="submit" value="Refresh"/>
 	</form>
-      </right>
+</center>
     </div>
     {{pass}}
 	<div id="myImageFlow" class="imageflow">
@@ -86,16 +87,17 @@ $(function() {
 <div class="container"> 
 <div class="sixteen columns center">
 <center>
+{{block prefooter}}
   {{if page != 0:}}
   {{=A('Previous', _href=URL(args=[page-1], vars=request.vars))}}
   {{pass}}
   {{if items_per_page*page < max_items:}}
   {{=A('Next', _href=URL(args=[page+1], vars=request.vars))}}
   {{pass}}
+{{end}}
 </center>			     
 </div>
 </div>
-
 {{block right_sidebar}}
 
 {{end}}

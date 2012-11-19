@@ -3,7 +3,7 @@ import json
 import matlab_wrapper
 
 db_scheduler = DAL(db_scheduler_string)
- 
+
 def create_model(*args, **vars):
     w = matlab_wrapper.Whisperer(db,im)
     w.create_model(*args, **vars)
@@ -15,7 +15,7 @@ def import_or_update_movie(*args, **kwargs):
 def import_popular_movies(*args, **kwargs):
     i = Importer(db, im)
     i.get_popular_movies(schedule_movie, *args, **kwargs)
-    
+
 def create_features_vector(*args, **kwargs):
     w = matlab_wrapper.Whisperer(db, im)
     w.create_features_vector(*args, **kwargs)
@@ -44,12 +44,12 @@ def start_survey(surveyid):
                       message='''Hello.
                       You have been selected to participate to a quick survey about movies.
                       Just click on the link below and you can participate.
-                      
+
                       {0}
 
                       Your username is: {1}
                       Your password is: {2}
-                      
+
                       Ready to discover new cool movies?
 
                       '''.format(URL(
@@ -57,18 +57,22 @@ def start_survey(surveyid):
                           host='movish.co'), user.email, user.email[:user.email.find('@')]))
     survey = db.surveys[surveyid]
     #create_model(survey.algorithm)
-    user_ids = db(db.surveys_users.survey == survey)._select(db.surveys_users.iuser)
-    survey_users = db(db[auth.settings.table_user_name].id.belongs(user_ids)).select(
-        db[auth.settings.table_user_name].id,
-        db[auth.settings.table_user_name].email)
-    send_mail(survey_users)
+    if survey.type == 'algorithm_performance':
+        user_ids = db(db.surveys_users.survey == survey)._select(db.surveys_users.iuser)
+        survey_users = db(db[auth.settings.table_user_name].id.belongs(user_ids)).select(
+            db[auth.settings.table_user_name].id,
+            db[auth.settings.table_user_name].email)
+        send_mail(survey_users)
 
 def do_recommendation(algorithm, userid, num_rec):
     w = matlab_wrapper.Whisperer(db, im)
     rec = w.get_rec(algorithm, userid, num_rec)
     db.recommendations.update_or_insert(db.recommendations.iuser==userid,
                                         iuser=userid,
-                                        rec=[index for value,index in rec])
+                                        movies=[index for value,index in rec],
+                                        timestamp=request.now,
+                                        algorithm=algorithm
+    )
     db.commit()
 
 from gluon.scheduler import Scheduler
