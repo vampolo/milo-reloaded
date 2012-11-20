@@ -23,30 +23,32 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 	  <input type="hidden" name="free_rating" value="end"/>
 	  <input type="submit" value="Refresh"/>
 	</form>
-</center>
+      </center>
     </div>
     {{pass}}
-	<div id="myImageFlow" class="imageflow">
+    {{if not session.survey:}}
+    <div id="myImageFlow" class="imageflow">
 		{{for movie in slider_movies:}}
 			<img src="{{=URL('static', movie.poster)}}" alt="{{=movie.title}}" longdesc="{{=URL('movie', 'show', args=[movie.id])}}" />
 		{{pass}}
+    </div>
+    {{pass}}
+    <div id="search">
+      <form action="{{=URL('index', r=request, args=request.args, vars=request.vars)}}">
+	<input type="text" name="s"/ 
+	       value="{{=request.vars.get('s', '')}}">
+	<input type="submit" value="Search" />
+	<div class="centered" style="width:350px;">
+	  <left>
+	    <input type="radio" name="ord" value="latest" {{if request.vars.get('ord', 'latest') == 'latest':}}checked{{pass}}>Latest<br/>
+	  </left>
+	  <right>
+	    <input type="radio" name="ord" value="popular" {{if request.vars.get('ord') == 'popular':}}checked{{pass}}>Popular<br/>
+	  </right>
 	</div>
-	<div id="search">
-			<form action="{{=URL('index', r=request, args=request.args, vars=request.vars)}}">
-				<input type="text" name="s"/ 
-				       value="{{=request.vars.get('s', '')}}">
-				<input type="submit" value="Search" />
-				<div class="centered" style="width:350px;">
-				  <left>
-				    <input type="radio" name="ord" value="latest" {{if request.vars.get('ord', 'latest') == 'latest':}}checked{{pass}}>Latest<br/>
-				  </left>
-				  <right>
-				    <input type="radio" name="ord" value="popular" {{if request.vars.get('ord') == 'popular':}}checked{{pass}}>Popular<br/>
-				  </right>
-				</div>
-			</form>	
+      </form>	
 			
-	</div>
+    </div>
 {{end}}
 <section id="masonry-content" class="centered">
 	{{for movie in list_movies:}}
