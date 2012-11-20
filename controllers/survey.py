@@ -80,7 +80,7 @@ def demographic():
         if session.survey_stage < 2:
             session.survey_stage = 2
         _form_in_db(form, surveyid)
-        redirect(URL('milo','default', 'index'))
+        redirect(URL('milo','default', 'index', vars={'ord': 'popular'}))
     elif form.errors:
         response.flash = 'form has errors'
     else:

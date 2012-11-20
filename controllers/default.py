@@ -22,20 +22,24 @@ def _render_to_index(query):
         del session.survey
     response.view = 'default/index.html'
     page = 0 if not request.args(0) else int(request.args(0))
-    list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
+    ord = request.vars.get('ord')
+    if ord == 'popular':
+        list_movies = db((db.ratings.imovie==db.movies.id)).select(db.movies.ALL, groupby=db.ratings.imovie|db.movies.id, orderby=~(db.ratings.imovie.count()), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
+    else:
+        list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     max_items = db(query).count()
     return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE, **sur)
 
 def index():
     query = useful_movies
-    return _render_to_index(query)
-
-def search():
     term = request.vars.get('s')
     genres = request.vars.getlist('genres')
-    query = db.movies.id>0
+    if len(genres)>0:
+        query = db.movies.id>0
     if term:
         query &= db.movies.title.contains(term+' ' if term[-1] is not ' ' else term)
+    elif 's' in request.vars:
+        del request.vars['s']
     if genres:
         query &= db.movies.id.belongs(db(db.movies_genres.genre.belongs(genres))._select(db.movies_genres.movie))
     return _render_to_index(query)

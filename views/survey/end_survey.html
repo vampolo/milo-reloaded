@@ -9,5 +9,9 @@
 <div>
 Thank you for participating to this survey.
 You can close the page now or  go to the <a href="{{=URL('default', 'index')}}">homepage</a>.
+<br/>
+{{if auth.user.email.startswith('amazonturk'):}}
+The <strong>Amazon Mechanical Turk code</strong> to redeem your work is <strong>{{=auth.user.email}}</strong>
+{{pass}}
 </div>
 {{end}}
