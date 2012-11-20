@@ -207,8 +207,8 @@ def algorithm_strenght():
     form = FORM(TABLE(
         TR('How many movies in this list have you ever watched?', SELECT(*movies_select, _name='num_watched')),
         TR('How many movies in this list have you never heard of?', SELECT(*movies_select, _name='num_heard_of')),
-        TR('How many movies in this list do you like?', SELECT(*movies_select, _name='num_like')),
-        TR('How many movies in this list do you hate?', SELECT(*movies_select, _name='num_hate')),
+        TR('From the movies in this list that you already watched, if any, how many do you like? (leave 0 if no one)', SELECT(*movies_select, _name='num_like')),
+        TR('From the movies in this list that you already watched, if any, how many do you dislike? (leave 0 if no one)', SELECT(*movies_select, _name='num_hate')),
         TR('From 1 to 5 how interesting did you find the given recommendations?', SELECT(*range(6), _name='1_to_5_interesting')),
         TR('How many movies in this list will you likely watch in the future?', SELECT(*movies_select, _name='num_like_to_watch')),
         TR('','',INPUT(_type="submit", value="Finish"))
