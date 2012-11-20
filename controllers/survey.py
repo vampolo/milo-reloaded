@@ -229,7 +229,7 @@ def local_info():
         session.survey_stage = 5
     form = FORM(TABLE(
         TR('Where did this survey take place?', SELECT('University', 'Home', 'Work place', 'Public place', 'Other', _name='survey_take_place')),
-        TR('Why did you accepted to take part to the survey?', SELECT('Friend request', 'Interest in movies', 'Amazon Turk', 'Other', _name='why_survey')),
+        TR('Why did you accept to take part to the survey?', SELECT('Friend request', 'Interest in movies', 'Amazon Turk', 'Other', _name='why_survey')),
         TR('','',INPUT(_type="submit", value="Finish"))
         ))
     if form.process().accepted:
