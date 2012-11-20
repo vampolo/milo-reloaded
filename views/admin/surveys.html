@@ -6,8 +6,10 @@
 				<th class="col1">Name</th>
 				<th class="col2">Algorithm</th>
 				<th class="col3">Number of Ratings</th>
-				<th class="col4">Scale</th>
-				<th class="col5">Actions</th>
+				<th class="col4">Type</th>
+				<th class="col4">Number of free rating</th>
+				<th class="col5">Amazon Turk link</th>
+				<th class="col6">Actions</th>
 			</tr>
 			{{highlight=True}}
 			{{for survey in surveys:}}
@@ -15,7 +17,9 @@
 				<td>{{=survey.name}}</td>
 				<td>{{=survey.algorithm}}</td>
 				<td>{{=survey.number_of_ratings}}</td>
-				<td>{{=survey.scale}}</td>
+				<td>{{=survey.type}}</td>
+				<td>{{=survey.number_of_free_ratings}}</td>
+				<td><a href="{{=URL('survey', 'amazonturk', host=True, args=[survey.id])}}">{{=URL('survey', 'amazonturk', host=True, args=[survey.id])}}</a></td>
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[]))}}</li>
