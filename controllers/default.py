@@ -24,7 +24,7 @@ def _render_to_index(query):
     page = 0 if not request.args(0) else int(request.args(0))
     ord = request.vars.get('ord')
     if ord == 'popular':
-        list_movies = db((db.ratings.imovie==db.movies.id)).select(db.movies.ALL, groupby=db.ratings.imovie|db.movies.id, orderby=~(db.ratings.imovie.count()), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
+        list_movies = db((db.ratings.imovie==db.movies.id)&query).select(db.movies.ALL, groupby=db.ratings.imovie|db.movies.id, orderby=~(db.ratings.imovie.count()), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     else:
         list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     max_items = db(query).count()
