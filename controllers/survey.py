@@ -205,12 +205,12 @@ def algorithm_strenght():
     movies_num = len(movies)
     movies_select = range(movies_num+1)
     form = FORM(TABLE(
-        TR('Have you ever watched some of these movies?', SELECT(*movies_select, _name='num_watched')),
-        TR('Are there movies you never heard of?', SELECT(*movies_select, _name='num_heard_of')),
-        TR('How many of the recommended movies do you like?', SELECT(*movies_select, _name='num_like')),
-        TR('How many of the recommended movies do you hate?', SELECT(*movies_select, _name='num_hate')),
+        TR('How many movies in this list have you ever watched?', SELECT(*movies_select, _name='num_watched')),
+        TR('How many movies in this list have you never heard of?', SELECT(*movies_select, _name='num_heard_of')),
+        TR('How many movies in this list do you like?', SELECT(*movies_select, _name='num_like')),
+        TR('How many movies in this list do you hate?', SELECT(*movies_select, _name='num_hate')),
         TR('From 1 to 5 how interesting did you find the given recommendations?', SELECT(*range(6), _name='1_to_5_interesting')),
-        TR('Are there movies in the recommendation list that you will like to watch in the future?', SELECT(*movies_select, _name='num_like_to_watch')),
+        TR('How many movies in this list will you likely watch in the future?', SELECT(*movies_select, _name='num_like_to_watch')),
         TR('','',INPUT(_type="submit", value="Finish"))
         ))
     if form.process().accepted:
