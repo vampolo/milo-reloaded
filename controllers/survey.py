@@ -97,7 +97,7 @@ def catalogue_questions():
         TR("Where you looking for specific items?", SELECT('No',
                                                            'Partially',
                                                            'Yes', _name="spec_item")),
-        TR("Did you looked for movies that couldn't be found?", SELECT('No', 'Yes', _name="not_found")),
+        TR("If you were looking for specific items, didn't you find all of them?", SELECT('No', 'Yes', _name="not_found")),
         TR("If yes, which ones?"),
         TR('',INPUT(_name="title1")),
         TR('',INPUT(_name="title2")),
