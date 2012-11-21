@@ -9,7 +9,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 
 {{if not session.survey:}}
 {{block statusbar}}
-    <div class="breadcrumbs"><a href="{{=URL('default', 'index', args=request.args, vars=request.vars)}}">Home</a></div>
+    <div class="breadcrumbs"><a href="{{=session.home_link or URL('default', 'index', args=request.args, vars=request.vars)}}">Home</a></div>
 {{end}}
 {{pass}}
 
@@ -27,11 +27,21 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
     </div>
     {{pass}}
     {{if not session.survey:}}
+    {{if slider_movies:}}
     <div id="myImageFlow" class="imageflow">
 		{{for movie in slider_movies:}}
 			<img src="{{=URL('static', movie.poster)}}" alt="{{=movie.title}}" longdesc="{{=URL('movie', 'show', args=[movie.id])}}" />
 		{{pass}}
     </div>
+    {{else:}}
+    <div>
+      <center>
+	<img src="{{=URL('static', 'images', 'homer_simpson_face.jpg')}}" style="margin-bottom:70px; width:300px;"/><br/>
+	Ouch! No movies found! Search for another movie :)
+      </center>
+      <br/>
+    </div>
+    {{pass}}
     {{pass}}
     <div id="search">
       <form action="{{=URL('index', args=request.args, vars=request.vars)}}">

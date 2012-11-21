@@ -13,6 +13,7 @@ ITEMS_PER_PAGE = 15
 
 def _render_to_index(query):
     sur = dict()
+    session.home_link=URL(r=request, args=request.args, vars=request.vars)
     if session.survey and auth.user is not None:
         sur['survey'] = db.surveys[session.survey]
         sur['n_ratings'] = db(db.ratings.iuser==auth.user.milo_user).count()
@@ -37,7 +38,7 @@ def index():
     if len(genres)>0:
         query = db.movies.id>0
     if term:
-        query &= db.movies.title.contains(term+' ' if term[-1] is not ' ' else term)
+        query &= db.movies.title.like('% '+term+' %')|db.movies.title.like(term)
     elif 's' in request.vars:
         del request.vars['s']
     if genres:

@@ -4,7 +4,7 @@
 
 {{if not session.survey:}}
 {{block statusbar}}
-    <div class="breadcrumbs"><a href="{{=URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
+    <div class="breadcrumbs"><a href="{{=session.home_link or URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
 {{end}}
 {{pass}}
 
@@ -68,14 +68,14 @@
 		{{pass}}
 	</article>
 </section>
-<section>
-	<div class="clearboth"></div>
-	<h2>Comments</h2>
-	{{for comment in comments:}}
-	<article>
-		<div>{{=comment.title}}</div>
-		<div>{{=comment.text}}</div>
-	</article>
-	{{pass}}
-</section>
+<!-- <section> -->
+<!-- 	<div class="clearboth"></div> -->
+<!-- 	<h2>Comments</h2> -->
+<!-- 	{{for comment in comments:}} -->
+<!-- 	<article> -->
+<!-- 		<div>{{=comment.title}}</div> -->
+<!-- 		<div>{{=comment.text}}</div> -->
+<!-- 	</article> -->
+<!-- 	{{pass}} -->
+<!-- </section> -->
 {{end}}

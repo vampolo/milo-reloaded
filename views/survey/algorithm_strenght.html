@@ -1,16 +1,69 @@
 {{left_sidebar_enabled,right_sidebar_enabled=False,False}}
+{{
+response.files.append(URL('static', 'imageflow/imageflow.css'))
+response.files.append(URL('static', 'imageflow/imageflow.js'))
+response.files.append(URL('static', 'js/jquery.masonry.min.js'))
+}}
 
-{{extend 'default/index.html'}}
+{{extend 'layout2.html'}}
 
 {{block center}}
-<div class="sixteen columns center alpha omega" style="margin-bottom:20px">
-<center>
-This is the <strong>Recommendation of movies for you</strong>.
-Just answer the questions below.
-<strong>Some images and titles may not appear. Do not consider those movies while answering the questions</strong>
-</center>
-</div>
 {{end}}
+<section id="masonry-content" class="centered">
+	{{for movie in list_movies:}}
+	<div class="masonry-item">
+		<a><img src="{{=URL('static', movie.get('poster'))}}" /></a>
+		<div class="movie-info">
+			<div class="movie-title">{{=movie.get('title')}} ({{=movie.get('year')}})</div>
+			{{if not movie.get('year') or movie.poster.startswith('images/unknown'):
+			      schedule_movie(movie.get('id'), reviews=True)
+			  pass
+			}}
+			<div class="genre">
+				<span class="bold">Genre:</span>
+				{{for rel in movie.get('movies_genres').select(cache=(cache.disk, 3600)):}}
+				{{=A(rel.genre.name)}}
+				{{pass}}
+			</div>
+			<div class="ratings">
+			<span class="bold">Ratings:</span>
+				{{=movie.ratings.count()}}
+			</div>
+		</div>
+		<div class="comments">
+			
+		</div>
+	</div>
+	{{pass}}
+	
+</section>
+<script type="text/javascript">
+$(function() {
+
+	var $container = $('#masonry-content');
+	$container.imagesLoaded(function(){
+	  $container.masonry({
+	    itemSelector : '.masonry-item',
+	   	columnWidth: 250,
+	    isAnimated: true,
+	    isFitWidth: true,
+	  });
+	});
+	
+});
+</script>
+<div class="container"> 
+<div class="sixteen columns center">
+<center>
 {{block prefooter}}
 {{=form}}
 {{end}}
+</center>			     
+</div>
+</div>
+{{block right_sidebar}}
+
+{{end}}
+
+
+

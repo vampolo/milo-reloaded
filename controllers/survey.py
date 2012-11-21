@@ -94,7 +94,7 @@ def catalogue_questions():
     if session.survey_stage < 3:
         session.survey_stage = 3
     form = FORM(TABLE(
-        TR("Where you looking for specific items?", SELECT('No',
+        TR("Were you looking for specific items?", SELECT('No',
                                                            'Partially',
                                                            'Yes', _name="spec_item")),
         TR("If you were looking for specific items, didn't you find all of them?", SELECT('No', 'Yes', _name="not_found")),
@@ -110,14 +110,14 @@ def catalogue_questions():
         TR("Check the boxes you LIKED about the graphical interface"),
         TR(TD(INPUT(_type="checkbox", _name='color_palette'), "Color Palette")),
         TR(TD(INPUT(_type="checkbox", _name='text_readability'),"Text readability")),
-        TR(TD(INPUT(_type="checkbox", _name='organizzation'),"Organizzation")),
+        TR(TD(INPUT(_type="checkbox", _name='organization'),"Organization")),
         TR(TD(INPUT(_type="checkbox", _name='orientation_guidelines'),"Orientation guidelines")),
         TR("Check the boxes you DISLIKED about the graphical interface"),
         TR(TD(INPUT(_type="checkbox", _name='color_palette_dislike'),"Color Palette")),
         TR(TD(INPUT(_type="checkbox", _name='text_readability_dislike'),"Text readability")),
-        TR(TD(INPUT(_type="checkbox", _name='organizzation_dislike'),"Organizzation")),
+        TR(TD(INPUT(_type="checkbox", _name='organization_dislike'),"Organization")),
         TR(TD(INPUT(_type="checkbox", _name='orientation_guidelines'),"Orientation guidelines")),
-        TR("Did you find confusing the browsing experience through the catalogue?", SELECT('No', 'Partially', 'Yes', _name='confusing_browser_experience')),
+        TR("Do you find the browsing experience to be confusing?", SELECT('No', 'Partially', 'Yes', _name='confusing_browser_experience')),
         TR('','',INPUT(_type="submit"))
         ))
     if form.process().accepted:
@@ -209,7 +209,7 @@ def algorithm_strenght():
         TR('How many movies in this list have you never heard of?', SELECT(*movies_select, _name='num_heard_of')),
         TR('From the movies in this list that you have already watched, if any, how many do you like? (leave 0 if no one)', SELECT(*movies_select, _name='num_like')),
         TR('From the movies in this list that you have already watched, if any, how many do you dislike? (leave 0 if no one)', SELECT(*movies_select, _name='num_hate')),
-        TR('From 1 to 5 how interesting did you find the given recommendations?', SELECT(*range(6), _name='1_to_5_interesting')),
+        TR('From 1 (low interesting) to 5 (very interesting) how interesting did you find the given recommendations?', SELECT(*range(6), _name='1_to_5_interesting')),
         TR('How many movies in this list will you likely watch in the future?', SELECT(*movies_select, _name='num_like_to_watch')),
         TR('','',INPUT(_type="submit", value="Finish"))
         ))
