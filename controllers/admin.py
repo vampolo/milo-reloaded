@@ -91,6 +91,8 @@ def download_survey_results():
     stream=cStringIO.StringIO()
     cvs_writer = csv.writer(stream)
     users = set([x.survey_user for x in answers_to_survey])
+    users = list(users)
+    users.sort()
     cvs_writer.writerow(['survey_user']+[x.text for x in questions])
 
     question_id_mapping = dict()
