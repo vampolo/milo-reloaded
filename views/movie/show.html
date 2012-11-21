@@ -2,11 +2,15 @@
 
 {{extend 'layout2.html'}}
 
-{{if not session.survey:}}
+
 {{block statusbar}}
-    <div class="breadcrumbs"><a href="{{=session.home_link or URL('default', 'index')}}">Home</a> > <a href="{{=URL('movie', 'show', args=[movie.id])}}">Movie</a></div>
+    <div class="breadcrumbs">
+      {{for key,value in session.orientation.iteritems():}}
+      <a href="{{=value}}">{{=key}}</a> > 
+      {{pass}}
+    </div>
 {{end}}
-{{pass}}
+
 
 {{block center}}
 <section id="movie">

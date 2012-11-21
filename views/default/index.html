@@ -7,11 +7,13 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 
 {{extend 'layout2.html'}}
 
-{{if not session.survey:}}
 {{block statusbar}}
-    <div class="breadcrumbs"><a href="{{=session.home_link or URL('default', 'index', args=request.args, vars=request.vars)}}">Home</a></div>
+    <div class="breadcrumbs">
+      {{for key,value in session.orientation.iteritems():}}
+      <a href="{{=value}}">{{=key}}</a> > 
+      {{pass}}
+    </div>
 {{end}}
-{{pass}}
 
 {{block center}}
     {{if session.survey:}}
@@ -33,7 +35,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 			<img src="{{=URL('static', movie.poster)}}" alt="{{=movie.title}}" longdesc="{{=URL('movie', 'show', args=[movie.id])}}" />
 		{{pass}}
     </div>
-    {{else:}}
+    {{elif not list_movies:}}
     <div>
       <center>
 	<img src="{{=URL('static', 'images', 'homer_simpson_face.jpg')}}" style="margin-bottom:70px; width:300px;"/><br/>
