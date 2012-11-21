@@ -1,4 +1,6 @@
 import matlab_wrapper
+import cStringIO
+import csv
 
 @auth.requires_membership('admin')
 def index():
@@ -79,6 +81,41 @@ def create_survey():
     else:
         response.flash='fill out the form'
     return dict(form=form)
+
+def download_survey_results():
+    survey = db.surveys[request.args[0]]
+    survey_users_ids = db(db.surveys_users.survey==survey)._select(db.surveys_users.id)
+    questions_ids = db(db.answers_to_surveys.survey_user.belongs(survey_users_ids))._select(db.answers_to_surveys.question,  distinct=True)
+    questions = db(db.questions.id.belongs(questions_ids)).select(db.questions.ALL)
+    answers_to_survey = db(db.answers_to_surveys.survey_user.belongs(survey_users_ids)).select(db.answers_to_surveys.ALL, orderby=db.answers_to_surveys.survey_user|db.answers_to_surveys.question, groupby=db.answers_to_surveys.survey_user|db.answers_to_surveys.id)
+    stream=cStringIO.StringIO()
+    cvs_writer = csv.writer(stream)
+    users = set([x.survey_user for x in answers_to_survey])
+    cvs_writer.writerow(['survey_user']+[x.text for x in questions])
+
+    question_id_mapping = dict()
+    counter = 0
+    for x in questions:
+        question_id_mapping[x.id]=counter
+        counter+=1
+    for user in users:
+        res = [None]*counter
+        for id_question in [x.id for x in questions]:
+            if res[question_id_mapping[id_question]] is None:
+                for answer_to_survey in answers_to_survey:
+                    if answer_to_survey.survey_user == user:
+                        if answer_to_survey.question == id_question:
+                            res[question_id_mapping[id_question]]=answer_to_survey.answer.text
+        res.insert(0, user)
+        cvs_writer.writerow(res)
+    response.headers['Content-Type'] = 'text/csv'
+    response.headers['Content-Disposition'] = 'attachment; filename={}.csv'.format('movish-survey-'+str(survey.id))
+    return stream.getvalue()
+
+def delete_survey():
+    del db.surveys[request.args[0]]
+    response.view = 'admin/surveys.html'
+    return surveys()
 
 def get_popular_movies():
     schedule_popular_movies()

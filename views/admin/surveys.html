@@ -22,9 +22,8 @@
 				<td><a href="{{=URL('survey', 'amazonturk', host=True, args=[survey.id])}}">{{=URL('survey', 'amazonturk', host=True, args=[survey.id])}}</a></td>
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[]))}}</li>
-						<li>{{=A('', _class="add", _title="make new matrice", callback=URL('make_matrice', args=[]), target="message")}}</li>
-						<li>{{=A('', _class="delete", _title="delete", callback=URL('delete_matrice', args=[]), target="message")}}</li>
+						<li>{{=A('', _class="edit", _title="download results", _href=URL('download_survey_results', args=[survey.id]))}}</li>
+						<li>{{=A('', _class="delete", _title="delete survey", callback=URL('delete_survey', args=[survey.id]), target='content')}}</li>
 					</ul>
 				</td>
 			</tr>
