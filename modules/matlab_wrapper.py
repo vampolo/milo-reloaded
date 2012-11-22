@@ -130,7 +130,7 @@ class Whisperer(object):
         db_ratings = db(db.ratings).select(db.ratings.ALL, distinct=True)
         users = [float(x.iuser) for x in db_ratings]
         movies = [float(x.imovie) for x in db_ratings]
-        ratings = [float(x.rating) for x in db_ratings]
+        ratings = [round(x.rating * 5, 0) for x in db_ratings]
         users = numpy.array(users)
         movies = numpy.array(movies)
         ratings = numpy.array(ratings)
@@ -159,7 +159,7 @@ class Whisperer(object):
     def create_userprofile(self, user):
         db = self.db
         entries = db(db.ratings.iuser==user).select(db.ratings.ALL, cacheable=True)
-        ratings = [float(x.rating) for x in entries]
+        ratings = [round(x.rating * 5, 0) for x in entries]
         movies = [float(x.imovie) for x in entries]
         max_movies = db.ratings.imovie.max()
         dimension = [float(db().select(max_movies).first()[max_movies])]
