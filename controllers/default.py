@@ -9,42 +9,28 @@
 ## - call exposes all registered services (none by default)
 #########################################################################
 
-from collections import OrderedDict
-
 ITEMS_PER_PAGE = 15
 
 def index():
-    orient_key = None
-    if not session.orientation or request.vars.get('clear'):
-        session.orientation = OrderedDict()
-        vars = dict(**request.vars)
-        vars['clear'] = True
-        session.orientation["Home"]=URL('default', 'index', args=request.args, vars=vars)
-    elif len(session.orientation) > 1:
-        (orient_key, orient_value) = session.orientation.popitem()
-
     query = useful_movies
     term = request.vars.get('s')
     genres = request.vars.getlist('genres')
     ord = request.vars.get('ord')
+    breadcrumbs_text = 'Home'
+    page = 0 if not request.args(0) else int(request.args(0))
+
     if len(genres)>0:
         query = db.movies.id>0
     if term:
         query &= db.movies.title.contains(term)
-        if orient_key:
-            session.orientation[orient_key] = orient_value
-        session.orientation['Search: '+term]=URL(r=request, args=request.args, vars=request.vars)
-        vars = dict(**request.vars)
-        del vars['s']
+        breadcrumbs_text = 'Filtering results by search: '+term
         ord = 'popular'
     elif 's' in request.vars:
         del request.vars['s']
     if genres:
-        query &= db.movies.id.belongs(db(db.movies_genres.genre.belongs(genres))._select(db.movies_genres.movie))
         genre_names = db(db.genres.id.belongs(genres)).select(db.genres.name)
-        if orient_key:
-            session.orientation[orient_key] = orient_value
-        session.orientation['Genres: '+' '.join([x.name for x in genre_names])] = URL(r=request, args=request.args, vars=request.vars)
+        breadcrumbs_text = 'Filtering results by genre: '+' '.join([x.name for x in genre_names])
+        query &= db.movies.id.belongs(db(db.movies_genres.genre.belongs(genres))._select(db.movies_genres.movie))
 
     sur = dict()
     if session.survey and auth.user is not None:
@@ -55,14 +41,12 @@ def index():
     elif 'survey' in session:
         del session.survey
 
-    page = 0 if not request.args(0) else int(request.args(0))
-
     if ord == 'popular':
         list_movies = db((db.ratings.imovie==db.movies.id)&query).select(db.movies.ALL, groupby=db.ratings.imovie|db.movies.id, orderby=~(db.ratings.imovie.count()), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     else:
         list_movies = db(query).select(db.movies.ALL, orderby=~(db.movies.year)|~(db.movies.updated), limitby=(page*ITEMS_PER_PAGE,page*ITEMS_PER_PAGE+ITEMS_PER_PAGE), cache=(cache.disk, 3600))
     max_items = db(query).count()
-    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE, **sur)
+    return dict(list_movies = list_movies, slider_movies = list_movies, page = page, max_items=max_items, items_per_page=ITEMS_PER_PAGE, breadcrumbs=breadcrumbs_text, **sur)
 
 def user():
     """

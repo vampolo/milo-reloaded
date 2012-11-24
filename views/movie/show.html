@@ -5,9 +5,7 @@
 
 {{block statusbar}}
     <div class="breadcrumbs">
-      {{for key,value in session.orientation.iteritems():}}
-      <a href="{{=value}}">{{=key}}</a> > 
-      {{pass}}
+      Showing movie: {{=movie.title}}
     </div>
 {{end}}
 

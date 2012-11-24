@@ -91,13 +91,13 @@
         <div class="sixteen columns">
 	  {{if not session.survey:}}
           <div id="navbar">{{='auth' in globals() and auth.navbar(separators=(' ',' | ',''))}}</div>
+	  {{pass}}
           {{is_mobile=request.user_agent().is_mobile}}
 	  {{if response.menu:}}
           <div id="menu">
              {{=MENU(response.menu, _class='mobile-menu' if is_mobile else 'sf-menu',mobile=is_mobile)}}
           </div>
           {{pass}}
-	  {{pass}}
         </div>
       </div>
     </div><!-- topbar -->

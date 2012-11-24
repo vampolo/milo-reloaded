@@ -9,9 +9,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 
 {{block statusbar}}
     <div class="breadcrumbs">
-      {{for key,value in session.orientation.iteritems():}}
-      <a href="{{=value}}">{{=key}}</a> > 
-      {{pass}}
+      {{=breadcrumbs}}
     </div>
 {{end}}
 
@@ -46,7 +44,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
     {{pass}}
     {{pass}}
     <div id="search">
-      <form action="{{=URL('index', args=request.args, vars=request.vars)}}">
+      <form action="{{=URL(r=request)}}">
 	<input type="text" name="s"/ 
 	       value="{{=request.vars.get('s', '')}}">
 	<input type="submit" value="Search" />
@@ -75,7 +73,7 @@ response.files.append(URL('static', 'js/jquery.masonry.min.js'))
 			<div class="genre">
 				<span class="bold">Genre:</span>
 				{{for rel in movie.get('movies_genres').select(cache=(cache.disk, 3600)):}}
-				{{=A(rel.genre.name, _href=URL('index', vars=dict(request.vars, **{'genres':(rel.genre.id,)})))}}
+				{{=A(rel.genre.name, _href=URL('index', vars={'genres':(rel.genre.id,)}))}}
 				{{pass}}
 			</div>
 			<div class="ratings">
@@ -115,7 +113,7 @@ $(function() {
   {{if page != 0:}}
   {{=A('Previous', _href=URL(args=[page-1], vars=request.vars))}}
   {{pass}}
-  {{if items_per_page*page < max_items:}}
+  {{if items_per_page*page+items_per_page < max_items:}}
   {{=A('Next', _href=URL(args=[page+1], vars=request.vars))}}
   {{pass}}
 {{end}}
