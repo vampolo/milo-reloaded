@@ -134,5 +134,5 @@ def bisect():
     return dict(completed_n=completed_n, failed_n=failed_n, faileds=faileds)
 
 def remove_adult_movies():
-    db(adult_movies).delete()
+    schedule_remove_adult_movies()
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>All movies with Adult genre will be deleted from the dataset shortly</span></p>'

@@ -27,7 +27,7 @@ def schedule_create_features_vector(*args, **kwargs):
         timeout = 3600*24*7,
     )
     db_scheduler.commit()
-    
+
 def schedule_create_titles_vector(*args, **kwargs):
     db_scheduler.scheduler_task.insert(
         function_name='create_titles_vector',
@@ -36,7 +36,7 @@ def schedule_create_titles_vector(*args, **kwargs):
         timeout = 3600*24*7,
     )
     db_scheduler.commit()
-    
+
 def schedule_create_matlab_matrices(*args, **kwargs):
     db_scheduler.scheduler_task.insert(
         function_name='create_matlab_matrices',
@@ -70,13 +70,20 @@ def schedule_start_survey(surveyid):
         args=json.dumps([surveyid]),
         timeout = 3600*24*7,
     )
-    db_scheduler.commit() 
+    db_scheduler.commit()
 
 def schedule_recommendation(algorithm, userid, num_rec=10):
     db_scheduler.scheduler_task.insert(
         function_name='do_recommendation',
         args=json.dumps([algorithm, userid, num_rec]),
         group_name = 'recommendation',
+        timeout = 3600*24
+        )
+    db_scheduler.commit()
+
+def schedule_remove_adult_movies():
+    db_scheduler.scheduler_task.insert(
+        function_name='remove_adult_movies',
         timeout = 3600*24
         )
     db_scheduler.commit()

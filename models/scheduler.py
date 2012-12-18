@@ -75,6 +75,10 @@ def do_recommendation(algorithm, userid, num_rec):
     )
     db.commit()
 
+def remove_adult_movies():
+    db(adult_movies).delete()
+    db.commit()
+
 from gluon.scheduler import Scheduler
 myscheduler = Scheduler(db_scheduler,
                         group_names=['main', 'recommendation', 'model'])
