@@ -9,7 +9,7 @@ response.title = ' '.join(word.capitalize() for word in request.application.spli
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
 response.meta.author = 'Vincenzo Ampolo <vincenzo.ampolo@gmail.com>'
-response.meta.description = 'Milo recommendation system'
+response.meta.description = 'Movish recommendation system'
 response.meta.keywords = 'web2py, python, framework'
 response.meta.generator = 'Web2py Web Framework'
 response.meta.copyright = 'Copyright 2012'
