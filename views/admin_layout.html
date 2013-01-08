@@ -70,16 +70,14 @@ target='content')}}</li>
 				<a href="#" title="Algorithms">Algorithms</a>
 				<ul>
 					{{for alg in algorithms:}}
-					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', 
-
-args=[alg]), target='content')}}</li>
+					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
 			</li>
 
 
 			<li>
-                        	{{=A('Upload', _title="Upload", callback=URL('admin', 'upload.html'), target='content')}}
+                        	{{=A('Upload', _title="Upload", callback=URL('matrices'), target='content')}}
                		</li>
 
 
