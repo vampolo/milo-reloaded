@@ -1,0 +1,40 @@
+<h2>Regole di Buona Forma per Algoritmi di Raccomandazione Personalizzati</h2>
+<div class="box">
+  <table>
+  	<tbody>
+			Regole principali di buona forma valide per entrambe le funzioni:<br>
+•	Le funzioni devono essere scritte in linguaggio Matlab, devono quindi rispettare la sua sintassi o genereranno errori che potrebbero portare al crash della loro esecuzione<br>
+•	Le funzioni devono avere un estensione .mat o il sistema non le accetterà<br>
+•	I nomi dei file <cite>.mat</cite> contenente le funzioni sono liberi (in ogni caso dopo l’upload il sistema li immagazzinerà usando dei nomi reimpostati, che si basano sul nome col quale il manager vuole identificare l’algoritmo all’interno del sistema), ma non lo sono i nomi delle funzioni, che dovranno seguire le indicazioni di cui di seguito<br><br>
+
+Regole principali di buona forma valide per la funzione dedicata alla creazione del modello:<br>
+•	La funzione deve avere un nome del tipo <cite>createModel_algname</cite>, dove algname deve essere ovviamente sostituito col nome dell’algoritmo in questione<br>
+•	La dichiarazione della funzione avrà questa forma:<br>
+<cite>function [model] = createModel_algname (URM,ICM, modelParam)</cite><br>
+Dove <cite>model</cite> è il modello di output, <cite>URM</cite> è la User Rating Matrix, <cite>ICM</cite> è la Item Content Matrix, entrambe matrici che il sistema possiede e che vengono passate come parametri, ed infine <cite>modelParam</cite>, che contiene eventuali parametri aggiuntivi che potrebbero essere utili alla creazione del modello<br>
+•	La funzione dovrà costruire il suo modello e riassumerlo in un vettore Matlab monodimensionale la cui variabile deve avere un nome di questo tipo: <cite>model.algname</cite><br><br>
+
+Regole principali di buona forma valide per la funzione dedicata alle raccomandazioni:<br>
+•	La funzione deve avere un nome del tipo <cite>onLineRecom_algname</cite>, dove algname deve essere ovviamente sostituito col nome dell’algoritmo in questione<br>
+•	La dichiarazione della funzione avrà questa forma:<br>
+	<cite>function [recomList] = onLineRecom_algname (userProfile, model, param)</cite><br>
+Dove <cite>recomList</cite> è l’ouput, cioè la lista dei film che vengono scelti come raccomandazioni, <cite>userProfile</cite> è un vettore monodimensionale contentente i rating del singolo utente a cui si sta offrendo il servizio di raccomandazione, <cite>model</cite> è il modello creato dalla funzione di creazione del modello del medesimo algoritmo, mentre <cite>param</cite> contiene eventuali parametri aggiuntivi, tra cui in particolare <cite>param.postProcessingFunction</cite> che è l’handle of post-processing function (utilizzata nell’output)<br>
+•	La funzione deve lavorare con il vettore passatogli dal modello e scegliere, attraverso il metodo che ritiene più opportuno, solo la lista di film che ritiene idonei alla raccomandazione (per quel determinato utente); la variabile <cite>recomList</cite>, anch’essa vettore monodimensionale, dovrà essere assegnata in questo senso prima della fase finale di return in modo tale che contenga tali informazioni<br>
+•	La funzione deve infine contenere queste righe di controllo:<br>
+<pre>
+	<cite>if (nargin>=3)
+		&#1;if(isfield(param,'postProcessingFunction'))
+			&#1;&#1;recomList=feval(param.postProcessingFunction,recomList,param);
+		&#1;end
+	end</cite>
+</pre>
+	La variabile recomList sarà il vettore contenente i nomi dei film da raccomandare all’utente.
+
+		</tbody>
+
+	</table>
+</div>
+<br>
+<div id="message">
+
+</div>
