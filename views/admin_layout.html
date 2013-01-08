@@ -1,19 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-
+
+strict.dtd">
 <html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<title>Movish manager</title>
 	<meta http-equiv="content-language" content="en" />
 	<meta http-equiv="cache-control" content="no-cache" />
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <link rel="shortcut icon" href="{{=URL('static','emanager')}}/images/favicon.ico" type="image/x-icon"/>
-    <link href="{{=URL('static','emanager')}}/css/styles.css" rel="stylesheet" type="text/css" media="screen" />
+    <link rel="shortcut icon" href="{{=URL('static','emanager')}}/images/favicon.ico" 
+
+type="image/x-icon"/>
+    <link href="{{=URL('static','emanager')}}/css/styles.css" rel="stylesheet" type="text/css" 
+
+media="screen" />
 	<!--[if lte IE 7]>
 	<link href="css/styles_ie.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
 	<!--[if lte IE 6]>
 	<link href="css/styles_ie6.css" rel="stylesheet" type="text/css" media="screen" />
 	<![endif]-->
-    <script type="text/javascript" src="{{=URL('static','emanager')}}/js/jquery-1.2.6.min.js"></script>
+    <script type="text/javascript" src="{{=URL('static','emanager')}}/js/jquery-
+
+1.2.6.min.js"></script>
     <script type="text/javascript" src="{{=URL('static','emanager')}}/js/ui.js"></script>
     {{include 'web2py_ajax.html'}}
 </head>
@@ -23,9 +31,13 @@
 <div id="wrap">
 	<div id="header">
 		<h1><a class="bg" href="#" title="Home"></a>Movish Manager</h1>
-		<p id="status">Logged is as {{=auth.user.email}}, <a href="{{=URL('user', 'logout')}}" title="Sign Out?">Sign Out?</a></p>
+		<p id="status">Logged is as {{=auth.user.email}}, <a href="{{=URL('user', 
+
+'logout')}}" title="Sign Out?">Sign Out?</a></p>
 		<h2><span>Hello, this is the Dashboard!</span></h2>
-		<p id="description">The movish dashboard is the main panel to monitor user activity in movish webapp</p>
+		<p id="description">The movish dashboard is the main panel to monitor user activity 
+
+in movish webapp</p>
 	</div>
 	<div class="flash">{{=response.flash or ''}}</div>
     <div id="sidebar">
@@ -37,35 +49,64 @@
             <li class="subitems">
             	<a href="#"> Actions</a>
             	<ul>
-            		<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), target='content')}}</li>
-            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'get_popular_movies'), target='content')}}</li>
-            		<li>{{=A('Get coming soon movies', callback=URL('admin', 'get_popular_movies'), target='content')}}</li>
-            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 'get_popular_movies'), target='content')}}</li>
-			<li>{{=A('Remove adult movies', callback=URL('admin', 'remove_adult_movies'), target='content')}}</li>
+            		<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), 
+
+target='content')}}</li>
+            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'get_popular_movies'), 
+
+target='content')}}</li>
+            		<li>{{=A('Get coming soon movies', callback=URL('admin', 
+
+'get_popular_movies'), target='content')}}</li>
+            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 
+
+'get_popular_movies'), target='content')}}</li>
+			<li>{{=A('Remove adult movies', callback=URL('admin', 
+
+'remove_adult_movies'), target='content')}}</li>
             	</ul>
             </li>
 			<li class="subitems">
 				<a href="#" title="Algorithms">Algorithms</a>
 				<ul>
 					{{for alg in algorithms:}}
-					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
+					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', 
+
+args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
 			</li>
+
+
+			<li>
+                          {{=A('Upload', _title="Upload", callback=URL('admin', 'upload'), 
+
+target='content')}}
+                </li>
+
+
  			<li>
- 				{{=A('Matrices', _title="Matrices", target='content', callback=URL('matrices'))}}
+ 				{{=A('Matrices', _title="Matrices", target='content', callback=URL
+
+('matrices'))}}
 			<!-- 	<ul>
                     <li><a href="#" title="Edit Matches">Edit Matches</a></li>
 				</ul> -->
 			</li>
 			<li>
-				{{=A('Surveys', callback=URL('admin', 'surveys'), target='content')}}
+				{{=A('Surveys', _title="Surveys", callback=URL('admin', 'surveys'), 
+
+target='content')}}
 				<ul>
-					<li>{{=A('Create new survey', callback=URL('admin', 'create_survey'), target='content')}}</li>
+					<li>{{=A('Create new survey', callback=URL('admin', 
+
+'create_survey'), target='content')}}</li>
 				</ul>
 			</li>
                         <li>
-                          {{=A('Bisect', callback=URL('admin', 'bisect'), target='content')}}
+                          {{=A('Bisect', _title="Bisect", callback=URL('admin', 'bisect'), 
+
+target='content')}}
                         </li>
 		<!-- 	<li class="subitems">
 				<a href="#" title="Survey">Matrices</a>
@@ -78,7 +119,9 @@
 				<a href="#" title="Users">Donation Info</a>
 				<ul>
 					<li><a href="#" title="Admin Users">Monthly Goals</a></li>
-					<li><a href="#" title="Add New User">Monthly Donations</a></li>
+					<li><a href="#" title="Add New User">Monthly 
+
+Donations</a></li>
 
 				</ul>
 			</li>
@@ -88,7 +131,9 @@
 					<li><a href="#" title="Admin Users">Member List</a></li>
 					<li><a href="#" title="Add New User">Mass Message</a></li>
 					<li><a href="#" title="Add New User">Edit Members</a></li>
-					<li><a href="#" title="Add New User">Edit Permissions</a></li>
+					<li><a href="#" title="Add New User">Edit 
+
+Permissions</a></li>
 					<li><a href="#" title="Add New User">Edit Ranks</a></li>
 				</ul>
 			</li> -->
