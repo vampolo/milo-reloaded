@@ -11,7 +11,7 @@
 			{{highlight=True}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td class="name" >
-					<input type="text" name="textline" style="width:130px; margin:5px">
+					<input type="text" name="textline" style="width:150px; margin:5px">
 				</td>
 				<td class="menu" >
 					<SELECT NAME=" alg_type " style="margin:5px; width:130px;">
@@ -22,10 +22,18 @@
 					</SELECT>
 				</td>
 				<td class="browse" >
-					<input type="file" value="Browse" name="datafile" size="4" style="width:40px; height: 30px; margin:5px; display:none">
+					<input type="file" value="Browse" name="datafile" size="4" style="width:40px; height: 30px; margin:5px">
 				</td>
 				<td class="browse" >
-					<input type="file" value="bane" name="datafile" size="4" style="width:40px; height: 30px; margin:5px">
+    <!-- Real Input field, but hidden-->
+    <input type="file" name="myFile" style="display:none;">
+
+    <!-- Fake field to fool the user -->
+    <input type="text" name="txtFakeText" readonly="true">
+
+    <!-- Button to invoke the click of the File Input -->
+    <input type="button" onclick="HandleFileButtonClick();" 
+         value="Upload File" style="background: red;">
 				</td>
 			</tr>
 			<br>
