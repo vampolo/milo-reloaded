@@ -33,6 +33,14 @@ def matrices():
 def upload():
     upload = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(upload=upload)
+    
+def rules_en():
+    rules_en = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(rules_en=rules_en)
+    
+def rules_it():
+    rules_it = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(rules_it=rules_it)
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
