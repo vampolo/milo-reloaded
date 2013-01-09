@@ -7,7 +7,6 @@
 				<th class="col2">Creating-model function</th>
 				<th class="col3">Recommender function</th>
 				<th class="col4">Good Form Test</th>
-				<th class="col5">Upload</th>
 			</tr>
 			{{highlight=True}}
 			<tr class="{{='highlight' if highlight else ''}}">
@@ -23,9 +22,6 @@
 				<td class="test">
 					<input type="submit" value="Run Test">
 				</td>
-				<td class="upload">
-					<input type="submit" value="Submit">
-				</td>
 			</tr>
 			<br>
 			
@@ -37,6 +33,9 @@
 	{{=A(SPAN('Read good form rules (English)'), _class="button", _style="margin:40px", callback=URL('admin', 'rules_en'), target="content")}}
 	{{=A(SPAN('Regole di buona forma (Italiano)'), _class="button", _style="margin:40px", callback=URL('admin', 'rules_it'), target="content")}}
 	</div>
+	<td class="upload">
+		<input type="submit" value="Submit">
+	</td>
 </div>
 <br>
 <div id="message">
