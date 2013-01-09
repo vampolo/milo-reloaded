@@ -29,6 +29,10 @@ def update_algorithm():
 def matrices():
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(matrices=matrices)
+    
+def upload():
+    upload = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(upload=upload)
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
