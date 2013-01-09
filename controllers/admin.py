@@ -41,6 +41,10 @@ def rules_en():
 def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
+    
+def upload_submit():
+    upload_submit = matlab_wrapper.Whisperer.get_matrices_info()
+    return 0
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
