@@ -43,7 +43,8 @@ def rules_it():
     return dict(rules_it=rules_it)
     
 def upload_submit():
-    return 0
+    newalg = 0;
+    return newalg
 
 def gf_test():
     return 0
