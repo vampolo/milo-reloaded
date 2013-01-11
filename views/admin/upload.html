@@ -12,6 +12,7 @@
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td class="name">
 					<input type="text" name="alg_name" style="width:130px; margin:5px;" required="">
+					<INPUT TYPE="Button" Value="Show" onClick="showAndClearField(this.td)">
 				</td>
 				<td class="menu" >
 					<SELECT NAME=" alg_type " style="width:120px; margin:5px;" required="">
@@ -40,7 +41,7 @@
 			}
 			//-->
 			</SCRIPT>
-			<INPUT TYPE="Button" Value="Show and Clear Input" onClick="showAndClearField(this.form)">
+
 			
 			<br>
 			{{highlight = not highlight}}
