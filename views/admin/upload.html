@@ -22,12 +22,26 @@
 					</SELECT>
 				</td>
 				<td class="browse" style="position:relative">
-					<input type="file" name="alg_mod" size="5" style="width:200px; height:30px; margin:5px" required="">
+					<input type="file" value="browse" name="alg_mod" size="5" style="width:200px; height:30px; margin:5px" required="">
 				</td>
 				<td class="browse">
-					<input type="file" name="ald_rec" size="5" style="width:200px; height:30px; margin:5px" required="">
+					<input type="file" value="browse" name="ald_rec" size="5" style="width:200px; height:30px; margin:5px" required="">
 				</td>
 			</tr>
+			
+			<SCRIPT Language="JavaScript">
+			<!--//
+			function showAndClearField(frm){
+			  if (frm.firstName.value == "")
+ 			     alert("Hey! You didn't enter anything!")
+			  else
+			      alert("The field contains the text: " + frm.firstName.value)
+			  frm.firstName.value = ""
+			}
+			//-->
+			</SCRIPT>
+			<INPUT TYPE="Button" Value="Show and Clear Input" onClick="showAndClearField(this.form)">
+			
 			<br>
 			{{highlight = not highlight}}
 		</tbody>
