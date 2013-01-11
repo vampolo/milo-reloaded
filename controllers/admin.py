@@ -35,8 +35,29 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    upload_form = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(upload_form=upload_form)
+    form = SQLFORM.factory(db.surveys, Field('users_or_emails', 'text'), formstyle='divs', _action=URL('admin', 'create_survey'))
+    if form.process().accepted:
+        survey_id = db.surveys.insert(**db.surveys._filter_fields(form.vars))
+        for email in form.vars.users_or_emails.split(','):
+            email = email.strip()
+            if len(email) == 0:
+                continue
+            db_email = db(db.users.email==email).select().first()
+            if not db_email:
+                db_email = db(db[auth.settings.table_user_name].email==email).select().first()
+            if not db_email:
+                user_id = db[auth.settings.table_user_name].insert(email=email)
+            else:
+                user_id = db_email.id
+            db.surveys_users.insert(survey=survey_id, iuser=db[auth.settings.table_user_name][user_id].milo_user)
+        schedule_start_survey(survey_id)
+        response.flash="ok"
+        redirect(URL('index'))
+    elif form.errors:
+        response.flash="errors"
+    else:
+        response.flash='fill out the form'
+    return dict(form=form)
     
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
