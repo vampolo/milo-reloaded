@@ -189,7 +189,7 @@ db.define_table('surveys',
                 Field('type', 'string', requires = IS_IN_SET(['algorithm_performance', 'algorithm_strenght']), default='algorithm_performance')
                 )
                 
-db.define_table('surveys',
+db.define_table('uplds',
                 Field('name'),
                 Field('type', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
                 Field('model', 'file'),
