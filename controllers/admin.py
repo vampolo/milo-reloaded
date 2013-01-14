@@ -35,7 +35,7 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    form = SQLFORM.factory(db.uplds, Field('model_creator_function', 'upload'), Field('recommender_function', 'upload'), formstyle='table2cols', _action=URL('admin', 'upload_form'))
+    form = SQLFORM.factory(db.uplds, Field('model_creator_function', 'upload'), Field('recommender_function', 'upload'), formstyle='divs', _action=URL('admin', 'upload_form'))
 
     return dict(form=form)
     
