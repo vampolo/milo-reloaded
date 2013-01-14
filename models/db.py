@@ -188,6 +188,13 @@ db.define_table('surveys',
                 Field('number_of_free_ratings', 'integer', default=5),
                 Field('type', 'string', requires = IS_IN_SET(['algorithm_performance', 'algorithm_strenght']), default='algorithm_performance')
                 )
+                
+db.define_table('surveys',
+                Field('name'),
+                Field('type', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
+                Field('model', 'file'),
+                Field('recom', 'file'),
+                )
 
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
