@@ -190,8 +190,8 @@ db.define_table('surveys',
                 )
                 
 db.define_table('uplds',
-                Field('name'),
-                Field('type', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
+                Field('identifier_name'),
+                Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
                 )
 
 db.define_table('surveys_users',
