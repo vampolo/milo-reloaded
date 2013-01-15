@@ -35,11 +35,12 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    form = SQLFORM.factory(db.uplds, Field('model_creator_function', 'upload'), Field('recommender_function', 'upload'), formstyle='divs', _action=URL('admin', 'upload_form'), table_name='up_table')
+    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'), table_name='up_table')
     if form.process().accepted:
         #uplds_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        schedule_start_uplds(uplds_id)
+        #schedule_start_uplds(uplds_id)
         response.flash="ok"
+        store()
         redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
