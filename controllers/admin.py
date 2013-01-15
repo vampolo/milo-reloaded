@@ -52,6 +52,10 @@ def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
 
+#def gf_test():
+#    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
+#    return dict(gf_test=gf_test)
+
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
     matrice = request.args(0)
