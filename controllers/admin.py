@@ -35,7 +35,7 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    form = SQLFORM.factory(db.uplds, Field('model_creator_function', 'upload'), Field('recommender_function', 'upload'), formstyle='divs', _action=URL('admin', 'upload_form'), table_name='up_table', uploadfolder=os.path.join(request.folder,'/modules/algorithms/recsys_matlab_codes/algorithms/'))
+    form = SQLFORM.factory(db.uplds, Field('model_creator_function', 'upload'), Field('recommender_function', 'upload'), formstyle='divs', _action=URL('admin', 'upload_form'), table_name='up_table', uploadfolder=os.path.join(request.folder,'/'))
     if form.process().accepted:
         uplds_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         schedule_start_uplds(uplds_id)
