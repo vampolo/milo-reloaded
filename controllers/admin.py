@@ -51,13 +51,6 @@ def rules_en():
 def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
-    
-def upload_submit():
-    newalg = 0;
-    return newalg
-
-def gf_test():
-    return 0
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
