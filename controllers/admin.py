@@ -35,7 +35,7 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    form = SQLFORM.factory(db.uplds, _action=URL('admin', 'upload_form'))
+    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
         response.flash='form accepted'
     elif form.errors:
