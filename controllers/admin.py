@@ -87,7 +87,6 @@ def surveys():
 
 def create_survey():
     form = SQLFORM.factory(db.surveys,
-        db.quest,
         Field('users_or_emails', 'text'),
         formstyle='divs',
         _action=URL('admin', 'create_survey')
