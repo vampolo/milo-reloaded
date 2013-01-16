@@ -196,14 +196,6 @@ db.define_table('uplds',
                 Field('recommender_function', 'upload', uploadfolder='/modules/algorithms/recsys_matlab_codes/algorithms/')
                 )
 
-db.define_table('questions',
-                Field('1st_question','text'),
-                Field('2nd_question','text'),
-                Field('3rd_question','text'),
-                Field('4th_question','text'),
-                Field('5th_question','text')
-                )
-
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
                 Field('iuser', db.users, requires=IS_IN_DB(db, 'users.id', db.users._format)),
