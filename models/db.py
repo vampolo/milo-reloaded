@@ -184,7 +184,7 @@ db.define_table('surveys',
                 Field('name'),
                 Field('algorithm', requires=IS_IN_SET(Whisperer.get_algnames())),
                 Field('number_of_ratings', 'integer'),
-                Field('scale', 'integer', requires=IS_IN_SET([1, 5]), default=5),
+                Field('scale', 'integer', requires=IS_IN_SET([1, 5, 10, 20]), default=5),
                 Field('number_of_free_ratings', 'integer', default=5),
                 Field('type', 'string', requires = IS_IN_SET(['algorithm_performance', 'algorithm_strenght']), default='algorithm_performance')
                 )
