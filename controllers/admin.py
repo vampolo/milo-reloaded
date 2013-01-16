@@ -37,7 +37,7 @@ def upload():
 def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
-        upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
+        #upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         response.flash='form accepted'
         redirect(URL('index'))
     elif form.errors:
@@ -86,11 +86,7 @@ def surveys():
     return dict(surveys=surveys)
 
 def create_survey():
-    form = SQLFORM.factory(db.surveys,
-        Field('users_or_emails', 'text'),
-        formstyle='divs',
-        _action=URL('admin', 'create_survey')
-    )
+    form = SQLFORM.factory(db.surveys,Field('users_or_emails', 'text'),formstyle='divs',action=URL('admin', 'create_survey'))
     if form.process().accepted:
         survey_id = db.surveys.insert(**db.surveys._filter_fields(form.vars))
         for email in form.vars.users_or_emails.split(','):
