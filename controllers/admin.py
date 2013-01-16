@@ -86,7 +86,12 @@ def surveys():
     return dict(surveys=surveys)
 
 def create_survey():
-    form = SQLFORM.factory(db.surveys, Field('users_or_emails', 'text'), formstyle='divs', _action=URL('admin', 'create_survey'))
+    form = SQLFORM.factory(db.surveys,
+        db.quest,
+        Field('users_or_emails', 'text'),
+        formstyle='divs',
+        _action=URL('admin', 'create_survey')
+    )
     if form.process().accepted:
         survey_id = db.surveys.insert(**db.surveys._filter_fields(form.vars))
         for email in form.vars.users_or_emails.split(','):
