@@ -196,7 +196,7 @@ db.define_table('uplds',
                 Field('recommender_function', 'upload', uploadfolder='/modules/algorithms/recsys_matlab_codes/algorithms/')
                 )
 
-db.define_table('quest',
+db.define_table('questions',
                 Field('1st_question','text'),
                 Field('2nd_question','text'),
                 Field('3rd_question','text'),
