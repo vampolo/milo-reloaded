@@ -1,0 +1,113 @@
+{{left_sidebar_enabled,right_sidebar_enabled=False,False}}
+{{
+response.files.append(URL('static', 'imageflow/imageflow.css'))
+response.files.append(URL('static', 'imageflow/imageflow.js'))
+response.files.append(URL('static', 'js/jquery.masonry.min.js'))
+}}
+
+{{extend 'layout2.html'}}
+
+{{if not session.survey:}}
+{{block statusbar}}
+    <div class="breadcrumbs"><a href="{{=URL('default', 'index', args=request.args, vars=request.vars)}}">Home</a></div>
+{{end}}
+{{pass}}
+
+{{block center}}
+    {{if session.survey:}}
+    <div class="sixteen columns center alpha omega" style="margin-bottom:20px">
+      <center>You have to rate <strong>{{=survey.number_of_free_ratings}}</strong> movies now. You can use the search box to look for movies or you can surf by genres just clicking in a genre of a movie.<br/>
+  When you complete all the ratings the system will ask the next questions.<br/>
+	<strong>Still {{=survey.number_of_free_ratings-n_ratings}} to go</strong>
+	<form method="POST">
+	  <input type="hidden" name="free_rating" value="end"/>
+	  <input type="submit" value="Refresh"/>
+	</form>
+</center>
+    </div>
+    {{pass}}
+	<div id="myImageFlow" class="imageflow">
+		{{for movie in slider_movies:}}
+			<img src="{{=URL('static', movie.poster)}}" alt="{{=movie.title}}" longdesc="{{=URL('movie', 'show', args=[movie.id])}}" />
+		{{pass}}
+	</div>
+	<div id="search">
+			<form action="{{=URL('index', r=request, args=request.args, vars=request.vars)}}">
+				<input type="text" name="s"/ 
+				       value="{{=request.vars.get('s', '')}}">
+				<input type="submit" value="Search" />
+				<div class="centered" style="width:350px;">
+				  <left>
+				    <input type="radio" name="ord" value="latest" {{if request.vars.get('ord', 'latest') == 'latest':}}checked{{pass}}>Latest<br/>
+				  </left>
+				  <right>
+				    <input type="radio" name="ord" value="popular" {{if request.vars.get('ord') == 'popular':}}checked{{pass}}>Popular<br/>
+				  </right>
+				</div>
+			</form>	
+			
+	</div>
+{{end}}
+<section id="masonry-content" class="centered">
+	{{for movie in list_movies:}}
+	<div class="masonry-item">
+		<a href="{{=URL('movie', 'show', args=[movie.get('id')])}}"><img src="{{=URL('static', movie.get('poster'))}}" width="120" height="180"/></a>
+		<div class="movie-info">
+			<div class="movie-title">{{=movie.get('title')}} ({{=movie.get('year')}})</div>
+			{{if not movie.get('year') or movie.poster.startswith('images/unknown'):
+			      schedule_movie(movie.get('id'), reviews=True)
+			  pass
+			}}
+			<div class="genre">
+				<span class="bold">Genre:</span>
+				{{for rel in movie.get('movies_genres').select(cache=(cache.disk, 3600)):}}
+				{{=A(rel.genre.name, _href=URL('index', vars=dict(request.vars, **{'genres':(rel.genre.id,)})))}}
+				{{pass}}
+			</div>
+			<div class="ratings">
+			{{if auth.is_logged_in():}}
+			{{=LOAD('rating', 'index.load', args=[movie.id], ajax_trap=True)}}
+			{{pass}}
+			<span class="bold">Ratings:</span>
+				{{=movie.ratings.count()}}
+			</div>
+		</div>
+		<div class="comments">
+			
+		</div>
+	</div>
+	{{pass}}
+	
+</section>
+<script type="text/javascript">
+$(function() {
+
+	var $container = $('#masonry-content');
+	$container.imagesLoaded(function(){
+	  $container.masonry({
+	    itemSelector : '.masonry-item',
+	   	columnWidth: 250,
+	    isAnimated: true,
+	    isFitWidth: true,
+	  });
+	});
+	
+});
+</script>
+<div class="container"> 
+<div class="sixteen columns center">
+<center>
+{{block prefooter}}
+  {{if page != 0:}}
+  {{=A('Previous', _href=URL(args=[page-1], vars=request.vars))}}
+  {{pass}}
+  {{if items_per_page*page < max_items:}}
+  {{=A('Next', _href=URL(args=[page+1], vars=request.vars))}}
+  {{pass}}
+{{end}}
+</center>			     
+</div>
+</div>
+{{block right_sidebar}}
+
+{{end}}
