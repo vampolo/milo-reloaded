@@ -43,8 +43,8 @@ def upload_form():
     if form.errors:
         response.flash="errors"
     else:
-        response.flash='form accepted'
-        redirect(URL('index'))
+        response.flash="form accepted"
+        ##redirect(URL('index'))
     return dict(form=form)
     
 def rules_en():
