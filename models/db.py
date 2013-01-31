@@ -191,8 +191,8 @@ db.define_table('surveys',
                 
 db.define_table('uplds',
                 Field('algorithm_identifier_name'),
-                Field('model_creator_function', 'upload' ,uploadfolder='/home'),
-                Field('recommender_function', 'upload',uploadfolder='/home'),
+                Field('model_creator_function', 'upload' ,uploadfolder='/modules', permission='777'),
+                Field('recommender_function', 'upload',uploadfolder='/modules', permission='777'),
                 Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
                 )
 
