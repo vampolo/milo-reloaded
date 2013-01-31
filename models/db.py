@@ -201,13 +201,13 @@ db.define_table('surveys_users',
                 Field('iuser', db.users, requires=IS_IN_DB(db, 'users.id', db.users._format)),
                 )
 
-#db.define_table('quests',
-                #Field('1st_question', 'text'),
-                #Field('2nd_question', 'text'),
-                #Field('3rd_question', 'text'),
-                #Field('4th_question', 'text'),
-                #Field('5th_question', 'text')
-                #)
+##db.define_table('quests',
+                ##Field('1st_question', 'text'),
+                ##Field('2nd_question', 'text'),
+                ##Field('3rd_question', 'text'),
+                ##Field('4th_question', 'text'),
+                ##Field('5th_question', 'text')
+                ##)
 
 db.define_table('questions',
                 Field('text', 'text')
