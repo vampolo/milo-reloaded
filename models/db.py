@@ -191,8 +191,8 @@ db.define_table('surveys',
                 
 db.define_table('uplds',
                 Field('algorithm_identifier_name'),
-                Field('model_creator_function', 'upload' ,uploadfolder='/modules/algorithms/recsys_matlab_codes/algorithms'),
-                Field('recommender_function', 'upload',uploadfolder='/modules/algorithms/recsys_matlab_codes/algorithms'),
+                Field('model_creator_function', 'upload' ,uploadfolder='/modules'), ##/algorithms/recsys_matlab_codes/algorithms'),
+                Field('recommender_function', 'upload',uploadfolder='/modules'), ##/algorithms/recsys_matlab_codes/algorithms'),
                 Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
                 )
 
