@@ -190,11 +190,14 @@ db.define_table('surveys',
                 )
                 
 db.define_table('uplds',
-                Field('algorithm_identifier_name'),
-                Field('model_creator_function', 'upload' ,uploadfolder='modules/algorithms/recsys_matlab_codes/algorithms'),
-                Field('recommender_function', 'upload',uploadfolder='modules/algorithms/recsys_matlab_codes/algorithms'),
+                Field('algorithm_identifier_name', requires=IS_NOT_EMPTY()),
+                Field('model_creator_function', 'upload' ,uploadfolder='modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='mat')),
+                Field('recommender_function', 'upload',uploadfolder='modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='mat')),
                 Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative', 'content-based','not-personalized']), default='collaborative')
                 )
+                
+db.uplds.algorithm_identifier_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_identifier_name')
+
 
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
