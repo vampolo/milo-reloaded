@@ -37,7 +37,7 @@ def upload():
 def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
-        ##upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
+        upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         ##change filenames
         ##change direcotry due to alg_type
         response.flash='form accepted'
