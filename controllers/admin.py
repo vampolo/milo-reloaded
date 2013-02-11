@@ -1,7 +1,6 @@
 import matlab_wrapper
 import cStringIO
 import csv
-import ctypes
 
 @auth.requires_membership('admin')
 def index():
@@ -39,11 +38,10 @@ def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
         
-        MessageBox = ctypes.windll.user32.MessageBoxA
-        MessageBox(None, 'Hello', 'Window title', 0)
         #change filenames
         request.vars.model_creator_function.filename = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         request.vars.recommender_function.filename = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        print 'ciao'
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         #change direcotry due to alg_type
         response.flash='form accepted'
