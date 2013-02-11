@@ -37,10 +37,10 @@ def upload():
 def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
-        upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         ##change filenames
-        ##request.vars.model_creator_function.filename = "createModel_" + form.vars.algorithm_identifier_name
-        ##request.vars.recommender_function.filename = "onLineRecom_" + form.vars.algorithm_identifier_name
+        request.vars.model_creator_function.filename = "createModel_" + form.vars.algorithm_identifier_name
+        request.vars.recommender_function.filename = "onLineRecom_" + form.vars.algorithm_identifier_name
+        upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         ##change direcotry due to alg_type
         response.flash='form accepted'
         redirect(URL('index'))
