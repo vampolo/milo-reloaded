@@ -40,10 +40,10 @@ def upload_form():
         
         #change filenames
         form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
-        request.vars.recommender_function.filename = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
-        print "Uploaded new algorithm: " + form.vars.algorithm_identifier_name
+        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        print "\n\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
-        print 'Recommender function: ' + request.vars.recommender_function.filename
+        print 'Recommender function: ' + form.vars.recommender_function
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         print form.vars
         #change direcotry due to alg_type
