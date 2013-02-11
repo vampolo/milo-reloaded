@@ -45,7 +45,7 @@ def upload_form():
         print 'Model function: ' + request.vars.model_creator_function.filename
         print 'Recommender function: ' + request.vars.recommender_function.filename
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        print 'bisfosfoglicerato' + form.vars
+        print 'bisfosfoglicerato' + upload_id
         #change direcotry due to alg_type
         response.flash='form accepted'
         redirect(URL('index'))
