@@ -91,7 +91,6 @@ use_janrain(auth,filename='private/janrain.key')
 #########################################################################
 
 import imdb
-import ctypes
 
 #imdb_connection_str = 'postgres://imdb:imdbsecret@localhost/imdb'
 #
