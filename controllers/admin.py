@@ -41,7 +41,7 @@ def upload_form():
         #change filenames
         request.vars.model_creator_function.filename = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         request.vars.recommender_function.filename = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
-        print 'ciao'
+        print request.vars.recommender_function.filename
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         #change direcotry due to alg_type
         response.flash='form accepted'
