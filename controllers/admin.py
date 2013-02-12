@@ -36,7 +36,7 @@ def upload():
 
 def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
-    if form.process().accepted:
+    if form.validate():
         
         #change filenames
         #form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
@@ -44,7 +44,7 @@ def upload_form():
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
-        upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
+        form.vars.id = db.uplds.insert(**dict(form.vars))
         print form.vars
         print "\n"
         
@@ -54,7 +54,7 @@ def upload_form():
         print enlist
         
         #change direcotry due to alg_type
-        response.flash='form accepted'
+        response.flash='record inserted'
         redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
