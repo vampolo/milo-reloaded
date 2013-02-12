@@ -39,8 +39,8 @@ def upload_form():
     if form.validate():
         
         #change filenames
-        #form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
-        #form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
+        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
