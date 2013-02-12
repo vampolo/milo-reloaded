@@ -198,14 +198,6 @@ db.define_table('uplds',
                 
 db.uplds.algorithm_identifier_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_identifier_name')
 
-#for x in db(db.uplds).select(db.uplds.ALL):
-#    x.delete_record()
-#    db.commit()
-
-#run only once
-
-
-
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
                 Field('iuser', db.users, requires=IS_IN_DB(db, 'users.id', db.users._format)),
