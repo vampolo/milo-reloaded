@@ -50,7 +50,7 @@ def upload_form():
         
         #query
         
-        del db.uplds[request.args[0]]
+        del db.uplds.select()
         enlist = db(db.uplds).select()
         print enlist
         response.view = 'admin/surveys.html'
