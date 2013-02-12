@@ -55,8 +55,7 @@ def upload_form():
         
         #change direcotry due to alg_type
         response.flash='record inserted'
-        response.view = 'admin/success.html'
-        #redirect(URL('index'))
+        redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
     else:
