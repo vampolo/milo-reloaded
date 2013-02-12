@@ -52,7 +52,6 @@ def upload_form():
         
         enlist = db(db.uplds).select()
         print enlist
-        response.view = 'admin/surveys.html'
         
         #change direcotry due to alg_type
         response.flash='form accepted'
