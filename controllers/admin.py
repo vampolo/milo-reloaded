@@ -35,8 +35,7 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    record = db.uplds(request.args(0)) or redirect(URL('index'))
-    form = SQLFORM.factory(db.uplds, record, deletable=True, upload=URL('download'), formstyle='divs', _action=URL('admin', 'upload_form'))
+    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
         
         #change filenames
@@ -62,9 +61,6 @@ def upload_form():
     else:
         response.flash='fill out the form'
     return dict(form=form)
-
-def download():
-    return response.download(request, db)
 
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
