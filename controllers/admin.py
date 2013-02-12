@@ -47,6 +47,12 @@ def upload_form():
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
         print form.vars
         print "\n"
+        
+        #query
+        enlist = db(db.uplds).select()
+        print enlist
+        
+        
         #change direcotry due to alg_type
         response.flash='form accepted'
         redirect(URL('index'))
