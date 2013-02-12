@@ -49,13 +49,15 @@ def upload_form():
         print "\n"
         
         #query
+        
+        del db.uplds[request.args[0]]
         enlist = db(db.uplds).select()
         print enlist
         response.view = 'admin/surveys.html'
         
         #change direcotry due to alg_type
         response.flash='form accepted'
-        redirect(URL('index'))
+        #redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
     else:
