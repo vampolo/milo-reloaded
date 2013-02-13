@@ -44,7 +44,7 @@ def upload_form():
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
-        db.uplds.insert(**db.uplds.form.vars)
+        db.uplds.insert(**db.uplds._filter_fields(form.vars))
         #print form.vars
         print "\n"
         
