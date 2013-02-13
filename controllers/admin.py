@@ -50,6 +50,7 @@ def upload_form():
         
         
         #query
+        del db(db.uplds).select()
         enlist = db(db.uplds).select()
         print enlist
         
