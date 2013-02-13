@@ -45,16 +45,17 @@ def upload_form():
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
         upload_id = db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        print form.vars
+        #print form.vars
         print "\n"
         
-        
-        
+        stream = open(form.vars.model_creator_function, 'rb')
+        db.uplds.insert(model_creator_function=db.uplds.model_creator_function.store(stream, form.vars.model_creator_function),
+        blobber=stream.read())
         
         
         #query
-        #enlist = db(db.uplds).select()
-        #print enlist
+        enlist = db(db.uplds).select()
+        print enlist
         
         #change direcotry due to alg_type
         response.flash='record inserted'
