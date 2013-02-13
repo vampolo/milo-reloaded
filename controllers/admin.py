@@ -48,10 +48,13 @@ def upload_form():
         print form.vars
         print "\n"
         
-        #query
         
-        enlist = db(db.uplds).select()
-        print enlist
+        
+        
+        
+        #query
+        #enlist = db(db.uplds).select()
+        #print enlist
         
         #change direcotry due to alg_type
         response.flash='record inserted'
