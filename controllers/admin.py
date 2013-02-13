@@ -48,10 +48,6 @@ def upload_form():
         #print form.vars
         print "\n"
         
-        stream = open(form.vars.model_creator_function, 'rb')
-        db.uplds.insert(model_creator_function=db.uplds.model_creator_function.store(stream, form.vars.model_creator_function),
-        blobber=stream.read())
-        
         
         #query
         enlist = db(db.uplds).select()
