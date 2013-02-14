@@ -39,15 +39,11 @@ def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
         
-        #change filenames
-        mc_name = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
-        olr_name = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
-        
+        #function renames
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.recommender_function
         rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
-        
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
