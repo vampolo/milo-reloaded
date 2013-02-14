@@ -43,10 +43,11 @@ def upload_form():
         mc_name = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         olr_name = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
         
-        form.vars.model_creator_function = mc_name
-        form.vars.recommender_function = olr_name
+        mc_name = form.vars.model_creator_function
+        olr_name = form.vars.recommender_function
         
         print mc_name
+        print olr_name
         
         #os.rename('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test.py','applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test2.py')
         #os.rename('test',olr_name)
