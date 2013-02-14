@@ -65,9 +65,14 @@ def upload_form():
         
         
         #change direcotry due to alg_type
-        if (form.vars.algorithm_family == 'content-based'):
-            print hello
-        
+        if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
+            print 'case1'
+        elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
+            print 'case2'
+        elif (form.vars.algorithm_family == 'content-based'):
+            print 'case3'
+        else:
+            print 'case4'
         
         
         response.flash='record inserted'
