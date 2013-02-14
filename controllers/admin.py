@@ -39,7 +39,7 @@ def upload_form():
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
     if form.process().accepted:
         
-        #function renames
+        #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.recommender_function
@@ -47,18 +47,27 @@ def upload_form():
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
+        #function renames in database
+        form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
+        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        
         #control insertion
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
-        print 'Model function: ' + "createModel_" + form.vars.algorithm_identifier_name + ".mat"
-        print 'Recommender function: ' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        print 'Model function: ' + form.vars.model_creator_function
+        print 'Recommender function: ' + form.vars.recommender_function
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
         print "\n"
                 
-        #query
-        enlist = db(db.uplds).select()
-        print enlist
+        #print whole upload list
+        #enlist = db(db.uplds).select()
+        #print enlist
+        
         
         #change direcotry due to alg_type
+        
+        
+        
+        
         response.flash='record inserted'
         redirect(URL('index'))
     elif form.errors:
