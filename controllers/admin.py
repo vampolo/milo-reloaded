@@ -65,7 +65,8 @@ def upload_form():
         
         
         #change direcotry due to alg_type
-        
+        if (form.vars.algorithm_family == 'content-based'):
+            print hello
         
         
         
