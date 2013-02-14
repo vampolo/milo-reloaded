@@ -45,7 +45,7 @@ def upload_form():
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        #print form.vars
+        print form.vars
         print "\n"
         
         
