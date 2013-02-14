@@ -2,6 +2,7 @@ import matlab_wrapper
 import cStringIO
 import csv
 import os
+import shutil
 
 @auth.requires_membership('admin')
 def index():
@@ -67,12 +68,19 @@ def upload_form():
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name)
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
+        
         elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/neighborhoodBased/' + form.vars.algorithm_identifier_name)
+        
         elif (form.vars.algorithm_family == 'content-based'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name)
+        
         elif (form.vars.algorithm_family == 'non-personalized'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name)
+        
         else:
             print 'error. algorithm family is not valid'
         
