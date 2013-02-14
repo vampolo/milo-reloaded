@@ -66,15 +66,15 @@ def upload_form():
         
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
-            print 'case1'
+            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name)
         elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
-            print 'case2'
+            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/neighborhoodBased/' + form.vars.algorithm_identifier_name)
         elif (form.vars.algorithm_family == 'content-based'):
-            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/testdir')
-            print 'case3'
+            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name)
+        elif (form.vars.algorithm_family == 'non-personalized'):
+            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name)
         else:
-            print 'case4'
-        
+            print 'error. algorithm family is not valid'
         
         response.flash='record inserted'
         redirect(URL('index'))
