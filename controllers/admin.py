@@ -46,7 +46,9 @@ def upload_form():
         form.vars.model_creator_function = mc_name
         form.vars.recommender_function = olr_name
         
-        os.rename('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test.py','applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test2.py')
+        print mc_name
+        
+        #os.rename('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test.py','applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test2.py')
         #os.rename('test',olr_name)
         
         #control insertion
