@@ -1,6 +1,7 @@
 import matlab_wrapper
 import cStringIO
 import csv
+import os
 
 @auth.requires_membership('admin')
 def index():
@@ -47,6 +48,8 @@ def upload_form():
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
+        
+        os.rename('test','test2')
         
         #print variable
         #print form.vars
