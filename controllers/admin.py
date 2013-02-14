@@ -70,6 +70,7 @@ def upload_form():
         elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
             print 'case2'
         elif (form.vars.algorithm_family == 'content-based'):
+            os.makedir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based' + form.vars.algorithm_identifier_name)
             print 'case3'
         else:
             print 'case4'
