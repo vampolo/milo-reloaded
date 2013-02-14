@@ -55,12 +55,13 @@ def upload_form():
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
+        print 'Algorithm family: ' + form.vars.algorithm_family
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
         print "\n"
                 
-        #print whole upload list
+        #whole upload list
         enlist = db(db.uplds).select()
-        print enlist
+        #print enlist
         
         
         #change direcotry due to alg_type
