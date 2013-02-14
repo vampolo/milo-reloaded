@@ -46,7 +46,7 @@ def upload_form():
         form.vars.model_creator_function = mc_name
         form.vars.recommender_function = olr_name
         
-        os.rename('test',mc_name)
+        os.rename('test2',mc_name)
         #os.rename('test',olr_name)
         
         #control insertion
