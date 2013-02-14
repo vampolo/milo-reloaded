@@ -41,17 +41,20 @@ def upload_form():
         #change filenames
         form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        
+        #control insertion
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        print form.vars
+        
+        #print variable
+        #print form.vars
         print "\n"
-        
-        
+                
         #query
-        #enlist = db(db.uplds).select()
-        #print enlist
+        enlist = db(db.uplds).select()
+        print enlist
         
         #change direcotry due to alg_type
         response.flash='record inserted'
