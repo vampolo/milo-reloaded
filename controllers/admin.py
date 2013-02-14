@@ -43,14 +43,13 @@ def upload_form():
         mc_name = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
         olr_name = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
         
-        mc_name = form.vars.model_creator_function
-        olr_name = form.vars.recommender_function
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".mat"
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.recommender_function
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
         
-        print mc_name
-        print olr_name
-        
-        #os.rename('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test.py','applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/test2.py')
-        #os.rename('test',olr_name)
+        os.rename(rnm1a,rnm1b)
+        os.rename(rnm2a,rnm2b)
         
         #control insertion
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
