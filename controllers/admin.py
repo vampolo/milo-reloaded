@@ -42,9 +42,9 @@ def upload_form():
         
         #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
-        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".mat"
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".m"
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.recommender_function
-        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".m"
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
@@ -74,12 +74,21 @@ def upload_form():
         
         elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/neighborhoodBased/' + form.vars.algorithm_identifier_name)
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/neighborhoodBased/' + form.vars.algorithm_identifier_name
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
         
         elif (form.vars.algorithm_family == 'content-based'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name)
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
         
         elif (form.vars.algorithm_family == 'non-personalized'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name)
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
         
         else:
             print 'error. algorithm family is not valid'
