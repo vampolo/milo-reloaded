@@ -73,7 +73,7 @@ def upload_form():
             shutil.move(rnm2b, dst)
         
         elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
-            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/neighborhoodBased/' + form.vars.algorithm_identifier_name)
+            os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/neighborhoodBased/' + form.vars.algorithm_identifier_name)
             dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/neighborhoodBased/' + form.vars.algorithm_identifier_name
             shutil.move(rnm1b, dst)
             shutil.move(rnm2b, dst)
