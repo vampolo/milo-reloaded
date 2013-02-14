@@ -48,8 +48,8 @@ def upload_form():
         os.rename(rnm2a,rnm2b)
         
         #function renames in database
-        form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".mat"
-        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".mat"
+        form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".m"
+        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".m"
         
         #control insertion
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
