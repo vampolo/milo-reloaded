@@ -37,14 +37,13 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
-    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
-    
     
     #benchmark manager
     enuser = db(db.users).select()
     print enuser
     
-    
+    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
+            
     if form.process().accepted:
         
         #function renames in system
