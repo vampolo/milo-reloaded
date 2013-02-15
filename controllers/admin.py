@@ -64,6 +64,8 @@ def upload_form():
         enlist = db(db.uplds).select()
         #print enlist
         
+        enuser = db(db.users).select()
+        print enuser
         
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
