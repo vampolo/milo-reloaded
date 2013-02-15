@@ -46,26 +46,6 @@ in movish webapp</p>
             <li class="active">
             	<a href="{{=URL('index')}}" title="Dashboard">Dashboard</a>
             </li>
-            <li class="subitems">
-            	<a href="#"> Actions</a>
-            	<ul>
-            		<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), 
-
-target='content')}}</li>
-            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'get_popular_movies'), 
-
-target='content')}}</li>
-            		<li>{{=A('Get coming soon movies', callback=URL('admin', 
-
-'get_popular_movies'), target='content')}}</li>
-            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 
-
-'get_popular_movies'), target='content')}}</li>
-			<li>{{=A('Remove adult movies', callback=URL('admin', 
-
-'remove_adult_movies'), target='content')}}</li>
-            	</ul>
-            </li>
 			<li class="subitems">
 				<a href="#" title="Algorithms">Algorithms</a>
 				<ul>
@@ -80,19 +60,46 @@ target='content')}}</li>
                         	{{=A('Upload', _title="Upload", callback=URL('admin', 'upload_form'), target='content')}}
                		</li>
 
-
- 			<li>
- 				{{=A('Matrices', _title="Matrices", callback=URL('matrices'), target='content')}}
-			<!-- 	<ul>
-                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
-				</ul> -->
-			</li>
+			
 			<li>
 				{{=A('Surveys', _title="Surveys", callback=URL('admin', 'surveys'), target='content')}}
 				<ul>
 					<li>{{=A('Create new survey', callback=URL('admin', 'create_survey'), target='content')}}</li>
 				</ul>
 			</li>
+			
+ 			
+ 			<li class="subitems">
+            		<a href="#"> Actions</a>
+            			<ul>
+            			<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), 
+
+target='content')}}</li>
+            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'get_popular_movies'), 
+
+target='content')}}</li>
+            		<li>{{=A('Get coming soon movies', callback=URL('admin', 
+
+'get_popular_movies'), target='content')}}</li>
+            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 
+
+'get_popular_movies'), target='content')}}</li>
+			<li>{{=A('Remove adult movies', callback=URL('admin', 
+
+'remove_adult_movies'), target='content')}}</li>
+            			</ul>
+            		</li>
+ 			
+ 			
+ 			
+ 			<li>
+ 				{{=A('Matrices', _title="Matrices", callback=URL('matrices'), target='content')}}
+			<!-- 	<ul>
+                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
+				</ul> -->
+			</li>
+						
+            		          
                         <li>
                         	{{=A('Bisect', _title="Bisect", callback=URL('admin', 'bisect'), target='content')}}
                         </li>
