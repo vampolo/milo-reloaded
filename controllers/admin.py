@@ -38,10 +38,7 @@ def upload():
 
 def upload_form():
     
-    #benchmark manager
-    enuser = db(db.users).select()
-    print enuser
-    
+
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
@@ -70,7 +67,10 @@ def upload_form():
         enlist = db(db.uplds).select()
         #print enlist
         
-        
+        #benchmark manager
+        enuser = db(db.users).select()
+        print enuser
+    
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
             os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name)
