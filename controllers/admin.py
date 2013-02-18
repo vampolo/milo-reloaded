@@ -39,7 +39,7 @@ def upload():
 def upload_form():
     
     #query benchmark
-    van = auth.login_bare(username,password)
+    van = @db.auth.login_bare(username,password)
     print van
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
