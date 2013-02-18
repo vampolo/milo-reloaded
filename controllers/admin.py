@@ -39,7 +39,6 @@ def upload():
 def upload_form():
     
     #query benchmark
-    print db.auth_user.first_name
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
