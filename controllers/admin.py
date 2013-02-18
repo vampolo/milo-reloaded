@@ -38,10 +38,9 @@ def upload():
 
 def upload_form():
     
-    #benchmark manager
-    enuser = db(db.users).select()
-    print enuser
-        
+    #query benchmark
+    db.auth_user.username
+    
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
