@@ -53,13 +53,11 @@ def upload():
 def upload_form():
     
     #query benchmark
+    print auth.membership
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
-        
-        #benchmark
-        print auth.membership
         
         #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
