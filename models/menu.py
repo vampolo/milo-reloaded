@@ -24,9 +24,9 @@ response.google_analytics_id = None
 response.menu = [
     (T('Home'), False, URL('default','index'), []),]
 if (auth.has_membership('admin') or auth.has_membership('manager')):
-    response.menu += [(T('Dashboard'), False, URL('admin', 'index'), [])]
+    response.menu += [(T('Manager Dashboard'), False, URL('admin', 'index'), [])]
 if (auth.has_membership('admin')):
-    response.menu += [(T('Admin'), False, URL('admin', 'index'), [])]
+    response.menu += [(T('Admin Dashboard'), False, URL('admin', 'index'), [])]
 
 #########################################################################
 ## provide shortcuts for development. remove in production
