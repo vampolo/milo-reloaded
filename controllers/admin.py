@@ -58,6 +58,9 @@ def upload_form():
             
     if form.process().accepted:
         
+        #benchmark
+        print auth.membership
+        
         #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".m"
