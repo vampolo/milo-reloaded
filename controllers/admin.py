@@ -18,6 +18,20 @@ def index():
     workers = db_scheduler(db_scheduler.scheduler_run.status=='RUNNING').select()
     return dict(algorithms=algorithms, matrices_info=matrices, info=l, workers=workers)
 
+@auth.requires_membership('admin')    
+def indexplus():
+    algorithms = matlab_wrapper.Whisperer.get_algnames()
+    matrices = matlab_wrapper.Whisperer.get_matrices_info()
+    l = list()
+    l.append(db(db.users).count())
+    l.append(db(useful_movies).count())
+    l.append(db(db.movies).count())
+    l.append(db(db.ratings).count())
+    l.append(db_scheduler(db_scheduler.scheduler_worker).count())
+    l.append(db_scheduler((db_scheduler.scheduler_task.status=="QUEUED")|(db_scheduler.scheduler_task.status=="ASSIGNED")).count())
+    workers = db_scheduler(db_scheduler.scheduler_run.status=='RUNNING').select()
+    return dict(algorithms=algorithms, matrices_info=matrices, info=l, workers=workers)
+
 def info_algorithm():
     algname = request.args(0)
     infos = matlab_wrapper.Whisperer.get_models_info()
