@@ -23,7 +23,7 @@ response.google_analytics_id = None
 
 response.menu = [
     (T('Home'), False, URL('default','index'), []),]
-if (auth.has_membership('admin') || auth.has_membership('manager')):
+if (auth.has_membership('admin') or auth.has_membership('manager')):
     response.menu += [(T('Dashboard'), False, URL('admin', 'index'), [])]
 
 #########################################################################
