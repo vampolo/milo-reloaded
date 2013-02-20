@@ -53,7 +53,7 @@ def upload():
 def upload_form():
     
     #query benchmark
-    print auth.membership
+    print auth
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
