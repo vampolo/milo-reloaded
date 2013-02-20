@@ -1,1 +1,45 @@
-a
+{{extend 'admin_layout2.html'}}
+
+<h2>System info</h2>
+<div class="box">
+  <table>
+		<tbody>
+			<tr>
+				<th class="col1">Users</th>
+				<th class="col2">Movies</th>
+				<th class="col3">Ratings</th>
+				<th class="col4">Workers</th>
+				<th class="col5">Jobs</th>
+			</tr>
+			<tr class="highlight">
+				<td>{{=info[0]}}</td>
+				<td>{{=info[1]}} / {{=info[2]}}</td>
+				<td>{{=info[3]}}</td>
+				<td>{{=len(workers)}}/{{=info[4]}}</td>
+				<td>{{=info[5]}}</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+<br/>
+<h2>Workers</h2>
+<div class="box">
+	<table>
+		<tbody>
+			<tr>
+				<th class="col1">Number</th>
+				<th class="col2">Status</th>
+				<th class="col3">Job</th>
+			</tr>
+			{{highlight=True}}
+			{{for i,worker in enumerate(workers):}}
+			<tr class="{{='highlight' if highlight else ''}}">
+				<td>{{=i}}</td>
+				<td>{{=worker.status}}</td>
+				<td>{{=worker.scheduler_task.task_name}}</td>
+			</tr>
+			{{highlight = not highlight}}
+			{{pass}}
+		</tbody>
+	</table>
+</div>
