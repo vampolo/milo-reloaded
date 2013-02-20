@@ -25,7 +25,7 @@ response.menu = [
     (T('Home'), False, URL('default','index'), []),]
 if (auth.has_membership('admin') or auth.has_membership('manager')):
     response.menu += [(T('Dashboard'), False, URL('admin', 'index'), [])]
-if (auth.has_membership('admin'):
+if (auth.has_membership('admin')):
     response.menu += [(T('Admin'), False, URL('admin', 'index'), [])]
 
 #########################################################################
