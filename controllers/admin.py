@@ -54,7 +54,6 @@ def upload_form():
     
     #query benchmark
     print "\nBENCHMARK: "
-    print auth.user_id
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
@@ -76,8 +75,11 @@ def upload_form():
         print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
-        print 'Algorithm family: ' + form.vars.algorithm_family
+        print 'Algorithm family: ' + form.vars.algorithm_family    
+        print 'User ID: ' + auth.user_id
+        form.vars.author = auth.user_id
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
+        
         print "\n"
                 
         #whole upload list
