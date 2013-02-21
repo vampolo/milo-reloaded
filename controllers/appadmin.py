@@ -45,8 +45,6 @@ response.menu = [[T('design'), False, URL('admin', 'default', 'design',
                  URL('ccache')]]
 
 
-research_group = auth.add_group(role = 'Researchers')
-auth.settings.everybody_group_id = research_group
 
 
 # ##########################################################
