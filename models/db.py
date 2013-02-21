@@ -54,8 +54,8 @@ auth.settings.extra_fields[auth.settings.table_user_name] = [
         Field('milo_user', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),
             unique=True, notnull=False, writable=False, readable=False, default=lambda: db.users.insert(webuser=True))]
 
-
-#auth.settings.everybody_group_id = managers_group
+research_group = auth.add_group(role = 'Researchers')
+#auth.settings.everybody_group_id = research_group
 
 
 ## create all tables needed by auth if not custom tables
