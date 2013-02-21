@@ -77,7 +77,7 @@ def upload_form():
         print 'Model function: ' + form.vars.model_creator_function
         print 'Recommender function: ' + form.vars.recommender_function
         print 'Algorithm family: ' + form.vars.algorithm_family    
-        print 'Author ID: ' + auth.user_id
+        print 'Author ID: ' + str(auth.user_id)
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
         
         print "\n"
