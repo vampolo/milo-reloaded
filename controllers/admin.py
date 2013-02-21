@@ -56,7 +56,7 @@ def upload_form():
     print "\nBENCHMARK: "
     managers_group = auth.add_group(role = 'Researchers')
     auth.add_membership(managers_group)
-    print auth.has_membership(managers_group, 9)
+    print auth.has_membership(managers_group)
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
