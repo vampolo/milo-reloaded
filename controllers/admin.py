@@ -54,7 +54,7 @@ def upload_form():
     
     #query benchmark
     print "\nBENCHMARK: "
-    managers_group = auth.add_group(role = 'Researchers')
+    #managers_group = auth.add_group(role = 'Researchers')
     auth.add_membership(managers_group)
     print auth.has_membership(managers_group)
     
