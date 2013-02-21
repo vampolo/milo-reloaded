@@ -54,7 +54,7 @@ def upload_form():
     
     #query benchmark
     print "\nBENCHMARK: "
-    enlist2 = auth.research_group.select()
+    enlist2 = research_group.select()
     print enlist2
     print auth.has_membership(research_group)
     
