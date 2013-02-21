@@ -44,8 +44,6 @@ auth = Auth(db, hmac_key=Auth.get_or_create_key())
 crud, service, plugins = Crud(db), Service(), PluginManager()
 
 
-
-
 db.define_table('users',
         Field('name'),
         Field('email'),
@@ -63,6 +61,8 @@ auth.define_tables()
 
 research_group = auth.add_group(role = 'Researchers')
 auth.settings.everybody_group_id = research_group
+#for promo in research_group
+    #auth.add_membership(research_gruop, promo)
 
 ## configure email
 mail=auth.settings.mailer
