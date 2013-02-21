@@ -79,12 +79,10 @@ def upload_form():
         print 'Algorithm family: ' + form.vars.algorithm_family    
         print 'Author ID: ' + str(auth.user_id)
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
-        
-        print "\n"
                 
         #whole upload list
         enlist = db(db.uplds).select()
-        #print enlist
+        print enlist
     
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
