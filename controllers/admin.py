@@ -53,9 +53,7 @@ def upload():
 def upload_form():
     
     #query benchmark
-    print "\nBENCHMARK: "
-    enlist2 = research_group.select()
-    print enlist2
+    print "\nResearcher privileges: "
     print auth.has_membership(research_group)
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
