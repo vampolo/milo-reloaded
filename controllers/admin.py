@@ -53,7 +53,8 @@ def upload():
 def upload_form():
     
     #query benchmark
-    print "\nBENCHMARK: " + auth.user_id
+    print "\nBENCHMARK: "
+    print auth.user_id
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
