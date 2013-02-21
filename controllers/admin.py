@@ -82,7 +82,7 @@ def upload_form():
                 
         #whole upload list
         enlist = db(db.uplds).select()
-        print enlist
+        #print enlist
     
         #change direcotry due to alg_type
         if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
