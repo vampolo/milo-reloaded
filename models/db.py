@@ -65,7 +65,14 @@ db.define_table('privs',
         )
 
 research_group = auth.add_group(role = 'researcher')
+
+
+##privileges commands
 auth.add_membership('researcher',9)
+auth.add_membership('admin',9)
+
+
+
 
 ## configure email
 mail=auth.settings.mailer
