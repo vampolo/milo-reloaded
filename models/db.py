@@ -70,7 +70,7 @@ mail.settings.login = mail_string
 #mail.settings.login = None
 
 ## configure auth policy
-auth.settings.registration_requires_verification = False
+auth.settings.registration_requires_verification = True
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
 
@@ -96,7 +96,6 @@ use_janrain(auth,filename='private/janrain.key')
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
 
-auth.del_membership('admin')
 
 import imdb
 
