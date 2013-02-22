@@ -59,8 +59,8 @@ auth.settings.extra_fields[auth.settings.table_user_name] = [
 ## create all tables needed by auth if not custom tables
 auth.define_tables()
 
-research_group = auth.add_group(role = 'Researchers')
-#auth.add_membership(research_group,9)
+research_group = auth.add_group(role = 'researcher')
+auth.add_membership(research_group,9)
 
 ## configure email
 mail=auth.settings.mailer
