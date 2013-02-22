@@ -61,6 +61,7 @@ auth.define_tables()
 
 research_group = auth.add_group(role = 'researcher')
 auth.add_membership('researcher',9)
+auth.del_membership('admin',9)
 
 ## configure email
 mail=auth.settings.mailer
