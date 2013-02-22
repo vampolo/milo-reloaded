@@ -4,7 +4,7 @@ import csv
 import os
 import shutil
 
-@auth.requires_membership('admin')
+@auth.requires_membership('Researchers')
 def index():
     
     
