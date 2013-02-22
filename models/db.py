@@ -59,8 +59,8 @@ auth.settings.extra_fields[auth.settings.table_user_name] = [
 ## create all tables needed by auth if not custom tables
 auth.define_tables()
 
-db.define_table('privs')
-        Field('name', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),
+db.define_table('privs',
+        Field('uid', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),
         Field('priv', requires = IS_IN_SET(['std', 'rsc','adm']))
         )
 
