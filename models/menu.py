@@ -34,6 +34,8 @@ if (auth.has_membership('admin')):
     print auth.has_membership('researcher')
     print "\nAdmin privileges: "
     print auth.has_membership('admin')
+    tt = auth.user_group(user_id)
+    print tt
 
 #########################################################################
 ## provide shortcuts for development. remove in production
