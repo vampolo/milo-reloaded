@@ -8,7 +8,7 @@
 response.title = ' '.join(word.capitalize() for word in request.application.split('_'))
 
 ## read more at http://dev.w3.org/html5/markup/meta.name.html
-response.meta.author = 'Vincenzo Ampolo <vincenzo.ampolo@gmail.com>'
+response.meta.author = 'Vincenzo Ampolo <vincenzo.ampolo@gmail.com> & Luca Botti <ing.botti.luca@gmail.com>'
 response.meta.description = 'Movish recommendation system'
 response.meta.keywords = 'web2py, python, framework'
 response.meta.generator = 'Web2py Web Framework'
@@ -34,8 +34,6 @@ if (auth.has_membership('admin')):
     print auth.has_membership('researcher')
     print "\nAdmin privileges: "
     print auth.has_membership('admin')
-    tt = auth.user_group(9)
-    print tt
 
 #########################################################################
 ## provide shortcuts for development. remove in production
