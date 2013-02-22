@@ -4,8 +4,17 @@ import csv
 import os
 import shutil
 
-@auth.requires_membership(research_group)
+@auth.requires_membership('admin')
 def index():
+    
+    
+    #query benchmark
+    print "\nResearcher privileges: "
+    print auth.has_membership(research_group)
+    print "\nAdmin privileges: "
+    print auth.has_membership('admin')
+    
+    
     algorithms = matlab_wrapper.Whisperer.get_algnames()
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     l = list()
@@ -52,9 +61,6 @@ def upload():
 
 def upload_form():
     
-    #query benchmark
-    print "\nResearcher privileges: "
-    print auth.has_membership(research_group)
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
