@@ -5,15 +5,7 @@ import os
 import shutil
 
 @auth.requires_membership('researcher')
-def index():
-    
-    
-    #query benchmark
-    print "\nResearcher privileges: "
-    print auth.has_membership('researcher')
-    print "\nAdmin privileges: "
-    print auth.has_membership('admin')
-    
+def index():    
     
     algorithms = matlab_wrapper.Whisperer.get_algnames()
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
