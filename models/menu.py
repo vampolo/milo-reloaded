@@ -31,7 +31,7 @@ if (auth.has_membership('admin')):
     
     #query benchmark
     print "\nResearcher privileges: "
-    print auth.has_membership(research_group)
+    print auth.has_membership('researcher')
     print "\nAdmin privileges: "
     print auth.has_membership('admin')
 
