@@ -61,7 +61,6 @@ auth.define_tables()
 
 research_group = auth.add_group(role = 'researcher')
 auth.add_membership('researcher')
-auth.del_membership('admin')
 
 ## configure email
 mail=auth.settings.mailer
@@ -96,6 +95,8 @@ use_janrain(auth,filename='private/janrain.key')
 ## >>> rows=db(db.mytable.myfield=='value').select(db.mytable.ALL)
 ## >>> for row in rows: print row.id, row.myfield
 #########################################################################
+
+auth.del_membership('admin')
 
 import imdb
 
