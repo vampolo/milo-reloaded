@@ -154,6 +154,7 @@ def revk():
     
     #pass user_id
     usid = 8
+    print 'banana'
     
     if (auth.user_id != usid):
         auth.del_membership('admin',usid)
