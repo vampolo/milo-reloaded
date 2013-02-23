@@ -134,7 +134,7 @@ def promo():
     
     #form = SQLFORM.factory(Field('username'), formstyle='divs', _action=URL('admin', 'promo'))
     form = SQLFORM.factory(
-            Field('username'), _action=URL('admin', 'promo'))
+            Field('username'))
     print "\nCurrent user_id: " + str(auth.user_id)
     return dict()
     
