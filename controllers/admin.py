@@ -131,6 +131,8 @@ def success():
     return dict(success=success)
     
 def promo():
+    
+    form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'promo'))
     print "\nCurrent user_id: " + str(auth.user_id)
     return dict()
     
