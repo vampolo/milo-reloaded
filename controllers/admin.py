@@ -53,7 +53,6 @@ def upload():
 
 def upload_form():
     
-    
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
@@ -130,6 +129,10 @@ def rules_it():
 def success():
     success = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(success=success)
+    
+def promo():
+    promo = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(promo=promo)
     
 def prom():
     
