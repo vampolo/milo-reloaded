@@ -145,6 +145,7 @@ def prom1():
         print 'Admin privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
+    redirect(URL('indexplus'))
     return dict()
 
 def prom2():
@@ -157,6 +158,7 @@ def prom2():
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
+    redirect(URL('indexplus'))
     return dict()
 
 def revk1():
