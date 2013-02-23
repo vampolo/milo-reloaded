@@ -131,16 +131,20 @@ def success():
     return dict(success=success)
     
 def promo():
-    print "Current user: " + str(auth.user_id)
+    print "\nCurrent user: " + str(auth.user_id)
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
     
 def prom():
     
     #pass user_id
-    usid = 9
+    usid = 8
     
-    auth.add_membership('admin',usid)
+    if (auth.user_id!= usid):
+        auth.add_membership('admin',usid)
+    else:
+        print 'You cannot change your own privileges'
+    
     print 'Admin privileges granted for user: ' + str(usid)
         
     prom = matlab_wrapper.Whisperer.get_matrices_info()
@@ -149,9 +153,13 @@ def prom():
 def revk():
     
     #pass user_id
-    usid = 9
+    usid = 8
     
-    auth.del_membership('admin',usid)
+    if (auth.user_id!= usid):
+        auth.del_membership('admin',usid)
+    else:
+        print 'You cannot change your own privileges'
+    
     print 'Admin privileges revoked for user: ' + str(usid)
     
     revk = matlab_wrapper.Whisperer.get_matrices_info()
