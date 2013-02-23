@@ -131,7 +131,7 @@ def success():
     return dict(success=success)
     
 def promo():
-    print "\nCurrent user: " + str(auth.user_id)
+    print "\nCurrent user_id: " + str(auth.user_id)
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
     
