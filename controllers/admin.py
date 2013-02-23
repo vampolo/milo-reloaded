@@ -182,7 +182,7 @@ def revk2():
     usid = 8
     
     if (auth.user_id != usid):
-        auth.del_membership(8,usid)
+        auth.del_membership('researcher',usid)
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
