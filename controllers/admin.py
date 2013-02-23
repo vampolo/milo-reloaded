@@ -145,8 +145,6 @@ def prom1():
         print 'Admin privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
-        
-    #prom = matlab_wrapper.Whisperer.get_matrices_info()
     return dict()
 
 def prom2():
@@ -159,9 +157,7 @@ def prom2():
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
-        
-    prom = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(prom=prom)
+    return dict()
 
 def revk1():
     
@@ -173,9 +169,7 @@ def revk1():
         print 'Admin privileges revoked for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
-    
-    revk = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(revk=revk)
+    return dict()
 
 def revk2():
     
@@ -187,9 +181,7 @@ def revk2():
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
-        
-    prom = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(prom=prom)
+    return dict()
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
