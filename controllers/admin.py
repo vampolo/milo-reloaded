@@ -145,7 +145,8 @@ def prom1():
     else:
         print 'You cannot change your own privileges!'
     
-    return dict(URL'indexplus')
+    redirect(URL('indexplus'))
+    return dict()
 
 def prom2():
     
@@ -157,6 +158,8 @@ def prom2():
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
+    
+    redirect(URL('indexplus'))
     return dict()
 
 def revk1():
@@ -169,6 +172,8 @@ def revk1():
         print 'Admin privileges revoked for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
+    
+    redirect(URL('indexplus'))
     return dict()
 
 def revk2():
@@ -177,10 +182,12 @@ def revk2():
     usid = 8
     
     if (auth.user_id != usid):
-        auth.del_membership('researcher',usid)
+        auth.del_membership(8,usid)
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
+    
+    redirect(URL('indexplus'))
     return dict()
 
 #def gf_test():
