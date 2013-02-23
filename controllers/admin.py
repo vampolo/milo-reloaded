@@ -168,7 +168,7 @@ def revk1():
     usid = 8
     
     if (auth.user_id != usid):
-        auth.del_membership('admin',usid)
+        #auth.del_membership('admin',usid)
         print 'Admin privileges revoked for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
@@ -182,7 +182,7 @@ def revk2():
     usid = 8
     
     if (auth.user_id != usid):
-        auth.del_membership('researcher',usid)
+        #auth.del_membership('researcher',usid)
         print 'Researcher privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
