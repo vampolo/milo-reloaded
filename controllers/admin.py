@@ -130,6 +130,17 @@ def rules_it():
 def success():
     success = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(success=success)
+    
+def prom():
+    
+    prom = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(prom=prom)
+
+def revk():
+    revk = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(revk=revk)
+
+
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
