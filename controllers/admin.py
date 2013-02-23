@@ -132,7 +132,7 @@ def success():
     
 def promo():
     print "\nCurrent user_id: " + str(auth.user_id)
-    redirect(URL('indexplus'))
+    #redirect(URL('indexplus'))
     return dict()
     
 def prom1():
