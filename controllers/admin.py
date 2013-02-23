@@ -132,8 +132,8 @@ def success():
     
 def promo():
     print "\nCurrent user_id: " + str(auth.user_id)
-    promo = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(promo=promo)
+    redirect(URL('indexplus'))
+    return dict()
     
 def prom1():
     
@@ -145,7 +145,7 @@ def prom1():
         print 'Admin privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges!'
-    redirect(URL('indexplus'))
+    #redirect(URL('indexplus'))
     return dict()
 
 def prom2():
