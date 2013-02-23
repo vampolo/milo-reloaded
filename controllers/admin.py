@@ -187,7 +187,7 @@ def revk2():
     else:
         print 'You cannot change your own privileges!'
     
-    redirect(URL('indexplus'))
+    redirect(URL('indexplus'), target = "content")
     return dict()
 
 #def gf_test():
