@@ -139,13 +139,13 @@ def prom():
     
     #pass user_id
     usid = 8
+    print auth.user_id != usid
     
-    if (auth.user_id!= usid):
+    if (auth.user_id != usid):
         auth.add_membership('admin',usid)
+        print 'Admin privileges granted for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges'
-    
-    print 'Admin privileges granted for user: ' + str(usid)
         
     prom = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(prom=prom)
@@ -155,12 +155,11 @@ def revk():
     #pass user_id
     usid = 8
     
-    if (auth.user_id!= usid):
+    if (auth.user_id != usid):
         auth.del_membership('admin',usid)
+        print 'Admin privileges revoked for user: ' + str(usid)
     else:
         print 'You cannot change your own privileges'
-    
-    print 'Admin privileges revoked for user: ' + str(usid)
     
     revk = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(revk=revk)
