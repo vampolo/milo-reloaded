@@ -135,37 +135,61 @@ def promo():
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
     
-def prom():
+def prom1():
     
     #pass user_id
     usid = 8
-    print auth.user_id != usid
     
     if (auth.user_id != usid):
         auth.add_membership('admin',usid)
         print 'Admin privileges granted for user: ' + str(usid)
     else:
-        print 'You cannot change your own privileges'
+        print 'You cannot change your own privileges!'
+        
+    #prom = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict()
+
+def prom2():
+    
+    #pass user_id
+    usid = 8
+    
+    if (auth.user_id != usid):
+        auth.add_membership('researcher',usid)
+        print 'Researcher privileges granted for user: ' + str(usid)
+    else:
+        print 'You cannot change your own privileges!'
         
     prom = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(prom=prom)
 
-def revk():
+def revk1():
     
     #pass user_id
     usid = 8
-    print 'banana'
     
     if (auth.user_id != usid):
         auth.del_membership('admin',usid)
         print 'Admin privileges revoked for user: ' + str(usid)
     else:
-        print 'You cannot change your own privileges'
+        print 'You cannot change your own privileges!'
     
     revk = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(revk=revk)
 
-
+def revk2():
+    
+    #pass user_id
+    usid = 8
+    
+    if (auth.user_id != usid):
+        auth.del_membership('researcher',usid)
+        print 'Researcher privileges granted for user: ' + str(usid)
+    else:
+        print 'You cannot change your own privileges!'
+        
+    prom = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(prom=prom)
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
