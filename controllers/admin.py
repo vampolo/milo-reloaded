@@ -133,10 +133,19 @@ def success():
     
 def prom():
     
+    #pass user_id
+    usid = 9
+    
+    auth.add_membership('admin',usid)
     prom = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(prom=prom)
 
 def revk():
+    
+    #pass user_id
+    usid = 9
+    
+    auth.del_membership('admin',usid)
     revk = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(revk=revk)
 
