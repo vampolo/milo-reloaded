@@ -141,6 +141,7 @@ def prom():
     
     auth.add_membership('admin',usid)
     prom = matlab_wrapper.Whisperer.get_matrices_info()
+    print 'Admin privileges revoked for user: ' + str(usid)
     return dict(prom=prom)
 
 def revk():
@@ -150,6 +151,7 @@ def revk():
     
     auth.del_membership('admin',usid)
     revk = matlab_wrapper.Whisperer.get_matrices_info()
+    print 'Admin privileges granted for user: ' + str(usid)
     return dict(revk=revk)
 
 
