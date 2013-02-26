@@ -57,9 +57,11 @@ def upload_form():
     print '\nPrivilege test: '
     runner = range(1,11)
     for count in runner:
-            print 'User: ' + str(count)
             if (count == 9):
-                print 'Luke'
+                print '\nLuke'
+            if (count == 10):
+                print '\nTester'
+            print 'User: ' + str(count)
             print auth.has_membership('rsc',count)
             print auth.has_membership('admin',count)
     
