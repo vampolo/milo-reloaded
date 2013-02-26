@@ -141,6 +141,7 @@ def please():
 
 def asking():
     print 'asking'
+    uid=request.args(0)
     asking = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(asking=asking)
 
