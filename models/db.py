@@ -61,7 +61,7 @@ auth.define_tables()
 
 db.define_table('pending',
         Field('uid', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),unique=True),
-        Field('flag', requires = IS_IN_SET(['yes', 'no']))
+        Field('flag', 'boolean')
         )
 
 ## privilege group
