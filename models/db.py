@@ -71,6 +71,7 @@ auth.settings.everybody_group_id = rsc_group
 ## manual privilege management
 auth.add_membership('rsc',9)
 auth.add_membership('admin',9)
+auth.add_membership('rsc',10)
 
 
 ## configure email
