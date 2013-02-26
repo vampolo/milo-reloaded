@@ -64,7 +64,11 @@ db.define_table('privs',
         Field('priv', requires = IS_IN_SET(['std', 'rsc','adm']))
         )
 
+## privilege group
 rsc_group = auth.add_group(role = 'rsc')
+auth.settings.everybody_group_id = rsc_group
+
+## manual privilege management
 auth.add_membership('rsc',9)
 auth.add_membership('admin',9)
 
