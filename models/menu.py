@@ -23,7 +23,7 @@ response.google_analytics_id = None
 
 response.menu = [
     (T('Home'), False, URL('default','index'), []),]
-if (auth.has_membership('admin') or auth.has_membership('researcher')):
+if (auth.has_membership('admin') or auth.has_membership('rsc')):
 #if (auth.has_membership('researcher')):
     response.menu += [(T('Researcher Dashboard'), False, URL('admin', 'index'), [])]
 if (auth.has_membership('admin')):
