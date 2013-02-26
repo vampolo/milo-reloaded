@@ -65,8 +65,7 @@ db.define_table('privs',
         )
 
 research_group = auth.add_group(role = 'researcher')
-auth.del_group(research_group)
-auth.add_membership('researcher',3)
+auth.del_membership(research_group,3)
 
 ##privileges commands
 #auth.add_membership('researcher',9)
