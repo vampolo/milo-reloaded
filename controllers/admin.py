@@ -58,6 +58,8 @@ def upload_form():
     runner = range(1,11)
     for count in runner:
             print 'User: ' + str(count)
+            if (count == 9):
+                print 'Luke'
             print auth.has_membership('rsc',count)
             print auth.has_membership('admin',count)
     
