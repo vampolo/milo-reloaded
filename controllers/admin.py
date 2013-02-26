@@ -53,17 +53,7 @@ def upload():
 
 def upload_form():
     
-    #benchmark
-    print '\nPrivilege test: '
-    runner = range(1,11)
-    for count in runner:
-            if (count == 9):
-                print '\nLuke'
-            if (count == 10):
-                print '\nTester'
-            print 'User: ' + str(count)
-            print auth.has_membership('rsc',count)
-            print auth.has_membership('admin',count)
+
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
@@ -135,6 +125,19 @@ def promo():
     return dict(promo=promo)
 
 def please():
+    
+    #Privilege test
+    print '\nPrivilege test: '
+    runner = range(1,11)
+    for count in runner:
+            if (count == 9):
+                print '\nLuke'
+            if (count == 10):
+                print '\nTester'
+            print 'User: ' + str(count)
+            print auth.has_membership('rsc',count)
+            print auth.has_membership('admin',count)
+    
     please = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(please=please)
 
