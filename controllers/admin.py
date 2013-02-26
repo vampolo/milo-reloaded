@@ -53,6 +53,7 @@ def upload():
 
 def upload_form():
     
+    #benchmark
     print '\nPrivilege test: '
     runner = range(1,11)
     for count in runner:
