@@ -54,7 +54,7 @@ def upload():
 def upload_form():
     
     print '\nPrivilege test: '
-    print auth.has_membership('researcher')
+    print auth.has_membership('researcher',7)
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
