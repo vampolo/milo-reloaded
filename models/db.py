@@ -59,9 +59,9 @@ auth.settings.extra_fields[auth.settings.table_user_name] = [
 ## create all tables needed by auth if not custom tables
 auth.define_tables()
 
-db.define_table('privs',
+db.define_table('pending',
         Field('uid', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),unique=True),
-        Field('priv', requires = IS_IN_SET(['std', 'rsc','adm']))
+        Field('flag', requires = IS_IN_SET(['yes', 'no']))
         )
 
 ## privilege group
@@ -71,7 +71,6 @@ auth.settings.everybody_group_id = rsc_group
 ## manual privilege management
 auth.add_membership('rsc',9)
 auth.add_membership('admin',9)
-auth.add_membership('rsc',10)
 
 
 ## configure email
