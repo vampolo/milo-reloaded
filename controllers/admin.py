@@ -53,8 +53,6 @@ def upload():
 
 def upload_form():
     
-
-    
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
@@ -141,6 +139,11 @@ def please():
     please = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(please=please)
 
+def asking():
+    print 'asking'
+    asking = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(asking=asking)
+
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_en=rules_en)
@@ -149,9 +152,9 @@ def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
     
-def success():
-    success = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(success=success)
+#def success():
+#    success = matlab_wrapper.Whisperer.get_matrices_info()
+#    return dict(success=success)
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
