@@ -4,8 +4,7 @@ import csv
 import os
 import shutil
 
-@auth.requires_membership(research_group)
-#@auth.requires_login()
+@auth.requires_membership('researcher')
 def index():    
     
     algorithms = matlab_wrapper.Whisperer.get_algnames()
