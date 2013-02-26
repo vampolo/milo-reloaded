@@ -71,7 +71,7 @@ research_group = auth.add_group(role = 'researcher')
 ##researcher group ID: 9
 ##admin group ID: 
 auth.add_membership('researcher',9)
-auth.del_membership('researcher',8)
+auth.del_membership(research_group,8)
 auth.add_membership('admin',9)
 
 
