@@ -130,6 +130,10 @@ def upload_form():
         response.flash='fill out the form'
     return dict(form=form)
 
+def promo():
+    promo = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(promo=promo)
+
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_en=rules_en)
