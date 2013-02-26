@@ -64,8 +64,8 @@ db.define_table('privs',
         Field('priv', requires = IS_IN_SET(['std', 'rsc','adm']))
         )
 
-research_group = auth.add_group(role = 'researcher')
-auth.del_membership(research_group,3)
+#research_group = auth.add_group(role = 'researcher')
+#auth.del_membership(research_group,3)
 
 ##privileges commands
 #auth.add_membership('researcher',9)
