@@ -134,66 +134,6 @@ def rules_it():
 def success():
     success = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(success=success)
-    
-def promo():
-    print "\nCurrent user_id: " + str(auth.user_id)
-    return dict()
-    
-def prom1():
-    
-    #pass user_id
-    usid = 8
-    
-    if (auth.user_id != usid):
-        auth.add_membership('admin',usid)
-        print 'Admin privileges granted for user: ' + str(usid)
-    else:
-        print 'You cannot change your own privileges!'
-    
-    redirect(URL('indexplus'))
-    return dict()
-
-def prom2():
-    
-    #pass user_id
-    usid = 8
-    
-    if (auth.user_id != usid):
-        auth.add_membership('researcher',usid)
-        print 'Researcher privileges granted for user: ' + str(usid)
-    else:
-        print 'You cannot change your own privileges!'
-    
-    redirect(URL('indexplus'))
-    return dict()
-
-def revk1():
-    
-    #pass user_id
-    usid = 8
-    
-    if (auth.user_id != usid):
-        #auth.del_membership('admin',usid)
-        print 'Admin privileges revoked for user: ' + str(usid)
-    else:
-        print 'You cannot change your own privileges!'
-    
-    redirect(URL('indexplus'))
-    return dict()
-
-def revk2():
-    
-    #pass user_id
-    usid = 8
-    
-    if (auth.user_id != usid):
-        #auth.del_membership('researcher',usid)
-        print 'Researcher privileges revoked for user: ' + str(usid)
-    else:
-        print 'You cannot change your own privileges!'
-    
-    redirect(URL('indexplus'))
-    return dict()
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
