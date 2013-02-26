@@ -134,6 +134,10 @@ def promo():
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
 
+def please():
+    please = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(please=please)
+
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_en=rules_en)
