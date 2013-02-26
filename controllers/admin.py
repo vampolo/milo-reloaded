@@ -4,8 +4,8 @@ import csv
 import os
 import shutil
 
-#@auth.requires_membership(research_group)
-@auth.requires_login()
+@auth.requires_membership(research_group)
+#@auth.requires_login()
 def index():    
     
     algorithms = matlab_wrapper.Whisperer.get_algnames()
@@ -53,6 +53,12 @@ def upload():
     return dict(upload=upload)
 
 def upload_form():
+    
+    print '\nPrivilege test: '
+    runner = range(1,50)
+    for count in runner:
+        if auth.has_membership(count, 'admin'):
+            print count
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
