@@ -30,6 +30,7 @@ if (auth.has_membership('admin')):
     response.menu += [(T('Admin Dashboard'), False, URL('admin', 'indexplus'), [])]
     
     #query benchmark
+    print aut.user_id
     print "\nResearcher & Admin privileges: " + str(auth.has_membership('researcher')) + ' ' + str(auth.has_membership('admin'))
 
 #########################################################################
