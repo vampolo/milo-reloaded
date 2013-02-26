@@ -9,14 +9,14 @@
 •	I nomi dei file <cite>.m</cite> contenente le funzioni sono liberi (in ogni caso dopo l’upload il sistema li immagazzinerà usando dei nomi reimpostati, che si basano sul nome col quale il manager vuole identificare l’algoritmo all’interno del sistema), ma non lo sono i nomi delle funzioni, che dovranno seguire le indicazioni di cui di seguito<br><br>
 
 Regole principali di buona forma valide per la funzione dedicata alla creazione del modello:<br>
-•	La funzione deve avere un nome del tipo <cite>createModel_algname</cite>, dove algname deve essere ovviamente sostituito col nome dell’algoritmo in questione<br>
+•	Il filename della funzione è arbitrario ma viene memorizzato dal sistema nella forma <cite>createModel_algname</cite>, dove algname è il nome identificativo dell’algoritmo in questione<br>
 •	La dichiarazione della funzione avrà questa forma:<br>
 <cite>function [model] = createModel_algname (URM,ICM, modelParam)</cite><br>
 Dove <cite>model</cite> è il modello di output, <cite>URM</cite> è la User Rating Matrix, <cite>ICM</cite> è la Item Content Matrix, entrambe matrici che il sistema possiede e che vengono passate come parametri, ed infine <cite>modelParam</cite>, che contiene eventuali parametri aggiuntivi che potrebbero essere utili alla creazione del modello<br>
 •	La funzione dovrà costruire il suo modello e riassumerlo in un vettore Matlab monodimensionale la cui variabile deve avere un nome di questo tipo: <cite>model.algname</cite><br><br>
 
 Regole principali di buona forma valide per la funzione dedicata alle raccomandazioni:<br>
-•	La funzione deve avere un nome del tipo <cite>onLineRecom_algname</cite>, dove algname deve essere ovviamente sostituito col nome dell’algoritmo in questione<br>
+•	Il filename della funzione è arbitrario ma viene memorizzato dal sistema nella forma <cite>onLineRecom_algname</cite>, dove algname è il nome identificativo dell’algoritmo in questione<br>
 •	La dichiarazione della funzione avrà questa forma:<br>
 	<cite>function [recomList] = onLineRecom_algname (userProfile, model, param)</cite><br>
 Dove <cite>recomList</cite> è l’ouput, cioè la lista dei film che vengono scelti come raccomandazioni, <cite>userProfile</cite> è un vettore monodimensionale contentente i rating del singolo utente a cui si sta offrendo il servizio di raccomandazione, <cite>model</cite> è il modello creato dalla funzione di creazione del modello del medesimo algoritmo, mentre <cite>param</cite> contiene eventuali parametri aggiuntivi, tra cui in particolare <cite>param.postProcessingFunction</cite> che è l’handle of post-processing function (utilizzata nell’output)<br>
