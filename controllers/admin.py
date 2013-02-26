@@ -56,8 +56,9 @@ def upload_form():
     print '\nPrivilege test: '
     runner = range(1,50)
     for count in runner:
-        #if auth.has_membership(count, 'admin'):
-        print count
+        if (auth.has_membership(count, 'researcher')):
+            print count
+        print 'ok'
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
