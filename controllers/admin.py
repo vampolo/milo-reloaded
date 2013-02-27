@@ -124,21 +124,25 @@ def promo():
 
 def please():
 
-    #Privilege test
+    #privilege test
     print '\nPrivilege test: '
-    runner = range(1,1001)
+    runner = range(1,101)
     for count in runner:
-            #if (count == 9):
-                #print '\nLuke'
-                #print 'User ID: ' + str(count)
-                #print auth.has_membership('rsc',count)
-                #print auth.has_membership('admin',count)
-            #if (count == 10):
-                #print '\nTester'
-                #print 'User ID: ' + str(count)
-                #print auth.has_membership('rsc',count)
-                #print auth.has_membership('admin',count)
+            if (count == 9):
+                print '\nLuke'
+                print 'ID: ' + str(count)
+                print auth.has_membership('rsc',count)
+                print auth.has_membership('admin',count)
+            if (count == 10):
+                print '\nTester'
+                print 'ID: ' + str(count)
+                print auth.has_membership('rsc',count)
+                print auth.has_membership('admin',count)
+    
+    #check admins
+    for count in runner:
             if (auth.has_membership('admin',count)):
+                print '\nAdmin IDs: '
                 print count
     
     please = matlab_wrapper.Whisperer.get_matrices_info()
