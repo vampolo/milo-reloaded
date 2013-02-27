@@ -129,21 +129,20 @@ def please():
     runner = range(1,101)
     for count in runner:
             if (count == 9 or count == 10 or count == 11):
-                print 'ID: ' + str(count)
+                print '\nID: ' + str(count)
                 print auth.has_membership('rsc',count)
                 print auth.has_membership('admin',count)
     
     #check and store admin IDs
     
-    buckets = [];
+    admin_ids = [];
     
     print '\nAdmin IDs: '
     for count in runner:
             if (auth.has_membership('admin',count)):
-                buckets.append(count);
-    
-    print buckets
-    please = matlab_wrapper.Whisperer.get_matrices_info()
+                admin_ids.append(count);
+    print admin_ids
+    please = admin_ids
     return dict(please=please)
 
 def asking():
