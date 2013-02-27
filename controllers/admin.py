@@ -144,6 +144,7 @@ def please():
     print admin_ids
     for row in db(db.users.email=='luke.eagle4@gmail.com').select():
         print row.email
+    print 'ok'
     please = admin_ids
     return dict(please=please)
 
