@@ -142,15 +142,18 @@ def please():
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     print admin_ids
-    for row in db(db.users).select():
-        print row.email
-    print 'ok'
+    
+    db.pending.insert(uid=5)
+    enlist2 = db(db.pending).select()
+    print enlist2
+    
     please = admin_ids
     return dict(please=please)
 
 def asking():
     print 'asking'
     uid=request.args(0)
+    
     asking = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(asking=asking)
 
