@@ -147,16 +147,14 @@ def please():
     return dict(please=please)
 
 def asking():
-    print 'asking'
     temp=request.args(0)
     
     #insert into pending table
-    db.pending.truncate()
     db.pending.insert(uid=5)
-    enlist2 = db(db.pending).select()
-    print enlist2
+    penlist = db(db.pending).select()
+    print penlist
     
-    asking = matlab_wrapper.Whisperer.get_matrices_info()
+    asking = penlist
     return dict(asking=asking)
 
 def rules_en():
