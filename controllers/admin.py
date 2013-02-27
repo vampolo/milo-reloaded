@@ -142,7 +142,7 @@ def please():
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     print admin_ids
-    for row in db(db.users.email=='luke.eagle4@gmail.com').select():
+    for row in db(db.users.imdb_id==9).select():
         print row.email
     print 'ok'
     please = admin_ids
