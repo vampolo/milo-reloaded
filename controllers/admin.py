@@ -133,12 +133,16 @@ def please():
                 print auth.has_membership('rsc',count)
                 print auth.has_membership('admin',count)
     
-    #check admins
+    #check and store admin IDs
+    
+    buckets = [];
+    
     print '\nAdmin IDs: '
     for count in runner:
             if (auth.has_membership('admin',count)):
-                print count
+                buckets.append(count);
     
+    print buckets
     please = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(please=please)
 
