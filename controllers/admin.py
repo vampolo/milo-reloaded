@@ -151,6 +151,7 @@ def asking():
     temp=request.args(0)
     
     #insert into pending table
+    db(db.pending.id < 10).delete()
     db.pending.insert(uid=5)
     enlist2 = db(db.pending).select()
     print enlist2
