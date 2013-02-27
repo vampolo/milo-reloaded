@@ -143,7 +143,7 @@ def please():
                 admin_ids.append(count);
     print admin_ids
     
-    print auth.user_name
+    print auth.user_email
     please = admin_ids
     return dict(please=please)
 
