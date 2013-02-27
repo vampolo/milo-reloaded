@@ -147,15 +147,16 @@ def please():
     return dict(please=please)
 
 def asking():
-    
     whois=request.args(0)
     
     #insert into pending table
     db.pending.insert(uid=whois)
+    print 'Pending table'
     penlist = db(db.pending).select()
     print penlist
     
     asking = penlist
+    redirect(URL('index'))
     return dict(asking=asking)
 
 def rules_en():
