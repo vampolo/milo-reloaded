@@ -143,6 +143,8 @@ def please():
                 admin_ids.append(count);
     print admin_ids
     print auth.user_id
+    mails = db(db.users).select(mails)
+    print mails
     please = admin_ids
     return dict(please=please)
 
