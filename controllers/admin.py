@@ -147,10 +147,11 @@ def please():
     return dict(please=please)
 
 def asking():
-    temp=request.args(0)
+    
+    whois=request.args(0)
     
     #insert into pending table
-    db.pending.insert(uid=5)
+    db.pending.insert(uid=whois)
     penlist = db(db.pending).select()
     print penlist
     
