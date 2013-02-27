@@ -126,15 +126,20 @@ def please():
 
     #Privilege test
     print '\nPrivilege test: '
-    runner = range(1,11)
+    runner = range(1,1001)
     for count in runner:
-            if (count == 9):
-                print '\nLuke'
-            if (count == 10):
-                print '\nTester'
-            print 'User: ' + str(count)
-            print auth.has_membership('rsc',count)
-            print auth.has_membership('admin',count)
+            #if (count == 9):
+                #print '\nLuke'
+                #print 'User ID: ' + str(count)
+                #print auth.has_membership('rsc',count)
+                #print auth.has_membership('admin',count)
+            #if (count == 10):
+                #print '\nTester'
+                #print 'User ID: ' + str(count)
+                #print auth.has_membership('rsc',count)
+                #print auth.has_membership('admin',count)
+            if (auth.has_membership('admin',count)):
+                print count
     
     please = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(please=please)
