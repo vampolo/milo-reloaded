@@ -143,16 +143,17 @@ def please():
                 admin_ids.append(count);
     print admin_ids
     
-    db.pending.insert(uid=5)
-    enlist2 = db(db.pending).select()
-    print enlist2
-    
     please = admin_ids
     return dict(please=please)
 
 def asking():
     print 'asking'
-    uid=request.args(0)
+    temp=request.args(0)
+    
+    #insert into pending table
+    db.pending.insert(uid=5)
+    enlist2 = db(db.pending).select()
+    print enlist2
     
     asking = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(asking=asking)
