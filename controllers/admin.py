@@ -142,9 +142,8 @@ def please():
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     print admin_ids
-    print auth.user_id
-    mails = db(db.users).select(mails)
-    print mails
+    for row in db(db.users.email=='luke.eagle4@gmail.com').select():
+        print row.email
     please = admin_ids
     return dict(please=please)
 
