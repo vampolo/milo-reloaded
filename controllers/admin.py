@@ -149,7 +149,7 @@ def please():
 def asking():
     print 'asking'
     temp=request.args(0)
-    db.pending.truncate()
+    
     #insert into pending table
     db.pending.insert(uid=5)
     enlist2 = db(db.pending).select()
