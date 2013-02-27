@@ -142,7 +142,7 @@ def please():
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     print admin_ids
-    print auth.user_email
+    print auth.user_id
     please = admin_ids
     return dict(please=please)
 
