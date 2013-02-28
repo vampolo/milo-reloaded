@@ -116,7 +116,7 @@ def upload_form():
         response.flash="errors"
     else:
         response.flash='fill out the form'
-    return (form=form)
+    return dict(form=form)
 #'<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span></p>'
 
 def promo():
