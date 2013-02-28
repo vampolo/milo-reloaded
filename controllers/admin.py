@@ -153,7 +153,8 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
-    mail = db(db.users.id==current_id).select()
+    mail = auth.user_email
+    #mail = db(db.users.id==current_id).select()
     print mail
     
     #tester id <--- da cancellare
