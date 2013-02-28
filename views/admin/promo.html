@@ -11,7 +11,7 @@
 			{{for uid in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
-				<td>{{=uname}}</td>
+				<td>{{=uid}}</td>
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="add", _title="allow privileges", callback=URL('ok', args=[uid]), target="content")}}</li>
