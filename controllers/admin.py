@@ -151,7 +151,7 @@ def asking():
     
     #insert into pending table
     db.pending.insert(uid=whois)
-    print 'Pending table'
+    print '\nPending table'
     penlist = db(db.pending).select()
     print penlist
     
