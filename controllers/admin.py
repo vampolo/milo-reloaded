@@ -116,7 +116,8 @@ def upload_form():
 
 def promo():
     promo = db(db.pending.flag==True).select(db.pending.uid)
-    print promo
+    
+    print str(promo)
     return dict(promo=promo)
 
 def ok():
