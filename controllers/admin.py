@@ -119,9 +119,9 @@ def promo():
     #getting pending IDs
     promo=[]
     pen_ids= db(db.pending.flag==True).select(db.pending.uid)
-
-    for i in pen_ids:
-            promo.append(int(i))
+    print pen_ids
+    #for i in pen_ids:
+            #promo.append(int(i))
     
     print promo
     return dict(promo=promo)
