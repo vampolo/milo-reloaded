@@ -143,6 +143,10 @@ def please():
     print admin_ids
     
     current_id = auth.user_id
+    
+    #tester id <--- da cancellare
+    current_id = 7
+    
     return dict(admin_ids=admin_ids, current_id=current_id)
 
 def asking():
