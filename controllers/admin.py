@@ -119,13 +119,13 @@ def upload_form():
     return dict(form=form)
 
 def promo():
-    print auth.user_id
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
 
 def please():
 
     #privilege test
+    print auth.user_id
     print '\nPrivilege test: '
     runner = range(1,101)
     for count in runner:
