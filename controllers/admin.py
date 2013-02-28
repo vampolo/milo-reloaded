@@ -151,21 +151,20 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
-    #mail = [];
-    
+    #retrieve admin emails
+    mail = [];
     k = 0;
-    #for i in admin_ids:
-        #mail[0] = db(db.auth_user.id=9).select(db.auth_user.email)
-        #k = k + 1
+    for i in admin_ids:
+            tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
+            mail[k] = tempo[17:]
+            k = k +1
     
-    mail = str(db(db.auth_user.id==9).select(db.auth_user.email))
-    mail2 = mail[17:]
-    print mail2
+    print mail
     
     #tester id <--- da cancellare
     current_id = 7
     
-    return dict(admin_ids=admin_ids, current_id=current_id)
+    return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
 def asking():
     whois=request.args(0)
