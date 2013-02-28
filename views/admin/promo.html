@@ -12,12 +12,15 @@
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
 				<td>{{=uid}}</td>
+				<td>{{=uid}}</td>
+				<!--
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="add", _title="allow privileges", callback=URL('ok', args=[uid]), target="content")}}</li>
 						<li>{{=A('', _class="delete", _title="reject request", callback=URL('no', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
+				-->
 			</tr>
 			{{highlight = not highlight}}
 			{{pass}}
