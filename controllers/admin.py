@@ -151,10 +151,11 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
+    mail = [];
     #mail = auth.user.email
-    
-    mail = db(db.auth_user.id==9).select(db.auth_user.email)
-    
+    for item in admin_ids:
+        mail[item] = db(db.auth_user.id==admin_ids[item]).select(db.auth_user.email)
+        
     print mail
     
     #tester id <--- da cancellare
