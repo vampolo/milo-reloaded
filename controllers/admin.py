@@ -156,13 +156,10 @@ def please():
     k = 0;
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
-            tempo2 = str(tempo[17:])
-            mail = str(tempo2[:2])
+            mail[k].appen(str(tempo[17:]))
             k = k + 1
-            print k
-            print mail
     
-    #print mail
+    print mail
     
     #tester id <--- da cancellare
     current_id = 7
