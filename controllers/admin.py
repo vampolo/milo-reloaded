@@ -158,7 +158,8 @@ def please():
         #mail[0] = db(db.auth_user.id=9).select(db.auth_user.email)
         #k = k + 1
     
-    mail = db(db.auth_user.id==9).select(db.auth_user.email)  
+    mail = []
+    mail[0] = str(db(db.auth_user.id==9).select(db.auth_user.email))
     
     print mail
     
