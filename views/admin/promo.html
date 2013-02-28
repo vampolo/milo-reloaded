@@ -4,12 +4,14 @@
 		<tbody>
 			<tr>
 				<th class="col1">UserID</th>
+				<th class="col2">Username</th>
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
 			{{for uid in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
+				<td>{{=uname}}</td>
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="add", _title="allow privileges", callback=URL('ok', args=[uid]), target="content")}}</li>
