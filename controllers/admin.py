@@ -152,12 +152,12 @@ def please():
     current_id = auth.user_id
     
     #retrieve admin emails
-    mail = [];
+    mail = [][];
     k = 0;
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
             mail[0] = tempo[17:]
-            k = k +1
+            #k = k +1
             print mail[0]
     
     print mail
