@@ -151,14 +151,14 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
-    mail = [];
+    #mail = [];
     
     k = 0;
     #for i in admin_ids:
         #mail[0] = db(db.auth_user.id=9).select(db.auth_user.email)
         #k = k + 1
     
-    mail[0] = db(db.auth_user.id==9).select(db.auth_user.email)  
+    mail = db(db.auth_user.id==9).select(db.auth_user.email)  
     
     print mail
     
