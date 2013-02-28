@@ -143,25 +143,24 @@ def please():
     
     #check and store admin IDs
     admin_ids = [];
-    
-    print '\nAdmin IDs: '
     for count in runner:
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
-    print admin_ids
     current_id = auth.user_id
+    
+    #print '\nAdmin IDs: '
+    #print admin_ids
     
     #retrieve admin emails
     mail = [];
-    k = 0;
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
             tempo2 = str(tempo[17:])
             tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
-            k = k + 1
     
-    print mail
+    #print '\nAdmin mails: '
+    #print mail
     
     #tester id <--- da cancellare
     current_id = 7
