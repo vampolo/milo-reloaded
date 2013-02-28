@@ -144,8 +144,6 @@ def please():
     #check and store admin IDs
     admin_ids = [];
     
-    
-    
     print '\nAdmin IDs: '
     for count in runner:
             if (auth.has_membership('admin',count)):
@@ -153,7 +151,10 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
-    mail = auth.user(id==9).email
+    #mail = auth.user.email
+    
+    mail = db(auth.user_id==9).select(auth.user.email)
+    
     print mail
     
     #tester id <--- da cancellare
