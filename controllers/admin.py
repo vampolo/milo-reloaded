@@ -186,6 +186,7 @@ def asking():
     print penlist
     
     asking = penlist
+    redirect(URL('success'))
     return dict(asking=asking)
 
 def rules_en():
