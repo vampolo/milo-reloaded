@@ -151,18 +151,20 @@ def please():
 
 def asking():
     whois=request.args(0)
-    
-
+         
+    myrecord = db(db.pending.uid==13).select(db.pending.flag).first()
+    if myrecord == None
+        print 'nooooneeee'
     
     #insert into pending table
     db.pending.insert(uid=whois)
-    
-        
-    myrecord = db(db.pending.uid==7).select(db.pending.flag).first()
-    print myrecord
+
     
     #to reset pending table
     #db.pending.truncate()
+    
+    #to delete pending
+    #db(db.pending.uid==whois).delete()
     
     print '\nPending table'
     penlist = db(db.pending).select()
