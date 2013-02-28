@@ -121,7 +121,7 @@ def promo():
     pen_ids= str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
     
-    for i in range(1,10):
+    for i in range(0,10):
         k = pen_ids.split('\n')[i]
         print k
     
