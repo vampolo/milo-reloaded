@@ -187,7 +187,7 @@ def asking():
     print penlist
     
     #redirect(URL('index'))
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span></p>'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request has been successfully sent!</span></p>'
 
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
@@ -196,13 +196,6 @@ def rules_en():
 def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
-    
-#def success():
-    #return dict()
-
-#def gf_test():
-#    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
-#    return dict(gf_test=gf_test)
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
