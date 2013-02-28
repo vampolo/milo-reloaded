@@ -157,7 +157,7 @@ def please():
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
             tempo2 = str(tempo[17:])
-            mail = str(tempo[:2])
+            mail = str(tempo2[:2])
             k = k + 1
             print k
             print mail
