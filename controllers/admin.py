@@ -127,7 +127,9 @@ def promo():
         if ((str(pen_ids.split('\n')[i]))!= '\r'):
             temp = int(pen_ids.split('\n')[i])
             promo.append(temp)
+            print 'mango'
         else:
+            print'ananasso'
             z = 0;
         i = i +1;
     #for i in range(0,1):
@@ -135,7 +137,10 @@ def promo():
         #promo.append(temp)
     
     print 'banana'
-    print promo
+    print promo[0]
+    print promo[1]
+    print promo[2]
+    print promo[3]
     
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo, matrices=matrices)
