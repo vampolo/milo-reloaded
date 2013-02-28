@@ -134,6 +134,7 @@ def ok():
     
     #to delete pending
     #db(db.pending.uid==uid).delete()
+    
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
 
 def no():
@@ -143,7 +144,7 @@ def no():
     #db.pending.truncate()
     
     #to delete pending
-    #db(db.pending.uid==5).delete()
+    #db(db.pending.uid==uid).delete()
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
 
 def please():
