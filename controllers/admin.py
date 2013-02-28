@@ -160,7 +160,10 @@ def please():
     
     mail = db(db.auth_user.id==9).select(db.auth_user.email)
     
-    print str(mail)
+    a = []
+    a[0] = str(mail)
+    
+    print a
     
     #tester id <--- da cancellare
     current_id = 7
