@@ -2,28 +2,31 @@
 <div class="box">
 	<table>
 		<tbody>
+		{{=promo[0]}}
+		<!--
 			<tr>
 				<th class="col1">Name</th>
 				<th class="col2">Creation date</th>
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
-			{{for i in promo.iteritems():}}
+			{{for uid in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
-				<td>{{=promo[0]}}</td>
-				<td>{{=i}}</td>
-				<td>{{=i}}</td>
-				<!--
+				<td>{{=uid}}</td>
+				<td>{{=uid}}</td>
+				<td>{{=uid}}</td>
+
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="add", _title="ok", callback=URL('ok', args=[uid]), target="content")}}</li>
 						<li>{{=A('', _class="delete", _title="no", callback=URL('no', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
-				-->
+				
 			</tr>
 			{{highlight = not highlight}}
 			{{pass}}
+		-->
 		</tbody>
 	</table>
 </div>
