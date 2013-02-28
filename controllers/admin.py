@@ -151,14 +151,11 @@ def please():
 
 def asking():
     whois=request.args(0)
-         
-    myrecord = db(db.pending.uid==13).select(db.pending.flag).first()
-    if (myrecord == None):
-        print 'nooooneeee'
     
-    #insert into pending table
-    db.pending.insert(uid=whois)
-
+    #insert into pending table        
+    control = db(db.pending.uid==whois).select(db.pending.flag).first()
+    if (control == None):
+        db.pending.insert(uid=whois)
     
     #to reset pending table
     #db.pending.truncate()
