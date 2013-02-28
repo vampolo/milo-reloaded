@@ -187,7 +187,7 @@ def asking():
     
     asking = penlist
     
-    #redirect(URL('index'))
+    redirect(URL('index'))
     return dict(asking=asking)
 
 def rules_en():
