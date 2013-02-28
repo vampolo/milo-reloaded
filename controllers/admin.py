@@ -116,19 +116,12 @@ def upload_form():
 
 def promo():
     
-    print 'start'
     #getting pending IDs
     promo=[]
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
-    
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
-    #promo.append(pen_ids)
     
-    print 'finish'
-    print promo
-    
-    matrices = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(promo=promo, matrices=matrices)
+    return dict(promo=promo)
 
 def ok():
     print 'ok'
