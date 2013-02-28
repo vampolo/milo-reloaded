@@ -121,26 +121,14 @@ def promo():
     promo=[]
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
-    print pen_ids
     
-    z = 1;
-    i = 0;
-    while z != 0:
-        if (isinstance(         (pen_ids.split('\n')[i])      , int ) ==True):
-            temp = int(pen_ids.split('\n')[i])
-            promo.append(temp)
-            print temp
-            print 'mango'
-        else:
-            print'ananasso'
-            z = 0;
-        i = i +1;
+    promo = map(int,pen_ids)
+    
+    
+    #promo.append(temp)
     
     print 'banana'
-    print promo[0]
-    print promo[1]
-    print promo[2]
-    print promo[3]
+    print promo
     
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo, matrices=matrices)
