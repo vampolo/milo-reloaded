@@ -181,7 +181,7 @@ def asking():
     #to delete pending
     #db(db.pending.uid==5).delete()
     
-    print '\nPending table'
+    #pending list
     penlist = db(db.pending).select()
     print penlist
     
