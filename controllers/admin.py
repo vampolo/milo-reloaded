@@ -119,6 +119,7 @@ def upload_form():
     return dict(form=form)
 
 def promo():
+    print auth.user_id
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
 
