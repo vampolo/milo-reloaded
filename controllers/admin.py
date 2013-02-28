@@ -144,13 +144,17 @@ def please():
     #check and store admin IDs
     admin_ids = [];
     
+    
+    
     print '\nAdmin IDs: '
     for count in runner:
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     print admin_ids
-    
     current_id = auth.user_id
+    
+    mail = db(db.users.id==current_id).select(db.users.email)
+    print mail
     
     #tester id <--- da cancellare
     current_id = 7
