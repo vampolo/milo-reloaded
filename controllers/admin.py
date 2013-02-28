@@ -179,7 +179,7 @@ def asking():
     #db.pending.truncate()
     
     #to delete pending
-    #db(db.pending.uid==5).delete()
+    db(db.pending.uid==5).delete()
     
     print '\nPending table'
     penlist = db(db.pending).select()
@@ -187,7 +187,7 @@ def asking():
     
     asking = penlist
     
-    redirect(URL('index'))
+    #redirect(URL('index'))
     return dict(asking=asking)
 
 def rules_en():
