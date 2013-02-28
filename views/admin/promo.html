@@ -8,11 +8,11 @@
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
-			{{for uid in promo.iteritems():}}
+			{{for i in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
-				<td>{{=uid}}</td>
-				<td>{{=uid}}</td>
-				<td>{{=uid}}</td>
+				<td>{{=i}}</td>
+				<td>{{=i}}</td>
+				<td>{{=i}}</td>
 				<!--
 				<td class="action">
 					<ul style="width:75px;">
