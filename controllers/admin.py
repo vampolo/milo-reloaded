@@ -120,12 +120,7 @@ def promo():
     promo=[]
     pen_ids= db(db.pending.flag==True).select(db.pending.uid)
     for i in pen_ids:
-            print 'olè'
-            temp1 = int(i)
-            print temp1
-            temp2 = tempo1.split('}')[0]
-            print temp2
-            #promo.append(int(i))
+            print i
     
     #print promo
     return dict(promo=promo)
@@ -146,7 +141,7 @@ def no():
 
 def please():
 
-    #privilege test
+    #privilege test <-- da cancellare
     print '\nPrivilege test: '
     runner = range(1,101)
     for count in runner:
