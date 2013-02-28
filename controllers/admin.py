@@ -118,12 +118,10 @@ def promo():
     
     #getting pending IDs
     promo=[]
-    cont = (db(db.pending.flag==True).count*)
-    print cont
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
     
-    for i in range(0,10):
+    for i in range(0,1):
         temp = int(pen_ids.split('\n')[i])
         promo.append(temp)
     
