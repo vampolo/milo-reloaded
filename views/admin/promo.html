@@ -4,19 +4,16 @@
 		<tbody>
 			<tr>
 				<th class="col1">UserID</th>
-				<th class="col2">UserID</th>
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
 			{{for uid in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
-				<td>{{=uid}}</td>
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="edit", _title="download", _href=URL('download_matrice', args=[uid]))}}</li>
-						<li>{{=A('', _class="add", _title="make new matrice", callback=URL('make_matrice', args=[uid]), target="message")}}</li>
-						<li>{{=A('', _class="delete", _title="delete", callback=URL('delete_matrice', args=[uid]), target="message")}}</li>
+						<li>{{=A('', _class="add", _title="allow privileges", callback=URL('ok', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="delete", _title="reject request", callback=URL('no', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
 			</tr>
