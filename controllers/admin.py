@@ -46,10 +46,6 @@ def update_algorithm():
 def matrices():
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(matrices=matrices)
-    
-def upload():
-    upload = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(upload=upload)
 
 def upload_form():
     
@@ -117,19 +113,24 @@ def upload_form():
     else:
         response.flash='fill out the form'
     return dict(form=form)
-#'<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span></p>'
 
 def promo():
     promo = db(db.pending.flag==True).select(db.pending.uid).first()
     return dict(promo=promo)
 
 def ok():
-    ok = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(ok=ok)
+    print 'ok'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
 
 def no():
-    no = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(no=no)
+    
+    #to reset pending table
+    #db.pending.truncate()
+    
+    #to delete pending
+    #db(db.pending.uid==5).delete()
+    print 'no'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
 
 def please():
 
@@ -149,9 +150,6 @@ def please():
                 admin_ids.append(count);
     current_id = auth.user_id
     
-    #print '\nAdmin IDs: '
-    #print admin_ids
-    
     #retrieve admin emails
     mail = [];
     for i in admin_ids:
@@ -160,11 +158,8 @@ def please():
             tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
     
-    #print '\nAdmin mails: '
-    #print mail
-    
     #tester id <--- da cancellare
-    current_id = 7
+    current_id = 11
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
@@ -176,12 +171,6 @@ def asking():
     if (control == None):
         db.pending.insert(uid=whois)
     
-    #to reset pending table
-    #db.pending.truncate()
-    
-    #to delete pending
-    #db(db.pending.uid==5).delete()
-    
     #pending list
     penlist = db(db.pending).select()
     print penlist
@@ -190,12 +179,10 @@ def asking():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request has been successfully sent!</span></p>'
 
 def rules_en():
-    rules_en = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(rules_en=rules_en)
+    return dict()
     
 def rules_it():
-    rules_it = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(rules_it=rules_it)
+    return dict()
 
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
