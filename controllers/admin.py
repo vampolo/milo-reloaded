@@ -153,7 +153,7 @@ def please():
     
     mail = [];
     #mail = auth.user.email
-    for i in len(admin_ids):
+    for i in admin_ids:
         print i
         #mail[k] = db(db.auth_user.id=i).select(db.auth_user.email)
         
