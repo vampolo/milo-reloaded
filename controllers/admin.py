@@ -155,7 +155,7 @@ def please():
     
     mail = db(auth.user_query()).select()
     
-    print mail
+    print auth.user
     
     #tester id <--- da cancellare
     current_id = 7
