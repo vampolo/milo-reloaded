@@ -169,7 +169,7 @@ def asking():
     #db.pending.truncate()
     
     #to delete pending
-    db(db.pending.uid==whois).delete()
+    db(db.pending.uid==5).delete()
     
     print '\nPending table'
     penlist = db(db.pending).select()
