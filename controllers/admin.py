@@ -116,6 +116,7 @@ def upload_form():
 
 def promo():
     
+    print 'papaya'
     #getting pending IDs
     promo=[]
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
