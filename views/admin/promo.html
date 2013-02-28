@@ -8,14 +8,14 @@
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
-			{{for matrice,date in matrices.iteritems():}}
+			{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
-				<td>{{=matrice}}</td>
-				<td>{{=date}}</td>
+				<td>{{=uid}}</td>
+				<td>{{=uid}}</td>
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="add", _title="Accept the user request", _href=URL('ok', args=[matrice]))}}</li>
-						<li>{{=A('', _class="delete", _title="Reject the user request", callback=URL('no', args=[matrice]), target="message")}}</li>
+						<li>{{=A('', _class="add", _title="Accept the user request", _href=URL('ok', args=[uid]))}}</li>
+						<li>{{=A('', _class="delete", _title="Reject the user request", callback=URL('no', args=[uid]), target="message")}}</li>
 					</ul>
 				</td>
 			</tr>
