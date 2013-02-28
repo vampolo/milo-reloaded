@@ -127,16 +127,22 @@ def promo():
 
 def ok():
     print 'ok'
+    
+    #to grant privileges
+    #auth.add_membership('rsc',uid)
+    
+    #to delete pending
+    #db(db.pending.uid==uid).delete()
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
 
 def no():
+    print 'no'
     
     #to reset pending table
     #db.pending.truncate()
     
     #to delete pending
     #db(db.pending.uid==5).delete()
-    print 'no'
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
 
 def please():
