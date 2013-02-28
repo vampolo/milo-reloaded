@@ -126,7 +126,7 @@ def promo():
     z = 1;
     i = 0;
     while z != 0:
-        if ((str(pen_ids.split('\n')[i]))!= '\r'):
+        if (isinstance(         (pen_ids.split('\n')[i])      , int ) ==True):
             temp = int(pen_ids.split('\n')[i])
             promo.append(temp)
             print temp
