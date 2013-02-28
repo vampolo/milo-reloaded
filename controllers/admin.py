@@ -128,13 +128,23 @@ def promo():
     temp3 = int(pen_ids.split('\n')[2])
     print temp3
     
+    z = 1;
+    i = 0;
+    while z != 0:
+        if ((str(pen_ids.split('\n')[i]))!= '\r'):
+            temp = int(pen_ids.split('\n')[i])
+            promo.append(temp)
+        else:
+            z = 0;
+        i = i +1;
     #for i in range(0,1):
         #temp = int(pen_ids.split('\n')[i])
         #promo.append(temp)
     
     print 'banana'
-    matrices = matlab_wrapper.Whisperer.get_matrices_info()
+    print promo
     
+    matrices = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo, matrices=matrices)
 
 def ok():
