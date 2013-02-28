@@ -122,6 +122,14 @@ def promo():
     promo = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(promo=promo)
 
+def ok():
+    ok = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(ok=ok)
+
+def no():
+    no = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(no=no)
+
 def please():
 
     #privilege test
@@ -161,7 +169,7 @@ def asking():
     #db.pending.truncate()
     
     #to delete pending
-    #db(db.pending.uid==whois).delete()
+    db(db.pending.uid==whois).delete()
     
     print '\nPending table'
     penlist = db(db.pending).select()
