@@ -122,7 +122,7 @@ def promo():
     pen_ids=str(pen_ids[13:])
     print pen_ids
     
-    for i in 9:
+    for i in range(1,10):
         print i
     
     #tempo3 = tempo2.split('\r')[0]
