@@ -111,12 +111,13 @@ def upload_form():
             print 'error. algorithm family is not valid'
         
         response.flash='record inserted'
-        redirect(URL('index'))
+        #redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
     else:
         response.flash='fill out the form'
-    return (form=form,'<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span></p>')
+    return (form=form)
+#'<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span></p>'
 
 def promo():
     promo = db(db.pending.flag==True).select(db.pending.uid).first()
