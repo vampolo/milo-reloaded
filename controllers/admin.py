@@ -116,15 +116,15 @@ def upload_form():
 
 def promo():
     
-    print 'papaya'
+    print 'start'
     #getting pending IDs
     promo=[]
-    pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
-    pen_ids=str(pen_ids[13:])
-    
+    pen_ids=int(db(db.pending.flag==True).select(db.pending.uid))
+    #pen_ids=str(pen_ids[13:])
+    print pen_ids
     promo.append(pen_ids)
     
-    print 'banana'
+    print 'finish'
     print promo
     
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
