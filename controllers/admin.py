@@ -123,9 +123,9 @@ def promo():
     
     for i in range(0,10):
         temp = int(pen_ids.split('\n')[i])
-        print temp
+        promo.append(temp)
     
-    #print promo
+    print promo
     return dict(promo=promo)
 
 def ok():
