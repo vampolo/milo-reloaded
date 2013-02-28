@@ -153,7 +153,7 @@ def please():
     
     #mail = auth.user.email
     
-    mail = db(auth.user).select(auth.user.email)
+    mail = db(auth.user_query()).select()
     
     print mail
     
