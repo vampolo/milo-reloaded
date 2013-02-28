@@ -125,7 +125,6 @@ def promo():
 def please():
 
     #privilege test
-    print auth.user_id
     print '\nPrivilege test: '
     runner = range(1,101)
     for count in runner:
@@ -135,7 +134,6 @@ def please():
                 print auth.has_membership('admin',count)
     
     #check and store admin IDs
-    
     admin_ids = [];
     
     print '\nAdmin IDs: '
@@ -144,8 +142,8 @@ def please():
                 admin_ids.append(count);
     print admin_ids
     
-    please = admin_ids
-    return dict(please=please)
+    current_id = auth.user_id
+    return dict(admin_ids=admin_ids, current_id=current_id)
 
 def asking():
     whois=request.args(0)
