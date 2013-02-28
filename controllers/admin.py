@@ -186,8 +186,6 @@ def asking():
     print penlist
     
     asking = penlist
-    
-    redirect(URL('index'))
     return dict(asking=asking)
 
 def rules_en():
@@ -198,9 +196,8 @@ def rules_it():
     rules_it = matlab_wrapper.Whisperer.get_matrices_info()
     return dict(rules_it=rules_it)
     
-#def success():
-#    success = matlab_wrapper.Whisperer.get_matrices_info()
-#    return dict(success=success)
+def success():
+    return dict()
 
 #def gf_test():
 #    gf_test = matlab_wrapper.Whisperer.get_matrices_info()
