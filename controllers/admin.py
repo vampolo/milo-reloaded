@@ -122,10 +122,7 @@ def promo():
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
     
-    promo = map(int,pen_ids)
-    
-    
-    #promo.append(temp)
+    promo.append(pen_ids)
     
     print 'banana'
     print promo
