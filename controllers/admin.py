@@ -153,7 +153,7 @@ def please():
     
     #mail = auth.user.email
     
-    mail = db.auth_user.select(id == 9)
+    mail = db(db.auth_user.id==9).select()
     
     print mail
     
@@ -174,7 +174,7 @@ def asking():
     #db.pending.truncate()
     
     #to delete pending
-    db(db.pending.uid==5).delete()
+    #db(db.pending.uid==5).delete()
     
     print '\nPending table'
     penlist = db(db.pending).select()
