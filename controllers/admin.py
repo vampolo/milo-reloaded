@@ -153,9 +153,8 @@ def asking():
     whois=request.args(0)
          
     myrecord = db(db.pending.uid==13).select(db.pending.flag).first()
-    print myrecord
-    #if myrecord == 'None'
-        #print 'nooooneeee'
+    if str(myrecord) == 'None'
+        print 'nooooneeee'
     
     #insert into pending table
     db.pending.insert(uid=whois)
