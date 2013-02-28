@@ -118,10 +118,13 @@ def promo():
     
     #getting pending IDs
     promo=[]
-    temp1= db(db.pending.flag==True).select(db.pending.uid)
-    temp2 = str(temp1[12:])
-    temp3 = temp2.split('\r')[0]
-    promo.append(temp3)
+    pen_ids= db(db.pending.flag==True).select(db.pending.uid)
+
+    for i in pen_ids:
+            print i
+            #tempo2 = str(i[12:])
+            #tempo3 = tempo2.split('\r')[0]
+            #promo.append(tempo3)
     
     print promo
     return dict(promo=promo)
