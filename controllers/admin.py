@@ -159,7 +159,7 @@ def please():
         #k = k + 1
     
     mail = str(db(db.auth_user.id==9).select(db.auth_user.email))
-    mail2 = mail[16:]
+    mail2 = mail[17:]
     print mail2
     
     #tester id <--- da cancellare
