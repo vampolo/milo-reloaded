@@ -120,12 +120,10 @@ def promo():
     promo=[]
     pen_ids= str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
-    print pen_ids
     
     for i in range(1,10):
-        print i
-    
-    #tempo3 = tempo2.split('\r')[0]
+        k = pen_ids.split('\n')[i]
+        print k
     
     #print promo
     return dict(promo=promo)
