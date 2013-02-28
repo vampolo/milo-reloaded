@@ -119,7 +119,7 @@ def upload_form():
     return dict(form=form)
 
 def promo():
-    promo = matlab_wrapper.Whisperer.get_matrices_info()
+    promo = db(db.pending.flag==True).select(db.pending.uid).first()
     return dict(promo=promo)
 
 def ok():
