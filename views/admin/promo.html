@@ -14,8 +14,8 @@
 				<td>{{=date}}</td>
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="edit", _title="Accept the user request", _href=URL('ok', args=[matrice]))}}</li>
-						<li>{{=A('', _class="add", _title="Reject the user request", callback=URL('no', args=[matrice]), target="message")}}</li>
+						<li>{{=A('', _class="add", _title="Accept the user request", _href=URL('ok', args=[matrice]))}}</li>
+						<li>{{=A('', _class="delete", _title="Reject the user request", callback=URL('no', args=[matrice]), target="message")}}</li>
 					</ul>
 				</td>
 			</tr>
