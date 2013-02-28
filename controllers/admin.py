@@ -154,7 +154,8 @@ def please():
     mail = [];
     #mail = auth.user.email
     for i in admin_ids:
-        print admin_ids[int(i)]
+        print i
+        #print admin_ids[int(i)]
         #mail[item] = db(db.auth_user.id==admin_ids[item]).select(db.auth_user.email)
         
     print mail
