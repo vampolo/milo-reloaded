@@ -186,7 +186,7 @@ def asking():
     print penlist
     
     #redirect(URL('index'))
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span>' +str(A("Refresh page", _title="Index", target="content", callback=URL("index")))+'</p>'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request ended well</span>' +str(A("Refresh page", target="content", callback=URL("upload_form")))+'</p>'
 
 def rules_en():
     rules_en = matlab_wrapper.Whisperer.get_matrices_info()
