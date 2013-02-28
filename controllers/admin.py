@@ -158,9 +158,9 @@ def please():
         #mail[0] = db(db.auth_user.id=9).select(db.auth_user.email)
         #k = k + 1
     
-    mail = db(db.auth_user.id==9).select(str(db.auth_user.email))
-    
-    print mail
+    mail = db(db.auth_user.id==9).select(db.auth_user.email)
+    mail2 = mail.split('mail')[0]
+    print mail2
     
     #tester id <--- da cancellare
     current_id = 7
