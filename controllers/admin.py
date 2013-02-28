@@ -125,7 +125,9 @@ def promo():
         temp = int(pen_ids.split('\n')[i])
         promo.append(temp)
     
-    return dict(promo=promo)
+    matrices = matlab_wrapper.Whisperer.get_matrices_info()
+    
+    return dict(promo=promo, matrices=matrices)
 
 def ok():
     print 'ok'
