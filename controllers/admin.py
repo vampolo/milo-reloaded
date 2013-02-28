@@ -121,6 +121,7 @@ def promo():
     promo=[]
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
+    print pen_ids
     
     z = 1;
     i = 0;
@@ -128,14 +129,12 @@ def promo():
         if ((str(pen_ids.split('\n')[i]))!= '\r'):
             temp = int(pen_ids.split('\n')[i])
             promo.append(temp)
+            print temp
             print 'mango'
         else:
             print'ananasso'
             z = 0;
         i = i +1;
-    #for i in range(0,1):
-        #temp = int(pen_ids.split('\n')[i])
-        #promo.append(temp)
     
     print 'banana'
     print promo[0]
