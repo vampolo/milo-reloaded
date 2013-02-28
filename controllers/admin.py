@@ -111,7 +111,7 @@ def upload_form():
             print 'error. algorithm family is not valid'
         
         response.flash='record inserted'
-        #redirect(URL('index'))
+        redirect(URL('index'))
     elif form.errors:
         response.flash="errors"
     else:
