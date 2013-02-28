@@ -153,7 +153,7 @@ def please():
     print admin_ids
     current_id = auth.user_id
     
-    mail = auth.user_email
+    mail = auth.username
     #mail = db(db.users.id==current_id).select()
     print mail
     
