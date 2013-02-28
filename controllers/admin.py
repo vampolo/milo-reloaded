@@ -115,9 +115,15 @@ def upload_form():
     return dict(form=form)
 
 def promo():
-    promo = db(db.pending.flag==True).select(db.pending.uid)
     
-    print str(promo)
+    #getting pending IDs
+    promo=[]
+    temp1= db(db.pending.flag==True).select(db.pending.uid)
+    temp2 = str(temp1[12:])
+    temp3 = temp2.split('\r')[0]
+    promo.append(temp3)
+    
+    print promo
     return dict(promo=promo)
 
 def ok():
