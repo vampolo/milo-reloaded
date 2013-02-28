@@ -121,9 +121,16 @@ def promo():
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     pen_ids=str(pen_ids[13:])
     
-    for i in range(0,1):
-        temp = int(pen_ids.split('\n')[i])
-        promo.append(temp)
+    temp1 = int(pen_ids.split('\n')[0])
+    print temp1
+    temp2 = int(pen_ids.split('\n')[1])
+    print temp2
+    temp3 = int(pen_ids.split('\n')[2])
+    print temp3
+    
+    #for i in range(0,1):
+        #temp = int(pen_ids.split('\n')[i])
+        #promo.append(temp)
     
     print 'banana'
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
