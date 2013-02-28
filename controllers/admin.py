@@ -153,7 +153,7 @@ def please():
     
     #mail = auth.user.email
     
-    mail = (auth.user.id==9).select(auth.user.email)
+    mail = (auth.user_id==9).select(auth.user.email)
     
     print mail
     
