@@ -3,15 +3,15 @@
 	<table>
 		<tbody>
 			<tr>
-				<th class="col1">Name</th>
-				<th class="col2">Creation date</th>
+				<th class="col1">UserID</th>
+				<th class="col2">UserID</th>
 				<th class="col3">Actions</th>
 			</tr>
 			{{highlight=True}}
-			{{for matrice,date in matrices.iteritems():}}
+			{{for uid in promo.iteritems():}}
 			<tr class="{{='highlight' if highlight else ''}}">
-				<td>{{=matrice}}</td>
-				<td>{{=date}}</td>
+				<td>{{=uid}}</td>
+				<td>{{=uid}}</td>
 				<td class="action">
 					<ul style="width:75px;">
 						{{if date is not None:}}
