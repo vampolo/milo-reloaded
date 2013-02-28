@@ -147,6 +147,7 @@ def please():
     #tester id <--- da cancellare
     current_id = 7
     
+    redirect(URL('index'))
     return dict(admin_ids=admin_ids, current_id=current_id)
 
 def asking():
@@ -159,7 +160,6 @@ def asking():
     print penlist
     
     asking = penlist
-    redirect(URL('index'))
     return dict(asking=asking)
 
 def rules_en():
