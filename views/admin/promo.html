@@ -14,7 +14,7 @@
 				<td>{{=uid}}</td>
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="add", _title="Accept the user request", _href=URL('ok', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="add", _title="Accept the user request", callback=URL('ok', args=[uid]), target="content")}}</li>
 						<li>{{=A('', _class="delete", _title="Reject the user request", callback=URL('no', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
