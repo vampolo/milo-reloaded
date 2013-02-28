@@ -122,9 +122,8 @@ def promo():
     pen_ids=str(pen_ids[13:])
     
     for i in range(0,10):
-        temp1 = pen_ids.split('\n')[i]
-        temp2 = temp1.split('\r')[0]
-        print temp2
+        temp = int(pen_ids.split('\n')[i])
+        print temp
     
     #print promo
     return dict(promo=promo)
