@@ -122,8 +122,8 @@ def promo():
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
     
     
-    s=str(db(db.auth_user.id==7).select(db.auth_user.first_name))
-    s = s.split('\n')[1]
+    s=(str(db(db.auth_user.id==7).select(db.auth_user.first_name)))split('\n')[1]
+    #s = s.split('\n')[1]
     
     print s
     
