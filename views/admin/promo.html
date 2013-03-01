@@ -9,6 +9,9 @@
 				<th class="col4">Actions</th>
 			</tr>
 			{{highlight=True}}
+			
+			{{if not promo:}}
+			
 			{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
@@ -26,6 +29,12 @@
 				</td>
 			</tr>
 			{{highlight = not highlight}}
+			{{pass}}
+			
+			{{pass}}
+			
+			{{else:}}
+				<td>No active requests</td>
 			{{pass}}
 		</tbody>
 	</table>
