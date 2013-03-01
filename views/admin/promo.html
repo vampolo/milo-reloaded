@@ -2,6 +2,7 @@
 <div class="box">
 	<table>
 		<tbody>
+			{{if promo:}}
 			<tr>
 				<th class="col1">User ID</th>
 				<th class="col2">Username</th>
@@ -9,8 +10,6 @@
 				<th class="col4">Actions</th>
 			</tr>
 			{{highlight=True}}
-			
-			{{if promo:}}
 			
 				{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
@@ -34,7 +33,7 @@
 			{{pass}}
 			
 			{{if not promo:}}
-				<p>No pending requests!</p>
+				<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests</span></p>
 			{{pass}}
 		</tbody>
 	</table>
