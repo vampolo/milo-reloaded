@@ -1,8 +1,8 @@
 <h2>User Management</h2>
 <div class="box">
+	{{if promo:}}
 	<table>
 		<tbody>
-			{{if promo:}}
 			<tr>
 				<th class="col1">User ID</th>
 				<th class="col2">Username</th>
@@ -29,16 +29,14 @@
 			</tr>
 				{{highlight = not highlight}}
 				{{pass}}
-			
-			{{pass}}
-			
-			{{if not promo:}}
-				{{highlight=True}}
-				<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests</span></p>
-				{{highlight = not highlight}}
-			{{pass}}
+
 		</tbody>
 	</table>
+	{{pass}}
+	
+	{{if not promo:}}
+		<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests</span></p>
+	{{pass}}
 </div>
 <br>
 <div id="message">
