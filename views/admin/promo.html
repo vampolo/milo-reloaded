@@ -13,7 +13,7 @@
 				<td>{{=uid}}</td>
 				
 				{{nome=(str(db(db.auth_user.id==uid).select(db.auth_user.first_name)))}}
-				{{nome=str(tempo[19:]}}
+				{{nome=(str(tempo[19:]))}}
 				
 				<td>{{=nome}}</td>
 				<td class="action">
