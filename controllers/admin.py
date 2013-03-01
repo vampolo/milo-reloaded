@@ -126,11 +126,15 @@ def promo():
 def ok():
     whois=request.args(0)
     
+    print 'step1'
     #grant privileges
     auth.add_membership('rsc',uid)
     
+    print 'step2'
     #delete pending
     db(db.pending.uid==whois).delete()
+    
+    print 'step3'
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
 
