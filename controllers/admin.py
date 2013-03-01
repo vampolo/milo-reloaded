@@ -171,7 +171,7 @@ def please():
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
             tempo2 = str(tempo[17:])
-            tempo3 = tempo2.split('\r')[0]
+            tempo3 = tempo2.split('\n')[0]
             mail.append(tempo3)
     
     #tester id <--- da cancellare
