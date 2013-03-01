@@ -124,23 +124,24 @@ def promo():
     return dict(promo=promo)
 
 def ok():
+    whois=request.args(0)
     
-    print 'banana'
-    #to grant privileges
+    #grant privileges
     auth.add_membership('rsc',uid)
     
-    #to delete pending
-    db(db.pending.uid==uid).delete()
+    #delete pending
+    db(db.pending.uid==whois).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
 
 def no():
+    whois=request.args(0)
     
-    #to reset pending table
+    #reset pending table
     #db.pending.truncate()
     
-    #to delete pending
-    db(db.pending.uid==uid).delete()
+    #delete pending
+    db(db.pending.uid==whois).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
 
