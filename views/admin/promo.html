@@ -11,7 +11,7 @@
 			{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
-				<td>{{=uid}}</td>
+				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.first_name)))</td>
 				<td class="action">
 					<ul style="width:75px;">
 						<li>{{=A('', _class="add", _title="Accept the user request", callback=URL('ok', args=[uid]), target="content")}}</li>
