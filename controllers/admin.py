@@ -127,7 +127,7 @@ def ok():
     whois=request.args(0)
     
     #grant privileges
-    auth.add_membership('rsc',whois)
+    auth.add_membership('admin',whois)
     
     #delete pending
     db(db.pending.uid==whois).delete()
@@ -151,7 +151,7 @@ def please():
     print '\nPrivilege test: '
     runner = range(1,101)
     for count in runner:
-            if (count == 9 or count == 10 or count == 11):
+            if (count == 7 or count == 9 or count == 10 or count == 12):
                 print '\nID: ' + str(count)
                 print auth.has_membership('rsc',count)
                 print auth.has_membership('admin',count)
@@ -172,7 +172,7 @@ def please():
             mail.append(tempo3)
     
     #tester id <--- da cancellare
-    current_id = 11
+    current_id = 7
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
