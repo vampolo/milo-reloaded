@@ -121,12 +121,6 @@ def promo():
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
     
-    
-    s= (str(db(db.auth_user.id==7).select(db.auth_user.first_name))).split('\n')[1]
-    #s = s.split('\n')[1]
-    
-    print s
-    
     return dict(promo=promo)
 
 def ok():
