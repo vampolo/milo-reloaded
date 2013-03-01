@@ -12,7 +12,7 @@
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=uid}}</td>
 				
-				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.first_name))).split('\n')[1] +
+				<td>{{=(str(db(db.auth_user.id==9).select(db.auth_user.first_name))).split('\n')[1] +
 				(str(db(db.auth_user.id==uid).select(db.auth_user.last_name))).split('\n')[1]}}</td>
 				<td class="action">
 					<ul style="width:75px;">
