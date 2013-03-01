@@ -123,7 +123,7 @@ def promo():
     
     
     t1=str(db(db.auth_user.id==7).select(db.auth_user.first_name))
-    t2 = t1[:s.rfind("name")]
+    t2 = t1[s.rfind("name"):]
     t3 = t2.split('\r')[0]
     
     print t3
