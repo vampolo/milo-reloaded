@@ -128,7 +128,7 @@ def ok():
     
     print 'step1'
     #grant privileges
-    auth.add_membership('rsc',uid)
+    auth.add_membership('rsc',whois)
     
     print 'step2'
     #delete pending
