@@ -1,6 +1,7 @@
 <h2>User Management</h2>
+
+{{if promo:}}
 <div class="box">
-	{{if promo:}}
 	<table>
 		<tbody>
 			<tr>
@@ -32,12 +33,16 @@
 
 		</tbody>
 	</table>
-	{{pass}}
+
 	
-	{{if not promo:}}
-		<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests</span></p>
-	{{pass}}
+
 </div>
+{{pass}}
+
+{{if not promo:}}
+	<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests</span></p>
+{{pass}}
+
 <br>
 <div id="message">
 
