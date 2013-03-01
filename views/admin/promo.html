@@ -10,7 +10,7 @@
 			</tr>
 			{{highlight=True}}
 			
-			{{if not promo:}}
+			{{if promo:}}
 			
 				{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
@@ -31,6 +31,10 @@
 				{{highlight = not highlight}}
 				{{pass}}
 			
+			{{pass}}
+			
+			{{if promo:}}
+				<p>No pending requests!</p>
 			{{pass}}
 		</tbody>
 	</table>
