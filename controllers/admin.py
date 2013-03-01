@@ -122,7 +122,7 @@ def promo():
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
     
     
-    nome=str(db(db.auth_user.id==7).select(db.auth_user.first_name))[20:]
+    nome=(str(db(db.auth_user.id==7).select(db.auth_user.first_name)))[20:]
     nome = nome.split('\r')[0]
     print nome
     
@@ -171,7 +171,7 @@ def please():
     for i in admin_ids:
             tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
             tempo2 = str(tempo[17:])
-            tempo3 = tempo2.split('\n')[0]
+            tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
     
     #tester id <--- da cancellare
