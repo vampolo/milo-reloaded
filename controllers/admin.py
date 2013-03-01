@@ -186,7 +186,7 @@ def asking():
     
     #pending list
     penlist = db(db.pending).select()
-    print penlist
+    #print penlist
     
     #redirect(URL('index'))
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request has been successfully sent!</span></p>'
