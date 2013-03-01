@@ -122,7 +122,7 @@ def promo():
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
     
     
-    nome=str(db(db.auth_user.id==7).select(db.auth_user.first_name))
+    nome=str(db(db.auth_user.id==7).select(db.auth_user.first_name))[19:]
     print nome
     
     return dict(promo=promo)
