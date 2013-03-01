@@ -125,6 +125,7 @@ def promo():
 
 def ok():
     
+    print 'banana'
     #to grant privileges
     auth.add_membership('rsc',uid)
     
