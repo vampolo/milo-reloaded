@@ -123,7 +123,9 @@ def promo():
     
     
     s=str(db(db.auth_user.id==7).select(db.auth_user.first_name))
-    s = [s.rfind("name":)]
+    s = s[s.rfind("name":)]
+    s = s.split('\r')[0]
+    
     print s
     
     return dict(promo=promo)
