@@ -172,7 +172,7 @@ def please():
             mail.append(tempo3)
     
     #tester id <--- da cancellare
-    current_id = 5
+    current_id = 7
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
