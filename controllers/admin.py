@@ -148,7 +148,7 @@ def addadm():
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
-def rvkadmin():
+def rvkadm():
     whois=request.args(0)
     
     #revoke admin privileges
