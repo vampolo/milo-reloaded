@@ -57,9 +57,9 @@ def upload_form():
         
         #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.model_creator_function)
-        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + str(form.vars.algorithm_name) + ".m"
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.recommender_function)
-        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
@@ -67,7 +67,7 @@ def upload_form():
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
         if (form.vars.algorithm_sharing == 'private'):
-            form.vars.algorithm_name = str(form.vars.algorithm_name) + '@User' + str(auth.user_id)
+            form.vars.algorithm_name = str(form.vars.algorithm_name) + '@user' + str(auth.user_id)
         
         #control insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
@@ -78,6 +78,7 @@ def upload_form():
                 
         #whole upload list
         enlist = db(db.uplds).select()
+        db.uplds.truncate()
         print enlist
         
         #change direcotry due to alg_type
