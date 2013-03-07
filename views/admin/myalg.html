@@ -13,7 +13,7 @@
 
 				{{for upld in myalg:}}
 				<tr class="{{='highlight' if highlight else ''}}">
-        			<td>{{=upld.algorithm_name}}</td>
+        			<td>{{=upld.algorithm_name.split("@user")[0]}}</td>
         			<td>{{=upld.algorithm_sharing}}</td>
   				<td class="action">
 					<ul>
