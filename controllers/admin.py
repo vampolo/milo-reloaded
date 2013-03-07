@@ -64,8 +64,8 @@ def upload_form():
         os.rename(rnm2a,rnm2b)
         
         #function renames in database
-        form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
-        form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
+        form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_name) + ".m"
+        form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
         if (form.vars.algorithm_sharing == 'private'):
             form.vars.algorithm_name = str(form.vars.algorithm_name) + '@user' + str(auth.user_id)
         
@@ -77,8 +77,8 @@ def upload_form():
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
                 
         #whole upload list
-        enlist = db(db.uplds).select()
         db.uplds.truncate()
+        enlist = db(db.uplds).select()
         print enlist
         
         #change direcotry due to alg_type
