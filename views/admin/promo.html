@@ -22,8 +22,8 @@
 				
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="add", _title="Promote to admin", callback=URL('ok', args=[uid]), target="content")}}</li>
-						<li>{{=A('', _class="delete", _title="Revoke admin privileges", callback=URL('no', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="add", _title="Promote to admin", callback=URL('addadm', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="delete", _title="Revoke admin privileges", callback=URL('rvkadm', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
 			</tr>
