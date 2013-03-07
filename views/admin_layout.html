@@ -54,7 +54,7 @@ media="screen" />
 			</li>
 			
 			<li class="subitems">
-				<a href="#" title="My Algorithms">My Algorithms</a>
+				{{=A('My Algorithms', _title="My Algorithms", callback=URL('admin', 'myalg'), target='content')}}
 				<ul>
 					{{for alg in algorithms:}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
