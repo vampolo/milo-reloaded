@@ -159,7 +159,7 @@ def rvkadm():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 def please():
-     print 'banana1'
+    print 'banana1'
     #check and store admin IDs
     admin_ids = [];
     for count in runner:
