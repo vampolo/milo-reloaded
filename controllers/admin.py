@@ -55,6 +55,10 @@ def upload_form():
             
     if form.process().accepted:
         
+        #renaming private algs
+        if (form.vars.algorithm_sharing == 'private'):
+            form.vars.algorithm_name = str(form.vars.algorithm_name) + '@user' + str(auth.user_id)
+        
         #function renames in system
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.model_creator_function)
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + str(form.vars.algorithm_name) + ".m"
@@ -66,50 +70,26 @@ def upload_form():
         #function renames in database
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
-        if (form.vars.algorithm_sharing == 'private'):
-            form.vars.algorithm_name = str(form.vars.algorithm_name) + '@user' + str(auth.user_id)
         
-        #control insertion
+        #database insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
         print 'Model function: ' + str(form.vars.model_creator_function)
         print 'Recommender function: ' + str(form.vars.recommender_function)
         print 'Algorithm sharing type: ' + str(form.vars.algorithm_sharing)
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
-                
-        #whole upload list
+        
+        #change direcotry due to algorithm sharing type
+        if (form.vars.algorithm_sharing == 'private'):
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
+                        
+        #upload table
         enlist = db(db.uplds).select()
         #print enlist
         
         #reset uplds table
         #db.uplds.truncate()
-        
-        #change direcotry due to alg_type
-        #if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
-            #os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name)
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/latentFactors/' + form.vars.algorithm_identifier_name
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-        
-        #elif (form.vars.algorithm_family == 'collaborative(neighborhood-based)'):
-            #os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/neighborhoodBased/' + form.vars.algorithm_identifier_name)
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/collaborative/neighborhoodBased/' + form.vars.algorithm_identifier_name
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-        
-        #elif (form.vars.algorithm_family == 'content-based'):
-            #os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name)
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/content-based/' + form.vars.algorithm_identifier_name
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-        
-        #elif (form.vars.algorithm_family == 'non-personalized'):
-            #os.mkdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name)
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/non-personalized/' + form.vars.algorithm_identifier_name
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-        
-        #else:
-            #print 'error. algorithm family is not valid'
         
         response.flash='record inserted'
         redirect(URL('index'))
