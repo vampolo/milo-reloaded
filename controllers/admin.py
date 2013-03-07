@@ -56,10 +56,10 @@ def upload_form():
     if form.process().accepted:
         
         #function renames in system
-        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.model_creator_function
-        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + form.vars.algorithm_identifier_name + ".m"
-        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + form.vars.recommender_function
-        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + form.vars.algorithm_identifier_name + ".m"
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.model_creator_function)
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.recommender_function)
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
@@ -77,8 +77,8 @@ def upload_form():
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
                 
         #whole upload list
-        #enlist = db(db.uplds).select()
-        #print enlist
+        enlist = db(db.uplds).select()
+        print enlist
     
         if (form.vars.algorithm_sharing == 'public'):
             print 'uploaded algorithm is seet as public'
