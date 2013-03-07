@@ -118,17 +118,10 @@ def promo():
     
     #getting pending IDs
     promo=[]
-    #pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
-    #promo = [int(s) for s in pen_ids.split() if s.isdigit()]
-    
-    print '\nPrivilege test: '
-    runner = range(1,101)
+    runner = range(1,1001)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
-                print count
-                #promo.append(count)
-    
-    print promo
+                promo.append(count)
     
     return dict(promo=promo)
 
