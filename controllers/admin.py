@@ -122,20 +122,24 @@ def rename():
 
 def change():
     whois=request.args(0)
-    print 'gino'
-    alg = db(db.uplds.id==whois).select(db.uplds.algorithm_sharing)
-    print alg
     
-        #if (alg.algorithm_sharing == 'private'):
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-        #if (alg.algorithm_sharing == 'public'):
-            #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
-            #shutil.move(rnm1b, dst)
-            #shutil.move(rnm2b, dst)
-    #change algorithm type
-    print 'change type'
+    alg_name = db(db.uplds.id==whois).select(db.uplds.algorithm_name).split("@user")[0]
+    
+    alg_type = db(db.uplds.id==whois).select(db.uplds.algorithm_sharing)
+    print alg_name
+    print alg_type
+    #if (alg_type == 'private'):
+        #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
+        #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
+        #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+        #shutil.move(src1, dst)
+        #shutil.move(src2, dst)
+    #if (alg_type == 'public'):
+        #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
+        #shutil.move(src1, dst)
+        #shutil.move(src2, dst)
+    
+    
   
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
