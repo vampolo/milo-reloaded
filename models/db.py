@@ -59,11 +59,6 @@ auth.settings.extra_fields[auth.settings.table_user_name] = [
 ## create all tables needed by auth if not custom tables
 auth.define_tables()
 
-db.define_table('pending',
-        Field('uid', db.users, requires = IS_IN_DB(db,'users.id',db.users._format),unique=True),
-        Field('flag', 'boolean', default=True)
-        )
-
 ## privilege group
 rsc_group = auth.add_group(role = 'rsc')
 auth.settings.everybody_group_id = rsc_group
