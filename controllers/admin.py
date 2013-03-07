@@ -128,7 +128,7 @@ def change():
     #print alg_name
     print alg_type
     
-    alg = db(db.uplds.id==whois).select()
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     print alg
     print alg.algorithm_sharing
     
