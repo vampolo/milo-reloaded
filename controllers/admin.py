@@ -129,7 +129,7 @@ def change():
     print alg_type
     
     alg = db(db.uplds.id==whois).select()
-    print alg
+    print alg.algorithm_name
     
     #if (alg_type == 'private'):
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
