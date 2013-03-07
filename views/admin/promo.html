@@ -1,6 +1,5 @@
 <h2>User Management</h2>
 
-{{if promo:}}
 <div class="box">
 	<table>
 		<tbody>
@@ -23,8 +22,8 @@
 				
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="add", _title="Accept the user request", callback=URL('ok', args=[uid]), target="content")}}</li>
-						<li>{{=A('', _class="delete", _title="Reject the user request", callback=URL('no', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="add", _title="Promote to admin", callback=URL('ok', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="delete", _title="Revoke admin privileges", callback=URL('no', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
 			</tr>
@@ -37,11 +36,6 @@
 	
 
 </div>
-{{pass}}
-
-{{if not promo:}}
-	<p class="alert congrats"><span class="txt"><span class="icon"></span>No active requests!</span></p>
-{{pass}}
 
 <br>
 <div id="message">
