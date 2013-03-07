@@ -121,11 +121,12 @@ def promo():
     pen_ids=str(db(db.pending.flag==True).select(db.pending.uid))
     promo = [int(s) for s in pen_ids.split() if s.isdigit()]
     
-    for i in range(1,100):
-        uid = db(db.auth_user.id==i).select(db.auth_user.id)
-        print auth.has_membership('rsc',uid)
-        #if ((auth.has_membership('rsc',uid))==True):
-            #print uid
+    print '\nPrivilege test: '
+    runner = range(1,101)
+    for count in runner:
+            if (auth.has_membership('rsc',count) == True):
+                print '\nID: ' + str(count)
+                print auth.has_membership('rsc',count)
     
     return dict(promo=promo)
 
@@ -152,15 +153,6 @@ def no():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
 
 def please():
-
-    #privilege test <-- da cancellare
-    print '\nPrivilege test: '
-    runner = range(1,101)
-    for count in runner:
-            if (count == 7 or count == 9 or count == 10 or count == 12):
-                print '\nID: ' + str(count)
-                print auth.has_membership('rsc',count)
-                print auth.has_membership('admin',count)
     
     #check and store admin IDs
     admin_ids = [];
