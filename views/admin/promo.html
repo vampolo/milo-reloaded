@@ -20,14 +20,14 @@
 				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.email))).split('\n')[1]}}</td>
 				
 				<td class="action">
-					<ul style="width:75px;">
+					<ul>
 						<!--<li>{{=A('', _class="add", _title="Promote to researcher", callback=URL('addrsc', args=[uid]), target="content")}}</li>-->
 						<li>{{=A('', _class="delete", _title="Revoke researcher privileges", callback=URL('rvkrsc', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
 				
 				<td class="action">
-					<ul style="width:75px;">
+					<ul>
 						{{if (auth.has_membership('admin',uid) == False):}}
 						<li>{{=A('', _class="add", _title="Promote to admin", callback=URL('addadm', args=[uid]), target="content")}}</li>
 						{{pass}}
