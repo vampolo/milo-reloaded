@@ -209,7 +209,7 @@ db.define_table('uplds',
                 #Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative(latent-factors)', 'collaborative(neighborhood-based)','content-based','non-personalized'])),
                 Field('algorithm_sharing', 'string', requires = IS_IN_SET(['public','private']), default='public')
                 )
-#db.uplds.algorithm_identifier_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_identifier_name')
+db.uplds.algorithm_identifier_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_name')
 
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
