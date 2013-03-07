@@ -118,11 +118,11 @@ def promo():
     
     #getting pending IDs
     promo=[]
-    runner = range(1,1001)
+    runner = range(1,101)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
-    
+    print promo
     return dict(promo=promo)
 
 def ok():
