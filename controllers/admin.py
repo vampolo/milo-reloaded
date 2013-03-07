@@ -123,10 +123,14 @@ def rename():
 def change():
     whois=request.args(0)
     
-    #alg_name = db(db.uplds.id==whois).select(db.uplds.algorithm_name).split("@user")[0]
+    #alg_name = (str(db(db.uplds.id==whois).select(db.uplds.algorithm_name))).split("@user")[0]
     alg_type = db(db.uplds.id==whois).select(db.uplds.algorithm_sharing)
     #print alg_name
     print alg_type
+    
+    alg = db(db.uplds.id==whois).select(ALL)
+    print alg
+    
     #if (alg_type == 'private'):
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
