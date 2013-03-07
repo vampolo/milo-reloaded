@@ -13,23 +13,19 @@
 
 				{{for alg in myalg:}}
 				<tr class="{{='highlight' if highlight else ''}}">
-        			<td>
-          				nome
-        			</td>
+        			<td>{{=algorithm_name}}</td>
 
 				<td class="action">
 					<ul>
-						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rvkrsc', args=[alg]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id]), target="content")}}</li>
 					</ul>
 				</td>
         
-        			<td>
-         	 			tipo
-        			</td>
+        			<td>{{=algorithm_sharing}}</td>
 
   				<td class="action">
 					<ul>
-						<li>{{=A('', _class="edit", _title="Change sharing type", callback=URL('rvkrsc', args=[alg]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Change sharing type", callback=URL('change', args=[alg.id]), target="content")}}</li>
 					</ul>
 				</td>
         
