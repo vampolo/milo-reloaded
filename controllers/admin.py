@@ -67,7 +67,7 @@ def upload_form():
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
         if (form.vars.algorithm_sharing == 'private'):
-            form.vars.algorithm_name = str(form.vars.algorithm_name) + '-' + str(auth.user_id)
+            form.vars.algorithm_name = str(form.vars.algorithm_name) + '@User' + str(auth.user_id)
         
         #control insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
