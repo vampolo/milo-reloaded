@@ -12,13 +12,10 @@
 			{{highlight=True}}
 
 				{{for alg in myalg:}}
-			<tr class="{{='highlight' if highlight else ''}}">
-<!--
-				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.email))).split('\n')[1]}}</td>
--->
-        <td>
-          nome
-        </td>
+				<tr class="{{='highlight' if highlight else ''}}">
+        			<td>
+          				nome
+        			</td>
 
 				<td class="action">
 					<ul>
@@ -26,11 +23,11 @@
 					</ul>
 				</td>
         
-        <td>
-          tipo
-        </td>
+        			<td>
+         	 			tipo
+        			</td>
 
-  			<td class="action">
+  				<td class="action">
 					<ul>
 						<li>{{=A('', _class="edit", _title="Change sharing type", callback=URL('rvkrsc', args=[5]), target="content")}}</li>
 					</ul>
