@@ -66,24 +66,19 @@ def upload_form():
         #function renames in database
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
-        form.vars.author = auth.user_id
+        if (form.vars.algorithm_sharing == 'private'):
+            form.vars.algorithm_name = str(form.vars.algorithm_name) + '-' + str(auth.user_id)
         
         #control insertion
-        print "\nUploaded new algorithm: " + str(form.vars.algorithm_identifier_name)
+        print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
         print 'Model function: ' + str(form.vars.model_creator_function)
         print 'Recommender function: ' + str(form.vars.recommender_function)
         print 'Algorithm sharing type: ' + str(form.vars.algorithm_sharing)
-        print 'Author ID: ' + str(auth.user_id)
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
                 
         #whole upload list
         enlist = db(db.uplds).select()
         print enlist
-    
-        if (form.vars.algorithm_sharing == 'public'):
-            print 'uploaded algorithm is seet as public'
-        if (form.vars.algorithm_sharing == 'prive'):
-            print 'uploaded algorithm is seet as private'
         
         #change direcotry due to alg_type
         #if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
