@@ -108,6 +108,7 @@ def rules_en():
     
 def myalg():
     myalg = db(db.uplds).select()
+    print 'ciao'
     return dict(myalg=myalg)
 
 def please():
