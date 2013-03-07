@@ -175,22 +175,6 @@ def please():
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
-#obsoleta
-def asking():
-    whois=request.args(0)
-    
-    #insert into pending table        
-    control = db(db.pending.uid==whois).select(db.pending.flag).first()
-    if (control == None):
-        db.pending.insert(uid=whois)
-    
-    #pending list
-    penlist = db(db.pending).select()
-    #print penlist
-    
-    #redirect(URL('index'))
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Your request has been successfully sent!</span></p>'
-
 def rules_en():
     return dict()
     
