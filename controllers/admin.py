@@ -122,8 +122,9 @@ def rename():
 
 def change():
     whois=request.args(0)
-    alg = db(db.uplds.id==whois).select()
-    print alg.algorithm_sharing
+    print 'gino'
+    alg = db(db.uplds.id==whois).select(db.uplds.algorithm_sharing)
+    print alg
     
         #if (alg.algorithm_sharing == 'private'):
             #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
