@@ -162,7 +162,7 @@ def please():
     print 'banana1'
     #check and store admin IDs
     admin_ids = [];
-    for count in runner:
+    for count2 in runner2:
             if (auth.has_membership('admin',count)):
                 admin_ids.append(count);
     current_id = auth.user_id
