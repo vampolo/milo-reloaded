@@ -171,11 +171,9 @@ def please():
             tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
     
-    #tester id <--- da cancellare
-    current_id = 7
-    
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
+#obsoleta
 def asking():
     whois=request.args(0)
     
