@@ -77,9 +77,11 @@ def upload_form():
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
                 
         #whole upload list
-        db.uplds.truncate()
         enlist = db(db.uplds).select()
-        print enlist
+        #print enlist
+        
+        #reset uplds table
+        #db.uplds.truncate()
         
         #change direcotry due to alg_type
         #if (form.vars.algorithm_family == 'collaborative(latent-factors)'):
