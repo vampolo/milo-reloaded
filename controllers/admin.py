@@ -108,6 +108,8 @@ def rules_en():
     
 def myalg():
     myalg = db(db.uplds).select()
+    
+    #only user algorithm
     return dict(myalg=myalg)
 
 def rename():
