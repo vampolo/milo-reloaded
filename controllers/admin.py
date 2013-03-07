@@ -110,6 +110,22 @@ def myalg():
     myalg = db(db.uplds).select()
     return dict(myalg=myalg)
 
+def rename():
+    whois=request.args(0)
+    
+    #rename algorithm   
+    print 'rename'
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+def change():
+    whois=request.args(0)
+    
+    #change algorithm type
+    print 'change type'
+  
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
 def please():
 
     #check and store admin IDs
