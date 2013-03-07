@@ -129,7 +129,8 @@ def change():
     print alg_type
     
     alg = db(db.uplds.id==whois).select()
-    print alg.algorithm_name
+    print alg
+    print alg.algorithm_sharing
     
     #if (alg_type == 'private'):
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
@@ -141,7 +142,6 @@ def change():
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
-    
     
   
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
