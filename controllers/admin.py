@@ -123,7 +123,7 @@ def promo():
     
     for i in range(1,100):
         uid = db(db.auth_user.id==i).select(db.auth_user.id)
-        print uid
+        print auth.has_membership('rsc',uid)
         #if ((auth.has_membership('rsc',uid))==True):
             #print uid
     
