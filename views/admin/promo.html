@@ -4,21 +4,27 @@
 	<table>
 		<tbody>
 			<tr>
-				<th class="col1">User ID</th>
-				<th class="col2">Username</th>
-				<th class="col3">Email</th>
-				<th class="col4">Actions</th>
+				<th class="col1">Username</th>
+				<th class="col2">Email</th>
+				<th class="col3">Researcher powers</th>
+				<th class="col4">Admin powers</th>
 			</tr>
 			{{highlight=True}}
 			
 				{{for uid in promo:}}
 			<tr class="{{='highlight' if highlight else ''}}">
-				<td>{{=uid}}</td>
 				
 				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.first_name))).split('\n')[1] +
 				(str(db(db.auth_user.id==uid).select(db.auth_user.last_name))).split('\n')[1]}}</td>
 				
 				<td>{{=(str(db(db.auth_user.id==uid).select(db.auth_user.email))).split('\n')[1]}}</td>
+				
+				<td class="action">
+					<ul style="width:75px;">
+						<li>{{=A('', _class="add", _title="Promote to researcher", callback=URL('addrsc', args=[uid]), target="content")}}</li>
+						<li>{{=A('', _class="delete", _title="Revoke researcher privileges", callback=URL('rvkrsc', args=[uid]), target="content")}}</li>
+					</ul>
+				</td>
 				
 				<td class="action">
 					<ul style="width:75px;">
