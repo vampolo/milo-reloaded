@@ -4,7 +4,7 @@ import csv
 import os
 import shutil
 
-MAX_USERS = 300
+MAX_USERS = 100
 
 @auth.requires_membership('rsc')
 def index():    
