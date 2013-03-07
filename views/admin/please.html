@@ -3,14 +3,7 @@
 	<div style="padding: 10px 20px 50px;">
 		<p class="text">For any problem or request, in this panel you can contact Admin via email.</p>
 		<p class="text">Click <a href="mailto:{{=mail}}">here</a> to mail Admin</p>
-		<br><br>
-		<p class="text">In this panel you can also ask for Admin privileges; if your request is approved, you can access to additional system functionalities as:</p>
-		<p class="text">	- Access to an additional control panel: the Admin Dashboard</p>
-		<p class="text">	- Update datasets</p>
-		<p class="text">	- View, download and delete matlab matrices</p>
-		<p class="text">	- Trace system errors through the bisect method</p>
-		<p class="text">	- Manage user privileges</p>
-		{{=A(SPAN('Ask for Admin privileges'), _class="button", _style="margin-top:30px", callback=URL('asking', args=[current_id]), target = "content")}}
+		<!--{{=A(SPAN('Ask for Admin privileges'), _class="button", _style="margin-top:30px", callback=URL('asking', args=[current_id]), target = "content")}}-->
 	</div>
 </div>
 <div class="box-end"></div>
