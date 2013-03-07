@@ -35,6 +35,10 @@ def indexplus():
     workers = db_scheduler(db_scheduler.scheduler_run.status=='RUNNING').select()
     return dict(algorithms=algorithms, matrices_info=matrices, info=l, workers=workers)
 
+##########################
+## Researcher dashboard ##
+##########################
+
 def info_algorithm():
     algname = request.args(0)
     infos = matlab_wrapper.Whisperer.get_models_info()
@@ -44,10 +48,6 @@ def update_algorithm():
     algname=request.args(0)
     schedule_model(algname=algname)
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Model creation correctly submitted</span></p>'
-
-def matrices():
-    matrices = matlab_wrapper.Whisperer.get_matrices_info()
-    return dict(matrices=matrices)
 
 def upload_form():
     
@@ -116,6 +116,37 @@ def upload_form():
         response.flash='fill out the form'
     return dict(form=form)
 
+def rules_en():
+    return dict()
+    
+def rules_it():
+    return dict()
+
+def please():
+
+    #check and store admin IDs
+    admin_ids = [];
+    runner = range(1,MAX_USERS)
+    for count in runner:
+            if (auth.has_membership('admin',count)):
+                admin_ids.append(count);
+    current_id = auth.user_id
+
+    #retrieve admin emails
+    mail = [];
+    for i in admin_ids:
+            tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
+            tempo2 = str(tempo[17:])
+            tempo3 = tempo2.split('\r')[0]
+            mail.append(tempo3)
+    
+    return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
+
+
+#####################
+## Admin dashboard ##
+#####################
+
 def promo():
     
     #getting researchers' ID
@@ -158,35 +189,10 @@ def rvkadm():
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
-def please():
-    print 'banana1'
-    #check and store admin IDs
-    admin_ids = [];
-    runner = range(1,MAX_USERS)
-    for count in runner:
-            if (auth.has_membership('admin',count)):
-                admin_ids.append(count);
-    current_id = auth.user_id
+def matrices():
+    matrices = matlab_wrapper.Whisperer.get_matrices_info()
+    return dict(matrices=matrices)
     
-    print 'banana2'
-    #retrieve admin emails
-    mail = [];
-    for i in admin_ids:
-            tempo = str(db(db.auth_user.id==i).select(db.auth_user.email))
-            tempo2 = str(tempo[17:])
-            tempo3 = tempo2.split('\r')[0]
-            mail.append(tempo3)
-            
-    print 'banana3'
-    
-    return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
-
-def rules_en():
-    return dict()
-    
-def rules_it():
-    return dict()
-
 def download_matrice():
     matrices = matlab_wrapper.Whisperer.get_matrices_path()
     matrice = request.args(0)
