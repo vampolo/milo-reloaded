@@ -89,7 +89,7 @@ def upload_form():
             shutil.move(rnm2b, dst)
         
         #reset uplds table
-        db.uplds.truncate()
+        #db.uplds.truncate()
 
         #upload table
         enlist = db(db.uplds).select()
