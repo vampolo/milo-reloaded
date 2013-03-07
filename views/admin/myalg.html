@@ -11,16 +11,16 @@
 			</tr>
 			{{highlight=True}}
 
-				{{for alg in myalg:}}
+				{{for upld in myalg:}}
 				<tr class="{{='highlight' if highlight else ''}}">
-        			<td>{{=alg.algorithm_name}}</td>
+        			<td>{{=upld.algorithm_name}}</td>
   				<td class="action">
 					<ul>
-						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[upld.id]), target="content")}}</li>
 					</ul>
 				</td>
-        			<td>{{=alg.algorithm_sharing}}</td>
-        			<td>{{=alg.algorithm_sharing}}</td>
+        			<td>{{=upld.id}}</td>
+        			<td>{{=upld.algorithm_sharing}}</td>
 				{{highlight = not highlight}}
 				{{pass}}
 
