@@ -119,7 +119,7 @@ def upload_form():
         response.flash='fill out the form'
     return dict(form=form)
 
-def rules():
+def rules_en():
     return dict()
 
 def please():
