@@ -163,8 +163,8 @@ def please():
     #check and store admin IDs
     admin_ids = [];
     for count2 in runner2:
-            if (auth.has_membership('admin',count)):
-                admin_ids.append(count);
+            if (auth.has_membership('admin',count2)):
+                admin_ids.append(count2);
     current_id = auth.user_id
     
     print 'banana2'
