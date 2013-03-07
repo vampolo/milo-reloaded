@@ -105,6 +105,10 @@ def upload_form():
 
 def rules_en():
     return dict()
+    
+def myalg():
+    myalg = db(db.uplds).select()
+    return dict(myalg=myalg)
 
 def please():
 
