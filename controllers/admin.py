@@ -83,13 +83,17 @@ def upload_form():
             dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
             shutil.move(rnm1b, dst)
             shutil.move(rnm2b, dst)
-                        
-        #upload table
-        enlist = db(db.uplds).select()
-        #print enlist
+        if (form.vars.algorithm_sharing == 'public'):
+            dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+            shutil.move(rnm1b, dst)
+            shutil.move(rnm2b, dst)
         
         #reset uplds table
-        #db.uplds.truncate()
+        db.uplds.truncate()
+
+        #upload table
+        enlist = db(db.uplds).select()
+        print enlist
         
         response.flash='record inserted'
         redirect(URL('index'))
