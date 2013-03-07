@@ -6,8 +6,8 @@
 			<tr>
 				<th class="col1">Username</th>
 				<th class="col2">Email</th>
-				<th class="col3">Researcher powers</th>
-				<th class="col4">Admin powers</th>
+				<th class="col3">Researcher privileges</th>
+				<th class="col4">Admin privileges</th>
 			</tr>
 			{{highlight=True}}
 			
@@ -21,15 +21,19 @@
 				
 				<td class="action">
 					<ul style="width:75px;">
-						<li>{{=A('', _class="add", _title="Promote to researcher", callback=URL('addrsc', args=[uid]), target="content")}}</li>
+						<!--<li>{{=A('', _class="add", _title="Promote to researcher", callback=URL('addrsc', args=[uid]), target="content")}}</li>-->
 						<li>{{=A('', _class="delete", _title="Revoke researcher privileges", callback=URL('rvkrsc', args=[uid]), target="content")}}</li>
 					</ul>
 				</td>
 				
 				<td class="action">
 					<ul style="width:75px;">
+						{{if (auth.has_membership('admin',uid) == False):}}
 						<li>{{=A('', _class="add", _title="Promote to admin", callback=URL('addadm', args=[uid]), target="content")}}</li>
+						{{pass}}
+						{{if (auth.has_membership('admin',uid) == True):}}
 						<li>{{=A('', _class="delete", _title="Revoke admin privileges", callback=URL('rvkadm', args=[uid]), target="content")}}</li>
+						{{pass}}
 					</ul>
 				</td>
 			</tr>
