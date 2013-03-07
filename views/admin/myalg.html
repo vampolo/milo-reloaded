@@ -5,22 +5,26 @@
 		<tbody>
 			<tr>
 				<th class="col1">Name</th>
-				<th class="col2">Name Actions</th>
-				<th class="col3">Type</th>
-				<th class="col4">Type Actions</th>
+				<th class="col2">Type</th>
+				<th class="col3">Change name</th>
+				<th class="col4">Change Type</th>
 			</tr>
 			{{highlight=True}}
 
 				{{for upld in myalg:}}
 				<tr class="{{='highlight' if highlight else ''}}">
         			<td>{{=upld.algorithm_name}}</td>
+        			<td>{{=upld.algorithm_sharing}}</td>
   				<td class="action">
 					<ul>
-						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[upld.id]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[upld]), target="content")}}</li>
 					</ul>
 				</td>
-        			<td>{{=upld.id}}</td>
-        			<td>{{=upld.algorithm_sharing}}</td>
+        			<td class="action">
+					<ul>
+						<li>{{=A('', _class="edit", _title="Change algorithm type", callback=URL('change', args=[upld]), target="content")}}</li>
+					</ul>
+				</td>
 				{{highlight = not highlight}}
 				{{pass}}
 
