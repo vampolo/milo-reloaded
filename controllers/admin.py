@@ -116,36 +116,45 @@ def upload_form():
 
 def promo():
     
-    #getting pending IDs
+    #getting researchers' ID
     promo=[]
     runner = range(1,101)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
-    print promo
     return dict(promo=promo)
 
-def ok():
+def addrsc():
     whois=request.args(0)
     
-    #grant privileges
+    #grant rsc privileges
+    auth.add_membership('rsc',whois)
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+def rvkrsc():
+    whois=request.args(0)
+    
+    #revoke rsc privileges
+    auth.del_membership('rsc',whois)
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+def addadm():
+    whois=request.args(0)
+    
+    #grant admin privileges
     auth.add_membership('admin',whois)
     
-    #delete pending
-    db(db.pending.uid==whois).delete()
-    
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully accepted!</span></p>'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
-def no():
+def rvkadmin():
     whois=request.args(0)
     
-    #reset pending table
-    #db.pending.truncate()
+    #revoke admin privileges
+    auth.del_membership('admin',whois)
     
-    #delete pending
-    db(db.pending.uid==whois).delete()
-    
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Request successfully rejected!</span></p>'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 def please():
     
