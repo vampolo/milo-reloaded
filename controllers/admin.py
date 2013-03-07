@@ -64,15 +64,15 @@ def upload_form():
         os.rename(rnm2a,rnm2b)
         
         #function renames in database
-        form.vars.model_creator_function = "createModel_" + form.vars.algorithm_identifier_name + ".m"
-        form.vars.recommender_function = "onLineRecom_" + form.vars.algorithm_identifier_name + ".m"
+        form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_identifier_name) + ".m"
+        form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_identifier_name) + ".m"
         form.vars.author = auth.user_id
         
         #control insertion
-        print "\nUploaded new algorithm: " + form.vars.algorithm_identifier_name
-        print 'Model function: ' + form.vars.model_creator_function
-        print 'Recommender function: ' + form.vars.recommender_function
-        print 'Algorithm sharing type: ' + form.vars.algorithm_sharing    
+        print "\nUploaded new algorithm: " + str(form.vars.algorithm_identifier_name)
+        print 'Model function: ' + str(form.vars.model_creator_function)
+        print 'Recommender function: ' + str(form.vars.recommender_function)
+        print 'Algorithm sharing type: ' + str(form.vars.algorithm_sharing)
         print 'Author ID: ' + str(auth.user_id)
         db.uplds.insert(**db.uplds._filter_fields(form.vars))
                 
