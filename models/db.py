@@ -203,11 +203,12 @@ db.define_table('surveys',
                 )
                 
 db.define_table('uplds',
-                Field('algorithm_identifier_name', requires=IS_NOT_EMPTY()),
-                Field('author'),
+                Field('algorithm_name', requires=IS_NOT_EMPTY()),
+                Field('author', requires=IS_NOT_EMPTY()),
                 Field('model_creator_function', 'upload', uploadfolder='applications/milo/modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='m')),
                 Field('recommender_function', 'upload',uploadfolder='applications/milo/modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='m')),
                 Field('algorithm_family', 'string', requires = IS_IN_SET(['collaborative(latent-factors)', 'collaborative(neighborhood-based)','content-based','non-personalized']))
+                Field('algorithm_sharing', 'string', requires = IS_IN_SET(['public','private']))
                 )
                 
 db.uplds.algorithm_identifier_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_identifier_name')
