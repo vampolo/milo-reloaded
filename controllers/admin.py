@@ -159,7 +159,7 @@ def rvkadm():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 def please():
-    
+     print 'banana1'
     #check and store admin IDs
     admin_ids = [];
     for count in runner:
@@ -167,6 +167,7 @@ def please():
                 admin_ids.append(count);
     current_id = auth.user_id
     
+    print 'banana2'
     #retrieve admin emails
     mail = [];
     for i in admin_ids:
@@ -175,7 +176,7 @@ def please():
             tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
             
-    print 'banana'
+    print 'banana3'
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
