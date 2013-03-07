@@ -117,7 +117,7 @@ def upload_form():
     return dict(form=form)
 
 def promo():
-    print MAX_USERS
+    
     #getting researchers' ID
     promo=[]
     runner = range(1,MAX_USERS)
