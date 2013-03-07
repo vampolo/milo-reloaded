@@ -4,6 +4,8 @@ import csv
 import os
 import shutil
 
+MAX_USERS = 300
+
 @auth.requires_membership('rsc')
 def index():    
     
@@ -115,10 +117,10 @@ def upload_form():
     return dict(form=form)
 
 def promo():
-    
+    print MAX_USERS
     #getting researchers' ID
     promo=[]
-    runner = range(1,301)
+    runner = range(1,MAX_USERS)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
