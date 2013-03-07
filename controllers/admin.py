@@ -174,6 +174,8 @@ def please():
             tempo2 = str(tempo[17:])
             tempo3 = tempo2.split('\r')[0]
             mail.append(tempo3)
+            
+    print 'banana'
     
     return dict(admin_ids=admin_ids, current_id=current_id, mail=mail)
 
