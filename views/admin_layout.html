@@ -48,7 +48,9 @@ media="screen" />
 				<a href="#" title="Public Algorithms">Public Algorithms</a>
 				<ul>
 					{{for alg in algorithms:}}
+					{{if (alg.count('@user'))==0:}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
+					{{pass}}
 					{{pass}}
 				</ul>
 			</li>
