@@ -128,7 +128,7 @@ def change():
     #print alg_name
     print alg_type
     
-    alg = db(db.uplds.id==whois).select(ALL)
+    alg = db(db.uplds.id==whois).select()
     print alg
     
     #if (alg_type == 'private'):
