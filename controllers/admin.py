@@ -118,7 +118,7 @@ def promo():
     
     #getting researchers' ID
     promo=[]
-    runner = range(1,101)
+    runner = range(1,301)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
