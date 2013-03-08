@@ -59,7 +59,9 @@ media="screen" />
 				{{=A('My Algorithms', _title="My Algorithms", callback=URL('admin', 'myalg'), target='content')}}
 				<ul>
 					{{for alg in algorithms:}}
-					{{print alg}}
+					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
+					{{algid = int(''.join(c for c in algline if c.isdigit()))}}
+					{{print algid}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
