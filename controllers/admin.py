@@ -132,9 +132,12 @@ def change():
     print algo
     
     if (algo[4] == 'private'):
+        algo[1]=algo[1].split('@user')[0]
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
         row.update_record(algorithm_sharing='public')
+        row.update_record(algorithm_name=algo[1])
+        print row
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
