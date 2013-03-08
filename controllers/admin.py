@@ -88,12 +88,20 @@ def upload_form():
             shutil.move(rnm1b, dst)
             shutil.move(rnm2b, dst)
         
+        #setting ownership table
+        print 'own'
+        iid = db(db.uplds.algorithm_name==str(form.vars.algorithm_name)).select(db.uplds.id)
+        db.owns.insert(upload=iid, author=int(auth.user_id))
+        owners = db(db.owns).select()
+        print owners
+        print 'ga fom?'
+        
         #reset uplds table
         #db.uplds.truncate()
 
         #upload table
         enlist = db(db.uplds).select()
-        print enlist
+        #print enlist
         
         response.flash='record inserted'
         redirect(URL('index'))
