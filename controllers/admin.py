@@ -135,13 +135,15 @@ def change():
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
         row.update_record(algorithm_sharing='public')
-        print rows
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
-    #if (alg_type == 'public'):
+    if (algo[4] == 'public'):
+        rows = db(db.uplds.id==whois).select()
+        row = rows[0]
+        row.update_record(algorithm_sharing='private')
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
