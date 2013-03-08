@@ -60,7 +60,8 @@ media="screen" />
 				<ul>
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
-					{{checker = db(db.owns.upload==algline).select(db.owns.author)}}
+					{{algid = algline.translate(None, string.digits)}}
+					{{checker = db(db.owns.upload==algid).select(db.owns.author)}}
 					{{print checker}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
