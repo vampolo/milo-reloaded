@@ -61,7 +61,7 @@ media="screen" />
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
 					
-					{{algid = 9}}
+					{{algid = 117}}
 					{{print algid}}
 					
 					{{checker = db(db.owns.upload==int(algid)).select(db.owns.author)}}
