@@ -137,16 +137,18 @@ def change():
         row = rows[0]
         row.update_record(algorithm_sharing='public')
         row.update_record(algorithm_name=algo[1])
-        print row
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
     if (algo[4] == 'public'):
+        algo[1] += '@user'
+        algo[1] += str(auth.user_id)
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
         row.update_record(algorithm_sharing='private')
+        row.update_record(algorithm_name=algo[1])
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
