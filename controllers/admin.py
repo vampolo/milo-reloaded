@@ -70,6 +70,10 @@ def upload_form():
         #function renames in database
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
+         
+        #reset tables
+        db.uplds.truncate()
+        db.owns.truncate()
         
         #database insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
@@ -93,16 +97,11 @@ def upload_form():
         iiid = int(''.join(c for c in iid if c.isdigit()))
         db.owns.insert(upload=iiid, author=int(auth.user_id))
 
-        
-        #reset tables
-        db.uplds.truncate()
-        db.owns.truncate()
-
         #check tables
         enlist = db(db.uplds).select()
-        #print enlist
+        print enlist
         owners = db(db.owns).select()
-        #print owners
+        print owners
         
         response.flash='record inserted'
         redirect(URL('index'))
