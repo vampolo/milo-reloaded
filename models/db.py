@@ -212,7 +212,7 @@ db.define_table('uplds',
 db.uplds.algorithm_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_name')
 
 db.define_table('owns',
-                Field('upload', requires=IS_NOT_EMPTY()),
+                Field('upload', 'integer', requires=IS_NOT_EMPTY()),
                 Field('author', requires=IS_NOT_EMPTY())
                 )
 
