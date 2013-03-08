@@ -58,13 +58,16 @@ media="screen" />
 			<li class="subitems">
 				{{=A('My Algorithms', _title="My Algorithms", callback=URL('admin', 'myalg'), target='content')}}
 				<ul>
-					{{import re}}
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
+					
 					{{algid = 9}}
+					
 					{{checker = db(db.owns.upload==algid).select(db.owns.author)}}
 					{{print checker}}
+					{{if (checker == int(auth.user_id)):}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
+					{{pass}}
 					{{pass}}
 				</ul>
 			</li>
