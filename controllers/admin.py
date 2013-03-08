@@ -134,7 +134,6 @@ def change():
         row = rows[0]
         
         #change name
-        oldname = algo[1]
         algo[1]=algo[1].split('@user')[0]
         row.update_record(algorithm_name=algo[1])
         
@@ -177,16 +176,25 @@ def change():
         row.update_record(algorithm_sharing='private') 
         
         #change model function
+        oldmod = algo[2]
         pos = algo[2].rfind('.m')
         algo[2] = algo[2][:pos] + '@user' + str(auth.user_id) + algo[2][pos:]
         row.update_record(model_creator_function=algo[2]) 
         
         #change recom function
+        oldrec = algo[3]
         pos = algo[3].rfind('.m')
         algo[3] = algo[3][:pos] + '@user' + str(auth.user_id) + algo[3][pos:]
         row.update_record(recommender_function=algo[3]) 
 
-
+        #rename and move files
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
+        os.rename(rnm1a,rnm1b)
+        os.rename(rnm2a,rnm2b)
+        
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
