@@ -142,14 +142,27 @@ def change():
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
     if (algo[4] == 'public'):
-        algo[1] = algo[1] + '@user' + str(auth.user_id)
-        pos = algo[2].rfind('.m')
-        algo[2] = algo[2][:pos] + '@user' + str(auth.user_id) + algo[2][pos:]
-        print algo[2]
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
-        row.update_record(algorithm_sharing='private')
+        
+        #change nome
+        algo[1] = algo[1] + '@user' + str(auth.user_id)
         row.update_record(algorithm_name=algo[1])
+        
+        #change tipo
+        row.update_record(algorithm_sharing='private') 
+        
+        #change model function
+        pos = algo[2].rfind('.m')
+        algo[2] = algo[2][:pos] + '@user' + str(auth.user_id) + algo[2][pos:]
+        row.update_record(model_creator_function=algo[2]) 
+        
+        #change recom function
+        pos = algo[3].rfind('.m')
+        algo[3] = algo[3][:pos] + '@user' + str(auth.user_id) + algo[3][pos:]
+        row.update_record(recommender_function=algo[3]) 
+
+
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
