@@ -51,6 +51,10 @@ def update_algorithm():
 
 def upload_form():
     
+    #reset tables
+    #db.uplds.truncate()
+    #db.owns.truncate()
+    
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
@@ -71,9 +75,7 @@ def upload_form():
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
          
-        #reset tables
-        db.uplds.truncate()
-        db.owns.truncate()
+
         
         #database insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
