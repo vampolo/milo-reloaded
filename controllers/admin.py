@@ -122,7 +122,7 @@ def rename():
     algo = alg.split(',')
     
     #choose new name
-    newname = 'vesta'
+    newname = 'phobos'
     
     if (algo[4] == 'private'):
         rows = db(db.uplds.id==whois).select()
