@@ -142,9 +142,9 @@ def change():
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
     if (algo[4] == 'public'):
-        algo[1] += '@user'
-        algo[1] += str(auth.user_id)
-        algo[2] = algo[2][:2]
+        algo[1] = algo[1] + '@user' + str(auth.user_id)
+        pos = algo[2].rfind('.m')
+        algo[2] = algo[2][:pos] + '@user' + str(auth.user_id) + algo[2][pos:]
         print algo[2]
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
