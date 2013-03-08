@@ -142,20 +142,23 @@ def change():
         row.update_record(algorithm_sharing='public') 
         
         #change model function
+        oldmod = algo[2]
         algo[2] = algo[2].split('@user')[0] + '.m'
         row.update_record(model_creator_function=algo[2]) 
         
         #change recom function
+        oldrec = algo[3]
         algo[3] = algo[3].split('@user')[0] + '.m'
         row.update_record(recommender_function=algo[3]) 
         
         #rename and move files
-        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + oldname + ".m"
-        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[2] + ".m"
-        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + oldname + ".m"
-        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[3] + ".m"
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
+        
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
