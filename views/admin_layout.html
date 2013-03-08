@@ -59,6 +59,7 @@ media="screen" />
 				{{=A('My Algorithms', _title="My Algorithms", callback=URL('admin', 'myalg'), target='content')}}
 				<ul>
 					{{for alg in algorithms:}}
+					{{print alg}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
