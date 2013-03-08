@@ -89,12 +89,11 @@ def upload_form():
             shutil.move(rnm2b, dst)
         
         #setting ownership table
-        print 'own'
-        iid = db(db.uplds.algorithm_name==str(form.vars.algorithm_name)).select(db.uplds.id)
+        iid = str(db(db.uplds.algorithm_name==str(form.vars.algorithm_name)).select(db.uplds.id))
+        iid = [int(s) for s in iid.split() if s.isdigit()]
         db.owns.insert(upload=iid, author=int(auth.user_id))
         owners = db(db.owns).select()
         print owners
-        print 'ga fom?'
         
         #reset uplds table
         #db.uplds.truncate()
