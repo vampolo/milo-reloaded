@@ -100,10 +100,10 @@ def upload_form():
         db.owns.insert(upload=iiid, author=int(auth.user_id))
 
         #check tables
-        enlist = db(db.uplds).select()
-        print enlist
-        owners = db(db.owns).select()
-        print owners
+        #enlist = db(db.uplds).select()
+        #print enlist
+        #owners = db(db.owns).select()
+        #print owners
         
         response.flash='record inserted'
         redirect(URL('index'))
