@@ -61,7 +61,7 @@ media="screen" />
 					{{import re}}
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
-					{{algid = int(re.match(r'\d+', algline).group())}}
+					{{algid = 9}}
 					{{checker = db(db.owns.upload==algid).select(db.owns.author)}}
 					{{print checker}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
