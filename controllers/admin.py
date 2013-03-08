@@ -158,11 +158,9 @@ def change():
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
-        #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
-        #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
-        #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
-        #shutil.move(src1, dst)
-        #shutil.move(src2, dst)
+        dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+        shutil.move(rnm1b, dst)
+        shutil.move(rnm2b, dst)
         
     if (algo[4] == 'public'):
         rows = db(db.uplds.id==whois).select()
@@ -188,20 +186,19 @@ def change():
         row.update_record(recommender_function=algo[3]) 
 
         #rename and move files
-        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
-        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
-        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
-        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldmod
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[2]
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldrec
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[3]
         os.rename(rnm1a,rnm1b)
         os.rename(rnm2a,rnm2b)
         
-        #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
-        #shutil.move(src1, dst)
-        #shutil.move(src2, dst)
+        dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
+        shutil.move(rnm1b, dst)
+        shutil.move(rnm2b, dst)
     
     actual = db(db.uplds.id==whois).select()
-    print actual
-    
+    #print actual
   
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
