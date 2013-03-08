@@ -124,9 +124,9 @@ def change():
     whois=request.args(0)
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[0]
+    #alg = alg.split('\n')[0]
     print alg
-    algo = [[]]
+    algo = []
     algo = alg.split(',')
     print algo
     
