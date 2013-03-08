@@ -211,6 +211,11 @@ db.define_table('uplds',
                 )
 db.uplds.algorithm_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_name')
 
+db.define_table('owns',
+                Field('upload', requires=IS_NOT_EMPTY()),
+                Field('author', requires=IS_NOT_EMPTY())
+                )
+
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
                 Field('iuser', db.users, requires=IS_IN_DB(db, 'users.id', db.users._format)),
