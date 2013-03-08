@@ -151,16 +151,16 @@ def change():
         row.update_record(recommender_function=algo[3]) 
         
         #rename and move files
-        #rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
-        #rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
-        #rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
-        #rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
-        #os.rename(rnm1a,rnm1b)
-        #os.rename(rnm2a,rnm2b)
+        rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
+        rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
+        rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
+        rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
+        os.rename(rnm1a,rnm1b)
+        os.rename(rnm2a,rnm2b)
         
-        #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
-        #shutil.move(rnm1b, dst)
-        #shutil.move(rnm2b, dst)
+        dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+        shutil.move(rnm1b, dst)
+        shutil.move(rnm2b, dst)
         
     if (algo[4] == 'public'):
         rows = db(db.uplds.id==whois).select()
