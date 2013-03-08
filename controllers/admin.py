@@ -90,8 +90,8 @@ def upload_form():
         
         #setting ownership table
         iid = str(db(db.uplds.algorithm_name==str(form.vars.algorithm_name)).select(db.uplds.id))
-        iid = [int(s) for s in iid.split() if s.isdigit()]
-        db.owns.insert(upload=int(iid), author=int(auth.user_id))
+        iiid = int(''.join(c for c in iid if c.isdigit()))
+        db.owns.insert(upload=iiid, author=int(auth.user_id))
         owners = db(db.owns).select()
         print owners
         
