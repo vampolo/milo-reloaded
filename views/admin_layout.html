@@ -60,8 +60,7 @@ media="screen" />
 				<ul>
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
-					{{algid = int(''.join(c for c in algline if c.isdigit()))}}
-					{{print algid}}
+					{{print algline}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 				</ul>
