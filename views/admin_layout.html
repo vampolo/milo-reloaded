@@ -61,10 +61,9 @@ media="screen" />
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
 					
-					{{algline = algline.split('\n')[1]}}
-					{{algline = algline.split('\n')[0]}}
-					{{algid = int(algline)}}
-					{{print algid}}
+					{{if algline:}}
+					
+					{{print algline}}
 					
 					{{checkline = db(db.owns.upload==int(algid)).select(db.owns.author)}}
 					
@@ -92,80 +91,6 @@ media="screen" />
 			<li>
                         	{{=A('Contact Admin', _title="Contact Admin", callback=URL('admin', 'please'), target='content')}}
                		</li>
-			
-			<!--
-			
-			<li>
-				<br>
-				<font color="white" style = 'font-weight: bold;'>ADMINISTRATOR FUNCTIONS</font>
-				<br>
-				<br>
-			</li>
-			
- 			
- 			<li class="subitems">
-            		<a href="#"> Actions</a>
-            			<ul>
-            			<li>{{=A('Update all movies', callback=URL('admin', 'update_all_movies'), 
-
-target='content')}}</li>
-            		<li>{{=A('Get top 250 movies', callback=URL('admin', 'get_popular_movies'), 
-
-target='content')}}</li>
-            		<li>{{=A('Get coming soon movies', callback=URL('admin', 
-
-'get_popular_movies'), target='content')}}</li>
-            		<li>{{=A('Get in cinema now movies', callback=URL('admin', 
-
-'get_popular_movies'), target='content')}}</li>
-			<li>{{=A('Remove adult movies', callback=URL('admin', 
-
-'remove_adult_movies'), target='content')}}</li>
-            			</ul>
-            		</li>
- 			
- 			
- 			
- 			<li>
- 				{{=A('Matrices', _title="Matrices", callback=URL('matrices'), target='content')}}
-			<!-- 	<ul>
-                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
-				</ul> -->
-			<!--</li>
-						
-            		          
-                        <li>
-                        	{{=A('Bisect', _title="Bisect", callback=URL('admin', 'bisect'), target='content')}}
-                        </li>-->
-		<!-- 	<li class="subitems">
-				<a href="#" title="Survey">Matrices</a>
-				<ul>
-                    <li><a href="#" title="Edit Matches">Edit Matches</a></li>
-				</ul>
-			</li> -->
-<!--			<li><a href="#mp3" title="MP3 Player">MP3 Player</a></li>
-			<li class="subitems">
-				<a href="#" title="Users">Donation Info</a>
-				<ul>
-					<li><a href="#" title="Admin Users">Monthly Goals</a></li>
-					<li><a href="#" title="Add New User">Monthly 
-
-Donations</a></li>
-
-				</ul>
-			</li>
-			<li class="subitems">
-				<a href="#" title="Users">Member Info</a>
-				<ul>
-					<li><a href="#" title="Admin Users">Member List</a></li>
-					<li><a href="#" title="Add New User">Mass Message</a></li>
-					<li><a href="#" title="Add New User">Edit Members</a></li>
-					<li><a href="#" title="Add New User">Edit 
-
-Permissions</a></li>
-					<li><a href="#" title="Add New User">Edit Ranks</a></li>
-				</ul>
-			</li> -->
 		</ul>
 		<span class="clear"></span>
 		<div id="redbox">
