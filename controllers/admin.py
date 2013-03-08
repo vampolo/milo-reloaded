@@ -125,12 +125,14 @@ def change():
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
     print alg
     algo = []
     algo = alg.split(',')
     print algo
     
-    #if (alg_type == 'private'):
+    if (algo[4] == 'private'):
+        print 'finocchio'
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
