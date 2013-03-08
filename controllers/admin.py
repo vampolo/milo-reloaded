@@ -126,10 +126,8 @@ def change():
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
-    print alg
     algo = []
     algo = alg.split(',')
-    print algo
     
     if (algo[4] == 'private'):
         algo[1]=algo[1].split('@user')[0]
@@ -152,6 +150,9 @@ def change():
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
+    
+    actual = db(db.uplds.id==whois).select()
+    print actual
     
   
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
