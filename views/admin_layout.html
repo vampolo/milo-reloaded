@@ -62,6 +62,7 @@ media="screen" />
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
 					
 					{{algid = 9}}
+					{{print algid}}
 					
 					{{checker = db(db.owns.upload==algid).select(db.owns.author)}}
 					{{print checker}}
