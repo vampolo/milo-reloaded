@@ -130,26 +130,39 @@ def change():
     algo = alg.split(',')
     
     if (algo[4] == 'private'):
-        algo[1]=algo[1].split('@user')[0]
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
-        row.update_record(algorithm_sharing='public')
+        
+        #change name
+        algo[1]=algo[1].split('@user')[0]
         row.update_record(algorithm_name=algo[1])
+        
+        #change type
+        row.update_record(algorithm_sharing='public') 
+        
+        #change model function
+        algo[2] = algo[2].split('@user')[0] + '.m'
+        row.update_record(model_creator_function=algo[2]) 
+        
+        #change recom function
+        algo[3] = algo[3].split('@user')[0] + '.m'
+        row.update_record(recommender_function=algo[3]) 
         
         #src1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "createModel_" + str(alg_name) + ".m"
         #src2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private' + "onLineRecom_" + str(alg_name) + ".m"
         #dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
         #shutil.move(src1, dst)
         #shutil.move(src2, dst)
+        
     if (algo[4] == 'public'):
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
         
-        #change nome
+        #change name
         algo[1] = algo[1] + '@user' + str(auth.user_id)
         row.update_record(algorithm_name=algo[1])
         
-        #change tipo
+        #change type
         row.update_record(algorithm_sharing='private') 
         
         #change model function
