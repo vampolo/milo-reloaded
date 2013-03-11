@@ -61,10 +61,14 @@ media="screen" />
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
 					{{algid = ''.join(i for i in algline if i.isdigit())}}
-					
-					{{if (algid > 0):}}
+					{{algid2 = str(algid)}}
+					{{algid3 = int(algid2)}}
+								
+					{{if (algid3 > 0):}}
 					{{print algid}}
 					{{pass}}
+					
+					{{algid = 117}}
 					
 					{{checkline = db(db.owns.upload==int(algid)).select(db.owns.author)}}
 					{{checkid = 9}}
