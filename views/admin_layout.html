@@ -60,7 +60,7 @@ media="screen" />
 				<ul>
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
-					{{algid = '' + (i for i in algline if i.isdigit())}}
+					{{algid = ''.join(i for i in algline if i.isdigit())}}
 					{{print algid}}
 					
 					{{algid = 117}}
