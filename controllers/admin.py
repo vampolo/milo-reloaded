@@ -132,7 +132,6 @@ def myalg():
 
     #select personal uploads
     myalg = db(db.uplds.id).select()
-    print myalg
     
     return dict(myalg=myalg, buff=buff)
 
