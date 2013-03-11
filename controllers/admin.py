@@ -131,7 +131,7 @@ def myalg():
 			buff.append(int(algid))
 
     #select personal uploads
-    myalg = db.mytable[id]
+    myalg = db.uplds[id]
     print myalg
     
     return dict(myalg=myalg)
