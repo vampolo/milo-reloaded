@@ -63,12 +63,13 @@ media="screen" />
 					{{algid = ''.join(i for i in algline if i.isdigit())}}
 					
 					{{if algid:}}
-					{{print algid}}
 					
 					{{checkline = db(db.owns.upload==int(algid)).select(db.owns.author)}}
-					{{print checkline}}
-					{{checkid = 9}}
+					{{checkid = ''.join(i for i in checkline if i.isdigit())}}
 					
+					{{if checkid:}}
+					{{print checkid}}
+					{{pass}}
 					
 					{{if (checkid == int(auth.user_id)):}}
 					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
