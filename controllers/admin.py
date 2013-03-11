@@ -117,9 +117,8 @@ def rules_en():
     return dict()
     
 def myalg():
-    myalg = db(db.uplds).select()
+    myalg = db(db.uplds.id==int(auth.user_id)).select()
     
-    #only user algorithm
     return dict(myalg=myalg)
 
 def rename():
