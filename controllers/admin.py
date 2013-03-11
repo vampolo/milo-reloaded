@@ -130,6 +130,7 @@ def myalg():
 			buff.append(int(algid))
     print buff
     myalg = db(db.uplds.id==buff[2]).select()
+    myalg += db(db.uplds.id==buff[1]).select()
     print myalg
     
     return dict(myalg=myalg)
