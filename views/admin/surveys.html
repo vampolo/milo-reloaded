@@ -15,7 +15,7 @@
 			{{for survey in surveys:}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=survey.name}}</td>
-				<td>{{=survey.algorithm}}</td>
+				<td>{{=survey.algorithm.split("@user")[0]}}</td>
 				<td>{{=survey.number_of_ratings}}</td>
 				<td>{{=survey.type}}</td>
 				<td>{{=survey.number_of_free_ratings}}</td>
