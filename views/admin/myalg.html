@@ -12,6 +12,11 @@
 			{{highlight=True}}
 
 				{{for alg in myalg:}}
+				
+				{{if (alg.id==buff[2]):}}
+				{{ciao}}
+				{{pass}}
+				
 				<tr class="{{='highlight' if highlight else ''}}">
         			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
         			<td>{{=alg.algorithm_sharing}}</td>
