@@ -139,6 +139,8 @@ def rename():
     whois=request.args(0)
     newname=request.args(1)
     
+    '<p class="alert congrats"><span class="txt"><span class="icon"></span>banana!</span></p>'
+    
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
