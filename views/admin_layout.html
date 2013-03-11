@@ -68,7 +68,7 @@ media="screen" />
 					{{checkid = ''.join(i for i in checkline if i.isdigit())}}
 					
 					{{if (int(checkid) == int(auth.user_id)):}}
-					<li>{{=A(alg, _title=alg, callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
+					<li>{{=A(alg, _title=alg.split('@user')[0], callback=URL('info_algorithm', args=[alg]), target='content')}}</li>
 					{{pass}}
 					
 					{{pass}}
