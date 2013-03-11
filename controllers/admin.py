@@ -121,7 +121,7 @@ def myalg():
     ownalg = db(db.owns.author==int(auth.user_id)).select(db.owns.upload)
     #print ownalg
     
-    myalg = db(db.uplds.id in ownalg).select()
+    myalg = db(db.uplds.id).select(db.uplds)
     print myalg
     
     return dict(myalg=myalg)
