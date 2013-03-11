@@ -134,7 +134,7 @@ def myalg():
     myalg = db(db.uplds.id).select()
     print myalg
     
-    return dict(myalg=myalg, algorithms=algorithms)
+    return dict(myalg=myalg, buff=buff)
 
 def rename():
     whois=request.args(0)
