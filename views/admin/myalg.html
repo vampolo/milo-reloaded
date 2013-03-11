@@ -15,8 +15,7 @@
 				
 				{{ctrl=alg.id}}
 				{{if int(ctrl) in buff:}}
-				{{print ctrl}}
-				{{pass}}
+
 				
 				<tr class="{{='highlight' if highlight else ''}}">
         			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
@@ -32,6 +31,9 @@
 					</ul>
 				</td>
 				{{highlight = not highlight}}
+				
+				{{pass}}
+				
 				{{pass}}
 
 		</tbody>
