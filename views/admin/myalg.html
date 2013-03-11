@@ -22,11 +22,11 @@
         			<td>{{=alg.algorithm_sharing}}</td>
   				<td class="action">
   					<form>
-  						<input type="password" name="pwd">
+  						<input type="text" name="newname">
 					</form>
-					
+					<ul>
 						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id,'amaltea']), target="content")}}</li>
-					
+					</ul>
 				</td>
         			<td class="action">
 					<ul>
@@ -41,8 +41,6 @@
 
 		</tbody>
 	</table>
-
-
 
 </div>
 
