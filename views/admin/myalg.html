@@ -3,6 +3,11 @@
 <div class="box">
   <table>
 		<tbody>
+			<script>
+        		function callme(field) {
+            		alert("field:" + field.value);
+       			}
+        		</script>
 			<tr>
 				<th class="col1">Name</th>
 				<th class="col2">Type</th>
@@ -22,7 +27,7 @@
         			<td>{{=alg.algorithm_sharing}}</td>
   				<td class="action">
   					<form>
-					New name: <input type="text" name="newname" size="20" value="bar">
+					New name: <input type="text" name="newname" size="20" onkeyup="callme(this);">
 					</form>
 					<ul>
 						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id,'amaltea']), target="content")}}</li>
