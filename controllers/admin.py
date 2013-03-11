@@ -118,11 +118,20 @@ def rules_en():
     
 def myalg():
     
-    ownalg = db(db.owns.author==int(auth.user_id)).select(db.owns.upload)
-    #print ownalg
+    algorithms = matlab_wrapper.Whisperer.get_algnames()
+    for alg in algorithms:
+	    algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))
+		algid = ''.join(i for i in algline if i.isdigit())
+
+		if algid:
+		    checkline = str(db(db.owns.upload==int(algid)).select(db.owns.author))
+			checkid = ''.join(i for i in checkline if i.isdigit())
+
+			if (int(checkid) == int(auth.user_id)):
+					print algid
     
-    myalg = db(db.uplds.id == (db(db.owns.author==int(auth.user_id)).select(db.owns.upload)) ).select()
-    print myalg
+    myalg = db(db.uplds).select()
+    #print myalg
     
     return dict(myalg=myalg)
 
