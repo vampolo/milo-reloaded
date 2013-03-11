@@ -119,10 +119,10 @@ def rules_en():
 def myalg():
     
     ownalg = db(db.owns.author==int(auth.user_id)).select(db.owns.upload)
-    print ownalg
+    #print ownalg
     
-    myalg = db(db.uplds).select()
-    #print myalg
+    myalg = db(db.uplds.id in ownalg).select()
+    print myalg
     
     return dict(myalg=myalg)
 
