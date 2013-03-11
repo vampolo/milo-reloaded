@@ -134,14 +134,6 @@ def myalg():
     myalg = db(db.uplds.id).select()
     
     return dict(myalg=myalg, buff=buff)
-
-def passage():
-    whois=request.args(0)
-    newname=request.args(1)
-    print 'step1'
-    form = SQLFORM.factory(Field('new_name', requires=IS_NOT_EMPTY()), formstyle='divs', _action=URL('admin', 'passage'))
-    print 'step2'
-    return dict(form=form)
     
 def rename():
     whois=request.args(0)
