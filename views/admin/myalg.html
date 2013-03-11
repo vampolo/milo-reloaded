@@ -13,8 +13,10 @@
 
 				{{for alg in myalg:}}
 				
-				{{prova=alg.id}}
-				{{print prova}}
+				{{ctrl=alg.id}}
+				{{if int(ctrl) in buff:}}
+				{{print ctrl}}
+				{{pass}}
 				
 				<tr class="{{='highlight' if highlight else ''}}">
         			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
