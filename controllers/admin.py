@@ -117,7 +117,7 @@ def rules_en():
     return dict()
     
 def myalg():
-    myalg = db(db.uplds.id==int(auth.user_id)).select()
+    myalg = db(db.author.id==int(auth.user_id)).select()
     
     return dict(myalg=myalg)
 
