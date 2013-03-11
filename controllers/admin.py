@@ -118,7 +118,7 @@ def rules_en():
     
 def myalg():
 	
-    temp = []
+    buff = []
     algorithms = matlab_wrapper.Whisperer.get_algnames()
     for alg in algorithms:
 	algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))
@@ -129,8 +129,9 @@ def myalg():
 		checkid = ''.join(i for i in checkline if i.isdigit())
 
 		if (int(checkid) == int(auth.user_id)):
-			temp.append[algid]
-    print temp
+			print 'daje'
+			buff.append[int(algid)]
+    print buff
     myalg = db(db.uplds.id).select()
     #print myalg
     
