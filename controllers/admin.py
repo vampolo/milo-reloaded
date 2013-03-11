@@ -130,8 +130,9 @@ def myalg():
 		if (int(checkid) == int(auth.user_id)):
 			buff.append(int(algid))
 
+    print 'ciao'
     #select personal uploads
-    myalg = db(db.uplds.id==id).select()
+    myalg = db(db.uplds.id).select()
     print myalg
     
     return dict(myalg=myalg)
