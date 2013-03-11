@@ -21,10 +21,8 @@
         			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
         			<td>{{=alg.algorithm_sharing}}</td>
   				<td class="action">
-  					<input type="text" name="nname" id="nname">
-  					<script>name = oForm.elements["nname"].value;</script>
 					<ul>
-						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id,name]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id,'amaltea']), target="content")}}</li>
 					</ul>
 				</td>
         			<td class="action">
