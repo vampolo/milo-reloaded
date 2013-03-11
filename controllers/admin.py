@@ -132,8 +132,8 @@ def myalg():
     print buff
     
     #select personal uploads
-    myalg = db(if db.uplds.id in buff).select()
-    print myalg.id
+    myalg = db(db.uplds.id == buff[k for k in buff]).select()
+    print myalg
     
     return dict(myalg=myalg)
 
