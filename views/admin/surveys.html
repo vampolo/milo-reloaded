@@ -15,7 +15,6 @@
 			{{for survey in surveys:}}
 			
 			{{exc = "@user" + str(auth.user_id)}}
-			{{print exc}}
 			{{if (not "@user" in survey.algorithm) | (exc in survey.algorithm):}}
 			<tr class="{{='highlight' if highlight else ''}}">
 				<td>{{=survey.name}}</td>
