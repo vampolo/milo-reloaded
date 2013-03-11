@@ -137,15 +137,13 @@ def myalg():
 
 def rename():
     whois=request.args(0)
+    newname=request.args(1)
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
     algo = []
     algo = alg.split(',')
-    
-    #choose new name
-    newname = 'amaltea'
     
     if (algo[4] == 'private'):
         rows = db(db.uplds.id==whois).select()
