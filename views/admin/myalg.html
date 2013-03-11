@@ -21,10 +21,6 @@
         			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
         			<td>{{=alg.algorithm_sharing}}</td>
   				<td class="action">
-  					<form>
-  						<input type="text" name="newname" style="width:20px">
-  						<input type="submit" value="Rename" style="width:20px">
-					</form>
 					<ul>
 						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('rename', args=[alg.id,'amaltea']), target="content")}}</li>
 					</ul>	
