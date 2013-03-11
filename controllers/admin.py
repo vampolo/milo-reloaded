@@ -130,7 +130,7 @@ def myalg():
 
 		if (int(checkid) == int(auth.user_id)):
 			buff.append(int(algid))
-    myalg = db(db.uplds.id in buff).select()
+    myalg = db(for i in buff db.uplds.id==i).select()
     print myalg
     
     return dict(myalg=myalg)
