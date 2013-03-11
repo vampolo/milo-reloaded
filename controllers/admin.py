@@ -3,7 +3,6 @@ import cStringIO
 import csv
 import os
 import shutil
-import win32api
 
 MAX_USERS = 100
 
@@ -139,8 +138,6 @@ def myalg():
 def rename():
     whois=request.args(0)
     newname=request.args(1)
-    
-    win32api.MessageBox(0, 'hello', 'title')
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
