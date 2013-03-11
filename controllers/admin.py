@@ -115,7 +115,8 @@ def rules_en():
     return dict()
     
 def myalg():
-	
+
+    #extract personal upload IDs
     buff = [];
     algorithms = matlab_wrapper.Whisperer.get_algnames()
     for alg in algorithms:
@@ -129,7 +130,9 @@ def myalg():
 		if (int(checkid) == int(auth.user_id)):
 			buff.append(int(algid))
     print buff
-    myalg = db(db.uplds.id).select()
+    
+    #select personal uploads
+    myalg = db(if db.uplds.id in buff).select()
     print myalg.id
     
     return dict(myalg=myalg)
