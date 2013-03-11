@@ -61,7 +61,9 @@ media="screen" />
 					{{for alg in algorithms:}}
 					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
 					{{algid = ''.join(i for i in algline if i.isdigit())}}
+					{{if algid:}}
 					{{print algid}}
+					{{pass}}
 					
 					{{algid = 117}}
 					
