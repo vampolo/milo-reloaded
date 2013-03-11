@@ -129,9 +129,9 @@ def myalg():
 
 		if (int(checkid) == int(auth.user_id)):
 			buff.append(int(algid))
-    print k for k in buff
+
     #select personal uploads
-    myalg = db(db.uplds.id == k for k in buff).select()
+    myalg = db.mytable[id]
     print myalg
     
     return dict(myalg=myalg)
