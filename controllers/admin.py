@@ -118,7 +118,7 @@ def rules_en():
     
 def myalg():
     
-    ownalg = db(db.owns.author==int(auth.user_id).select(db.owns.upload)
+    ownalg = db(db.owns.author==int(auth.user_id)).select(db.owns.upload)
     print ownalg
     
     myalg = db(db.uplds).select()
