@@ -64,7 +64,7 @@ media="screen" />
 					
 					{{if algid:}}
 					
-					{{checkline = db(db.owns.upload==int(algid)).select(db.owns.author)}}
+					{{checkline = str(db(db.owns.upload==int(algid)).select(db.owns.author))}}
 					{{checkid = ''.join(i for i in checkline if i.isdigit())}}
 					
 					{{if checkid:}}
