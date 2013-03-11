@@ -59,8 +59,8 @@ media="screen" />
 				{{=A('My Algorithms', _title="My Algorithms", callback=URL('admin', 'myalg'), target='content')}}
 				<ul>
 					{{for alg in algorithms:}}
-					{{algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))}}
-					
+					{{algline = db(db.uplds.algorithm_name==alg).select(db.uplds.id)}}
+					{{algline =''.join(i for i in algline if i.isdigit())}}
 					{{print algline}}
 					{{algid = 117}}
 					
