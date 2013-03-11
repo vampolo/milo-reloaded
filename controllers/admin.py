@@ -135,6 +135,13 @@ def myalg():
     
     return dict(myalg=myalg, buff=buff)
 
+def passage():
+    whois=request.args(0)
+    newname=request.args(1)
+    
+    form = SQLFORM.factory(Field('new_name', requires=IS_NOT_EMPTY()), formstyle='divs', _action=URL('admin', 'passage'))
+    return dict(form=form)
+    
 def rename():
     whois=request.args(0)
     newname=request.args(1)
