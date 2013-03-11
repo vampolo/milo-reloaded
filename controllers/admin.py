@@ -3,6 +3,7 @@ import cStringIO
 import csv
 import os
 import shutil
+import easygui
 
 MAX_USERS = 100
 
@@ -145,6 +146,8 @@ def rename():
     algo = []
     algo = alg.split(',')
     
+    easygui.msgbox("This is a message!", title="simple gui")
+    
     if (algo[4] == 'private'):
         rows = db(db.uplds.id==whois).select()
         row = rows[0]
@@ -198,7 +201,7 @@ def rename():
         os.rename(rnm2a,rnm2b)
     
     actual = db(db.uplds.id==whois).select()
-    print actual
+    #print actual
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
