@@ -74,8 +74,6 @@ def upload_form():
         #function renames in database
         form.vars.model_creator_function = "createModel_" + str(form.vars.algorithm_name) + ".m"
         form.vars.recommender_function = "onLineRecom_" + str(form.vars.algorithm_name) + ".m"
-         
-
         
         #database insertion
         print "\nUploaded new algorithm: " + str(form.vars.algorithm_name)
@@ -130,8 +128,8 @@ def myalg():
 
 		if (int(checkid) == int(auth.user_id)):
 			buff.append(int(algid))
-    
-    myalg = db(db.uplds).select()
+    print buff
+    myalg = db(db.uplds.id in buff).select()
     print myalg
     
     return dict(myalg=myalg)
