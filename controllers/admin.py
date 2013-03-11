@@ -134,8 +134,11 @@ def myalg():
     db.temp_uplds.truncate()
     
     for j in buff:
-    	db.temp_uplds.insert(db(db.uplds.id==j).select())
-    
+    	print 'step1'
+    	row = db(db.uplds.id==j).select()
+    	print 'step2'
+    	db.temp_uplds.insert(row)
+    print 'step3'
     myalg = db(db.temp_uplds).select()
     print myalg
     
