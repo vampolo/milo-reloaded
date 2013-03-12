@@ -5,6 +5,7 @@ import os
 import shutil
 
 MAX_USERS = 100
+sk = 0
 
 @auth.requires_membership('rsc')
 def index():    
@@ -136,10 +137,11 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    whois=request.args(0)
+    sk=request.args(0)
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
     if form.process().accepted:
+    	print sk
     	newname = form.vars.new_name
     	whois = 116
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
@@ -273,7 +275,7 @@ def rename():
         os.rename(rnm2a,rnm2b)
     
     actual = db(db.uplds.id==whois).select()
-    #print actual
+    print actual
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
