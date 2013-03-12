@@ -200,15 +200,17 @@ def passage():
         	rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[3]
         	os.rename(rnm1a,rnm1b)
         	os.rename(rnm2a,rnm2b)
-    
+       	
     	actual = db(db.uplds.id==whois).select()
     	print actual
     	
         response.flash='record inserted'
         redirect(URL('index'))
     elif form.errors:
+    	print 'dentro2'
         response.flash="errors"
     else:
+    	print 'dentro2'
         response.flash='fill out the form'
     return dict(form=form)
     
