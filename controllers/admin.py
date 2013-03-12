@@ -142,7 +142,7 @@ def passage():
     
     if form.process().accepted:
     	print 'dentro'
-    	newname = form.vars.new_algname
+    	newname = form.vars.new_name
     	print newname
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
