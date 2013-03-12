@@ -143,7 +143,7 @@ def passage():
     		formstyle='divs',
     		)
     
-    form.vars.new_algname = whois
+    form.vars.new_algname = 'cerere'
     
     if form.is_valid():
     	
