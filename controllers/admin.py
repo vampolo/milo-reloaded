@@ -202,10 +202,11 @@ def passage():
         	os.rename(rnm2a,rnm2b)
        	
     	actual = db(db.uplds.id==whois).select()
-    	print actual
+    	#print actual
     	
         response.flash='record inserted'
         redirect(URL('index'))
+        return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
     elif form.errors:
         response.flash="errors"
