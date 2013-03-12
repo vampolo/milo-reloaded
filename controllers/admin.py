@@ -150,6 +150,8 @@ def passage():
     	
     	algo = []
     	algo = alg.split(',')
+    	
+    	algo = ['a','b','c','d','e','f']
     
     	if (algo[4] == 'private'):
         	rows = db(db.uplds.id==whois).select()
