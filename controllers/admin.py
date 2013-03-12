@@ -136,7 +136,78 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
+    whois=request.args(0)
     form = SQLFORM.factory(Field('new_name','string'), formstyle='divs', _action=URL('admin', 'myalg'))
+        	
+    newname = 'cerere'
+    
+    if form.process().accepted:
+    	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    	alg = alg.split('\n')[1]
+    	alg = alg.split('\r')[0]
+    	algo = []
+    	algo = alg.split(',')
+    
+    	if (algo[4] == 'private'):
+        	rows = db(db.uplds.id==whois).select()
+        	row = rows[0]
+        	#change name
+        	algo[1] = newname + '@user' + str(auth.user_id)
+        	row.update_record(algorithm_name=algo[1])
+        
+        	#change model function
+        	oldmod = algo[2]
+        	algo[2] = "createModel_" + algo[1] + ".m"
+        	row.update_record(model_creator_function=algo[2]) 
+        
+        	#change recom function
+        	oldrec = algo[3]
+        	algo[3] = "onLineRecom_" + algo[1] + ".m"
+        	row.update_record(recommender_function=algo[3]) 
+        
+        	#rename files
+        	rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
+        	rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
+        	rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
+        	rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[3]
+        	os.rename(rnm1a,rnm1b)
+        	os.rename(rnm2a,rnm2b)
+        
+    	if (algo[4] == 'public'):
+        	rows = db(db.uplds.id==whois).select()
+        	row = rows[0]
+        
+        	#change name
+        	algo[1] = newname
+        	row.update_record(algorithm_name=algo[1])
+        
+        	#change model function
+        	oldmod = algo[2]
+        	algo[2] = "createModel_" + algo[1] + ".m"
+        	row.update_record(model_creator_function=algo[2]) 
+        
+        	#change recom function
+        	oldrec = algo[3]
+        	algo[3] = "onLineRecom_" + algo[1] + ".m"
+        	row.update_record(recommender_function=algo[3]) 
+        
+        	#rename files
+        	rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldmod
+        	rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[2]
+        	rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldrec
+        	rnm2b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[3]
+        	os.rename(rnm1a,rnm1b)
+        	os.rename(rnm2a,rnm2b)
+    
+    	actual = db(db.uplds.id==whois).select()
+    	print actual
+    	
+        response.flash='record inserted'
+        redirect(URL('index'))
+    elif form.errors:
+        response.flash="errors"
+    else:
+        response.flash='fill out the form'
     return dict(form=form)
     
 def rename():
@@ -167,7 +238,7 @@ def rename():
         algo[3] = "onLineRecom_" + algo[1] + ".m"
         row.update_record(recommender_function=algo[3]) 
         
-        #rename and move files
+        #rename files
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldmod
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + algo[2]
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + oldrec
@@ -193,7 +264,7 @@ def rename():
         algo[3] = "onLineRecom_" + algo[1] + ".m"
         row.update_record(recommender_function=algo[3]) 
         
-        #rename and move files
+        #rename files
         rnm1a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldmod
         rnm1b = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + algo[2]
         rnm2a = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + oldrec
