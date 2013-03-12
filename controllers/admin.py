@@ -141,12 +141,13 @@ def passage():
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
     if form.process().accepted:
-    	print 'dentro'
     	newname = form.vars.new_name
-    	print newname
+    	
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
     	alg = alg.split('\r')[0]
+    	print alg
+    	
     	algo = []
     	algo = alg.split(',')
     
