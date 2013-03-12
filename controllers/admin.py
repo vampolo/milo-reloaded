@@ -138,9 +138,8 @@ def myalg():
 def passage():
     whois=request.args(0)
     
-    form = FORM(INPUT(_name='new_algname', formstyle='divs', requires=IS_NOT_EMPTY()),
-              INPUT(_type='submit'))
-    print form.vars.new_algname
+    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'index'))
+    print form.vars.new_name
     
     if form.process().accepted:
     	
