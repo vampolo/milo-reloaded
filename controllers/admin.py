@@ -134,6 +134,9 @@ def myalg():
     myalg = db(db.uplds.id).select()
     
     return dict(myalg=myalg, buff=buff)
+
+def passage():
+    return dict()
     
 def rename():
     whois=request.args(0)
