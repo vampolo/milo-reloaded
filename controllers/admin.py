@@ -138,8 +138,9 @@ def myalg():
 def passage():
     whois=request.args(0)
     
-    form = FORM(INPUT(_name='new_algname', requires=IS_NOT_EMPTY()),
+    form = FORM(INPUT(_name='new_algname', formstyle='divs', requires=IS_NOT_EMPTY()),
               INPUT(_type='submit'))
+    print form.vars.new_algname
     
     if form.process().accepted:
     	
