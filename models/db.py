@@ -220,10 +220,6 @@ db.define_table('rnm',
                 Field('new_name', requires=IS_NOT_EMPTY())
                 )
 db.rnm.new_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_name')
-
-db.define_table('aux',
-                Field('whois')
-                )
                 
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
