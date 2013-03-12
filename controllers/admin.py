@@ -208,8 +208,10 @@ def passage():
         response.flash='record inserted'
         redirect(URL('index'))
     elif form.errors:
+    	print 'errors'
         response.flash="errors"
     else:
+    	print 'fill'
         response.flash='fill out the form'
     return dict(form=form)
     
