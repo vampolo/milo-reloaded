@@ -137,7 +137,10 @@ def myalg():
 
 def passage():
     whois=request.args(0)
-    form = SQLFORM.factory(Field('new_name','string'), formstyle='divs', _action=URL('admin', 'myalg'))
+    form = SQLFORM.factory(
+    		Field("new_name","string",requires=IS_NOT_EMPTY()),
+    		formstyle='divs',
+    		)
         	
     newname = 'cerere'
     print form.vars.new_name
@@ -207,10 +210,8 @@ def passage():
         response.flash='record inserted'
         redirect(URL('index'))
     elif form.errors:
-    	print 'dentro2'
         response.flash="errors"
     else:
-    	print 'dentro3'
         response.flash='fill out the form'
     return dict(form=form)
     
