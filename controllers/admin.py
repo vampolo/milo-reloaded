@@ -204,8 +204,9 @@ def passage():
     	#print actual
     	
         response.flash='record inserted'
+        redirect(URL('index'))
         return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
-        #redirect(URL('index'))
+
     elif form.errors:
         response.flash="errors"
     else:
