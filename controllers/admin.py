@@ -136,21 +136,17 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    ecca=request.args(0)
+    whois=request.args(0)
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
     if form.process().accepted:
-    	print ecca
     	newname = form.vars.new_name
     	whois = 116
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
     	alg = alg.split('\r')[0]
-    	
     	algo = []
     	algo = alg.split(',')
-    	
-    	algo = ['a','b','c','d','e','f']
     
     	if (algo[4] == 'private'):
         	rows = db(db.uplds.id==whois).select()
