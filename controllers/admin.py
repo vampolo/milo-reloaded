@@ -138,7 +138,7 @@ def myalg():
 def passage():
     whois=request.args(0)
     
-    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'index'))
+    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
     if form.process().accepted:
     	print 'dentro'
