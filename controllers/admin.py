@@ -210,7 +210,7 @@ def passage():
     	print 'dentro2'
         response.flash="errors"
     else:
-    	print 'dentro2'
+    	print 'dentro3'
         response.flash='fill out the form'
     return dict(form=form)
     
