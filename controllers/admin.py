@@ -137,7 +137,6 @@ def myalg():
 
 def passage():
     whois=request.args(0)
-    print whois
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'index'))
     print form.vars.new_name
