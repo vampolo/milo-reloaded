@@ -142,6 +142,7 @@ def passage():
     
     if form.process().accepted:
     	newname = form.vars.new_name
+    	whois=request.args(0)
     	print whois
     	
     	#alg = db(db.uplds).select()
@@ -206,7 +207,7 @@ def passage():
         	os.rename(rnm2a,rnm2b)
        	
     	actual = db(db.uplds.id==whois).select()
-    	print actual
+    	#print actual
     	
         response.flash='record inserted'
         redirect(URL('index'))
