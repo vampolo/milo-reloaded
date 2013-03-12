@@ -136,7 +136,7 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    form = SQLFORM.factory(Field('new_name'), formstyle='divs', _action=URL('admin', 'myalg'))
+    form = SQLFORM.factory(Field('new_name','string'), _action=URL('admin', 'myalg'))
     return dict(form=form)
     
 def rename():
