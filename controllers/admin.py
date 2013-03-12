@@ -139,10 +139,11 @@ def passage():
     #whois=request.args(0)
     #print whois
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
+    whois=request.args(0)
+    print whois
     
     if form.process().accepted:
-    	whois=request.args(0)
-    	print whois
+    	
     	newname = form.vars.new_name
     	
     	#alg = db(db.uplds).select()
