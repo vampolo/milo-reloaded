@@ -144,7 +144,7 @@ def passage():
     	newname = form.vars.new_name
     	
     	alg = db(db.uplds).select()
-    	print alg
+    	print whois
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
     	alg = alg.split('\r')[0]
