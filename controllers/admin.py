@@ -137,9 +137,7 @@ def myalg():
 
 def passage():
 
-    if (request.args(1)=="aux"):
-    	whois = request.args(0)
-    	request.args(1) = "nomore"
+    print MAX_USERS
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
