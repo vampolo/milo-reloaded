@@ -137,10 +137,10 @@ def myalg():
 
 def passage():
 
-    #if (request.args(1)==4):
-    print request.args(0)
-    print request.args(1)
-    print 'next'
+    if (request.args(1)==4):
+    	print request.args(0)
+    	print request.args(1)
+    	print 'next'
     	#whois=request.args(0)
     	#print whois
     
