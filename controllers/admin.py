@@ -136,12 +136,13 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    whois=request.args(0)
-    print whois
+    #whois=request.args(0)
+    #print whois
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
     if form.process().accepted:
+    	whois=request.args(0)
     	print whois
     	newname = form.vars.new_name
     	whois = 116
