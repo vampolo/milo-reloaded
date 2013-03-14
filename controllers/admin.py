@@ -5,7 +5,6 @@ import os
 import shutil
 
 MAX_USERS = 100
-AUX = 4
 
 @auth.requires_membership('rsc')
 def index():    
@@ -138,12 +137,11 @@ def myalg():
 
 def passage():
     whois=request.args(0)
-    print whois
-    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage', args=[116]))
+    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage', args=[whois]))
     
     if form.process().accepted:
+    	print whois
     	newname = form.vars.new_name
-    	whois = 116
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
     	alg = alg.split('\r')[0]
