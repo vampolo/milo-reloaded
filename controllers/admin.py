@@ -5,6 +5,7 @@ import os
 import shutil
 
 MAX_USERS = 100
+AUX = 4
 
 @auth.requires_membership('rsc')
 def index():    
