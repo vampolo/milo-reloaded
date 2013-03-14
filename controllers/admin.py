@@ -136,13 +136,16 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    #whois=request.args(0)
-    #print whois
+    
+    z=0;
+    if (z==0):
+    	whois=request.args(0)
+    	z = z+1
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
-    print request.args(0)
     
     if form.process().accepted:
+    	print whois
     	newname = form.vars.new_name
     	whois = 116
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
