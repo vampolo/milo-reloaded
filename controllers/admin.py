@@ -141,6 +141,7 @@ def passage():
     if (AUX == 4):
     	whois=request.args(0);
     	AUX = 5;
+    print AUX
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
