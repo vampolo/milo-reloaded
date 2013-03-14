@@ -138,8 +138,10 @@ def myalg():
 def passage():
 
     if (request.args(1)==4):
-    	whois=request.args(0)
-    	print whois
+    	print request.args(0)
+    	print request.args(1)
+    	#whois=request.args(0)
+    	#print whois
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
