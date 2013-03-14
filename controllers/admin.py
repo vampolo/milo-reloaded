@@ -140,9 +140,9 @@ def passage():
     #print whois
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
+    print request.args(0)
     
     if form.process().accepted:
-    	print request.args(0)
     	newname = form.vars.new_name
     	whois = 116
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
