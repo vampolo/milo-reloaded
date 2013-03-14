@@ -137,7 +137,7 @@ def myalg():
 
 def passage():
 
-    if (request.args(1)==4):
+    if (request.args(1)=="aux"):
     	print request.args(0)
     	print request.args(1)
     	print 'next'
