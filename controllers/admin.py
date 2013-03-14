@@ -136,11 +136,10 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def passage():
-    
-    z=0;
-    if (z==0):
+
+    if (isinstance(request.args(0),int)):
     	whois=request.args(0)
-    	z = z+1
+    	print whois
     
     form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage'))
     
