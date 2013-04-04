@@ -326,8 +326,8 @@ def promo():
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
-            #if (auth.has_membership('disabled',count) == True):
-            	#promo.append(count)
+            if (auth.has_membership('disabled',count) == True):
+            	promo.append(count)
     return dict(promo=promo)
     
 def del_user():
