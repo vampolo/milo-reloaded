@@ -337,9 +337,8 @@ def del_user():
     tempo = str(db(db.auth_user.id==whois).select(db.auth_user.email))
     tempo2 = str(tempo[17:])
     mail = tempo2.split('\r')[0]
-    print mail
-    #db(db.users.email == mail).delete()
     
+    db(db.users.email == mail).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
