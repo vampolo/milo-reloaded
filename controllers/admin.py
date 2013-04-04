@@ -119,8 +119,8 @@ def pubalg():
     return dict(pubalg=pubalg)
 
 def download_mc():
-    alg=request.args(0)
-    
+    whois=request.args(0)
+    alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + whois + ".m"
     print alg
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
