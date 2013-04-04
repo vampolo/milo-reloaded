@@ -120,7 +120,10 @@ def pubalg():
 
 def download_mc():
     alg=request.args(0)
-    return dict()
+    
+    print alg
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
 def download_or():
     alg=request.args(0)
