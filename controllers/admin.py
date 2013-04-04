@@ -335,7 +335,7 @@ def del_user():
     #delete user
     auth.del_group(auth.id_group('user_12'))
     
-    return dict()
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 def addrsc():
     whois=request.args(0)
