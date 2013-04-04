@@ -320,13 +320,21 @@ def please():
 
 def promo():
     
-    #getting researchers' ID
+    #getting user IDs
     promo=[]
     runner = range(1,MAX_USERS)
     for count in runner:
             if (auth.has_membership('rsc',count) == True):
                 promo.append(count)
+            #if (auth.has_membership('disabled',count) == True):
+            	#promo.append(count)
     return dict(promo=promo)
+    
+def del_user():
+	
+    #delete user
+    
+    return dict()
 
 def addrsc():
     whois=request.args(0)
