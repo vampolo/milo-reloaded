@@ -62,9 +62,11 @@ auth.define_tables()
 ## privilege group
 rsc_group = auth.add_group(role = 'rsc')
 auth.settings.everybody_group_id = rsc_group
+dis_group = auth.add_group(role = 'disabled')
 
 ## manual privilege management
 auth.add_membership('rsc',9)
+auth.add_membership('disabled',12)
 auth.add_membership('admin',9)
 
 
