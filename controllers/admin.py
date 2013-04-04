@@ -333,6 +333,7 @@ def promo():
 def del_user():
 	
     #delete user
+    auth.del_group(auth.id_group('user_12'))
     
     return dict()
 
