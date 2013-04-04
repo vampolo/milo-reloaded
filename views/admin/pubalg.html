@@ -5,31 +5,17 @@
   	<tbody>
 			<tr>
 				<th class="col1">Name</th>
-				<th class="col2">Type</th>
-				<th class="col3">Change Type</th>
-				<th class="col4">Change name</th>
+				<th class="col2">Model creator function</th>
+				<th class="col3">Online recommender function</th>
 			</tr>
 			{{highlight=True}}
 
-				{{for alg in myalg:}}
-				
-				{{ctrl=alg.id}}
-				{{if int(ctrl) in buff:}}
-
+				{{for alg in pubalg:}}
 				
 				<tr class="{{='highlight' if highlight else ''}}">
-        			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
-        			<td>{{=alg.algorithm_sharing}}</td>
-        			<td class="action">
-					<ul>
-						<li>{{=A('', _class="edit", _title="Change algorithm type", callback=URL('change', args=[alg.id]), target="content")}}</li>
-					</ul>
-				</td>
-  				<td class="action">
-					<ul>
-						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('passage', args=[alg.id]), target="content")}}</li>
-					</ul>
-				</td>
+        			<td>a</td>
+        			<td>b</td>
+        			<td>c</td>
 				{{highlight = not highlight}}
 				
 				{{pass}}
