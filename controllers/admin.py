@@ -123,11 +123,14 @@ def download_mc():
     alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
     print alg
     
-    return response.stream(alg)
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
 def download_or():
     alg=request.args(0)
-    return dict()
+    alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + whois + ".m"
+    print alg
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
 def myalg():
 
