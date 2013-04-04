@@ -119,11 +119,11 @@ def pubalg():
     return dict(pubalg=pubalg)
 
 def download_mc():
-    print 'mc' 
+    alg=request.args(0)
     return dict()
     
 def download_or():
-    print 'or' 
+    alg=request.args(0)
     return dict()
     
 def myalg():
