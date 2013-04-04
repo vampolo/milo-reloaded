@@ -324,10 +324,11 @@ def promo():
     promo=[]
     runner = range(1,MAX_USERS)
     for count in runner:
-            if (auth.has_membership('rsc',count) == True):
-                promo.append(count)
-            if (auth.has_membership('disabled',count) == True):
-            	promo.append(count)
+    	    if (auth.has_membership('destr',count) == False):
+            	if (auth.has_membership('rsc',count) == True):
+                	promo.append(count)
+            	if (auth.has_membership('disabled',count) == True):
+            		promo.append(count)
     return dict(promo=promo)
     
 def del_user():
@@ -338,6 +339,7 @@ def del_user():
     tempo2 = str(tempo[17:])
     mail = tempo2.split('\r')[0]
     
+    auth.add_membership('destr',whois)
     db(db.users.email == mail).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
