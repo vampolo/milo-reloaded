@@ -339,8 +339,11 @@ def del_user():
     tempo2 = str(tempo[17:])
     mail = tempo2.split('\r')[0]
     
-    auth.add_membership('destr',whois)
     db(db.users.email == mail).delete()
+    
+    auth.add_membership('destr',whois)
+    auth.del_membership('rsc',whois)
+    auth.del_membership('admin',whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
