@@ -22,8 +22,12 @@
 				
 				<td class="action">
 					<ul>
-						<!--<li>{{=A('', _class="add", _title="Promote to researcher", callback=URL('addrsc', args=[uid]), target="content")}}</li>-->
+						{{if (auth.has_membership('disabled',uid) == True):}}
+						<li>{{=A('', _class="add", _title="Rehabilitate researcher privileges", callback=URL('addrsc', args=[uid]), target="content")}}</li>
+						{{pass}}
+						{{if (auth.has_membership('disabled',uid) == False):}}
 						<li>{{=A('', _class="delete", _title="Revoke researcher privileges", callback=URL('rvkrsc', args=[uid]), target="content")}}</li>
+						{{pass}}
 					</ul>
 				</td>
 				
