@@ -333,7 +333,7 @@ def promo():
 def del_user():
     whois=request.args(0)
     
-    gino = db(db.auth_user.id==i).select(db.auth_user.email)
+    gino = db(db.auth_user.id==9).select(db.auth_user.email)
     print gino
     #delete user
     
