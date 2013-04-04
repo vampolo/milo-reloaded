@@ -339,8 +339,9 @@ def del_user():
 def addrsc():
     whois=request.args(0)
     
-    #grant rsc privileges
+    #enable rsc privileges
     auth.add_membership('rsc',whois)
+    auth.del_membership('disabled',whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
@@ -349,6 +350,7 @@ def rvkrsc():
     
     #revoke rsc privileges
     auth.del_membership('rsc',whois)
+    auth.add_membership('disabled',whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
