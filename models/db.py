@@ -66,8 +66,8 @@ dis_group = auth.add_group(role = 'disabled')
 
 ## manual privilege management
 auth.add_membership('rsc',9)
-auth.add_membership('disabled',12)
 auth.add_membership('admin',9)
+#auth.add_membership('disabled',12)
 
 
 ## configure email
