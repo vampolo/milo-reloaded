@@ -120,10 +120,10 @@ def pubalg():
 
 def download_mc():
     whois=request.args(0)
-    alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + whois + ".m"
+    alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
     print alg
     
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    return response.stream(alg)
     
 def download_or():
     alg=request.args(0)
