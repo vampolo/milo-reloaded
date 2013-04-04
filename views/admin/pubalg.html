@@ -12,8 +12,10 @@
 
 				{{for alg in pubalg:}}
 				
+				{{if (alg.count('@user'))==0:}}
+				
 				<tr class="{{='highlight' if highlight else ''}}">
-        			<td>a</td>
+        			<td>{{=alg}}</td>
         			<td>b</td>
         			<td>c</td>
 				{{highlight = not highlight}}
