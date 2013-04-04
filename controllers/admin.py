@@ -113,6 +113,9 @@ def upload_form():
 
 def rules_en():
     return dict()
+
+def pubalg():
+    return dict()
     
 def myalg():
 
