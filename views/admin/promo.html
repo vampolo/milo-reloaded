@@ -37,6 +37,11 @@
 						{{pass}}
 					</ul>
 				</td>
+				<td class="action">
+					<ul>
+						<li>{{=A('', _class="delete", _title="Delete this user form the system", callback=URL('del_user', args=[uid]), target="content")}}</li>
+					</ul>
+				</td>
 			</tr>
 				{{highlight = not highlight}}
 				{{pass}}
