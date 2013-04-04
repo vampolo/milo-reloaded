@@ -117,6 +117,14 @@ def rules_en():
 def pubalg():
     pubalg = matlab_wrapper.Whisperer.get_algnames()
     return dict(pubalg=pubalg)
+
+def download_mc():
+    print 'mc' 
+    return dict()
+    
+def download_or():
+    print 'or' 
+    return dict()
     
 def myalg():
 
