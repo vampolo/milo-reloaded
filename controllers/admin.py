@@ -339,12 +339,9 @@ def del_user():
 def addrsc():
     whois=request.args(0)
     
-    print "step"
     #enable rsc privileges
     auth.add_membership('rsc',whois)
-    print "step"
     auth.del_membership('disabled',whois)
-    print "step"
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
