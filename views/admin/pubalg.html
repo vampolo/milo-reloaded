@@ -16,8 +16,8 @@
 				
 				<tr class="{{='highlight' if highlight else ''}}">
         			<td>{{=alg}}</td>
-        			<td>{{=A('', _class="edit", _title="download model creator function", _href=URL('download_mc', args=[alg.]), target = 'content')}}</td>
-        			<td>{{=A('', _class="edit", _title="download online recommender function", _href=URL('download_or', args=[alg]), target = 'content')}}</td>
+        			<td>{{=A('', _class="edit", _title="download model creator function", _href=URL('download_mc', args=[alg.]))}}</td>
+        			<td>{{=A('', _class="edit", _title="download online recommender function", _href=URL('download_or', args=[alg]))}}</td>
 				{{highlight = not highlight}}
 				
 				{{pass}}
