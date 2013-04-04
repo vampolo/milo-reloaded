@@ -1,0 +1,47 @@
+<h2>Public Algorithms</h2>
+
+<div class="box">
+  <table>
+  	<tbody>
+			<tr>
+				<th class="col1">Name</th>
+				<th class="col2">Type</th>
+				<th class="col3">Change Type</th>
+				<th class="col4">Change name</th>
+			</tr>
+			{{highlight=True}}
+
+				{{for alg in myalg:}}
+				
+				{{ctrl=alg.id}}
+				{{if int(ctrl) in buff:}}
+
+				
+				<tr class="{{='highlight' if highlight else ''}}">
+        			<td>{{=alg.algorithm_name.split("@user")[0]}}</td>
+        			<td>{{=alg.algorithm_sharing}}</td>
+        			<td class="action">
+					<ul>
+						<li>{{=A('', _class="edit", _title="Change algorithm type", callback=URL('change', args=[alg.id]), target="content")}}</li>
+					</ul>
+				</td>
+  				<td class="action">
+					<ul>
+						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('passage', args=[alg.id]), target="content")}}</li>
+					</ul>
+				</td>
+				{{highlight = not highlight}}
+				
+				{{pass}}
+				
+				{{pass}}
+
+		</tbody>
+	</table>
+
+</div>
+
+<br>
+<div id="message">
+
+</div>
