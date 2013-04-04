@@ -331,9 +331,12 @@ def promo():
     return dict(promo=promo)
     
 def del_user():
-	
+    whois=request.args(0)
+    
+    gino = db(db.auth_user.id==i).select(db.auth_user.email)
+    print gino
     #delete user
-    auth.del_group(auth.id_group('user_12'))
+    
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
