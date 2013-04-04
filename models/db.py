@@ -68,7 +68,7 @@ destr_group = auth.add_group(role = 'destr')
 ## manual privilege management
 auth.add_membership('rsc',9)
 auth.add_membership('admin',9)
-#auth.add_membership('disabled',12)
+auth.add_membership('disabled',13)
 
 
 ## configure email
