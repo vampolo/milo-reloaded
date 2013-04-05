@@ -120,10 +120,16 @@ def pubalg():
 
 def download_mc():
     whois=request.args(0)
-    alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
-    print alg
+    
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
+    
+    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
+    print fname
     
     #download function
+    
         
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
