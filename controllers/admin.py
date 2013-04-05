@@ -189,7 +189,10 @@ def upd_mc():
     
     #form
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
     
     #delete old mc
     #insert new mc
@@ -201,13 +204,23 @@ def upd_mc():
 def upd_or():
     whois=request.args(0)
     
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')  
+
     #form
     
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+
     #delete old or
-    
     #insert new or
     
-    print 'upload or'
+    print '\nupdating: ' + fname
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
