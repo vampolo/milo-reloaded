@@ -158,10 +158,11 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def del_alg():
-    alg=request.args(0)
-    print alg
+    whois=request.args(0)
+    print whois
     
     #delete algorithm
+    #db(db.uplds.id > 3).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
