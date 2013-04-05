@@ -156,7 +156,11 @@ def download_or():
     #download function
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
-    
+
+#####################
+##  My Algorithms  ##
+#####################   
+
 def myalg():
 
     #extract personal upload IDs
