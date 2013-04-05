@@ -181,14 +181,26 @@ def myalg():
 def upd_mc():
     whois=request.args(0)
     
+    #form
     
+    #delete old mc
+    
+    #insert new mc
+    
+    print 'upload mc'
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 def upd_or():
     whois=request.args(0)
     
+    #form
     
+    #delete old or
+    
+    #insert new or
+    
+    print 'upload or'
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
