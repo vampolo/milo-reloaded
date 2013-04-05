@@ -123,7 +123,7 @@ def download_mc():
     alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
     print alg
     
-    #delete function
+    #download function
         
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
@@ -132,7 +132,7 @@ def download_or():
     alg = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + whois + ".m"
     print alg
     
-    #delete function
+    #download function
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
@@ -158,10 +158,10 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def del_alg():
-    #whois=request.args(0)
-    print 'ciao'
+    whois=request.args(0)
     
     #delete algorithm
+    print whois
     #db(db.uplds.id > 3).delete()
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
