@@ -222,6 +222,13 @@ db.define_table('rnm',
                 Field('new_name', requires=IS_NOT_EMPTY())
                 )
 db.rnm.new_name.requires = IS_NOT_IN_DB(db, 'uplds.algorithm_name')
+
+db.define_table('new_mc',
+                Field('new_model_creator_function', 'upload', uploadfolder='applications/milo/modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='m'))
+                )
+db.define_table('new_or',
+                Field('new_recommender_function', 'upload', uploadfolder='applications/milo/modules/algorithms/recsys_matlab_codes/algorithms',requires = IS_UPLOAD_FILENAME(extension='m'))
+                )
                 
 db.define_table('surveys_users',
                 Field('survey', db.surveys, requires=IS_IN_DB(db, 'surveys.id', db.surveys._format)),
