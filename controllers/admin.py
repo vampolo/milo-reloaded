@@ -51,15 +51,11 @@ def update_algorithm():
 
 def upload_form():
     
-    
-    db(db.uplds.id == 119).delete()
-    db(db.owns.upload == 119).delete()
-    
     #check tables
     #enlist = db(db.uplds).select()
     #print enlist
-    owners = db(db.owns).select()
-    print owners
+    #owners = db(db.owns).select()
+    #print owners
     #reset tables
     #db.uplds.truncate()
     #db.owns.truncate()
