@@ -161,8 +161,10 @@ def del_alg():
     whois=request.args(0)
     
     #delete algorithm
-    print whois
-    #db(db.uplds.id > 3).delete()
+    db(db.uplds.id == whois).delete()
+    db(db.owns.upload == whois).delete()
+    
+    #destroy file
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
