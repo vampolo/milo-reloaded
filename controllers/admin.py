@@ -180,6 +180,7 @@ def myalg():
 
 def del_alg():
     whois=request.args(0)
+    whois = 119
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
