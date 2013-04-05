@@ -125,7 +125,7 @@ def download_mc():
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + whois + ".m"
+    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + alg + ".m"
     print fname
     
     #download function
