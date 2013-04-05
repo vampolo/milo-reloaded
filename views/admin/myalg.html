@@ -8,9 +8,8 @@
 				<th class="col2">Type</th>
 				<th class="col3">Change Type</th>
 				<th class="col4">Change name</th>
-				<th class="col6">Update model</th>
-				<th class="col7">Download</th>
-				<th class="col8">Delete</th>
+				<th class="col5">Download</th>
+				<th class="col6">Delete</th>
 			</tr>
 			{{highlight=True}}
 
@@ -34,15 +33,10 @@
 					</ul>
 				</td>
 				</td>
-  				<td class="action">
-  					<ul>
-						<li>{{=A('', _class="edit", _title="Update or create a model for this algorithm", callback=URL('update_algorithm', args=[alg]), target="content")}}<li>
-					</ul>
-				</td>
         			<td class="action">
 					<ul>
-						<li>{{=A('', _class="edit", _title="Download model creator function", callback=URL('download_mc', args=[alg]), target="content")}}</li>
-						<li>{{=A('', _class="edit", _title="Download online recommender function", callback=URL('download_or', args=[alg]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Download model creator function", callback=URL('download_mc', args=[alg.id]), target="content")}}</li>
+						<li>{{=A('', _class="edit", _title="Download online recommender function", callback=URL('download_or', args=[alg.id]), target="content")}}</li>
 					</ul>
 				</td>
 				<td class="action">
