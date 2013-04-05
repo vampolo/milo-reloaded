@@ -51,6 +51,11 @@ def update_algorithm():
 
 def upload_form():
     
+    #check tables
+    enlist = db(db.uplds).select()
+    print enlist
+    #owners = db(db.owns).select()
+    #print owners
     #reset tables
     #db.uplds.truncate()
     #db.owns.truncate()
@@ -96,12 +101,6 @@ def upload_form():
         iid = str(db(db.uplds.algorithm_name==str(form.vars.algorithm_name)).select(db.uplds.id))
         iiid = int(''.join(c for c in iid if c.isdigit()))
         db.owns.insert(upload=iiid, author=int(auth.user_id))
-
-        #check tables
-        #enlist = db(db.uplds).select()
-        #print enlist
-        #owners = db(db.owns).select()
-        #print owners
         
         response.flash='record inserted'
         redirect(URL('index'))
