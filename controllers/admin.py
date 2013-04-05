@@ -178,6 +178,20 @@ def myalg():
     
     return dict(myalg=myalg, buff=buff)
 
+def upd_mc():
+    whois=request.args(0)
+    
+    
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+def upd_or():
+    whois=request.args(0)
+    
+    
+    
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
 def del_alg():
     whois=request.args(0)
     
