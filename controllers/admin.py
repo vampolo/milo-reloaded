@@ -181,13 +181,20 @@ def myalg():
 def upd_mc():
     whois=request.args(0)
     
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')  
+    
     #form
     
-    #delete old mc
+    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
     
+    #delete old mc
     #insert new mc
     
-    print 'upload mc'
+    print '\nupdating: ' + fname
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
