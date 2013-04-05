@@ -186,10 +186,12 @@ def del_alg():
     print 'deleting: ' + fname2
     
     #delete algorithm
-    #db(db.uplds.id == whois).delete()
-    #db(db.owns.upload == whois).delete()
+    db(db.uplds.id == whois).delete()
+    db(db.owns.upload == whois).delete()
     
     #destroy file
+    os.remove(fname1)
+    os.remove(fname2)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
