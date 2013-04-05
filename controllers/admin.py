@@ -188,7 +188,7 @@ def upd_mc():
     algo = alg.split(',')  
     
     #form
-    form.vars.newupd = 'nuovo'
+    form.vars.new_model_creator_function = 'nuovo'
     
     if (algo[4] == 'public'):
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
@@ -199,7 +199,7 @@ def upd_mc():
     os.remove(fname)
     
     #insert new mc
-    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.newupd)
+    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_model_creator_function)
     os.rename(rnm,fname)
     
     print '\nupdating: ' + fname
@@ -216,7 +216,7 @@ def upd_or():
     algo = alg.split(',')  
 
     #form
-    form.vars.newupd = 'nuovo'
+    form.vars.new_recommender_function = 'nuovo'
     
     if (algo[4] == 'public'):
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
@@ -227,7 +227,7 @@ def upd_or():
     os.remove(fname)
     
     #insert new or
-    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.newupd)
+    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_recommender_function)
     os.rename(rnm,fname)
     
     print '\nupdating: ' + fname
