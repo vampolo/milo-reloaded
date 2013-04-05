@@ -124,8 +124,10 @@ def download_mc():
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + alg + ".m"
+    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
     print 'downloading: ' + fname
     
     #download function
@@ -138,8 +140,10 @@ def download_or():
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + alg + ".m"
+    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
     print 'downloading: ' + fname
     
     #download function
@@ -173,10 +177,12 @@ def del_alg():
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
     alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')
     
-    fname1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + alg + ".m"
+    fname1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
     print 'deleting: ' + fname1
-    fname2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + alg + ".m"
+    fname2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
     print 'deleting: ' + fname2
     
     #delete algorithm
