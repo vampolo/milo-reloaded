@@ -8,8 +8,9 @@
 				<th class="col2">Type</th>
 				<th class="col3">Change Type</th>
 				<th class="col4">Change name</th>
-				<th class="col5">Download</th>
-				<th class="col6">Delete</th>
+				<th class="col6">Update model</th>
+				<th class="col7">Download</th>
+				<th class="col8">Delete</th>
 			</tr>
 			{{highlight=True}}
 
@@ -30,6 +31,12 @@
   				<td class="action">
 					<ul>
 						<li>{{=A('', _class="edit", _title="Rename algorithm", callback=URL('passage', args=[alg.id]), target="content")}}</li>
+					</ul>
+				</td>
+				</td>
+  				<td class="action">
+					<ul>
+						{{=A(SPAN('Update'), _class="button", _style="margin-top:30px", callback=URL('update_algorithm', args=[alg]), target="content")}}
 					</ul>
 				</td>
         			<td class="action">
