@@ -127,8 +127,12 @@ def download_mc():
     algo = []
     algo = alg.split(',')
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
-    print 'downloading: ' + fname
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+
+    print '\ndownloading: ' + fname
     
     #download function
       
@@ -143,8 +147,12 @@ def download_or():
     algo = []
     algo = alg.split(',')
     
-    fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
-    print 'downloading: ' + fname
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+    
+    print '\ndownloading: ' + fname
     
     #download function
     
@@ -180,10 +188,15 @@ def del_alg():
     algo = []
     algo = alg.split(',')
     
-    fname1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
-    print 'deleting: ' + fname1
-    fname2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
-    print 'deleting: ' + fname2
+    if (algo[4] == 'public'):
+    	fname1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    	fname2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname1 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+    	fname2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+    
+    print '\ndeleting: ' + fname1
+    print '\ndeleting: ' + fname2
     
     #delete algorithm
     db(db.uplds.id == whois).delete()
