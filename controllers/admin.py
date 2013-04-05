@@ -158,6 +158,7 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def del_alg():
+    print 'ciao'
     whois=request.args(0)
     print whois
     
