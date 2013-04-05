@@ -158,9 +158,8 @@ def myalg():
     return dict(myalg=myalg, buff=buff)
 
 def del_alg():
+    #whois=request.args(0)
     print 'ciao'
-    whois=request.args(0)
-    print whois
     
     #delete algorithm
     #db(db.uplds.id > 3).delete()
