@@ -52,8 +52,8 @@ def update_algorithm():
 def upload_form():
     
     #check tables
-    #enlist = db(db.uplds).select()
-    #print enlist
+    enlist = db(db.uplds).select()
+    print enlist
     #owners = db(db.owns).select()
     #print owners
     #reset tables
