@@ -54,12 +54,16 @@ def upload_form():
     #check tables
     #enlist = db(db.uplds).select()
     #print enlist
-    owners = db(db.owns).select()
-    print owners
+    #owners = db(db.owns).select()
+    #print owners
     
     #reset tables
     #db.uplds.truncate()
     #db.owns.truncate()
+    db(db.uplds.id == 122).delete()
+    db(db.owns.upload == 122).delete()
+    db(db.uplds.id == 123).delete()
+    db(db.owns.upload == 123).delete()
     
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
