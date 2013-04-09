@@ -223,7 +223,7 @@ def update_mc():
 
 def update_or():
     whois=request.args(0)
-    form = SQLFORM.factory(db.new_mc, formstyle='divs', _action=URL('admin', 'update_or', args=[whois]))
+    form = SQLFORM.factory(db.new_or, formstyle='divs', _action=URL('admin', 'update_or', args=[whois]))
     
     if form.process().accepted:
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
