@@ -187,28 +187,29 @@ def update_mc():
     form = SQLFORM.factory(db.new_mc, formstyle='divs', _action=URL('admin', 'update_mc', args=[whois]))
     
     if form.process().accepted:
-    	newname = form.vars.new_model_creator_function
     	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     	alg = alg.split('\n')[1]
     	alg = alg.split('\r')[0]
     	algo = []
     	algo = alg.split(',')
 
-	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + algo[1] + ".m"
-    	if (algo[4] == 'public'):
-    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
-    	if (algo[4] == 'private'):
-    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
-    
     	#delete old mc
-    	os.remove(dst)
-    
+    	if (algo[4] == 'public'):
+    		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    		os.remove(old)
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+    	if (algo[4] == 'private'):
+    		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+    		os.remove(old)
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
+
     	#rename and move new mc
     	rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_model_creator_function)
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + algo[1] + ".m"
     	os.rename(rnm,fname)
     	shutil.move(fname, dst)
     
-    	print '\nupdating: ' + dst
+    	print '\nupdating: ' + dst + "createModel_" + algo[1] + ".m"
         
         response.flash='record inserted'
         redirect(URL('index'))
@@ -222,32 +223,42 @@ def update_mc():
 
 def update_or():
     whois=request.args(0)
-    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage', args=[whois]))
+    form = SQLFORM.factory(db.new_mc, formstyle='divs', _action=URL('admin', 'update_or', args=[whois]))
     
-    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[1]
-    alg = alg.split('\r')[0]
-    algo = []
-    algo = alg.split(',')  
+    if form.process().accepted:
+    	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    	alg = alg.split('\n')[1]
+    	alg = alg.split('\r')[0]
+    	algo = []
+    	algo = alg.split(',')
 
-    #form
-    form.vars.new_recommender_function = 'nuovo'
-    
-    if (algo[4] == 'public'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
-    if (algo[4] == 'private'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+    	#delete old mc
+    	if (algo[4] == 'public'):
+    		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    		os.remove(old)
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+    	if (algo[4] == 'private'):
+    		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+    		os.remove(old)
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/'
 
-    #delete old or
-    os.remove(fname)
+    	#rename and move new mc
+    	rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_recommender_function)
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + algo[1] + ".m"
+    	os.rename(rnm,fname)
+    	shutil.move(fname, dst)
     
-    #insert new or
-    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_recommender_function)
-    os.rename(rnm,fname)
-    
-    print '\nupdating: ' + fname
-    
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    	print '\nupdating: ' + dst + "onLineRecom_" + algo[1] + ".m"
+        
+        response.flash='record inserted'
+        redirect(URL('index'))
+        return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+    elif form.errors:
+        response.flash="errors"
+    else:
+        response.flash='fill out the form'
+    return dict(form=form)
 
 def del_alg():
     whois=request.args(0)
