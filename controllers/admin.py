@@ -182,36 +182,47 @@ def myalg():
     
     return dict(myalg=myalg, buff=buff)
 
-def upd_mc():
+def update_mc():
     whois=request.args(0)
+    form = SQLFORM.factory(db.new_mc, formstyle='divs', _action=URL('admin', 'update_mc', args=[whois]))
     
-    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[1]
-    alg = alg.split('\r')[0]
-    algo = []
-    algo = alg.split(',')  
-    
-    #form
-    form.vars.new_model_creator_function = 'nuovo'
-    
-    if (algo[4] == 'public'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
-    if (algo[4] == 'private'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
-    
-    #delete old mc
-    os.remove(fname)
-    
-    #insert new mc
-    rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_model_creator_function)
-    os.rename(rnm,fname)
-    
-    print '\nupdating: ' + fname
-    
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    if form.process().accepted:
+    	newname = form.vars.new_model_creator_function
+    	alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    	alg = alg.split('\n')[1]
+    	alg = alg.split('\r')[0]
+    	algo = []
+    	algo = alg.split(',')
 
-def upd_or():
+	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "createModel_" + algo[1] + ".m"
+    	if (algo[4] == 'public'):
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    	if (algo[4] == 'private'):
+    		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+    
+    	#delete old mc
+    	os.remove(dst)
+    
+    	#rename and move new mc
+    	rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_model_creator_function)
+    	os.rename(rnm,fname)
+    	shutil.move(fname, dst)
+    
+    	print '\nupdating: ' + dst
+        
+        response.flash='record inserted'
+        redirect(URL('index'))
+        return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
+    elif form.errors:
+        response.flash="errors"
+    else:
+        response.flash='fill out the form'
+    return dict(form=form)
+
+def update_or():
     whois=request.args(0)
+    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage', args=[whois]))
     
     alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
     alg = alg.split('\n')[1]
