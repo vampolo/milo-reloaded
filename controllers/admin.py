@@ -231,6 +231,11 @@ def update_or():
     	alg = alg.split('\r')[0]
     	algo = []
     	algo = alg.split(',')
+    	
+    	rnm = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + str(form.vars.new_recommender_function)
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/' + "onLineRecom_" + algo[1] + ".m"
+
+    	print rnm
 
     	#delete old mc
     	if (algo[4] == 'public'):
