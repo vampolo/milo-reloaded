@@ -209,7 +209,7 @@ def update_mc():
     	os.rename(rnm,fname)
     	shutil.move(fname, dst)
     
-    	print '\nupdating: ' + dst + "createModel_" + algo[1] + ".m"
+    	print '\nupdated: ' + dst + "createModel_" + algo[1] + ".m"
         
         response.flash='record inserted'
         redirect(URL('index'))
@@ -236,9 +236,6 @@ def update_or():
     	if (algo[4] == 'public'):
     		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
     		os.remove(old)
-    		
-    		print '\ndeleted' + old
-    		
     		dst = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
     	if (algo[4] == 'private'):
     		old = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
@@ -251,7 +248,7 @@ def update_or():
     	os.rename(rnm,fname)
     	shutil.move(fname, dst)
     
-    	print '\nupdating: ' + dst + "onLineRecom_" + algo[1] + ".m"
+    	print '\nupdated: ' + dst + "onLineRecom_" + algo[1] + ".m"
         
         response.flash='record inserted'
         redirect(URL('index'))
@@ -292,9 +289,9 @@ def del_alg():
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
-def passage():
+def renaming():
     whois=request.args(0)
-    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'passage', args=[whois]))
+    form = SQLFORM.factory(db.rnm, formstyle='divs', _action=URL('admin', 'renaming', args=[whois]))
     
     if form.process().accepted:
     	newname = form.vars.new_name
