@@ -52,7 +52,7 @@ def update_algorithm():
 def upload_form():
     who = 17
     print ':('
-    auth.add_membership('tryer',who)
+    auth.add_membership(trygroup,who)
     print "Affiliato: " + str(funz)
     auth.del_membership(trygroup,who)
     funz = auth.has_membership('tryer',uid)
