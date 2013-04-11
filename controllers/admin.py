@@ -3,6 +3,7 @@ import cStringIO
 import csv
 import os
 import shutil
+import urllib
 
 MAX_USERS = 100
 
@@ -135,8 +136,7 @@ def download_mc():
     print '\ndownloading: ' + fname
 
     #download function
-    response.headers['Content-Disposition'] = 'attachment; filename={}.m'.format(fname)
-    return response.stream(fname)
+    urllib.urlretrieve(fname, "code.zip")
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
