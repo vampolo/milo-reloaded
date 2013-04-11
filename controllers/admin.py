@@ -2,7 +2,6 @@ import matlab_wrapper
 import cStringIO
 import csv
 import os
-from ftplib import FTP
 import shutil
 
 MAX_USERS = 100
@@ -136,10 +135,9 @@ def download_mc():
     print '\ndownloading: ' + fname
 
     #download function
-    lf = open(fname, "wb")
-    ftp.retrbinary("RETR " + filename, lf.write, 8*1024)
-    lf.close()
-      
+    response.headers['Content-Disposition'] = 'attachment; filename={}.m'.format(fname)
+    return response.stream(fname)
+    
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
 def download_or():
