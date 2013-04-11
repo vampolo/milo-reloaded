@@ -54,12 +54,16 @@ def upload_form():
     print 'Si va!'
     
     auth.add_membership(try_group,who)
-    funz = auth.has_membership('tryer',who)
-    print "Affiliato: " + str(funz)
+    
+    funz = auth.has_membership(try_group,who)
+    print "Affiliato1: " + str(funz)
+    
+    funz = auth.has_membership(who,'tryer')
+    print "Affiliato2: " + str(funz)
     
     auth.del_membership(trygroup,who)
     funz = auth.has_membership(trygroup,who)
-    print "Affiliato: " + str(funz)
+    print "Affiliato3: " + str(funz)
     
     #check tables
     #enlist = db(db.uplds).select()
