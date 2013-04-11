@@ -475,11 +475,6 @@ def please():
 
 def promo():
     
-    m1 = auth.has_membership('rsc',16)
-    m2 = auth.has_membership('admin',16)
-    print 'rsc: ' + str(m1)
-    print 'admin: ' + str(m2)
-    
     #getting user IDs
     promo=[]
     runner = range(1,MAX_USERS)
