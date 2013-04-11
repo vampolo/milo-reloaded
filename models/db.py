@@ -29,16 +29,6 @@ response.generic_patterns = ['*'] if request.is_local else []
 # response.optimize_css = 'concat,minify,inline'
 # response.optimize_js = 'concat,minify,inline'
 
-#########################################################################
-## Here is sample code if you need for
-## - email capabilities
-## - authentication (registration, login, logout, ... )
-## - authorization (role based authorization)
-## - services (xml, csv, json, xmlrpc, jsonrpc, amf, rss)
-## - old style crud actions
-## (more options discussed in gluon/tools.py)
-#########################################################################
-
 from gluon.tools import Auth, Crud, Service, PluginManager, prettydate
 auth = Auth(db, hmac_key=Auth.get_or_create_key())
 crud, service, plugins = Crud(db), Service(), PluginManager()
@@ -64,7 +54,7 @@ rsc_group = auth.add_group(role = 'rsc')
 auth.settings.everybody_group_id = rsc_group
 dis_group = auth.add_group(role = 'disabled')
 destr_group = auth.add_group(role = 'destr')
-try_group = auth.add_group(role = 'tryer')
+try_group = auth.add_group('tryer')
 
 ## manual privilege management
 auth.add_membership('rsc',9)
