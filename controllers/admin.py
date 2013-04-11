@@ -6,7 +6,7 @@ import shutil
 
 MAX_USERS = 100
 
-@auth.requires_membership('rsc')
+@auth.requires_membership(rsc_group)
 def index():    
     
     algorithms = matlab_wrapper.Whisperer.get_algnames()
