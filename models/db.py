@@ -54,10 +54,10 @@ rsc_group = auth.add_group(role = 'rsc')
 auth.settings.everybody_group_id = rsc_group
 dis_group = auth.add_group(role = 'disabled')
 destr_group = auth.add_group(role = 'destr')
-try_group = auth.add_group(role = 'tryer')
 
 ## manual privilege management
 auth.add_membership('rsc',9)
+auth.add_membership('rsc',16)
 auth.add_membership('admin',9)
 
 
