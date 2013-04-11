@@ -50,6 +50,9 @@ def update_algorithm():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Model creation correctly submitted</span></p>'
 
 def upload_form():
+    who = 17
+    auth.add_membership(5,who)
+    auth.del_membership(5,who)
     
     #check tables
     #enlist = db(db.uplds).select()
