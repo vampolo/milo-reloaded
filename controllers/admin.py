@@ -51,8 +51,12 @@ def update_algorithm():
 
 def upload_form():
     who = 17
-    auth.add_membership(5,who)
-    auth.del_membership(5,who)
+    trygroup = auth.add_group('tryer')
+    auth.add_membership('tryer',who)
+    print "Affiliato: " + str(funz)
+    auth.del_membership(trygroup,who)
+    funz = auth.has_membership('tryer',uid)
+    print "Affiliato: " + str(funz)
     
     #check tables
     #enlist = db(db.uplds).select()
