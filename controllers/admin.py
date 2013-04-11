@@ -50,19 +50,6 @@ def update_algorithm():
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Model creation correctly submitted</span></p>'
 
 def upload_form():
-    who = 17
-    print '\nSi va!'
-    
-    auth.add_membership('tryer',who)
-    
-    funz = auth.has_membership('tryer',who)
-    print "Affiliato1: " + str(funz)
-    
-    gruppone = auth.id_group('tryer')
-    auth.del_membership(gruppone,who)
-    
-    funz = auth.has_membership('tryer',who)
-    print "Affiliato2: " + str(funz)
     
     #check tables
     #enlist = db(db.uplds).select()
@@ -510,8 +497,10 @@ def del_user():
     db(db.users.email == mail).delete()
     
     auth.add_membership('destr',whois)
-    auth.del_membership('rsc',whois)
-    auth.del_membership('admin',whois)
+    grupid1 = auth.id_group('rsc')
+    auth.del_membership(grupid1,whois)
+    grupid2 = auth.id_group('admin')
+    auth.del_membership(grupid2,whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
@@ -520,7 +509,8 @@ def addrsc():
     
     #enable rsc privileges
     auth.add_membership('rsc',whois)
-    auth.del_membership('disabled',whois)
+    grupid1 = auth.id_group('disabled')
+    auth.del_membership(grupid1,whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
@@ -528,7 +518,8 @@ def rvkrsc():
     whois=request.args(0)
     
     #revoke rsc privileges
-    auth.del_membership('rsc',whois)
+    grupid1 = auth.id_group('rsc')
+    auth.del_membership(grupid1,whois)
     auth.add_membership('disabled',whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
@@ -545,7 +536,8 @@ def rvkadm():
     whois=request.args(0)
     
     #revoke admin privileges
-    auth.del_membership('admin',whois)
+    grupid1 = auth.id_group('admin')
+    auth.del_membership(grupid1,whois)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
