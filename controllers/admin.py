@@ -2,6 +2,7 @@ import matlab_wrapper
 import cStringIO
 import csv
 import os
+from ftplib import FTP
 import shutil
 
 MAX_USERS = 100
@@ -133,8 +134,11 @@ def download_mc():
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
 
     print '\ndownloading: ' + fname
-    
+
     #download function
+    lf = open(fname, "wb")
+    ftp.retrbinary("RETR " + filename, lf.write, 8*1024)
+    lf.close()
       
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
