@@ -136,20 +136,9 @@ def download_mc():
     print '\ndownloading: ' + fname
 
     #download function
-    
-    ftp = ftplib.FTP("ftp.localhost:8000/milo/admin")
-    ftp.login("luke.eagle4@gmail.com", "I4milo")
-
-    download(ftp, "applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/", "createModel_" + algo[1] + ".m")
-    
+      
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
     
-def download(ftp,directory,file):
-    ftp.cwd(directory)
-    f = open(file,"wb")
-    ftp.retrbinary("RETR " + file,f.write)
-    f.close()
-
 def download_or():
     whois=request.args(0)
     
