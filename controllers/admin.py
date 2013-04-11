@@ -51,19 +51,17 @@ def update_algorithm():
 
 def upload_form():
     who = 17
-    print 'Si va!'
+    print '\nSi va!'
     
-    auth.add_membership(try_group,who)
-    
-    funz = auth.has_membership(try_group,who)
-    print "Affiliato1: " + str(funz)
+    auth.add_membership('tryer',who)
     
     funz = auth.has_membership('tryer',who)
-    print "Affiliato2: " + str(funz)
+    print "Affiliato1: " + str(funz)
     
-    auth.del_membership(trygroup,who)
-    funz = auth.has_membership(trygroup,who)
-    print "Affiliato3: " + str(funz)
+    gruppone = auth.id_group('tryer')
+    auth.del_membership(gruppone,who)
+    funz = auth.has_membership(gruppone,who)
+    print "Affiliato2: " + str(funz)
     
     #check tables
     #enlist = db(db.uplds).select()
