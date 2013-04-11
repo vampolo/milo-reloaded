@@ -60,7 +60,8 @@ def upload_form():
     
     gruppone = auth.id_group('tryer')
     auth.del_membership(gruppone,who)
-    funz = auth.has_membership(gruppone,who)
+    
+    funz = auth.has_membership('tryer',who)
     print "Affiliato2: " + str(funz)
     
     #check tables
