@@ -58,7 +58,7 @@ def upload_form():
     funz = auth.has_membership(try_group,who)
     print "Affiliato1: " + str(funz)
     
-    funz = auth.has_membership(who,'tryer')
+    funz = auth.has_membership('tryer',who)
     print "Affiliato2: " + str(funz)
     
     auth.del_membership(trygroup,who)
