@@ -53,7 +53,7 @@ def upload_form():
     who = 17
     print 'Si va!'
     
-    auth.add_membership(trygroup,who)
+    auth.add_membership('tryer',who)
     funz = auth.has_membership('tryer',who)
     print "Affiliato: " + str(funz)
     
