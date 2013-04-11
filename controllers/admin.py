@@ -138,7 +138,7 @@ def download_mc():
     #download function
     
     ftp = ftplib.FTP("ftp.localhost:8000/milo/admin")
-    #ftp.login("luke.eagle4@gmail.com", "I4milo")
+    ftp.login("luke.eagle4@gmail.com", "I4milo")
 
     download(ftp, "applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/", "createModel_" + algo[1] + ".m")
     
