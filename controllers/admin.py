@@ -156,11 +156,13 @@ def download_or():
     print '\ndownloading: ' + fname
     
     filename = 'try.m'
-    van = db(db.uplds.id==whois).select(db.uplds.recommender_function)
+    #van = db(db.uplds.id==whois).select(db.uplds.recommender_function)
+    van = db(db.uplds.id==whois).select()
     print 'omv'
-    return response.download(request = request, van)
+    return response.download(van, db)
     
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+
 
 #####################
 ##  My Algorithms  ##
