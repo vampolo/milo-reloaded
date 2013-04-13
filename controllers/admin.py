@@ -157,7 +157,7 @@ def download_or():
     
     #download function
     print 'step1'
-    filname = fname
+    filename = fname
     response.headers['ContentType'] ="application/octet-stream";
     print 'step2'
     response.headers['Content-Disposition']="attachment; filename="  + filename
