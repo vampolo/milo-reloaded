@@ -158,9 +158,9 @@ def download_or():
     #download function
     print 'step1'
     filename = fname
-    response.headers['ContentType'] ="application/octet-stream";
+    #response.headers['ContentType'] ="application/octet-stream";
     print 'step2'
-    response.headers['Content-Disposition']="attachment; filename="  + filename
+    #response.headers['Content-Disposition']="attachment; filename="  + filename
     print 'step3'
     return response.stream(open(filename),chunk_size=4096)
     
