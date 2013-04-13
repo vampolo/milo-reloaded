@@ -156,13 +156,7 @@ def download_or():
     print '\ndownloading: ' + fname
     
     #download function
-    print 'step1'
-    filename = fname
-    #response.headers['ContentType'] ="application/octet-stream";
-    print 'step2'
-    #response.headers['Content-Disposition']="attachment; filename="  + filename
-    print 'step3'
-    return response.stream(open(filename),chunk_size=4096)
+    return response.stream(fname,request=request) 
     
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
