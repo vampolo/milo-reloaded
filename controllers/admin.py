@@ -155,9 +155,10 @@ def download_or():
     
     print '\ndownloading: ' + fname
     
+    filename = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/try.m'
     #download function
-    response.headers['Content-Disposition'] = 'attachment; filename={}.m'.format(fname)
-    return response.stream(fname)
+    response.headers['Content-Disposition'] = 'attachment; filename={}.m'.format(filename)
+    return response.stream(filename)
     
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
