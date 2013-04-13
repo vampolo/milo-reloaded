@@ -158,7 +158,7 @@ def download_or():
     filename = 'try.m'
     document = db(db.uplds.id==whois).select()
     print document
-    response.headers['X-Sendfile'] = os.path.join(request.folder, 'uploads', document.file)
+    response.headers['X-Sendfile'] = os.path.join(request.folder, 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/', document.file)
     
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
