@@ -156,7 +156,7 @@ def download_or():
     print '\ndownloading: ' + fname
     
     filename = 'try.m'
-    print db(db.uplds.id==whois).select(db.uplds.recommender_function))    
+    print db(db.uplds.id==whois).select(db.uplds.recommender_function)    
     return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Buongiorno! sono un Luchinus</span></p>'
 
 #####################
