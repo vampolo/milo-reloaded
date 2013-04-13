@@ -156,8 +156,13 @@ def download_or():
     print '\ndownloading: ' + fname
     
     #download function
+    filename = "onLineRecom_" + algo[1] + ".m"
+    path=os.path.join(request.folder,'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/',filename)
+    response.headers['ContentType'] ="application/octet-stream";
+    response.headers['Content-Disposition']="attachment; filename="  + filename
+    return response.stream(open(filename),chunk_size=4096)
     
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 #####################
 ##  My Algorithms  ##
