@@ -156,12 +156,8 @@ def download_or():
     print '\ndownloading: ' + fname
     
     filename = 'try.m'
-    import gluon.contenttype
-    response.headers['Content-Type']=gluon.contenttype.contenttype(filename)
-    pathfilename=os.path.join(request.folder,'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/', filename)
-    return open('pathfilename', 'rb').read()
         
-    #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Buongiorno! sono un Luchinus</span></p>'
 
 #####################
 ##  My Algorithms  ##
