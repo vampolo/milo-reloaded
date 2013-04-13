@@ -156,7 +156,8 @@ def download_or():
     print '\ndownloading: ' + fname
     
     #download function
-    return response.stream(fname,request=request) 
+    response.headers['Content-Disposition'] = 'attachment; filename={}.m'.format(fname)
+    return response.stream(fname)
     
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
