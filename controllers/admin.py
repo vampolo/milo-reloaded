@@ -157,7 +157,7 @@ def download_or():
     
     filename = 'try.m'
     van = db(db.uplds.id==whois).select(db.uplds.recommender_function)
-    return response.download(request, van)
+    return response.download(van)
     
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Buongiorno! sono un Luchinus</span></p>'
 
