@@ -136,9 +136,15 @@ def download_mc():
 
     print '\ndownloading: ' + fname
 
-    #download function
-      
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    #download mc
+    filename = fname
+    s=cStringIO.StringIO()
+    file=open(filename)
+    s.write(file.read())
+    response.headers['Content-Type'] = c.contenttype(filename)
+    response.headers['Content-Disposition'] = \
+                "attachment; filename=%s" % filename
+    return s.getvalue()
     
 def download_or():
     whois=request.args(0)
@@ -156,9 +162,8 @@ def download_or():
     
     print '\ndownloading: ' + fname
     
-    os.chdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
-    filename = "onLineRecom_" + algo[1] + ".m"
-    
+    #download or
+    filename = fname
     s=cStringIO.StringIO()
     file=open(filename)
     s.write(file.read())
@@ -166,9 +171,6 @@ def download_or():
     response.headers['Content-Disposition'] = \
                 "attachment; filename=%s" % filename
     return s.getvalue()
-        
-    #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
-
 
 #####################
 ##  My Algorithms  ##
