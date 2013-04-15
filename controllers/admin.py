@@ -120,64 +120,7 @@ def pubalg():
     pubalg = matlab_wrapper.Whisperer.get_algnames()
     return dict(pubalg=pubalg)
 
-def download_mc():
-    whois=request.args(0)
-    
-    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[1]
-    alg = alg.split('\r')[0]
-    algo = []
-    algo = alg.split(',')
-    
-    if (algo[4] == 'public'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
-    	filename = "createModel_" + algo[1] + ".m"
-    if (algo[4] == 'private'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
-    	filename = "createModel_" + algo[1] + ".m"    
-    print '\ndownloading: ' + filename
 
-    #download mc
-    s=cStringIO.StringIO()
-    file=open(filename)
-    s.write(file.read())
-    response.headers['Content-Type'] = c.contenttype(filename)
-    response.headers['Content-Disposition'] = \
-                "attachment; filename=%s" % filename
-    os.chdir('/var/www/web2py')
-    return s.getvalue()
-    
-def download_or():
-    whois=request.args(0)
-    
-    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[1]
-    alg = alg.split('\r')[0]
-    algo = []
-    algo = alg.split(',')
-    
-    if (algo[4] == 'public'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
-    	filename = "onLineRecom_" + algo[1] + ".m"
-    if (algo[4] == 'private'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
-    	filename = "onLineRecom_" + algo[1] + ".m"    
-    print '\ndownloading: ' + filename
-
-
-    #download or
-    s=cStringIO.StringIO()
-    file=open(filename)
-    s.write(file.read())
-    response.headers['Content-Type'] = c.contenttype(filename)
-    response.headers['Content-Disposition'] = \
-                "attachment; filename=%s" % filename
-    os.chdir('/var/www/web2py')
-    return s.getvalue()
 
 #####################
 ##  My Algorithms  ##
@@ -281,6 +224,66 @@ def update_or():
     else:
         response.flash='fill out the form'
     return dict(form=form)
+    
+def download_mc():
+    whois=request.args(0)
+    
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')
+    
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "createModel_" + algo[1] + ".m"
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
+    	filename = "createModel_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "createModel_" + algo[1] + ".m"
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
+    	filename = "createModel_" + algo[1] + ".m"   
+    	
+    print '\ndownloading: ' + filename
+
+    #download mc
+    s=cStringIO.StringIO()
+    file=open(filename)
+    s.write(file.read())
+    response.headers['Content-Type'] = c.contenttype(filename)
+    response.headers['Content-Disposition'] = \
+                "attachment; filename=%s" % filename
+    os.chdir('/var/www/web2py')
+    return s.getvalue()
+    
+def download_or():
+    whois=request.args(0)
+    
+    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
+    alg = alg.split('\n')[1]
+    alg = alg.split('\r')[0]
+    algo = []
+    algo = alg.split(',')
+    
+    if (algo[4] == 'public'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
+    	filename = "onLineRecom_" + algo[1] + ".m"
+    if (algo[4] == 'private'):
+    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
+    	filename = "onLineRecom_" + algo[1] + ".m"
+
+    print '\ndownloading: ' + filename
+
+    #download or
+    s=cStringIO.StringIO()
+    file=open(filename)
+    s.write(file.read())
+    response.headers['Content-Type'] = c.contenttype(filename)
+    response.headers['Content-Disposition'] = \
+                "attachment; filename=%s" % filename
+    os.chdir('/var/www/web2py')
+    return s.getvalue()
 
 def del_alg():
     whois=request.args(0)
