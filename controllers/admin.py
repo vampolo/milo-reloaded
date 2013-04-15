@@ -157,22 +157,24 @@ def download_or():
     
     if (algo[4] == 'public'):
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
+    	filename = "onLineRecom_" + algo[1] + ".m"
     if (algo[4] == 'private'):
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
-    
-    print '\ndownloading: ' + fname
-    
-    os.chdir('/var/www/web2py')
-    print os.getcwd()
+    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
+    	filename = "onLineRecom_" + algo[1] + ".m"    
+    print '\ndownloading: ' + filename
+
 
     #download or
-    filename = fname
+    #filename = fname
     s=cStringIO.StringIO()
     file=open(filename)
     s.write(file.read())
     response.headers['Content-Type'] = c.contenttype(filename)
     response.headers['Content-Disposition'] = \
                 "attachment; filename=%s" % filename
+    os.chdir('/var/www/web2py')
     return s.getvalue()
 
 #####################
