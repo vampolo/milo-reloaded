@@ -140,7 +140,6 @@ def download_mc():
     print '\ndownloading: ' + filename
 
     #download mc
-    filename = fname
     s=cStringIO.StringIO()
     file=open(filename)
     s.write(file.read())
