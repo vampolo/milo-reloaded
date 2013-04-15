@@ -122,6 +122,7 @@ def rules_en():
 
 def pubalg():
     pubalg = matlab_wrapper.Whisperer.get_algnames()
+    print pubalg
     return dict(pubalg=pubalg)
 
 def download_defmc():
