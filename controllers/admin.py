@@ -10,8 +10,11 @@ MAX_USERS = 100
 
 @auth.requires_membership('rsc')
 def index():    
-    
-    algorithms = matlab_wrapper.Whisperer.get_algnames()
+    getalg = matlab_wrapper.Whisperer.get_algnames()
+    algorithms = []
+    for element in getalg:
+	if element not in algorithms:
+		algorithms.append(element)
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     l = list()
     l.append(db(db.users).count())
@@ -25,7 +28,11 @@ def index():
 
 @auth.requires_membership('admin')    
 def indexplus():
-    algorithms = matlab_wrapper.Whisperer.get_algnames()
+    getalg = matlab_wrapper.Whisperer.get_algnames()
+    algorithms = []
+    for element in getalg:
+	if element not in algorithms:
+		algorithms.append(element)
     matrices = matlab_wrapper.Whisperer.get_matrices_info()
     l = list()
     l.append(db(db.users).count())
@@ -122,7 +129,6 @@ def pubalg():
     for element in getalg:
 	if element not in pubalg:
 		pubalg.append(element)
-    print pubalg
     return dict(pubalg=pubalg)
 
 def download_defmc():
@@ -169,7 +175,11 @@ def myalg():
 
     #extract personal upload IDs
     buff = [];
-    algorithms = matlab_wrapper.Whisperer.get_algnames()
+    getalg = matlab_wrapper.Whisperer.get_algnames()
+    algorithms = []
+    for element in getalg:
+	if element not in algorithms:
+		algorithms.append(element)
     for alg in algorithms:
 	algline = str(db(db.uplds.algorithm_name==alg).select(db.uplds.id))
 	algid = ''.join(i for i in algline if i.isdigit())
