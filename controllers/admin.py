@@ -63,6 +63,10 @@ def upload_form():
     #db.uplds.truncate()
     #db.owns.truncate()
     
+    dst2 = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/'
+    shutil.move(rnm1b, dst2)
+
+    
     form = SQLFORM.factory(db.uplds, formstyle='divs', _action=URL('admin', 'upload_form'))
             
     if form.process().accepted:
