@@ -162,12 +162,12 @@ def download_or():
     
     print '\ndownloading: ' + fname
     
+    print os.getcwd()
+
     #download or
     filename = fname
     s=cStringIO.StringIO()
-    print 'ciao'
     file=open(filename)
-    print 'ciao'
     s.write(file.read())
     response.headers['Content-Type'] = c.contenttype(filename)
     response.headers['Content-Disposition'] = \
