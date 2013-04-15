@@ -162,6 +162,7 @@ def download_or():
     
     print '\ndownloading: ' + fname
     
+    os.chdir('/var/www/web2py')
     print os.getcwd()
 
     #download or
