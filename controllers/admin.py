@@ -1,9 +1,10 @@
 import matlab_wrapper
-import cStringIO
 import csv
 import os
 import shutil
 import ftplib
+import cStringIO
+import contenttype as c
 
 MAX_USERS = 100
 
@@ -154,8 +155,18 @@ def download_or():
     	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
     
     print '\ndownloading: ' + fname
+    
+    filename = fname
+    
+    s=cStringIO.StringIO()
+    file=open(filename)
+    s.write(file.read())
+    response.headers['Content-Type'] = c.contenttype(filename)
+    response.headers['Content-Disposition'] = \
+                "attachment; filename=%s" % filename
+    return s.getvalue()
         
-    return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
+    #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
 
 #####################
