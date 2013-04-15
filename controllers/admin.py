@@ -156,7 +156,8 @@ def download_or():
     
     print '\ndownloading: ' + fname
     
-    filename = fname
+    os.chdir('applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
+    filename = "onLineRecom_" + algo[1] + ".m"
     
     s=cStringIO.StringIO()
     file=open(filename)
