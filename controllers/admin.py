@@ -164,7 +164,7 @@ def download_or():
     response.headers['Content-Type'] = c.contenttype(filename)
     response.headers['Content-Disposition'] = \
                 "attachment; filename=%s" % filename
-    return s.getvalue()
+    return response.stream(s.getvalue())
         
     #return '<p class="alert congrats"><span class="txt"><span class="icon"></span>Operation was successful!</span></p>'
 
