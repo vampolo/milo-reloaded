@@ -121,7 +121,11 @@ def rules_en():
     return dict()
 
 def pubalg():
-    pubalg = matlab_wrapper.Whisperer.get_algnames()
+    getalg = matlab_wrapper.Whisperer.get_algnames()
+    pubalg = []
+    for element in getalg:
+	if element not in pubalg:
+		pubalg.append(element)
     print pubalg
     return dict(pubalg=pubalg)
 
