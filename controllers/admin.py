@@ -165,7 +165,9 @@ def download_or():
     #download or
     filename = fname
     s=cStringIO.StringIO()
+    print 'ciao'
     file=open(filename)
+    print 'ciao'
     s.write(file.read())
     response.headers['Content-Type'] = c.contenttype(filename)
     response.headers['Content-Disposition'] = \
