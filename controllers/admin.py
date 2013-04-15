@@ -124,7 +124,7 @@ def download_defmc():
     whois=request.args(0)
     
     os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/default/')
-    filename = "createModel_" + whois + 'm'
+    filename = "createModel_" + whois + '.m'
     	
     print '\ndownloading: ' + filename
 
@@ -141,24 +141,12 @@ def download_defmc():
 def download_defor():
     whois=request.args(0)
     
-    alg = (str(db(db.uplds.id==whois).select())).split('uplds.algorithm_sharing')[1]
-    alg = alg.split('\n')[1]
-    alg = alg.split('\r')[0]
-    algo = []
-    algo = alg.split(',')
-    
-    if (algo[4] == 'public'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/' + "onLineRecom_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/public/')
-    	filename = "onLineRecom_" + algo[1] + ".m"
-    if (algo[4] == 'private'):
-    	fname = 'applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/' + "onLineRecom_" + algo[1] + ".m"
-    	os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/private/')
-    	filename = "onLineRecom_" + algo[1] + ".m"
-
+    os.chdir('/var/www/web2py/applications/milo/modules/algorithms/recsys_matlab_codes/algorithms/default/')
+    filename = "onLineRecom_" + whois + '.m'
+    	
     print '\ndownloading: ' + filename
 
-    #download or
+    #download mc
     s=cStringIO.StringIO()
     file=open(filename)
     s.write(file.read())
